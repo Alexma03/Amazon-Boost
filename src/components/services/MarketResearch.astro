@@ -3,32 +3,32 @@ import { Chart } from 'react-chartjs-2';
 
 const researchAreas = [
   {
-    title: "Competitor Analysis Framework",
+    title: "Marco de Análisis de Competencia",
     steps: [
-      "Market position mapping",
-      "Pricing strategy analysis",
-      "Content & imagery audit",
-      "Customer feedback analysis"
+      "Mapeo de posición en el mercado",
+      "Análisis de estrategia de precios",
+      "Auditoría de contenido e imágenes",
+      "Análisis de feedback de clientes"
     ],
     icon: "graph"
   },
   {
-    title: "Keyword Research Process",
+    title: "Proceso de Investigación de Palabras Clave",
     steps: [
-      "Search volume analysis",
-      "Competition difficulty scoring",
-      "Long-tail opportunity identification",
-      "Conversion intent mapping"
+      "Análisis de volumen de búsqueda",
+      "Puntuación de dificultad de competencia",
+      "Identificación de oportunidades long-tail",
+      "Mapeo de intención de conversión"
     ],
     icon: "search"
   },
   {
-    title: "Market Trend Identification",
+    title: "Identificación de Tendencias de Mercado",
     steps: [
-      "Seasonal pattern analysis",
-      "Category growth tracking",
-      "Consumer behavior insights",
-      "Emerging trend detection"
+      "Análisis de patrones estacionales",
+      "Seguimiento de crecimiento por categoría",
+      "Insights de comportamiento del consumidor",
+      "Detección de tendencias emergentes"
     ],
     icon: "trend"
   }
@@ -36,14 +36,14 @@ const researchAreas = [
 
 const successStories = [
   {
-    client: "Electronics Accessories Brand",
-    result: "Identified 3 untapped sub-niches with 50k+ monthly searches",
-    improvement: "142% revenue increase in 6 months"
+    client: "Marca de Accesorios Electrónicos",
+    result: "Identificamos 3 sub-nichos sin explotar con más de 50k búsquedas mensuales",
+    improvement: "142% de aumento en ingresos en 6 meses"
   },
   {
-    client: "Pet Products Manufacturer",
-    result: "Discovered seasonal trend leading to new product line",
-    improvement: "89% year-over-year growth"
+    client: "Fabricante de Productos para Mascotas",
+    result: "Descubrimos tendencia estacional que llevó a nueva línea de productos",
+    improvement: "89% de crecimiento interanual"
   }
 ];
 ---
@@ -51,7 +51,7 @@ const successStories = [
 <section id="research" class="py-20 bg-amazon-lightgray">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Data-Driven Market Research</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Investigación de Mercado Basada en Datos</h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Make informed decisions with our comprehensive market research methodology, powered by advanced analytics and industry expertise.
       </p>
@@ -94,13 +94,13 @@ const successStories = [
 
     <div class="grid md:grid-cols-2 gap-12 mb-16">
       <div class="bg-white p-8 rounded-xl shadow-lg">
-        <h3 class="text-2xl font-bold mb-6">Market Share Analysis</h3>
+        <h3 class="text-2xl font-bold mb-6">Análisis de Cuota de Mercado</h3>
         <div class="aspect-w-16 aspect-h-9">
           <canvas id="marketShareChart"></canvas>
         </div>
       </div>
       <div class="bg-white p-8 rounded-xl shadow-lg">
-        <h3 class="text-2xl font-bold mb-6">Keyword Opportunity Map</h3>
+        <h3 class="text-2xl font-bold mb-6">Mapa de Oportunidades de Palabras Clave</h3>
         <div class="aspect-w-16 aspect-h-9">
           <canvas id="keywordChart"></canvas>
         </div>
@@ -108,7 +108,7 @@ const successStories = [
     </div>
 
     <div class="bg-amazon-black text-white p-8 rounded-xl">
-      <h3 class="text-2xl font-bold mb-8 text-center">Success Stories</h3>
+      <h3 class="text-2xl font-bold mb-8 text-center">Casos de Éxito</h3>
       <div class="grid md:grid-cols-2 gap-8">
         {successStories.map(story => (
           <div class="border border-gray-700 rounded-lg p-6">

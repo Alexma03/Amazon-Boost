@@ -3,8 +3,8 @@ const caseStudies = [
   {
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3",
     client: "TechGear Pro",
-    title: "Electronics Category Domination",
-    overview: "Transformed a struggling electronics seller into a category leader through strategic optimization and PPC management.",
+    title: "Dominación en la Categoría de Electrónicos",
+    overview: "Transformamos un vendedor de electrónicos en dificultades en un líder de categoría a través de optimización estratégica y gestión de PPC.",
     results: {
       revenue: "+245%",
       ranking: "Top 3",
@@ -14,22 +14,22 @@ const caseStudies = [
   {
     image: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3",
     client: "HomeStyle Essentials",
-    title: "Home & Kitchen Success Story",
-    overview: "Launched a new home brand and achieved significant market share within 6 months.",
+    title: "Historia de Éxito en Hogar y Cocina",
+    overview: "Lanzamos una nueva marca de hogar y alcanzamos una cuota de mercado significativa en 6 meses.",
     results: {
       revenue: "+180%",
-      ranking: "Page 1",
+      ranking: "Página 1",
       conversion: "9.5%"
     }
   },
   {
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3",
     client: "PetCare Plus",
-    title: "Pet Supplies Market Expansion",
-    overview: "Helped a pet supplies brand expand their product line and double their market presence.",
+    title: "Expansión en el Mercado de Productos para Mascotas",
+    overview: "Ayudamos a una marca de productos para mascotas a expandir su línea de productos y duplicar su presencia en el mercado.",
     results: {
       revenue: "+320%",
-      ranking: "Best Seller",
+      ranking: "Más Vendido",
       conversion: "15.2%"
     }
   }
@@ -39,9 +39,9 @@ const caseStudies = [
 <section id="case-studies" class="py-20 bg-amazon-lightgray">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Success Stories</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Casos prácticos</h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        See how we've helped Amazon sellers achieve exceptional results and transform their businesses.
+        Descubre cómo hemos ayudado a vendedores de Amazon a lograr resultados excepcionales y transformar sus negocios.
       </p>
     </div>
 
@@ -58,19 +58,19 @@ const caseStudies = [
             <div class="grid grid-cols-3 gap-4 mb-6">
               <div class="text-center">
                 <div class="text-2xl font-bold text-amazon-orange">{study.results.revenue}</div>
-                <div class="text-sm text-gray-600">Revenue</div>
+                <div class="text-sm text-gray-600">Ingresos</div>
               </div>
               <div class="text-center">
                 <div class="text-2xl font-bold text-amazon-orange">{study.results.ranking}</div>
-                <div class="text-sm text-gray-600">Ranking</div>
+                <div class="text-sm text-gray-600">Posición</div>
               </div>
               <div class="text-center">
                 <div class="text-2xl font-bold text-amazon-orange">{study.results.conversion}</div>
-                <div class="text-sm text-gray-600">Conversion</div>
+                <div class="text-sm text-gray-600">Conversión</div>
               </div>
             </div>
             <a href={`/case-studies/${study.client.toLowerCase().replace(/\s+/g, '-')}`} class="text-amazon-orange font-medium hover:text-opacity-80 transition-colors inline-flex items-center">
-              Read Full Case Study
+              Ver Caso Completo
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
