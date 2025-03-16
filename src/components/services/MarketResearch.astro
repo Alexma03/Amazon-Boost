@@ -1,0 +1,189 @@
+---
+import { Chart } from 'react-chartjs-2';
+
+const researchAreas = [
+  {
+    title: "Competitor Analysis Framework",
+    steps: [
+      "Market position mapping",
+      "Pricing strategy analysis",
+      "Content & imagery audit",
+      "Customer feedback analysis"
+    ],
+    icon: "graph"
+  },
+  {
+    title: "Keyword Research Process",
+    steps: [
+      "Search volume analysis",
+      "Competition difficulty scoring",
+      "Long-tail opportunity identification",
+      "Conversion intent mapping"
+    ],
+    icon: "search"
+  },
+  {
+    title: "Market Trend Identification",
+    steps: [
+      "Seasonal pattern analysis",
+      "Category growth tracking",
+      "Consumer behavior insights",
+      "Emerging trend detection"
+    ],
+    icon: "trend"
+  }
+];
+
+const successStories = [
+  {
+    client: "Electronics Accessories Brand",
+    result: "Identified 3 untapped sub-niches with 50k+ monthly searches",
+    improvement: "142% revenue increase in 6 months"
+  },
+  {
+    client: "Pet Products Manufacturer",
+    result: "Discovered seasonal trend leading to new product line",
+    improvement: "89% year-over-year growth"
+  }
+];
+---
+
+<section id="research" class="py-20 bg-amazon-lightgray">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Data-Driven Market Research</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Make informed decisions with our comprehensive market research methodology, powered by advanced analytics and industry expertise.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      {researchAreas.map(area => (
+        <div class="bg-white p-8 rounded-xl shadow-lg">
+          <div class="text-amazon-orange mb-4">
+            {area.icon === 'graph' && (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            )}
+            {area.icon === 'search' && (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            )}
+            {area.icon === 'trend' && (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            )}
+          </div>
+          <h3 class="text-xl font-semibold mb-4">{area.title}</h3>
+          <ul class="space-y-3">
+            {area.steps.map(step => (
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-amazon-orange mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-600">{step}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+      <div class="bg-white p-8 rounded-xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-6">Market Share Analysis</h3>
+        <div class="aspect-w-16 aspect-h-9">
+          <canvas id="marketShareChart"></canvas>
+        </div>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-6">Keyword Opportunity Map</h3>
+        <div class="aspect-w-16 aspect-h-9">
+          <canvas id="keywordChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-amazon-black text-white p-8 rounded-xl">
+      <h3 class="text-2xl font-bold mb-8 text-center">Success Stories</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        {successStories.map(story => (
+          <div class="border border-gray-700 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-3">{story.client}</h4>
+            <p class="text-gray-300 mb-3">{story.result}</p>
+            <p class="text-amazon-orange font-semibold">{story.improvement}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { Chart, registerables } from 'chart.js';
+  Chart.register(...registerables);
+
+  // Market Share Chart
+  const marketShareCtx = document.getElementById('marketShareChart');
+  if (marketShareCtx) {
+    new Chart(marketShareCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Your Store', 'Competitor A', 'Competitor B', 'Others'],
+        datasets: [{
+          data: [25, 30, 20, 25],
+          backgroundColor: ['#FF9900', '#232F3E', '#37475A', '#848484']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+  }
+
+  // Keyword Opportunity Chart
+  const keywordCtx = document.getElementById('keywordChart');
+  if (keywordCtx) {
+    new Chart(keywordCtx, {
+      type: 'bubble',
+      data: {
+        datasets: [{
+          label: 'Keyword Opportunities',
+          data: [
+            { x: 2000, y: 0.8, r: 15 },
+            { x: 5000, y: 0.6, r: 20 },
+            { x: 8000, y: 0.4, r: 25 },
+            { x: 3000, y: 0.9, r: 10 },
+            { x: 6000, y: 0.5, r: 18 }
+          ],
+          backgroundColor: 'rgba(255, 153, 0, 0.6)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Search Volume'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Competition Score'
+            }
+          }
+        }
+      }
+    });
+  }
+</script>

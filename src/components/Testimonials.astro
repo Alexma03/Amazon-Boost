@@ -1,0 +1,111 @@
+---
+import { testimonials } from '../data/testimonials.js';
+---
+
+<section class="mb-20 bg-amazon-lightgray rounded-2xl p-8 md:p-12">
+  <h2 class="text-2xl font-bold mb-8 text-center">Success Stories</h2>
+  <div class="carousel-container">
+    <div class="carousel">
+      {testimonials.map(testimonial => (
+        <div class="carousel-item bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div class="flex items-center gap-4 mb-6">
+            <img 
+              src={testimonial.image} 
+              alt={testimonial.author} 
+              class="w-16 h-16 rounded-full object-cover"
+              loading="lazy"
+            />
+            <div>
+              <div class="font-semibold">{testimonial.author}</div>
+              <div class="text-sm text-gray-600">{testimonial.role}</div>
+              <div class="text-sm text-amazon-orange">{testimonial.company}</div>
+            </div>
+          </div>
+          <blockquote class="text-gray-600 mb-4">
+            "{testimonial.quote}"
+          </blockquote>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel {
+    display: flex;
+    width: max-content;
+    gap: 32px;
+  }
+  .carousel-item {
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+    transition: all 200ms ease-in-out;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const carouselEl = document.querySelector('.carousel');
+    const itemsNodeList = document.querySelectorAll('.carousel-item');
+    
+    if (!carouselEl || itemsNodeList.length === 0) return;
+    
+    // Type assertions for DOM elements
+    const carousel = carouselEl as HTMLElement;
+    const items = Array.from(itemsNodeList);
+    
+    // Clone items for infinite scrolling
+    const firstItem = items[0] as HTMLElement;
+    const itemWidth = firstItem.offsetWidth;
+    const gapWidth = 32; // Same as the gap in CSS
+    const totalItemWidth = itemWidth + gapWidth;
+    
+    // Clone all items and append them to create the infinite effect
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      if (clone instanceof Node) {
+        carousel.appendChild(clone);
+      }
+    });
+    
+    // Set initial position
+    let position = 0;
+    let speed = 0.5; // pixels per frame
+    
+    function animate() {
+      position -= speed;
+      
+      // When we've scrolled past the first item, reset position to create infinite loop
+      if (position <= -totalItemWidth) {
+        position += totalItemWidth;
+        
+        // Move the first item to the end to maintain the loop
+        const firstChild = carousel.firstElementChild;
+        if (firstChild instanceof Node) {
+          carousel.appendChild(firstChild);
+        }
+      }
+      
+      carousel.style.transform = `translateX(${position}px)`;
+      requestAnimationFrame(animate);
+    }
+    
+    // Start the animation
+    animate();
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => {
+      speed = 0;
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      speed = 0.5;
+    });
+  });
+</script>

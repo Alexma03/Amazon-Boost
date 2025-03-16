@@ -1,0 +1,122 @@
+---
+const auditSteps = [
+  {
+    title: "Initial Performance Assessment",
+    description: "Comprehensive analysis of your account's key performance indicators, sales trends, and operational metrics.",
+    metrics: ["Inventory turnover rate", "Profit margins", "Buy Box percentage", "Customer satisfaction scores"]
+  },
+  {
+    title: "Compliance Review",
+    description: "Thorough evaluation of your account's adherence to Amazon's policies and best practices.",
+    checklist: ["Product listing compliance", "Intellectual property rights", "Shipping requirements", "Customer service standards"]
+  },
+  {
+    title: "Growth Opportunity Analysis",
+    description: "Identification of untapped potential and growth strategies specific to your product category.",
+    areas: ["Market expansion opportunities", "Product line extensions", "Cross-selling potential", "Pricing optimization"]
+  },
+  {
+    title: "Competitive Positioning",
+    description: "In-depth analysis of your market position relative to competitors.",
+    evaluation: ["Market share analysis", "Pricing strategy review", "Content comparison", "Customer feedback analysis"]
+  }
+];
+
+const caseStudies = [
+  {
+    title: "Home & Kitchen Seller",
+    metric: "127%",
+    description: "Revenue increase within 3 months of implementing audit recommendations"
+  },
+  {
+    title: "Sports Equipment Brand",
+    metric: "4.8→4.9",
+    description: "Star rating improvement through customer service optimization"
+  },
+  {
+    title: "Beauty Products Seller",
+    metric: "89%",
+    description: "Reduction in policy compliance issues"
+  }
+];
+---
+
+<section id="audit" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">360° Amazon Account Audit</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Our comprehensive audit process identifies critical improvements and unlocks hidden potential in your Amazon business.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-16">
+      {auditSteps.map((step, index) => (
+        <div class="bg-amazon-lightgray p-8 rounded-xl">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-amazon-orange text-amazon-black rounded-full flex items-center justify-center font-bold text-xl">
+              {index + 1}
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-3">{step.title}</h3>
+              <p class="text-gray-600 mb-4">{step.description}</p>
+              <ul class="space-y-2">
+                {(step.metrics || step.checklist || step.areas || step.evaluation).map(item => (
+                  <li class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amazon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-amazon-black text-white p-8 rounded-xl">
+      <h3 class="text-2xl font-bold mb-8 text-center">Success Stories</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        {caseStudies.map(study => (
+          <div class="text-center">
+            <div class="text-4xl font-bold text-amazon-orange mb-2">{study.metric}</div>
+            <div class="font-semibold mb-2">{study.title}</div>
+            <p class="text-gray-300">{study.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <h3 class="text-2xl font-bold mb-4">Audit Deliverables Timeline</h3>
+      <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-16 text-right font-semibold">Day 1</div>
+            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Initial Data Collection & Analysis</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 text-right font-semibold">Day 2-3</div>
+            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Deep Dive Analysis & Opportunity Identification</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 text-right font-semibold">Day 4</div>
+            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Report Preparation & Recommendation Development</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 text-right font-semibold">Day 5</div>
+            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Presentation & Strategy Session</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="#contact" class="inline-block bg-amazon-orange text-amazon-black px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+        Request Your Free Audit
+      </a>
+    </div>
+  </div>
+</section>
