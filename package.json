@@ -10,10 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/image": "^0.18.0",
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^8.1.2",
+    "@astrojs/vercel": "^8.0.4",
     "@fontsource/inter": "^5.0.16",
     "astro": "^5.2.5",
     "chart.js": "^4.4.1",
