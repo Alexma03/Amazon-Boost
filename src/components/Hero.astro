@@ -42,14 +42,17 @@ import { Image } from 'astro:assets';
         </div>
       </div>
       <div class="relative">
-        <div class="bg-gradient-to-r from-amazon-orange to-amazon-darkblue p-1 rounded-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1633174524778-61a18ee54490?q=80&w=2096&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Amazon Success"
-            class="rounded-2xl"
-          />
+        <div class="rotating-border-container rounded-2xl">
+          <div class="rotating-border"></div>
+          <div class="image-container">
+            <img 
+              src="https://images.unsplash.com/photo-1633174524778-61a18ee54490?q=80&w=2096&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Amazon Success"
+              class="rounded-2xl w-full h-full object-cover"
+            />
+          </div>
         </div>
-        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl">
+        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl z-20">
           <div class="flex items-center gap-3">
             <div class="text-amazon-black">
               <p class="text-2xl font-bold">245%</p>
@@ -66,3 +69,49 @@ import { Image } from 'astro:assets';
     </div>
   </div>
 </section>
+
+<style>
+  .rotating-border-container {
+    position: relative;
+    overflow: hidden;
+    padding: 3px;
+    border-radius: 1rem;
+    z-index: 10;
+  }
+
+  .rotating-border {
+    position: absolute;
+    content: '';
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      #FF9900 0%, 
+      #232F3E 30%, 
+      #131921 50%,
+      #232F3E 70%,
+      #FF9900 100%
+    );
+    animation: rotate 12s linear infinite;
+    z-index: 0;
+  }
+
+  .image-container {
+    position: relative;
+    z-index: 1;
+    background-color: #131921;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border-radius: 0.875rem;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
