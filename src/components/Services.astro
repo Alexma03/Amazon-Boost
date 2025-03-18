@@ -38,8 +38,8 @@ const services = [
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {services.map(service => (
-        <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl hover:border-amazon-orange/30 hover:-translate-y-2 transition-all duration-300 group h-[350px] flex flex-col">
-          <div class="p-6 relative flex flex-col h-full">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl hover:border-amazon-orange/30 hover:-translate-y-2 transition-all duration-300 group">
+          <div class="p-6 relative">
             <div class="absolute top-0 left-0 w-1 h-0 bg-amazon-orange group-hover:h-full transition-all duration-300"></div>
             <div class="text-amazon-orange mb-4 transform group-hover:scale-110 transition-transform duration-300">
               {service.icon === 'audit' && (
@@ -67,7 +67,7 @@ const services = [
             <h3 class="text-xl font-bold mb-3 group-hover:text-amazon-orange transition-colors">{service.title}</h3>
             <p class="text-gray-600 mb-4 line-clamp-3">{service.description}</p>
             
-            <a href={service.link} class="text-amazon-orange font-medium group-hover:text-amazon-orange/90 inline-flex items-center relative group-hover:pl-1 transition-all mt-auto">
+            <a href={service.link} class="text-amazon-orange font-medium group-hover:text-amazon-orange/90 inline-flex items-center relative group-hover:pl-1 transition-all">
               <span class="relative z-10">Saber Más</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
