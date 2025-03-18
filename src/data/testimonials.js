@@ -1,14 +1,14 @@
 export const testimonials = [
   {
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3",
-    quote: "Amazon Boost transformó nuestro negocio con su optimización de PPC. Nuestro ROAS aumentó un 150% en el primer mes, y hemos mantenido un crecimiento constante desde entonces.",
+    quote: "Amazon Boost transformó nuestro negocio con su optimización de PPC. Nuestro ROAS aumentó un 150% en los 3 primeros meses, y hemos mantenido un crecimiento constante desde entonces.",
     author: "Alberto Gómez",
     role: "CEO",
     company: "TechGear Pro"
   },
   {
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3",
-    quote: "Sus conocimientos en investigación de mercado nos ayudaron a identificar nichos sin explotar y optimizar nuestros listados de productos. Nuestras clasificaciones orgánicas mejoraron dramáticamente, llevando a un aumento del 200% en ventas.",
+    quote: "Sus conocimientos en investigación de mercado nos ayudaron a identificar nichos sin explotar y optimizar nuestros listados de productos. Nuestras clasificaciones orgánicas mejoraron dramáticamente.",
     author: "Ana Martínez",
     role: "Directora de Marketing",
     company: "HomeStyle Essentials"
