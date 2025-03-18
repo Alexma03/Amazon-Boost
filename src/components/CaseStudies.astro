@@ -2,7 +2,6 @@
 const caseStudies = [
   {
     image: "https://img.freepik.com/free-photo/electronic-computer-motherboard-wallpaper_1409-5907.jpg?t=st=1742142820~exp=1742146420~hmac=e120eea0da2a8b307e9bde68d034ef8f090ef3027e4c95439a74bc88a4d0e106&w=1380",
-    client: "TechGear Pro",
     title: "Dominación en la Categoría de Electrónicos",
     overview: "Transformamos un vendedor de electrónicos en dificultades en un líder de categoría a través de optimización estratégica y gestión de PPC.",
     results: {
@@ -13,7 +12,6 @@ const caseStudies = [
   },
   {
     image: "https://img.freepik.com/free-photo/interiors-homely-kitchen_53876-146777.jpg?t=st=1742142914~exp=1742146514~hmac=64e02a6bd360b4f987e2c439513e2d05cbe053d27a887d610e31c7deff10bf15&w=996",
-    client: "HomeStyle Essentials",
     title: "Historia de Éxito en Hogar y Cocina",
     overview: "Lanzamos una nueva marca de hogar y alcanzamos una cuota de mercado significativa en 6 meses.",
     results: {
@@ -24,7 +22,6 @@ const caseStudies = [
   },
   {
     image: "https://img.freepik.com/free-photo/close-up-dog-accessories_23-2150959988.jpg?t=st=1742142965~exp=1742146565~hmac=86e305216e9f598c6132ff8a95c99c58a70032fbd39d05d115d5b7c22ba62d1c&w=996",
-    client: "PetCare Plus",
     title: "Expansión en Productos para Mascotas",
     overview: "Ayudamos a una marca de productos para mascotas a expandir su línea de productos y duplicar su presencia en el mercado.",
     results: {
@@ -54,10 +51,6 @@ const caseStudies = [
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div class="absolute top-0 left-0 w-1 h-0 bg-amazon-orange group-hover:h-full transition-all duration-300 -mt-1"></div>
-            <div class="text-sm text-amazon-orange font-medium mb-2 flex items-center">
-              <span class="inline-block w-2 h-2 bg-amazon-orange rounded-full mr-2"></span>
-              {study.client}
-            </div>
             <h3 class="text-xl font-bold mb-3 group-hover:text-amazon-orange transition-colors">{study.title}</h3>
             <p class="text-gray-600 mb-4 line-clamp-3">{study.overview}</p>
             <div class="grid grid-cols-3 gap-4 my-4">
@@ -74,7 +67,7 @@ const caseStudies = [
                 <div class="text-xs text-gray-600 font-medium">Conversión</div>
               </div>
             </div>
-            <a href={`/case-studies/${study.client.toLowerCase().replace(/\s+/g, '-')}`} class="text-amazon-orange font-medium group-hover:text-amazon-orange/90 inline-flex items-center relative overflow-hidden group-hover:pl-1 mt-2">
+            <a href={study.title.toLowerCase().replace(/\s+/g, '-')} class="text-amazon-orange font-medium group-hover:text-amazon-orange/90 inline-flex items-center relative overflow-hidden group-hover:pl-1 mt-2">
               <span class="relative z-10">Ver Caso Completo</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
