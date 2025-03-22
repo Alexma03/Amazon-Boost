@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 ---
 
 <section class="relative bg-amazon-black text-white py-20">
@@ -10,34 +10,64 @@ import { Image } from 'astro:assets';
           Agencia de Amazon FBA/FBM
         </h1>
         <p class="text-lg mb-8 text-gray-300">
-          Somos una agencia y consultoría especializada en la gestión integral de cuentas de Amazon. Ayudamos a vendedores y marcas a optimizar sus listados, gestionar su publicidad PPC y desarrollar estrategias de crecimiento para maximizar sus ventas y rentabilidad en la plataforma.
+          Somos una agencia y consultoría especializada en la gestión integral
+          de cuentas de Amazon. Ayudamos a vendedores y marcas a optimizar sus
+          listados, gestionar su publicidad PPC y desarrollar estrategias de
+          crecimiento para maximizar sus ventas y rentabilidad en la plataforma.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#contact" class="bg-amazon-orange text-amazon-black px-8 py-3 rounded-full font-medium text-center hover:bg-opacity-90 transition-colors">
+          <a
+            href="#contact"
+            class="bg-amazon-orange text-amazon-black px-8 py-3 rounded-full font-medium text-center hover:bg-opacity-90 transition-colors"
+          >
             Obtén una Auditoría Gratuita
           </a>
-          <a href="#services" class="border-2 border-amazon-orange text-white px-8 py-3 rounded-full font-medium text-center hover:bg-amazon-orange hover:text-amazon-black transition-colors">
+          <a
+            href="#services"
+            class="border-2 border-amazon-orange text-white px-8 py-3 rounded-full font-medium text-center hover:bg-amazon-orange hover:text-amazon-black transition-colors"
+          >
             Servicios
           </a>
         </div>
         <div class="mt-4 flex items-center gap-2">
           <div class="flex">
-            {[...Array(5)].map(() => (
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
+            {
+              [...Array(5)].map(() => (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-amazon-orange"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))
+            }
           </div>
-          <span class="text-amazon-orange font-medium">4.9/5 de nuestros clientes</span>
+          <span class="text-amazon-orange font-medium"
+            >4.9/5 de nuestros clientes</span
+          >
         </div>
         <div class="mt-8 flex items-center gap-6">
           <div class="flex -space-x-4">
-            <img class="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1627161684458-a62da52b51c3?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client" />
-            <img class="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1627161683077-e34782c24d81?q=80&w=2006&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-            <img class="w-10 h-10 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client" />
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white"
+              src="https://images.unsplash.com/photo-1627161684458-a62da52b51c3?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Client"
+            />
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white"
+              src="https://images.unsplash.com/photo-1627161683077-e34782c24d81?q=80&w=2006&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+            <img
+              class="w-10 h-10 rounded-full border-2 border-white"
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Client"
+            />
           </div>
           <p class="text-sm">
-            <span class="text-amazon-orange font-bold">20+</span> Vendedores Confían en Nosotros
+            <span class="text-amazon-orange font-bold">20+</span> Vendedores Confían
+            en Nosotros
           </p>
         </div>
       </div>
@@ -45,22 +75,34 @@ import { Image } from 'astro:assets';
         <div class="rotating-border-container rounded-2xl">
           <div class="rotating-border"></div>
           <div class="image-container">
-            <img 
+            <img
               src="https://images.unsplash.com/photo-1633174524778-61a18ee54490?q=80&w=2096&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Amazon Success"
               class="rounded-2xl w-full h-full object-cover"
             />
           </div>
         </div>
-        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl z-20">
+        <div
+          class="absolute -bottom-6 -right-6 bg-gradient-to-br from-white to-gray-100 p-4 rounded-lg shadow-xl z-20 acos-card"
+        >
           <div class="flex items-center gap-3">
             <div class="text-amazon-black">
               <p class="text-2xl font-bold">19%</p>
               <p class="text-sm">ACOS Promedio</p>
             </div>
             <div class="text-green-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
               </svg>
             </div>
           </div>
@@ -81,16 +123,16 @@ import { Image } from 'astro:assets';
 
   .rotating-border {
     position: absolute;
-    content: '';
+    content: "";
     inset: -50%;
     width: 200%;
     height: 200%;
     background: conic-gradient(
-      #FF9900 0%, 
-      #232F3E 30%, 
+      #ff9900 0%,
+      #232f3e 30%,
       #131921 50%,
-      #232F3E 70%,
-      #FF9900 100%
+      #232f3e 70%,
+      #ff9900 100%
     );
     animation: rotate 12s linear infinite;
     z-index: 0;
@@ -104,6 +146,26 @@ import { Image } from 'astro:assets';
     height: 100%;
     width: 100%;
     border-radius: 0.875rem;
+  }
+
+  .acos-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse 3s infinite;
+    border: 1px solid rgba(255, 153, 0, 0.1);
+  }
+
+  .acos-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 10px 15px -3px rgba(255, 153, 0, 0.1), 0 4px 6px -2px rgba(255, 153, 0, 0.05);
+    }
+    50% {
+      box-shadow: 0 15px 20px -3px rgba(255, 153, 0, 0.2), 0 8px 8px -2px rgba(255, 153, 0, 0.1);
+    }
   }
 
   @keyframes rotate {
