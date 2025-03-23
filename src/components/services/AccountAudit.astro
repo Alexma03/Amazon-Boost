@@ -41,13 +41,56 @@ const caseStudies = [
 ];
 ---
 
+---
+import { accountAuditData } from '../../data/services/account-audit.js';
+
+const { benefits } = accountAuditData;
+---
+
 <section id="audit" class="py-20 bg-white">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">360° Amazon Account Audit</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{accountAuditData.title}</h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Our comprehensive audit process identifies critical improvements and unlocks hidden potential in your Amazon business.
+        {accountAuditData.description}
       </p>
+    </div>
+
+    <div class="space-y-4 mb-16">
+      <h3 class="text-2xl font-bold mb-6 text-center">{benefits.title}</h3>
+      <div class="max-w-4xl mx-auto space-y-4">
+        {benefits.items.map((item, index) => (
+          <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="w-full text-left px-6 py-4 bg-amazon-lightgray hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center"
+              onclick={`document.getElementById('content-${index}').classList.toggle('hidden')`}
+            >
+              <span class="font-semibold text-lg">{item.header}</span>
+              <svg
+                class="w-6 h-6 transform transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div id={`content-${index}`} class="hidden px-6 py-4 bg-white">
+              <div class="prose max-w-none">
+                {item.content.split('\n').map((line) => (
+                  <p class="mb-2">{line}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 mb-16">
