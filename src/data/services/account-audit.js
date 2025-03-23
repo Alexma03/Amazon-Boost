@@ -19,19 +19,19 @@ export const accountAuditData = {
       {
         header: "Certificados y cumplimiento normativo",
         content: "• Revisión de certificados de producto requeridos en distintas categorías.\n•  Verificación de cumplimiento con normativas de seguridad y etiquetado en cada mercado.\n•  Identificación de restricciones y regulaciones específicas por país."
-      }
+      },
       {
         header: "Evaluación de listados y contenido de productos",
         content: "• Optimización de títulos, bullet points y descripciones para aumentar conversiones.\n• Revisión de palabras clave en los listados y sugerencias de mejora.\n• Análisis de imágenes y recomendaciones de mejora en fotografía y vídeos de producto.\n• Auditoría de contenido A+ y Storefront.\n• Verificación de variantes de producto para optimizar la estrategia de ventas."
-      }
+      },
       {
         header: "Posicionamiento y palabras clave",
         content: "• Análisis de ranking y visibilidad de productos en Amazon.\n• Identificación de palabras clave de alto rendimiento y oportunidades de mejora.\n•  Evaluación del uso de backend keywords para mejorar el posicionamiento."
-      }
+      },
       {
         header: "Revisión de estrategias publicitarias (PPC)",
         content: "• Análisis del rendimiento de campañas publicitarias activas.\n• Identificación de oportunidades de optimización en campañas manuales y automáticas.\n• Evaluación de la estructura de pujas y palabras clave negativas.\n• Optimización del ACoS y ROAS para mejorar la rentabilidad."
-      }
+      },
       {
         header: "Análisis de mercados internacionales",
         content: "• Evaluación del estado de la cuenta en diferentes marketplaces de Amazon (España, Alemania, Italia, etc.).\n• Revisión de diferencias en contenido, precios y cumplimiento normativo en cada país.\n• Estrategia para expandir productos a otros mercados de forma eficiente."
