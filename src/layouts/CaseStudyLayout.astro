@@ -1,0 +1,162 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  caseStudy: {
+    title: string;
+    image: string;
+    industry: string;
+    challenge: string;
+    solution: string;
+    approach: string[];
+    results: {
+      revenue: string;
+      ranking: string;
+      conversion: string;
+      additional?: {
+        label: string;
+        value: string;
+      }[];
+    };
+    testimonial?: {
+      quote: string;
+      author: string;
+      position: string;
+    };
+    conclusion: string;
+  };
+}
+
+const { title, description, caseStudy } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <div class="py-12 md:py-20 bg-amazon-lightgray">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <!-- Hero section -->
+        <div class="mb-12">
+          <a href="/#case-studies" class="inline-flex items-center text-amazon-orange mb-6 hover:underline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Volver a Casos de Éxito
+          </a>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 text-amazon-darkblue">{caseStudy.title}</h1>
+          <div class="flex flex-wrap items-center text-gray-600 text-sm mb-8">
+            <span class="bg-amazon-orange/10 text-amazon-orange rounded-full px-3 py-1 mr-3 mb-2">
+              {caseStudy.industry}
+            </span>
+          </div>
+        </div>
+        
+        <!-- Main image -->
+        <div class="rounded-xl overflow-hidden shadow-lg mb-12">
+          <img src={caseStudy.image} alt={caseStudy.title} class="w-full h-auto object-cover" />
+        </div>
+        
+        <!-- Challenge section -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+            El Desafío
+          </h2>
+          <p class="text-gray-700">
+            {caseStudy.challenge}
+          </p>
+        </div>
+        
+        <!-- Solution section -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+            Nuestra Solución
+          </h2>
+          <p class="text-gray-700 mb-6">
+            {caseStudy.solution}
+          </p>
+          
+          <h3 class="text-xl font-semibold mb-4 text-amazon-darkblue">Enfoque:</h3>
+          <ul class="space-y-4 mb-4">
+            {caseStudy.approach.map(step => (
+              <li class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <span class="ml-3 text-gray-700">{step}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Results section -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
+          <h2 class="text-2xl font-bold mb-6 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+            Resultados
+          </h2>
+          
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
+              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.revenue}</div>
+              <div class="text-gray-600 font-medium">Incremento en Ingresos</div>
+            </div>
+            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
+              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.ranking}</div>
+              <div class="text-gray-600 font-medium">Posición en Rankings</div>
+            </div>
+            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
+              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.conversion}</div>
+              <div class="text-gray-600 font-medium">Tasa de Conversión</div>
+            </div>
+          </div>
+
+          {caseStudy.results.additional && (
+            <div class="space-y-3 mb-6">
+              {caseStudy.results.additional.map(item => (
+                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                  <span class="text-gray-600">{item.label}:</span>
+                  <span class="font-bold text-amazon-darkblue">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        
+        <!-- Testimonial section (if available) -->
+        {caseStudy.testimonial && (
+          <div class="bg-amazon-darkblue text-white rounded-xl p-8 shadow-lg mb-8">
+            <div class="flex flex-col items-center text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amazon-orange mb-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+              <p class="text-lg italic mb-6">{caseStudy.testimonial.quote}</p>
+              <div>
+                <p class="font-bold">{caseStudy.testimonial.author}</p>
+                <p class="text-sm text-gray-300">{caseStudy.testimonial.position}</p>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        <!-- Conclusion -->
+        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+            Conclusión
+          </h2>
+          <p class="text-gray-700">
+            {caseStudy.conclusion}
+          </p>
+        </div>
+        
+        <!-- CTA -->
+        <div class="mt-12 text-center">
+          <a href="/#contact" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+            ¿Quieres resultados similares? Contáctanos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

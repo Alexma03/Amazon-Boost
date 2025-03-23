@@ -14,11 +14,11 @@ const navItems = [
     </a>
     
     <nav class="hidden md:flex items-center space-x-8">
-      <a href="/#services" class="hover:text-amazon-orange transition-colors">Servicios</a>
-      <a href="/#case-studies" class="hover:text-amazon-orange transition-colors">Casos de Éxito</a>
-      <a href="/#contact" class="hover:text-amazon-orange transition-colors">Contacto</a>
-      <a href="/blog" class="hover:text-amazon-orange transition-colors">Blog</a>
-      <a href="/#contact" class="bg-amazon-orange text-amazon-black px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">Auditoría Gratis</a>
+      <a href="/#services" class="nav-link">Servicios</a>
+      <a href="/#case-studies" class="nav-link">Casos de Éxito</a>
+      <a href="/#contact" class="nav-link">Contacto</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/#contact" class="header-cta-button">Auditoría Gratis</a>
     </nav>
 
     <button class="md:hidden text-white" id="menuButton">
@@ -36,7 +36,7 @@ const navItems = [
           {item.text}
         </a>
       ))}
-      <a href="/#contact" class="block px-3 py-2 text-base font-medium text-amazon-orange">
+      <a href="/#contact" class="mobile-cta-button">
         Auditoría Gratis
       </a>
     </div>
@@ -51,3 +51,213 @@ const navItems = [
     mobileMenu?.classList.toggle('hidden');
   });
 </script>
+
+<style>
+  .mobile-cta-button {
+    display: block;
+    margin: 0.5rem 0.75rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #ff9900, #ffb347, #ff9900);
+    color: #131921;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(255, 153, 0, 0.2);
+  }
+
+  .mobile-cta-button:after {
+    content: "";
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+    z-index: -1;
+  }
+
+  .mobile-cta-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px -1px rgba(255, 153, 0, 0.2);
+  }
+
+  @media (hover: hover) {
+    .mobile-cta-button:hover {
+      box-shadow: 0 6px 12px -2px rgba(255, 153, 0, 0.25);
+    }
+    
+    .mobile-cta-button:hover:after {
+      left: 100%;
+      animation: shine 1.5s infinite;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+    20%, 100% {
+      left: 100%;
+    }
+  }
+
+  /* Estilos para el botón CTA del header */
+  .header-cta-button {
+    position: relative;
+    background: linear-gradient(90deg, #ff9900, #ffb347, #ff9900);
+    background-size: 200%;
+    color: #131921;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 8px -2px rgba(255, 153, 0, 0.25);
+    z-index: 1;
+  }
+
+  .header-cta-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ffb347, #ff9900, #ffb347);
+    background-size: 200%;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+
+  .header-cta-button:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0;
+    transform: scale(0.5);
+    z-index: -2;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  .header-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(255, 153, 0, 0.4);
+    animation: shimmer-header 2s infinite;
+  }
+  
+  .header-cta-button:hover:before {
+    opacity: 1;
+    animation: bg-slide 2s infinite;
+  }
+  
+  .header-cta-button:hover:after {
+    opacity: 0.15;
+    transform: scale(2);
+    animation: pulse-glow 2s infinite;
+  }
+  
+  .header-cta-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px -1px rgba(255, 153, 0, 0.3);
+  }
+  
+  @keyframes shimmer-header {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes bg-slide {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+
+  /* Estilos para los enlaces de navegación */
+  .nav-link {
+    position: relative;
+    padding: 0.25rem 0;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    color: white;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(90deg, transparent, #ff9900, transparent);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+    opacity: 0;
+  }
+
+  .nav-link:hover {
+    color: #ff9900;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  /* Efecto adicional de destello al interactuar */
+  .nav-link:active {
+    text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+  }
+
+  /* Animación para detectar la página activa */
+  .nav-link.active::after {
+    transform: scaleX(1);
+    opacity: 0.8;
+    animation: pulse-underline 2s infinite;
+  }
+
+  @keyframes pulse-underline {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>

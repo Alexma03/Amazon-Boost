@@ -18,15 +18,15 @@ import { Image } from "astro:assets";
         <div class="flex flex-col sm:flex-row gap-4">
           <a
             href="#contact"
-            class="bg-amazon-orange text-amazon-black px-8 py-3 rounded-full font-medium text-center hover:bg-opacity-90 transition-colors"
+            class="cta-button"
           >
-            Obtén una Auditoría Gratuita
+            <span>Obtén una Auditoría Gratuita</span>
           </a>
           <a
             href="#services"
-            class="border-2 border-amazon-orange text-white px-8 py-3 rounded-full font-medium text-center hover:bg-amazon-orange hover:text-amazon-black transition-colors"
+            class="services-button"
           >
-            Servicios
+            <span>Servicios</span>
           </a>
         </div>
         <div class="mt-4 flex items-center gap-2">
@@ -83,7 +83,7 @@ import { Image } from "astro:assets";
           </div>
         </div>
         <div
-          class="absolute -bottom-6 -right-6 bg-gradient-to-br from-white to-gray-100 p-4 rounded-lg shadow-xl z-20 acos-card"
+          class="absolute acos-card bg-gradient-to-br from-white to-gray-100 p-4 rounded-lg shadow-xl z-20"
         >
           <div class="flex items-center gap-3">
             <div class="text-amazon-black">
@@ -152,11 +152,26 @@ import { Image } from "astro:assets";
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: pulse 3s infinite;
     border: 1px solid rgba(255, 153, 0, 0.1);
+    bottom: -1.5rem;
+    right: -1.5rem;
   }
 
   .acos-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  @media (max-width: 640px) {
+    .acos-card {
+      bottom: -1rem;
+      right: 0;
+      scale: 0.9;
+      transform-origin: bottom right;
+    }
+
+    .acos-card:hover {
+      transform: translateY(-3px) scale(0.9);
+    }
   }
 
   @keyframes pulse {
@@ -174,6 +189,163 @@ import { Image } from "astro:assets";
     }
     100% {
       transform: rotate(360deg);
+    }
+  }
+
+  /* Estilos para el botón principal */
+  .cta-button {
+    position: relative;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem 0.75rem 2rem;
+    text-align: center;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #ff9900, #ffb347, #ffc67a, #ff9900);
+    background-size: 300%;
+    color: #131921;
+    z-index: 1;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2);
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-button span {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-button span::after {
+    content: "→";
+    opacity: 0;
+    margin-left: 0;
+    transition: all 0.4s ease;
+    transform: translateX(-8px);
+  }
+
+  .cta-button:hover span::after {
+    opacity: 1;
+    margin-left: 8px;
+    transform: translateX(0);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
+    animation: animate-cta 8s linear infinite;
+  }
+
+  .cta-button:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #ff9900, #ffb347, #e67e00, #ff9900);
+    background-size: 400%;
+    border-radius: 35px;
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  .cta-button:hover:before {
+    filter: blur(15px);
+    opacity: 0.8;
+    animation: animate-glow 8s linear infinite;
+  }
+
+  .cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(255, 153, 0, 0.3);
+  }
+
+  @keyframes animate-cta {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+  }
+
+  @keyframes animate-glow {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+  }
+
+  /* Estilos para el botón de servicios */
+  .services-button {
+    position: relative;
+    padding: 0.75rem 2rem;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    border-radius: 9999px;
+    border: 2px solid #ff9900;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.3s ease;
+  }
+
+  .services-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 153, 0, 0.2), rgba(255, 153, 0, 0.4), rgba(255, 153, 0, 0.1));
+    transition: 0.6s;
+    z-index: -1;
+  }
+
+  .services-button:hover:before {
+    animation: shine 1.5s infinite;
+  }
+
+  .services-button:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: #ff9900;
+    z-index: -2;
+    transition: 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+
+  .services-button:hover:after {
+    height: 100%;
+  }
+
+  .services-button:hover {
+    color: #131921;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
+  }
+
+  .services-button:active {
+    transform: translateY(2px);
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+    20%, 100% {
+      left: 100%;
     }
   }
 </style>
