@@ -9,7 +9,7 @@ interface Props {
     description: string;
     benefits: {
       title: string;
-      items: string[];
+      items: Array<string | { header: string; content: string }>;
     };
     conclusion: string;
   };
@@ -32,17 +32,37 @@ const { title, description, service } = Astro.props;
             {service.benefits.title}
           </h2>
           
-          <ul class="space-y-4 mb-8">
-            {service.benefits.items.map(item => (
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <span class="ml-3 text-gray-700">{item}</span>
-              </li>
-            ))}
+          <ul class="space-y-6 mb-8">
+            {service.benefits.items.map((item) => {
+              if (typeof item === 'string') {
+                return (
+                  <li class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <span class="ml-3 text-gray-700">{item}</span>
+                  </li>
+                );
+              } else {
+                return (
+                  <li class="border-b pb-4 last:border-0 last:pb-0">
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <div class="ml-3">
+                        <h3 class="font-bold text-lg text-amazon-darkblue mb-2">{item.header}</h3>
+                        <div class="text-gray-700 whitespace-pre-line">{item.content}</div>
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+            })}
           </ul>
           
           <p class="text-gray-700 italic border-l-4 border-amazon-orange pl-4 bg-amber-50 p-4 rounded">

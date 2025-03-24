@@ -4,10 +4,22 @@ export const accountManagementData = {
   benefits: {
     title: "¿Qué incluye nuestra gestión de cuenta?",
     items: [
-      "Configuración y mantenimiento de la cuenta: Nos encargamos de la creación, configuración inicial y mantenimiento continuo de tu cuenta para evitar cualquier inconveniente con Amazon.",
-      "Gestión de inventario: Supervisamos tu stock para evitar rupturas o excesos de inventario que puedan afectar tu rentabilidad.",
-      "Resolución de problemas y soporte: Nos ocupamos de cualquier incidencia, desde suspensiones hasta disputas con Amazon, garantizando que tu negocio siga operando sin interrupciones.",
-      "Análisis de ventas y estrategias de crecimiento: Monitorizamos el rendimiento de tu cuenta y te proporcionamos estrategias basadas en datos para mejorar las ventas."
+      {
+        header: "Configuración y mantenimiento de la cuenta",
+        content: "• Creación y configuración inicial de la cuenta\n• Mantenimiento continuo y optimización\n• Resolución de problemas técnicos\n• Cumplimiento de políticas y requisitos de Amazon"
+      },
+      {
+        header: "Gestión de inventario",
+        content: "• Supervisión de niveles de stock\n• Prevención de rupturas de inventario\n• Optimización de envíos a Amazon FBA\n• Control de excesos para reducir costos de almacenamiento"
+      },
+      {
+        header: "Resolución de problemas y soporte",
+        content: "• Gestión de suspensiones de cuenta\n• Resolución de disputas con Amazon\n• Manejo de reclamaciones de clientes\n• Soporte técnico para incidencias\n• Comunicación directa con el soporte de Amazon"
+      },
+      {
+        header: "Análisis de ventas y estrategias de crecimiento",
+        content: "• Monitorización del rendimiento de ventas\n• Informes periódicos con métricas clave\n• Recomendaciones basadas en datos\n• Estrategias para mejorar la rentabilidad\n• Identificación de oportunidades de crecimiento"
+      }
     ]
   },
   conclusion: "Con nuestra gestión de cuenta, puedes enfocarte en hacer crecer tu negocio mientras nosotros nos encargamos del día a día en Amazon."
