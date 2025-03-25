@@ -5,8 +5,8 @@ export const ppcManagementData = {
     title: "Beneficios de nuestra gestión de PPC:",
     items: [
       {
-        header: "Creación de campañas personalizadas",
-        content: "• Diseñamos estrategias de publicidad a medida\n• Implementamos Sponsored Products, Sponsored Brands y Sponsored Display\n• Desarrollamos estructura óptima de campañas\n• Creamos segmentaciones precisas por audiencia y productos"
+        header: "Creación de estrategias publicitarias personalizadas de 3 niveles",
+        content: "• Diseñamos campañas de publicidad a medida\n• Implementamos Sponsored Products, Sponsored Brands y Sponsored Display\n• Desarrollamos estructura óptima de campañas\n• Creamos segmentaciones precisas por audiencia y productos"
       },
       {
         header: "Investigación y selección de palabras clave",
