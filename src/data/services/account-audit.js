@@ -38,5 +38,8 @@ export const accountAuditData = {
       }
     ]
   },
-  conclusion: "Con nuestra auditoría de cuenta y estudio de mercado, obtienes un análisis profundo de tu situación en Amazon y estrategias efectivas para mejorar tu rendimiento."
+  conclusion: "Con nuestra auditoría de cuenta y estudio de mercado, obtienes un análisis profundo de tu situación en Amazon y estrategias efectivas para mejorar tu rendimiento.",
+  slug: "auditoria-de-cuenta",
+  metaTitle: "Auditoría de Cuenta Amazon | AmazonBoost",
+  metaDescription: "Análisis exhaustivo de tu cuenta de Amazon con estudio de mercado para identificar oportunidades de crecimiento y mejorar el rendimiento."
 };

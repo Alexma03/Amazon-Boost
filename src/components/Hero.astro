@@ -50,19 +50,29 @@ import { Image } from "astro:assets";
         </div>
         <div class="mt-8 flex items-center gap-6">
           <div class="flex -space-x-4">
-            <img
+            <Image
               class="w-10 h-10 rounded-full border-2 border-white"
               src="https://images.unsplash.com/photo-1627161684458-a62da52b51c3?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Client"
+              loading={"eager"}
+              width={40}
+              height={40}
             />
-            <img
+            <Image
               class="w-10 h-10 rounded-full border-2 border-white"
               src="https://images.unsplash.com/photo-1627161683077-e34782c24d81?q=80&w=2006&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Client"
+              loading={"eager"}
+              width={40}
+              height={40}
             />
-            <img
+            <Image
               class="w-10 h-10 rounded-full border-2 border-white"
               src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Client"
+              loading={"eager"}
+              width={40}
+              height={40}
             />
           </div>
           <p class="text-sm">
@@ -75,10 +85,13 @@ import { Image } from "astro:assets";
         <div class="rotating-border-container rounded-2xl">
           <div class="rotating-border"></div>
           <div class="image-container">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1633174524778-61a18ee54490?q=80&w=2096&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Amazon Success"
               class="rounded-2xl w-full h-full object-cover"
+              loading={"eager"}
+              width={800}
+              height={600}
             />
           </div>
         </div>

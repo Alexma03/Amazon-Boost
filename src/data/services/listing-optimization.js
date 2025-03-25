@@ -26,5 +26,8 @@ export const listingOptimizationData = {
       }
     ]
   },
-  conclusion: "Con una optimización profesional de tus listados, conseguimos que tu producto destaque entre la competencia y genere más ventas."
+  conclusion: "Con una optimización profesional de tus listados, conseguimos que tu producto destaque entre la competencia y genere más ventas.",
+  slug: "optimizacion-de-listados",
+  metaTitle: "Optimización de Listados Amazon | AmazonBoost",
+  metaDescription: "Servicio profesional de optimización de listados de producto en Amazon para mejorar posicionamiento, conversión y ventas con copywriting persuasivo."
 };

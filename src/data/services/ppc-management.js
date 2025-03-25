@@ -22,5 +22,8 @@ export const ppcManagementData = {
       }
     ]
   },
-  conclusion: "Nuestra gestión de PPC está enfocada en aumentar tu visibilidad y rentabilidad en Amazon, asegurando que cada inversión publicitaria genere el mayor retorno posible."
+  conclusion: "Nuestra gestión de PPC está enfocada en aumentar tu visibilidad y rentabilidad en Amazon, asegurando que cada inversión publicitaria genere el mayor retorno posible.",
+  slug: "gestion-de-ppc",
+  metaTitle: "Gestión de PPC en Amazon | AmazonBoost",
+  metaDescription: "Optimización profesional de campañas publicitarias en Amazon para aumentar visibilidad, mejorar posicionamiento y maximizar el retorno de inversión (ROI)."
 };

@@ -22,5 +22,8 @@ export const accountManagementData = {
       }
     ]
   },
-  conclusion: "Con nuestra gestión de cuenta, puedes enfocarte en hacer crecer tu negocio mientras nosotros nos encargamos del día a día en Amazon."
+  conclusion: "Con nuestra gestión de cuenta, puedes enfocarte en hacer crecer tu negocio mientras nosotros nos encargamos del día a día en Amazon.",
+  slug: "gestion-de-cuenta",
+  metaTitle: "Gestión de Cuenta Amazon | AmazonBoost",
+  metaDescription: "Servicio de gestión profesional de cuentas de Amazon para maximizar ventas, evitar problemas y garantizar un crecimiento sostenible de tu negocio."
 };
