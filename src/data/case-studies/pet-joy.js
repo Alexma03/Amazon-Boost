@@ -1,7 +1,5 @@
----
-import CaseStudyLayout from '../layouts/CaseStudyLayout.astro';
-
-const caseStudy = {
+export const petJoyData = {
+  slug: "expansion-en-productos-para-mascotas",
   title: "Expansión en Productos para Mascotas",
   image: "https://images.unsplash.com/photo-1601758063890-1167f394febb?q=80&w=2002&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   client: "PetJoy",
@@ -32,11 +30,7 @@ const caseStudy = {
     author: "Carlos Velázquez",
     position: "CEO, PetJoy"
   },
-  conclusion: "Este caso demuestra el poder de una estrategia de expansión bien ejecutada en Amazon. Al aprovechar la equidad de marca existente mientras exploramos nuevos nichos de mercado, ayudamos a PetJoy a más que triplicar sus ingresos y establecerse como un líder en múltiples subcategorías del mercado de productos para mascotas. Su éxito ilustra cómo un enfoque estratégico para la expansión de catálogo puede transformar un negocio de Amazon de un vendedor de nicho a una marca dominante con múltiples líneas de productos exitosas."
+  conclusion: "Este caso demuestra el poder de una estrategia de expansión bien ejecutada en Amazon. Al aprovechar la equidad de marca existente mientras exploramos nuevos nichos de mercado, ayudamos a PetJoy a más que triplicar sus ingresos y establecerse como un líder en múltiples subcategorías del mercado de productos para mascotas. Su éxito ilustra cómo un enfoque estratégico para la expansión de catálogo puede transformar un negocio de Amazon de un vendedor de nicho a una marca dominante con múltiples líneas de productos exitosas.",
+  metaTitle: "Caso de Éxito: Expansión en Productos para Mascotas | Amazon Boost",
+  metaDescription: "Descubre cómo ayudamos a una marca de productos para mascotas a expandir su catálogo y triplicar sus ingresos, alcanzando el estatus de 'Más Vendido' en Amazon."
 };
-
-const title = "Caso de Éxito: Expansión en Productos para Mascotas | Amazon Boost";
-const description = "Descubre cómo ayudamos a una marca de productos para mascotas a expandir su catálogo y triplicar sus ingresos, alcanzando el estatus de 'Más Vendido' en Amazon.";
----
-
-<CaseStudyLayout title={title} description={description} caseStudy={caseStudy} />

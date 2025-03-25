@@ -1,7 +1,5 @@
----
-import CaseStudyLayout from '../layouts/CaseStudyLayout.astro';
-
-const caseStudy = {
+export const techLifeSolutionsData = {
+  slug: "dominacion-en-la-categoria-de-electronicos",
   title: "Dominación en la Categoría de Electrónicos",
   image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   client: "TechLife Solutions",
@@ -31,11 +29,7 @@ const caseStudy = {
     author: "Miguel Torres",
     position: "Director de E-commerce, TechLife Solutions"
   },
-  conclusion: "Este caso demuestra cómo una estrategia integral y basada en datos puede transformar un negocio en dificultades en un líder de categoría en Amazon. Al optimizar todos los aspectos de su presencia en la plataforma y adoptar un enfoque científico hacia la publicidad PPC, ayudamos a TechLife Solutions a más que duplicar sus ingresos y establecerse como un competidor dominante en su nicho, con una estructura escalable que continúa generando crecimiento."
+  conclusion: "Este caso demuestra cómo una estrategia integral y basada en datos puede transformar un negocio en dificultades en un líder de categoría en Amazon. Al optimizar todos los aspectos de su presencia en la plataforma y adoptar un enfoque científico hacia la publicidad PPC, ayudamos a TechLife Solutions a más que duplicar sus ingresos y establecerse como un competidor dominante en su nicho, con una estructura escalable que continúa generando crecimiento.",
+  metaTitle: "Caso de Éxito: Dominación en Electrónicos | Amazon Boost",
+  metaDescription: "Descubre cómo transformamos un vendedor de electrónicos en Amazon en un líder de categoría con un aumento del 245% en ingresos y posicionamiento Top 3."
 };
-
-const title = "Caso de Éxito: Dominación en Electrónicos | Amazon Boost";
-const description = "Descubre cómo transformamos un vendedor de electrónicos en Amazon en un líder de categoría con un aumento del 245% en ingresos y posicionamiento Top 3.";
----
-
-<CaseStudyLayout title={title} description={description} caseStudy={caseStudy} />

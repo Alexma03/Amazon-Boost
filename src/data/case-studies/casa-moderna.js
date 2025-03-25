@@ -1,7 +1,5 @@
----
-import CaseStudyLayout from '../layouts/CaseStudyLayout.astro';
-
-const caseStudy = {
+export const casaModernaData = {
+  slug: "historia-de-exito-en-hogar-y-cocina",
   title: "Historia de Éxito en Hogar y Cocina",
   image: "https://images.unsplash.com/photo-1556910585-09baa3a3998e?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   client: "Casa Moderna",
@@ -32,11 +30,7 @@ const caseStudy = {
     author: "Laura Martínez",
     position: "Fundadora, Casa Moderna"
   },
-  conclusion: "Este caso demuestra que incluso en categorías altamente competitivas como Hogar y Cocina, las marcas nuevas pueden establecerse rápidamente con la estrategia correcta. Al enfocarnos en un lanzamiento fuerte y en construir rápidamente credibilidad a través de reseñas y posicionamiento, ayudamos a Casa Moderna a pasar de ser desconocida a tener una cuota de mercado significativa en solo 6 meses, estableciendo las bases para un crecimiento sostenible a largo plazo."
+  conclusion: "Este caso demuestra que incluso en categorías altamente competitivas como Hogar y Cocina, las marcas nuevas pueden establecerse rápidamente con la estrategia correcta. Al enfocarnos en un lanzamiento fuerte y en construir rápidamente credibilidad a través de reseñas y posicionamiento, ayudamos a Casa Moderna a pasar de ser desconocida a tener una cuota de mercado significativa en solo 6 meses, estableciendo las bases para un crecimiento sostenible a largo plazo.",
+  metaTitle: "Caso de Éxito: Éxito en Hogar y Cocina | Amazon Boost",
+  metaDescription: "Descubre cómo lanzamos una nueva marca de productos para el hogar en Amazon y alcanzamos una cuota de mercado significativa con un aumento de ingresos del 180% en solo 6 meses."
 };
-
-const title = "Caso de Éxito: Éxito en Hogar y Cocina | Amazon Boost";
-const description = "Descubre cómo lanzamos una nueva marca de productos para el hogar en Amazon y alcanzamos una cuota de mercado significativa con un aumento de ingresos del 180% en solo 6 meses.";
----
-
-<CaseStudyLayout title={title} description={description} caseStudy={caseStudy} />

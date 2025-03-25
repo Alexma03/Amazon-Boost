@@ -1,0 +1,25 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { caseStudiesBySlug } from '../../data/case-studies/index.js';
+
+export async function getStaticPaths() {
+  const paths = Object.keys(caseStudiesBySlug).map(slug => {
+    return { params: { slug } };
+  });
+  
+  return paths;
+}
+
+const { slug } = Astro.params;
+const caseStudy = caseStudiesBySlug[slug];
+
+// En caso de que el slug no exista, redirigimos a la página principal
+if (!caseStudy) {
+  return Astro.redirect('/');
+}
+
+const title = caseStudy.metaTitle;
+const description = caseStudy.metaDescription;
+---
+
+<CaseStudyLayout title={title} description={description} caseStudy={caseStudy} />
