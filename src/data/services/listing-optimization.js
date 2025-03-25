@@ -10,7 +10,7 @@ export const listingOptimizationData = {
       },
       {
         header: "Bullet points persuasivos",
-        content: "• Redactamos puntos clave que destacan los beneficios del producto\n• Empleamos técnicas de copywriting para persuadir\n• Respondemos a objeciones comunes de los compradores\n• Destacamos características únicas de venta (USP)"
+        content: "• Redactamos puntos clave que destacan los beneficios del producto\n• Empleamos técnicas de copywriting persuasivas\n• Respondemos a preguntas frecuentes de los compradores\n• Optimizamos los bullet points con palabras clave estratégicas para mejorar el SEO"
       },
       {
         header: "Descripciones detalladas",
@@ -22,7 +22,7 @@ export const listingOptimizationData = {
       },
       {
         header: "Optimización de imágenes",
-        content: "• Asesoramos sobre requisitos técnicos de imágenes principales\n• Diseñamos infográficos efectivos para imágenes secundarias\n• Creamos elementos visuales que destacan características clave\n• Mejoramos la calidad visual para diferenciarte de la competencia"
+        content: "• Asesoramos sobre requisitos técnicos de imágenes principales\n• Asesoramos sobre las mejores prácticas para crear imágenes atractivas y optimizadas\n• Creamos elementos visuales que destacan características clave\n• Mejoramos la calidad visual para diferenciarte de la competencia"
       }
     ]
   },
