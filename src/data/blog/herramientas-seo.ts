@@ -87,15 +87,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'herramientasSeoData' y 'slug') ---
 
 export const herramientasSeoData: BlogPost = {
-  slug: 'herramientas-seo', // Slug mantenido como solicitado
-  title: 'Las 8 Mejores Herramientas SEO para Amazon en 2025', // Título actualizado con año
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'herramientas-seo-amazon',
+  title: '8 Herramientas Esenciales para Optimizar SEO en Amazon',
+  date: '2025-03-05',
   image:
-    'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Miguel Sánchez',
-  category: 'Herramientas Amazon', // Categoría ajustada o mantenida
+    'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'SEO',
   excerpt:
-    'Descubre las 8 herramientas SEO para Amazon más potentes en 2025 (Helium 10, Jungle Scout, etc.) y cómo usarlas para disparar tu ranking y ventas.', // Excerpt optimizado
+    'Descubre las 8 mejores herramientas para potenciar tu estrategia de SEO en Amazon. Análisis de competencia, investigación de palabras clave, optimización de listings y más.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
   tags: [

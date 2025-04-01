@@ -96,9 +96,8 @@ export const estrategiasPpcData: BlogPost = {
   title: '5 Estrategias PPC Amazon para Maximizar tu ROI en 2025', // Título actualizado a 2025
   date: '2025-04-01', // Fecha actualizada
   image:
-    'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Carlos Ruiz',
-  category: 'Amazon PPC', // Categoría mantenida
+    'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1080&auto=format&fit=crop', // Asegúrate de actualizar la imagen
+  category: 'PPC Amazon',
   excerpt:
     'Descubre 5 estrategias PPC probadas para Amazon en 2025. Optimiza estructura, pujas, concordancias y más para maximizar ROI y reducir ACoS.', // Excerpt actualizado a 2025
   sections: sections, // Usamos las nuevas secciones

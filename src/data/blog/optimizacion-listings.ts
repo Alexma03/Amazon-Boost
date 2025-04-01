@@ -100,16 +100,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'optimizacionListingsData' y 'slug') ---
 
 export const optimizacionListingsData: BlogPost = {
-  slug: 'optimizacion-listings', // Slug mantenido como solicitado
-  title:
-    '10 Claves para Optimizar Listings de Amazon y Disparar Ventas (2025)', // Título optimizado y con año
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'optimizacion-listings-amazon',
+  title: 'Guía Definitiva para Optimizar Listings en Amazon',
+  date: '2025-03-30',
   image:
-    'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'María González',
-  category: 'Optimización Listings Amazon', // Categoría ajustada
+    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'Optimización',
   excerpt:
-    'Descubre 10 estrategias probadas para optimizar tus listings en Amazon en 2025: keywords, imágenes, A+ Content, reseñas y más. ¡Aumenta tu conversión!', // Excerpt optimizado
+    'La guía completa y actualizada para optimizar tus listings en Amazon. Aprende técnicas avanzadas de SEO para aumentar visibilidad, conversión y ventas.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // El content original ya no es necesario
   tags: [

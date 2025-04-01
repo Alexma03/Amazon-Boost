@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import type { BlogPost } from '../../data/blog-data';
+import type { BlogPostPreview } from '../../data/blog-data';
 import { posts } from '../../data/blog-data';
 
 export const prerender = true;
@@ -27,7 +27,7 @@ export const prerender = true;
       <section class="mb-20">
         <h2 class="text-2xl font-bold mb-8">Últimos Artículos</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post: BlogPost) => (
+          {posts.map((post: BlogPostPreview) => (
             <article class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div class="relative aspect-[16/9]">
                 <img 
@@ -46,7 +46,6 @@ export const prerender = true;
                       year: 'numeric' 
                     })}
                   </time>
-                  <span>por {post.author}</span>
                 </div>
                 <h3 class="text-xl font-semibold mb-3 line-clamp-2">
                   <a href={`/blog/${post.slug}`} class="hover:text-amazon-orange">

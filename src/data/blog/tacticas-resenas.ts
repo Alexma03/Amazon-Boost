@@ -99,16 +99,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'tacticasResenasData' y 'slug') ---
 
 export const tacticasResenasData: BlogPost = {
-  slug: 'tacticas-resenas', // Slug mantenido como solicitado
-  title:
-    '6 Tácticas Legales para Conseguir Reseñas Amazon en 2025 (Sin Riesgos)', // Título optimizado, enfatiza legalidad y año
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'tacticas-resenas',
+  title: '10 Tácticas Éticas para Conseguir Más Reseñas en Amazon',
+  date: '2025-03-18',
   image:
-    'https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Laura Torres',
-  category: 'Reseñas Amazon', // Categoría mantenida o ajustada
+    'https://images.unsplash.com/photo-1586892477838-2b96e85e0f96?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'Reseñas Amazon',
   excerpt:
-    'Aprende 6 formas seguras y efectivas de aumentar tus reseñas en Amazon en 2025 cumpliendo las políticas: Vine, Request a Review, Inserts correctos y más.', // Excerpt optimizado
+    'Aprende 10 estrategias efectivas y éticas para aumentar las reseñas positivas de tus productos en Amazon. Métodos probados que respetan las políticas de la plataforma.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // El content original ya no es necesario
   tags: [

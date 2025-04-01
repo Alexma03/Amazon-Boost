@@ -83,7 +83,6 @@ export const algoritmoAmazonData: BlogPost = {
   date: '2025-04-01', // Fecha actualizada a hoy (o la que prefieras)
   image:
     'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Imagen de análisis de datos/algoritmos
-  author: 'David Moreno',
   category: 'SEO Amazon', // Categoría más específica
   excerpt:
     'Desbloquea el potencial de tus productos en Amazon. Aprende cómo funciona el algoritmo A10 en 2025 y aplica estrategias SEO probadas para disparar tu ranking y ventas.', // Excerpt más orientado a beneficios y SEO

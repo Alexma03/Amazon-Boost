@@ -14,7 +14,6 @@ interface Props {
     title: string;
     date: string;
     image: string;
-    author: string;
     category: string;
     excerpt: string;
     sections?: Section[];
@@ -65,9 +64,6 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('es-ES', {
             <time datetime={frontmatter.date} class="mr-4">
               {formattedDate}
             </time>
-            <span class="flex items-center">
-              por {frontmatter.author}
-            </span>
           </div>
           
           <!-- Excerpt / Resumen -->

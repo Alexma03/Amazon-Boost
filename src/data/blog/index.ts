@@ -23,7 +23,6 @@ export interface BlogPost {
   title: string;
   date: string;
   image: string;
-  author: string;
   category: string;
   excerpt: string;
   content?: string; // Campo opcional para mantener compatibilidad

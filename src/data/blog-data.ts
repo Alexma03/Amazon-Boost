@@ -15,7 +15,6 @@ export interface BlogPostPreview {
   image: string;
   title: string;
   date: string;
-  author: string;
   excerpt: string;
 }
 
@@ -35,6 +34,5 @@ export const posts: BlogPostPreview[] = [
   image: post.image,
   title: post.title,
   date: post.date,
-  author: post.author,
   excerpt: post.excerpt
 })); 

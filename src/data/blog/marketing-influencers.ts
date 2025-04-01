@@ -77,16 +77,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'marketingInfluencersData' y 'slug') ---
 
 export const marketingInfluencersData: BlogPost = {
-  slug: 'marketing-influencers', // Slug mantenido como solicitado
-  title:
-    'Marketing con Influencers en Amazon (2025): Guía para Impulsar Ventas', // Título optimizado y con año
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'marketing-influencers',
+  title: 'Cómo Implementar una Estrategia de Influencers para Amazon',
+  date: '2025-03-10',
   image:
-    'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Pablo Hernández',
-  category: 'Marketing Amazon', // Categoría ajustada
+    'https://images.unsplash.com/photo-1587614313085-5da51cebd8ac?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'Marketing',
   excerpt:
-    'Aprende a usar el marketing de influencers para vender más en Amazon en 2025. Estrategias de selección, formatos efectivos, medición y cumplimiento legal.', // Excerpt optimizado
+    'Descubre cómo crear una estrategia efectiva con influencers para potenciar tus ventas en Amazon. Guía paso a paso para elegir, contactar y trabajar con los creadores de contenido perfectos.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // El content original ya no es necesario
   tags: [

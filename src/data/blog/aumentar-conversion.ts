@@ -107,15 +107,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'aumentarConversionData') ---
 
 export const aumentarConversionData: BlogPost = {
-  slug: 'aumentar-conversion', // Slug optimizado
-  title: '7 Tácticas Infalibles para Disparar tu Conversión en Amazon (2025)', // Título actualizado y con año
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'aumentar-conversion-amazon',
+  title: '12 Estrategias Probadas para Aumentar la Tasa de Conversión en Amazon',
+  date: '2025-03-20',
   image:
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Roberto Méndez',
-  category: 'Optimización Amazon', // Categoría más amplia o específica según tu estructura
+    'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'Conversión',
   excerpt:
-    'Descubre 7 estrategias probadas para aumentar tu tasa de conversión (CVR) en Amazon en 2025. Optimiza imágenes, A+, precios y más para vender MÁS.', // Excerpt más directo y con keywords
+    'Descubre 12 tácticas efectivas para aumentar significativamente la tasa de conversión de tus productos en Amazon. Desde optimización de imágenes hasta estrategias de precios y más.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
   tags: [

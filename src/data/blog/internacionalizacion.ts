@@ -106,15 +106,13 @@ const sections: BlogSection[] = [
 
 export const internacionalizacionData: BlogPost = {
   slug: 'internacionalizacion', // Slug mantenido como solicitado
-  title:
-    'Guía Estratégica de Internacionalización Amazon (2025): Expande tu Negocio', // Título optimizado y con año
-  date: '2025-04-01', // Fecha actualizada
+  title: 'Guía Completa para Internacionalizar tu Negocio en Amazon',
+  date: '2025-03-15',
   image:
-    'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Elena Rodríguez',
-  category: 'Expansión Global Amazon', // Categoría ajustada
+    'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1080&auto=format&fit=crop',
+  category: 'Expansión Internacional',
   excerpt:
-    'Domina la expansión internacional en Amazon en 2025. Estrategias clave sobre selección de mercados, logística, localización y cumplimiento fiscal para vender globalmente.', // Excerpt optimizado
+    'Estrategia paso a paso para expandir tu negocio a los marketplaces internacionales de Amazon. Desde la selección de mercados hasta la adaptación cultural y logística.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // El content original ya no es necesario
   tags: [

@@ -88,15 +88,14 @@ const sections: BlogSection[] = [
 // --- Objeto BlogPost Actualizado (manteniendo nombre original 'tendenciasEcommerceData' y 'slug') ---
 
 export const tendenciasEcommerceData: BlogPost = {
-  slug: 'tendencias-ecommerce', // Slug mantenido como solicitado
-  title: '7 Tendencias Clave de E-commerce en Amazon para 2025', // Título actualizado a 2025
-  date: '2025-04-01', // Fecha actualizada
+  slug: 'tendencias-ecommerce',
+  title: 'Tendencias de Ecommerce que Dominarán Amazon en 2025',
+  date: '2025-03-25',
   image:
-    'https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
-  author: 'Ana Martínez',
-  category: 'Tendencias E-commerce Amazon', // Categoría ajustada
+    'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  category: 'Tendencias',
   excerpt:
-    'Descubre las 7 tendencias que definirán Amazon en 2025: Video, IA, Sostenibilidad, Social Commerce y más. Prepara tu negocio para el futuro.', // Excerpt actualizado a 2025
+    'Descubre las tendencias que transformarán el comercio electrónico en 2025. Desde IA y sostenibilidad hasta experiencias de compra inmersivas, prepárate para el futuro de Amazon.',
   sections: sections, // Usamos las nuevas secciones
   // content: undefined, // El content original ya no es necesario
   tags: [
