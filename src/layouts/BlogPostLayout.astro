@@ -1,6 +1,14 @@
 ---
 import Layout from './Layout.astro';
 
+interface Section {
+  title: string;
+  content: string;
+  type?: 'text' | 'list' | 'highlight' | 'image';
+  items?: string[];
+  imageUrl?: string;
+}
+
 interface Props {
   frontmatter: {
     title: string;
@@ -9,6 +17,8 @@ interface Props {
     author: string;
     category: string;
     excerpt: string;
+    sections?: Section[];
+    content?: string; // Mantenemos compatibilidad con el contenido no estructurado
     tags: string[];
     callToAction?: {
       text: string;
@@ -78,7 +88,38 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('es-ES', {
         <!-- Article content -->
         <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
           <article class="prose prose-lg max-w-none">
-            <slot />
+            {frontmatter.sections ? (
+              frontmatter.sections.map((section) => (
+                <div class="mb-8">
+                  {section.title && (
+                    <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+                      {section.title}
+                    </h2>
+                  )}
+                  
+                  {section.type === 'highlight' ? (
+                    <div class="bg-amazon-lightgray p-5 rounded-lg my-4">
+                      <div set:html={section.content} />
+                    </div>
+                  ) : section.type === 'list' && section.items ? (
+                    <ul class="space-y-2 mb-4 list-disc pl-5">
+                      {section.items.map(item => (
+                        <li set:html={item}></li>
+                      ))}
+                    </ul>
+                  ) : section.type === 'image' && section.imageUrl ? (
+                    <div class="my-6">
+                      <img src={section.imageUrl} alt={section.title || "Imagen ilustrativa"} class="rounded-lg" />
+                      {section.content && <p class="text-sm text-gray-600 mt-2 italic">{section.content}</p>}
+                    </div>
+                  ) : (
+                    <div set:html={section.content} />
+                  )}
+                </div>
+              ))
+            ) : (
+              <slot />
+            )}
           </article>
         </div>
         
@@ -116,24 +157,6 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('es-ES', {
             </div>
           </div>
         )}
-        
-        <!-- Author Section -->
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
-          <h3 class="text-xl font-semibold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            Sobre el autor
-          </h3>
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <div class="w-16 h-16 rounded-full bg-amazon-orange/20 flex items-center justify-center text-amazon-orange text-2xl font-bold">
-                {frontmatter.author.charAt(0)}
-              </div>
-            </div>
-            <div class="ml-5">
-              <h4 class="text-lg font-semibold text-amazon-darkblue">{frontmatter.author}</h4>
-              <p class="text-gray-600">Especialista en Marketing de Amazon con más de 8 años de experiencia ayudando a marcas a crecer en el marketplace.</p>
-            </div>
-          </div>
-        </div>
         
         <!-- Share section -->
         <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">

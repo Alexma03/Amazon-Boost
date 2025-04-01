@@ -1,146 +1,158 @@
-import type { BlogPost } from './index';
+import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
+
+// --- Secciones Optimizadas para 'aumentarConversionData' ---
+
+const sections: BlogSection[] = [
+  {
+    title: 'La Conversión: Tu Factor Clave de Éxito en Amazon',
+    content: `<p>Atraer visitantes a tu listing es solo el principio. La verdadera rentabilidad en Amazon viene de convertir esas visitas en ventas. Incrementar tu <strong>tasa de conversión (CVR)</strong>, incluso en un pequeño porcentaje, puede disparar tus ingresos. Te mostramos cómo.</p>`,
+    type: 'text',
+  },
+  {
+    title: '1. Imágenes que Venden: Optimización Visual Estratégica',
+    content: `<p>Tus imágenes son tu principal herramienta de persuasión visual. Optimízalas para captar la atención y generar confianza:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Imagen Principal Impecable:</strong> Fondo blanco puro, producto claro y ocupando ~85% del espacio.',
+      '<strong>Calidad y Zoom:</strong> Mínimo 1000x1000 píxeles para activar el zoom y mostrar detalles.',
+      '<strong>Secuencia Lógica:</strong> Muestra el producto en uso, beneficios clave y comparativas.',
+      '<strong>Infografías y Dimensiones:</strong> Usa texto sobre imagen (con moderación) para destacar características o tamaño.',
+    ],
+  },
+  {
+    // Sección de imagen para ilustrar el punto anterior
+    title: 'Ejemplo Visual: Impacto de una Buena Imagen',
+    content: `<p>Una secuencia de imágenes bien planificada guía al cliente y resuelve dudas antes de que surjan.</p>`,
+    type: 'image',
+    imageUrl:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1080&auto=format&fit=crop', // Puedes usar una imagen más específica si la tienes
+  },
+  {
+    title: '2. A+ Content: Más Allá de la Descripción Básica',
+    content: `<p>Si tienes Brand Registry, el <strong>Contenido A+</strong> es tu lienzo para contar la historia de tu producto y marca:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Conecta Emocionalmente:</strong> Usa módulos para explicar la historia de tu marca o producto.',
+      '<strong>Destaca Ventajas:</strong> Módulos de comparación visual contra alternativas.',
+      '<strong>Resuelve Dudas:</strong> Aborda objeciones comunes y muestra casos de uso.',
+      '<strong>Refuerza Confianza:</strong> Muestra garantías o testimonios visualmente.',
+    ],
+  },
+  {
+    title: '3. Títulos y Puntos Clave: SEO + Persuasión',
+    content: `<p>Equilibra la optimización para búsquedas (SEO) con mensajes claros que inciten a la compra:</p>
+      <ul>
+        <li><strong>Título Efectivo:</strong> [Marca] + [Beneficio Principal] + [Característica Clave] + [Keyword Principal].</li>
+        <li><strong>Bullets Enfocados:</strong> Empieza por el beneficio más potente. Sigue con características únicas, calidad, usos y garantía. ¡Sé claro y conciso!</li>
+      </ul>`,
+    type: 'text', // Usamos texto con lista interna para combinar explicación y puntos
+  },
+  {
+    title: '4. Precio y Promociones: El Factor Psicológico',
+    content: `<p>El precio adecuado y las ofertas bien planteadas pueden inclinar la balanza:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Precios Psicológicos:</strong> Terminar en .99 o .97 suele funcionar (¡prueba!).',
+      '<strong>Descuentos Visibles:</strong> Asegúrate que el precio tachado y el ahorro son claros.',
+      '<strong>Urgencia y Valor:</strong> Usa ofertas por tiempo limitado o bundles atractivos.',
+      '<strong>Suscripción:</strong> Si aplica, promueve activamente el "Suscríbete y Ahorra".',
+    ],
+  },
+  {
+    title: '5. Reseñas: La Prueba Social Indispensable',
+    content: `<p>Las reseñas son cruciales para la confianza. Una buena gestión marca la diferencia:</p>
+      <ul>
+        <li><strong>Volumen y Calidad:</strong> Superar las 20-25 reseñas con +4.5 estrellas es un gran impulso.</li>
+        <li><strong>Gestión Activa:</strong> Responde a reseñas (positivas y negativas) profesionalmente.</li>
+        <li><strong>Solicitud Inteligente:</strong> Usa el botón "Solicitar Reseña" de Amazon estratégicamente.</li>
+      </ul>`,
+    type: 'text',
+  },
+  {
+    // Sección destacada para un punto cada vez más relevante
+    title: '¡Alerta Móvil! Optimiza para Compras sobre la Marcha',
+    content: `<p>Más del 60% de las compras en Amazon se hacen desde el móvil. Tu listing <strong>debe</strong> estar optimizado: títulos concisos (primeros 80 caracteres vitales), imágenes claras en miniatura, y A+ Content responsive.</p>`,
+    type: 'highlight',
+  },
+  {
+    title: '6. Backstage: Inventario y Métricas de Vendedor',
+    content: `<p>Factores operativos que impactan directamente tu conversión:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Stock Siempre Disponible:</strong> Las roturas de stock penalizan tu ranking y conversión.',
+      '<strong>Salud de la Cuenta:</strong> Un Perfect Order Percentage (POP) alto y bajo ODR (Order Defect Rate) son vitales.',
+      '<strong>Envío Rápido:</strong> Compite con las mejores opciones de envío (Prime).',
+      '<strong>Atención al Cliente:</strong> Responde preguntas en menos de 24h.',
+    ],
+  },
+  {
+    title: '7. Implementación y Mejora Continua',
+    content: `<p>No apliques todo a la vez. Sigue un proceso:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Analiza:</strong> Mide tu CVR actual por ASIN.',
+      '<strong>Implementa por Fases:</strong> Cambia un elemento a la vez para medir impacto.',
+      '<strong>Prueba (A/B Test):</strong> Indispensable para imágenes y títulos.',
+      '<strong>Monitoriza y Refina:</strong> Adapta tu estrategia basándote en datos.',
+    ],
+  },
+  {
+    title: 'Conclusión: Convierte Visitas en Clientes Fieles',
+    content: `<p>Aumentar tu <strong>tasa de conversión en Amazon</strong> es un arte y una ciencia. Combinando optimización visual, contenido persuasivo, estrategias de precio, gestión de reputación y excelencia operativa, transformarás tu rendimiento.</p>
+    <p>En <strong>Amazon Boost</strong>, somos expertos en identificar y ejecutar las palancas de conversión más efectivas para tu negocio. ¿Quieres ver cómo podemos ayudarte?</p>`, // Ajusta "Amazon Boost" si es necesario
+    type: 'text',
+  },
+];
+
+// --- Objeto BlogPost Actualizado (manteniendo nombre original 'aumentarConversionData') ---
 
 export const aumentarConversionData: BlogPost = {
-  slug: "aumentar-conversion",
-  title: "7 Técnicas Probadas para Aumentar tu Conversión en Amazon",
-  date: "2024-02-25",
-  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2070&auto=format&fit=crop",
-  author: "Roberto Méndez",
-  category: "Conversión",
-  excerpt: "Descubre estrategias avanzadas para incrementar tu tasa de conversión en Amazon y maximizar tus ventas con cambios que puedes implementar hoy mismo.",
-  content: `
-## El factor decisivo: Maximizar la conversión en Amazon
-
-En el competitivo mercado de Amazon, conseguir tráfico es solo la mitad de la batalla. La verdadera diferencia entre vendedores exitosos y el resto radica en su capacidad para convertir ese tráfico en ventas. Según nuestros datos, un aumento de solo un 1% en la tasa de conversión puede representar un incremento del 10-15% en ingresos mensuales.
-
-## 1. Optimización estratégica de imágenes
-
-Las imágenes son el elemento visual más importante de tu listing y tienen un impacto directo en la tasa de conversión.
-
-**Técnicas de optimización probadas:**
-
-- **Imagen principal perfecta**: Fondo blanco, ángulo óptimo, producto ocupando 85% del espacio disponible
-- **Zoom de alta calidad**: Imágenes de al menos 1000x1000 píxeles para activar la función de zoom
-- **Secuencia estratégica**: Ordenar imágenes siguiendo el viaje de decisión del cliente
-- **Comparativas visuales**: Mostrar tamaños/medidas con referencias conocidas
-- **Demostraciones de uso**: El producto en acción en situaciones reales
-
-En un test A/B realizado con 50 ASINs de nuestros clientes, la implementación de estos principios resultó en un aumento promedio del 23% en la tasa de conversión.
-
-## 2. A+ Content que realmente convierte
-
-El contenido A+ (antes Enhanced Brand Content) permite a los vendedores registrados en Brand Registry crear descripciones visuales avanzadas.
-
-**Estrategias de alto impacto:**
-
-- **Historia de la marca**: Conectar emocionalmente con el comprador
-- **Módulos de comparación**: Destacar ventajas frente a alternativas
-- **Testimonios visuales**: Mostrar casos de uso real con resultados
-- **Respuestas a objeciones**: Abordar preocupaciones comunes visualmente
-- **Garantías visuales**: Destacar políticas de devolución/garantía
-
-Los vendedores que implementan un A+ Content estratégico experimentan un aumento promedio del 3-10% en su tasa de conversión, con picos de hasta 30% en categorías específicas.
-
-## 3. Títulos y bullets optimizados para conversión
-
-Aunque las palabras clave son fundamentales para la visibilidad, los títulos y bullets deben equilibrar SEO con persuasión.
-
-**Fórmulas de alta conversión:**
-
-- **Título**: [Marca] + [Beneficio Principal] + [Modelo] + [Característica Distintiva] + [Palabra Clave Principal]
-- **Primer bullet**: Beneficio más importante y problema que resuelve
-- **Segundo bullet**: Características únicas y ventajas competitivas
-- **Tercer bullet**: Calidad, materiales y durabilidad
-- **Cuarto bullet**: Versatilidad y usos principales
-- **Quinto bullet**: Garantía y propuesta de valor final
-
-La optimización de títulos y bullets enfocada en conversión (no solo en SEO) ha generado aumentos del 15-20% en CTR y 5-8% en tasa de conversión para nuestros clientes.
-
-## 4. Precios psicológicos y ofertas estratégicas
-
-El precio es uno de los factores más influyentes en la decisión de compra en Amazon.
-
-**Tácticas efectivas:**
-
-- **Puntos de precio psicológicos**: Terminar en .99 o .97 según estudios específicos por categoría
-- **Descuentos visibles**: Asegurar que el precio tachado y el ahorro sean claros
-- **Promociones por tiempo limitado**: Crear sentido de urgencia
-- **Bundles de valor**: Ofrecer sets a precios ventajosos
-- **Subscripción y ahorro**: Promover descuentos por compra recurrente
-
-Nuestros análisis muestran que los productos con precios terminados en .99 tienen un 3-5% más de conversión que aquellos con precios redondeados en la mayoría de categorías.
-
-## 5. Gestión estratégica de reseñas
-
-Las reseñas son fundamentales para la confianza del consumidor y tienen un impacto directo en la conversión.
-
-**Prácticas de alto impacto:**
-
-- **Volumen crítico**: Conseguir al menos 21 reseñas (umbral psicológico de credibilidad)
-- **Respuesta proactiva**: Contestar tanto a reseñas positivas como negativas
-- **Resolución visible**: Demostrar excelente servicio al cliente ante problemas
-- **Análisis de sentimiento**: Identificar y corregir problemas recurrentes
-- **Solicitud de reseñas optimizada**: Utilizar el botón "Request a Review" en el momento óptimo
-
-Los productos con más de 100 reseñas y una puntuación media superior a 4.5 estrellas experimentan tasas de conversión hasta un 25% superiores a productos similares con menos reseñas.
-
-## 6. Optimización para móvil
-
-Más del 60% de las compras en Amazon ya se realizan desde dispositivos móviles, y esta tendencia sigue en aumento.
-
-**Elementos críticos:**
-
-- **Primer párrafo de bullets impactante**: Visible sin necesidad de expandir en móvil
-- **Imágenes optimizadas para visualización pequeña**: Detalles visibles en miniaturas
-- **Títulos concisos**: Los primeros 80 caracteres deben contener la información esencial
-- **A+ Content responsive**: Asegurar correcta visualización en todos los dispositivos
-- **Velocidad de carga**: Optimizar tamaños de archivo para carga rápida
-
-Los vendedores que optimizan específicamente para la experiencia móvil reportan incrementos del 15-20% en conversión móvil.
-
-## 7. Inventario y calificaciones de vendedor impecables
-
-Factores operativos que muchos vendedores subestiman tienen un impacto significativo en la tasa de conversión.
-
-**Aspectos fundamentales:**
-
-- **Disponibilidad constante**: Evitar roturas de stock que afectan al algoritmo
-- **Perfect Order Percentage alto**: Mantener métricas de cuenta saludables
-- **Tiempos de envío competitivos**: Ofrecer entrega rápida y precisa
-- **Preguntas respondidas rápidamente**: Menos de 24 horas para responder preguntas
-- **Tasa de defectos baja**: Mantener reclamaciones y devoluciones al mínimo
-
-Los vendedores con métricas de cuenta en el top 10% de su categoría experimentan tasas de conversión hasta un 15% superiores a competidores con productos similares.
-
-## Implementación y medición
-
-Para maximizar resultados, recomendamos seguir este proceso:
-
-1. **Análisis del estado actual**: Establecer línea base de conversión por ASIN
-2. **Implementación por fases**: Aplicar cambios sistemáticamente para medir impacto
-3. **Test A/B cuando sea posible**: Probar variaciones para títulos e imágenes
-4. **Monitoreo constante**: Seguimiento de métricas de conversión post-cambios
-5. **Iteración basada en datos**: Refinar estrategia según resultados
-
-## Conclusión
-
-Mejorar la tasa de conversión en Amazon requiere un enfoque holístico que combine elementos visuales persuasivos, contenido estratégico y excelencia operativa. Al implementar estas siete técnicas, los vendedores pueden experimentar mejoras significativas sin necesidad de aumentar el gasto en publicidad.
-
-En Amazon Boost, ayudamos a vendedores a identificar sus mayores oportunidades de optimización de conversión y a implementar cambios basados en datos que generan resultados medibles. Nuestro enfoque sistemático ha permitido a cientos de marcas aumentar sus ventas mientras reducen su dependencia de la publicidad pagada.
-  `,
-  tags: ["conversión amazon", "optimización listados", "a+ content", "imágenes amazon", "precio psicológico", "reseñas amazon", "optimización móvil"],
+  slug: 'aumentar-conversion', // Slug optimizado
+  title: '7 Tácticas Infalibles para Disparar tu Conversión en Amazon (2025)', // Título actualizado y con año
+  date: '2025-04-01', // Fecha actualizada
+  image:
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
+  author: 'Roberto Méndez',
+  category: 'Optimización Amazon', // Categoría más amplia o específica según tu estructura
+  excerpt:
+    'Descubre 7 estrategias probadas para aumentar tu tasa de conversión (CVR) en Amazon en 2025. Optimiza imágenes, A+, precios y más para vender MÁS.', // Excerpt más directo y con keywords
+  sections: sections, // Usamos las nuevas secciones
+  // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
+  tags: [
+    'conversión amazon',
+    'aumentar ventas amazon',
+    'optimización listados',
+    'tasa de conversion',
+    'cvr amazon',
+    'a+ content',
+    'imágenes amazon',
+    'precios amazon',
+    'reseñas amazon',
+    'seo amazon',
+  ], // Tags revisados y ampliados
   callToAction: {
-    text: "¿Quieres aumentar tu tasa de conversión? Solicita un análisis gratuito",
-    url: "/#contact"
+    text: '¿Quieres aumentar tu tasa de conversión? Solicita un análisis gratuito', // CTA mantenido, es bueno
+    url: '/#contact', // Verificar URL
   },
   relatedPosts: [
-    "optimizacion-listings",
-    "tacticas-resenas",
-    "estrategias-ppc"
-  ],
+    'optimizacion-listings-amazon', // Ajustar slugs si es necesario
+    'gestion-resenas-amazon',
+    'estrategias-precios-amazon',
+  ], // Posts relacionados actualizados
   seo: {
-    metaTitle: "7 Técnicas Probadas para Aumentar tu Conversión en Amazon | Amazon Boost",
-    metaDescription: "Aprende estrategias efectivas para incrementar tu tasa de conversión en Amazon. Desde optimización de imágenes hasta precios psicológicos que aumentarán tus ventas.",
-    keywords: ["aumentar conversión amazon", "tasa de conversión", "optimización de listados", "a+ content", "amazon seo", "imágenes producto amazon"]
-  }
-}; 
+    metaTitle:
+      '7 Tácticas para Aumentar tu Conversión en Amazon | Guía 2025', // Meta título optimizado
+    metaDescription:
+      'Aprende cómo disparar tu tasa de conversión en Amazon con 7 técnicas efectivas: imágenes, A+ Content, precios, reseñas y optimización móvil.', // Meta descripción optimizada
+    keywords: [
+      'aumentar conversión amazon',
+      'tasa de conversión amazon',
+      'cvr amazon',
+      'optimización de listados amazon',
+      'vender más en amazon',
+      'a+ content',
+      'imágenes producto amazon',
+      'estrategias amazon 2025',
+    ], // Keywords revisadas
+  },
+};

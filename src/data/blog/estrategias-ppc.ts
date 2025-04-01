@@ -1,379 +1,140 @@
-import type { BlogPost } from './index';
+import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
+
+// --- Secciones Optimizadas para 'estrategiasPpcData' (Estructura Estándar) ---
+
+const sections: BlogSection[] = [
+  {
+    title: 'PPC en Amazon: De Gasto a Inversión Estratégica',
+    content: `<p>La publicidad PPC (Pay-Per-Click) en Amazon es esencial, pero el éxito no está garantizado. Requiere una <strong>estrategia inteligente y basada en datos</strong> para convertir clics en ventas rentables y superar a la competencia.</p>`,
+    type: 'text',
+  },
+  {
+    title: '1. Estructura de Campañas en Tres Niveles',
+    content: `<p>Una base sólida para gestionar y optimizar tus campañas:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Nivel 1 (Marca):</strong> Protege tu marca con keywords exactas y pujas altas. Defiende tu espacio.',
+      '<strong>Nivel 2 (Categoría/Manual):</strong> Ataca términos relevantes de tu nicho. Segmenta por grupos de keywords y optimiza el balance impresiones/conversión.',
+      '<strong>Nivel 3 (Descubrimiento/Auto):</strong> Usa targeting automático con presupuesto controlado para encontrar nuevas keywords rentables. Analiza y traslada éxitos a campañas manuales.',
+    ],
+  },
+  {
+    title: '2. Pujas Dinámicas Basadas en Datos',
+    content: `<p>Ajusta tus pujas constantemente según el rendimiento real:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Automatiza (con Lógica):</strong> Usa reglas de ajuste basadas en tu ACoS objetivo.',
+      '<strong>Potencia Ganadores:</strong> Aumenta pujas para keywords de alta conversión.',
+      '<strong>Poda Ineficientes:</strong> Reduce o pausa keywords con alto gasto y bajas ventas.',
+      '<strong>Considera el Tiempo:</strong> Ajusta pujas según hora del día, día de la semana o estacionalidad si es relevante.',
+    ],
+  },
+  {
+    // Highlight para el impacto del bidding dinámico
+    title: 'Impacto del Bidding Dinámico',
+    content: `<p>Implementar ajustes de puja basados en datos puede mejorar tu <strong>ACoS (Advertising Cost of Sale) entre un 25% y 40%</strong>.</p>`,
+    type: 'highlight',
+  },
+  {
+    title: '3. Uso Estratégico de Tipos de Concordancia',
+    content: `<p>Cada tipo de concordancia tiene un rol específico:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Amplia (Broad):</strong> Para descubrimiento inicial de términos.',
+      '<strong>De Frase (Phrase):</strong> Para capturar variaciones relevantes y controlar más.',
+      '<strong>Exacta (Exact):</strong> Para keywords con rendimiento probado y máximo control.',
+    ],
+  },
+  {
+    // Highlight para el flujo recomendado
+    title: 'Flujo Recomendado de Concordancias',
+    content: `<p>Descubre con <strong>Amplia</strong>, valida con <strong>Frase</strong>, y escala con <strong>Exacta</strong>. Mueve keywords rentables progresivamente hacia concordancias más restrictivas.</p>`,
+    type: 'highlight',
+  },
+  {
+    // Sección de imagen
+    title: 'Visualizando el Retorno',
+    content: `<p>Una estrategia PPC bien afinada convierte la inversión publicitaria en crecimiento tangible.</p>`,
+    type: 'image',
+    imageUrl:
+      'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1080&auto=format&fit=crop', // URL de la imagen principal
+  },
+  {
+    title: '4. Segmentación por Rendimiento de Producto',
+    content: `<p>Asigna tu presupuesto de forma inteligente según el rol de cada producto:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Alto Margen:</strong> Permite un ACoS más flexible para ganar cuota.',
+      '<strong>Bestsellers:</strong> Invierte para defender tu posición.',
+      '<strong>Nuevos Lanzamientos:</strong> Asigna presupuesto para generar visibilidad inicial.',
+      '<strong>Estacionales:</strong> Incrementa inversión durante picos de demanda.',
+    ],
+  },
+  {
+    title: '5. Optimización Continua del Embudo Completo',
+    content: `<p>Analiza y ajusta en cada etapa del viaje del cliente:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Impresiones/CTR:</strong> Optimiza título, imagen principal y puja inicial para atraer clics relevantes.',
+      '<strong>Clics:</strong> Analiza el CTR por keyword. Pausa términos con muchos clics pero sin ventas.',
+      '<strong>Conversión/ACoS:</strong> Enfócate en la rentabilidad. Reinvierte en las keywords que generan ventas a un ACoS objetivo.',
+      '<strong>Palabras Clave Negativas:</strong> Úsalas activamente para evitar gasto irrelevante.',
+    ],
+  },
+  {
+    title: 'Conclusión: PPC Inteligente para Crecimiento Rentable',
+    content: `<p>Una estrategia <strong>PPC en Amazon</strong> bien ejecutada es una inversión poderosa. Aplicando estos enfoques basados en estructura, datos y optimización continua, transformarás tus campañas en un motor de ventas rentable y predecible para <strong>2025</strong>.</p>
+    <p>En <strong>Amazon Boost</strong>, somos expertos en implementar y gestionar estrategias PPC avanzadas que reducen el ACoS y maximizan el ROI real de tu inversión publicitaria.</p>`, // Ajusta "Amazon Boost" si es necesario
+    type: 'text',
+  },
+];
+
+// --- Objeto BlogPost Actualizado (manteniendo nombre original 'estrategiasPpcData' y 'slug') ---
 
 export const estrategiasPpcData: BlogPost = {
-  slug: "estrategias-ppc",
-  title: "5 Estrategias PPC en Amazon que Maximizan tu ROI",
-  date: "2024-01-20",
-  image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=2070&auto=format&fit=crop",
-  author: "Carlos Ruiz",
-  category: "Amazon PPC",
-  excerpt: "Descubre las estrategias de publicidad PPC en Amazon que realmente funcionan y cómo implementarlas para maximizar tu retorno de inversión y superar a la competencia.",
-  content: `
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">El poder de una estrategia PPC bien planificada</h2>
-  <p class="text-gray-700">
-    En el competitivo marketplace de Amazon, la publicidad PPC (Pay-Per-Click) se ha convertido en un elemento imprescindible para cualquier vendedor que desee destacar. Sin embargo, no todas las campañas PPC se crean igual. El éxito depende de una estrategia inteligente y basada en datos.
-  </p>
-</div>
-
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">1. Estructura de campañas en tres niveles</h2>
-  <p class="text-gray-700 mb-4">
-    La base de una estrategia PPC efectiva comienza con una estructura adecuada:
-  </p>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Nivel 1: Campañas de marca</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Palabras clave exactas con tu marca</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Pujas más altas para dominar tu espacio</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Defensa contra competidores que pujan por tu marca</span>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Nivel 2: Campañas de categoría</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Términos relevantes a tu nicho de producto</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Segmentación por grupos de palabras clave relacionadas</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Optimización para balance entre impresiones y conversión</span>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Nivel 3: Campañas de descubrimiento</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Targeting automático para encontrar nuevas palabras clave</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Presupuestos controlados para experimentación</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Análisis regular para trasladar palabras clave exitosas a campañas manuales</span>
-      </li>
-    </ul>
-  </div>
-  
-  <p class="text-gray-700">
-    Esta estructura en tres niveles permite una gestión más eficiente del presupuesto y mejor control sobre dónde y cómo aparecen tus anuncios.
-  </p>
-</div>
-
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">2. Bidding dinámico basado en datos</h2>
-  <p class="text-gray-700 mb-4">
-    El éxito en PPC requiere ajustes constantes basados en datos reales:
-  </p>
-  
-  <ul class="space-y-2 mb-4 text-gray-700">
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3">Implementa reglas de ajuste automático de pujas basadas en ACoS</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3">Aumenta pujas para palabras clave con alta conversión</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3">Reduce o pausa palabras clave con alto gasto y pocas ventas</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3">Considera factores temporales (hora del día, día de la semana, estacionalidad)</span>
-    </li>
-  </ul>
-  
-  <div class="bg-amazon-orange/10 p-4 rounded-lg">
-    <p class="text-gray-700 font-semibold">
-      Los vendedores que implementan sistemas de bidding dinámico reportan mejoras del 25-40% en su ACoS (Advertising Cost of Sale).
-    </p>
-  </div>
-</div>
-
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">3. Uso estratégico de los tipos de coincidencia</h2>
-  <p class="text-gray-700 mb-4">
-    Cada tipo de coincidencia tiene su propósito:
-  </p>
-  
-  <ul class="space-y-2 mb-4 text-gray-700">
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Coincidencia exacta</strong>: Para palabras clave con historial probado de conversión</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Coincidencia de frase</strong>: Para capturar variaciones relevantes</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Coincidencia amplia</strong>: Para fase de descubrimiento inicial</span>
-    </li>
-  </ul>
-  
-  <div class="bg-amazon-darkblue text-white p-5 rounded-lg">
-    <h4 class="font-semibold mb-2">Recomendación:</h4>
-    <p>
-      Comienza con coincidencia amplia para descubrir términos efectivos, luego mueve los más rentables a coincidencia de frase y finalmente a exacta para maximizar el control y eficiencia.
-    </p>
-  </div>
-</div>
-
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">4. Segmentación por rendimiento de producto</h2>
-  <p class="text-gray-700 mb-4">
-    No todos tus productos merecen el mismo presupuesto publicitario:
-  </p>
-  
-  <ul class="space-y-2 mb-4 text-gray-700">
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Productos de alto margen</strong>: Permite un ACoS más alto para ganar cuota de mercado</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Bestsellers</strong>: Enfócate en defender posición con presupuestos adecuados</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Productos nuevos</strong>: Asigna presupuesto para ganar visibilidad inicial</span>
-    </li>
-    <li class="flex items-start">
-      <div class="flex-shrink-0 mt-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <span class="ml-3"><strong>Productos estacionales</strong>: Incrementa presupuesto durante períodos de demanda alta</span>
-    </li>
-  </ul>
-  
-  <div class="bg-amazon-orange/10 p-4 rounded-lg">
-    <p class="text-gray-700 font-semibold">
-      Nuestros clientes han visto mejoras de ROI de hasta un 60% simplemente redistribuyendo presupuesto según el rendimiento por producto.
-    </p>
-  </div>
-</div>
-
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">5. Optimización continua basada en el embudo de conversión</h2>
-  <p class="text-gray-700 mb-4">
-    El PPC efectivo requiere ajustes en cada etapa del embudo:
-  </p>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Fase de impresiones</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Optimiza títulos y principales bullets para mejor CTR</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Prueba diferentes imágenes principales</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Ajusta pujas para mantener posición ideal en los resultados</span>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Fase de clics</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Analiza CTR por palabra clave y ajusta pujas</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Identifica palabras clave con alto CTR pero baja conversión</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Prueba diferentes momentos del día para publicitar</span>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="bg-amazon-lightgray rounded-lg p-5 mb-4">
-    <h3 class="text-xl font-semibold mb-2 text-amazon-darkblue">Fase de conversión</h3>
-    <ul class="space-y-2 mb-4 text-gray-700">
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Enfócate en el ACoS para palabras clave específicas</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Elimina palabras clave que generan clics pero no ventas</span>
-      </li>
-      <li class="flex items-start">
-        <div class="flex-shrink-0 mt-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <span class="ml-3">Reinvierte en palabras clave de alto rendimiento</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="mb-8 bg-gradient-to-r from-amazon-darkblue to-blue-900 rounded-xl p-8 shadow-lg text-white">
-  <h2 class="text-2xl font-bold mb-4">Conclusión: El PPC como inversión estratégica</h2>
-  <p class="mb-4">
-    Las campañas PPC en Amazon no deben verse como un gasto, sino como una inversión estratégica para crecer tu negocio. Con estos cinco enfoques, puedes transformar tus campañas de publicidad en máquinas de generación de ventas rentables.
-  </p>
-  <p>
-    En Amazon Boost, ayudamos a vendedores a implementar estas estrategias avanzadas de PPC, logrando reducciones promedio del 35% en ACoS mientras incrementamos las ventas totales. Nuestra metodología probada convierte la publicidad en un motor de crecimiento predecible y medible.
-  </p>
-</div>
-  `,
-  tags: ["amazon ppc", "publicidad amazon", "acos", "roi amazon", "campañas de amazon", "advertising", "sponsored products"],
+  slug: 'estrategias-ppc', // Slug mantenido como solicitado
+  title: '5 Estrategias PPC Amazon para Maximizar tu ROI en 2025', // Título actualizado a 2025
+  date: '2025-04-01', // Fecha actualizada
+  image:
+    'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
+  author: 'Carlos Ruiz',
+  category: 'Amazon PPC', // Categoría mantenida
+  excerpt:
+    'Descubre 5 estrategias PPC probadas para Amazon en 2025. Optimiza estructura, pujas, concordancias y más para maximizar ROI y reducir ACoS.', // Excerpt actualizado a 2025
+  sections: sections, // Usamos las nuevas secciones
+  // content: undefined, // El content HTML original ya no es necesario
+  tags: [
+    'amazon ppc',
+    'estrategias ppc amazon',
+    'publicidad amazon',
+    'acos amazon',
+    'roi amazon ads',
+    'sponsored products',
+    'optimizar ppc amazon',
+    'amazon 2025',
+  ], // Tags actualizados a 2025
   callToAction: {
-    text: "¿Quieres optimizar tus campañas PPC? Solicita nuestro análisis gratuito",
-    url: "/#contact"
+    text: '¿Quieres optimizar tus campañas PPC? Solicita nuestro análisis gratuito', // CTA mantenido
+    url: '/#contact', // Verificar URL
   },
   relatedPosts: [
-    "algoritmo-amazon-a9",
-    "tacticas-avanzadas-sponsored-products",
-    "optimizacion-acos-amazon"
+    // Manteniendo los slugs originales. Considera si 'algoritmo-amazon-a9' debería actualizarse.
+    'algoritmo-amazon-a9',
+    'tacticas-avanzadas-sponsored-products',
+    'optimizacion-acos-amazon',
   ],
   seo: {
-    metaTitle: "5 Estrategias PPC en Amazon que Maximizan tu ROI | Amazon Boost",
-    metaDescription: "Descubre cómo implementar estrategias avanzadas de PPC en Amazon para reducir tu ACoS hasta un 35% y aumentar ventas. Guía completa con ejemplos.",
-    keywords: ["estrategias ppc amazon", "reducir acos amazon", "optimizar publicidad amazon", "roi amazon ads", "sponsored products"]
-  }
-}; 
+    metaTitle: 'Estrategias PPC Amazon 2025: Maximiza tu ROI [Guía]', // Meta título optimizado
+    metaDescription:
+      'Implementa 5 estrategias PPC avanzadas en Amazon para 2025. Mejora tu ROI, reduce ACoS y optimiza Sponsored Products con esta guía experta.', // Meta descripción optimizada
+    keywords: [
+      'estrategias ppc amazon',
+      'amazon ppc 2025',
+      'reducir acos amazon',
+      'optimizar publicidad amazon',
+      'roi amazon ads',
+      'sponsored products',
+      'gestión ppc amazon',
+    ], // Keywords actualizadas a 2025
+  },
+};

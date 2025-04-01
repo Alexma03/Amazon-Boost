@@ -8,6 +8,15 @@ import { algoritmoAmazonData } from './algoritmo-amazon.ts';
 import { internacionalizacionData } from './internacionalizacion.ts';
 import { marketingInfluencersData } from './marketing-influencers.ts';
 
+// Definimos la interfaz para las secciones del blog
+export interface BlogSection {
+  title: string;
+  content: string;
+  type?: 'text' | 'list' | 'highlight' | 'image';
+  items?: string[];
+  imageUrl?: string;
+}
+
 // Definimos la interfaz para los posts del blog
 export interface BlogPost {
   slug: string;
@@ -17,7 +26,8 @@ export interface BlogPost {
   author: string;
   category: string;
   excerpt: string;
-  content: string;
+  content?: string; // Campo opcional para mantener compatibilidad
+  sections?: BlogSection[]; // Nuevo campo para contenido estructurado
   tags: string[];
   callToAction: {
     text: string;

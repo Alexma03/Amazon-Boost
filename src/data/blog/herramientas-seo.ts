@@ -1,163 +1,141 @@
-import type { BlogPost } from './index';
+import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
+
+// --- Secciones Optimizadas para 'herramientasSeoData' ---
+
+const sections: BlogSection[] = [
+  {
+    title: 'El Arsenal Esencial: Herramientas SEO para Triunfar en Amazon',
+    content: `<p>En el competitivo universo de Amazon, destacar requiere más que intuición. Las <strong>herramientas SEO adecuadas</strong> son cruciales para analizar el mercado, encontrar palabras clave rentables y optimizar tus listings para atraer tráfico orgánico cualificado.</p>`,
+    type: 'text',
+  },
+  {
+    title: '1. Helium 10: La Suite Todo-en-Uno',
+    content: `<p>Popular por su amplitud. Su función <strong>Cerebro</strong> es potente para análisis inverso de ASINs y descubrir keywords de la competencia.</p>`,
+    type: 'text',
+    // No list needed if keeping it super brief
+  },
+  {
+    title: '2. Jungle Scout: Investigación de Keywords y Producto',
+    content: `<p>Fuerte en investigación de productos, pero su <strong>Keyword Scout</strong> ofrece datos de volumen de búsqueda precisos y análisis de dificultad.</p>`,
+    type: 'text',
+  },
+  {
+    title: '3. DataHawk: Análisis Profundo del Rendimiento Orgánico',
+    content: `<p>Destaca por su <strong>seguimiento diario de rankings</strong> y la capacidad de correlacionar cambios en listings con el rendimiento SEO.</p>`,
+    type: 'text',
+  },
+  {
+    title: '4. Sellics: Optimización de Contenido Integrada',
+    content: `<p>Ofrece un <strong>Optimizador de Contenido</strong> con puntuación en tiempo real y sugerencias de mejora, integrando SEO y PPC.</p>`,
+    type: 'text',
+  },
+  {
+    // Sección de imagen para descanso visual
+    title: 'Visualizando el Éxito: Datos en Acción',
+    content: `<p>Estas herramientas transforman datos complejos en insights accionables para tu estrategia SEO.</p>`,
+    type: 'image',
+    imageUrl:
+      'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1080&auto=format&fit=crop', // URL de la imagen principal
+  },
+  {
+    title: '5. AMZScout: Potencia Accesible',
+    content: `<p>Buena opción calidad-precio. Ofrece <strong>Keyword Tracker</strong> diario, análisis de competidores y un generador de listados.</p>`,
+    type: 'text',
+  },
+  {
+    // Highlight para la herramienta gratuita
+    title: '6. Sonar (de Sellics): Investigación de Keywords Gratuita',
+    content: `<p>¡Ideal para empezar o complementar! Acceso gratuito a una gran base de datos de keywords de Amazon y búsqueda inversa por ASIN.</p>`,
+    type: 'highlight',
+  },
+  {
+    title: '7. Merchant Words: Perspectiva Global',
+    content: `<p>Su fortaleza es la <strong>cobertura internacional</strong>, con volúmenes de búsqueda para múltiples marketplaces de Amazon.</p>`,
+    type: 'text',
+  },
+  {
+    title: '8. Viral Launch: Precisión y Oportunidad',
+    content: `<p>Conocido por la <strong>precisión en volúmenes de búsqueda</strong> y su algoritmo para identificar keywords de "baja competencia y alta oportunidad".</p>`,
+    type: 'text',
+  },
+  {
+    title: 'Estrategia de Implementación Inteligente',
+    content: `<p>Tener las herramientas no basta. Úsalas estratégicamente:</p>`,
+    type: 'list',
+    items: [
+      '<strong>Investiga a fondo:</strong> Identifica tu universo de keywords (Helium 10, Jungle Scout).',
+      '<strong>Prioriza con datos:</strong> Enfócate en volumen vs. competencia.',
+      '<strong>Optimiza tu listing:</strong> Aplica los hallazgos (Sellics, DataHawk).',
+      '<strong>Monitoriza sin descanso:</strong> Sigue tus rankings y los de la competencia (AMZScout, DataHawk).',
+      '<strong>Adapta continuamente:</strong> El SEO en Amazon siempre cambia.',
+    ],
+  },
+  {
+    // Highlight sobre la estrategia
+    title: 'Clave del Éxito: La Estrategia, No Solo la Herramienta',
+    content: `<p>La verdadera ventaja competitiva reside en cómo <strong>integras los datos</strong> de estas herramientas en una estrategia SEO coherente y dinámica, adaptada a tus objetivos y presupuesto.</p>`,
+    type: 'highlight',
+  },
+  {
+    title: 'Conclusión: Elige tu Arsenal SEO con Inteligencia',
+    content: `<p>Seleccionar las <strong>herramientas SEO para Amazon</strong> adecuadas puede marcar una gran diferencia en tu visibilidad y ventas orgánicas. No necesitas todas, sino la combinación correcta para tus necesidades.</p>
+    <p>En <strong>Amazon Boost</strong>, te asesoramos para construir tu stack tecnológico SEO ideal, asegurando que cada euro invertido trabaje para impulsar tu crecimiento en Amazon.</p>`, // Ajusta "Amazon Boost" si es necesario
+    type: 'text',
+  },
+];
+
+// --- Objeto BlogPost Actualizado (manteniendo nombre original 'herramientasSeoData' y 'slug') ---
 
 export const herramientasSeoData: BlogPost = {
-  slug: "herramientas-seo",
-  title: "Las 8 Mejores Herramientas SEO para Amazon en 2024",
-  date: "2024-03-05",
-  image: "https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=2070&auto=format&fit=crop",
-  author: "Miguel Sánchez",
-  category: "SEO Amazon",
-  excerpt: "Descubre las herramientas más efectivas para optimizar tu presencia en Amazon, mejorar rankings y aumentar ventas orgánicas con estas soluciones probadas por profesionales.",
-  content: `
-## El arsenal tecnológico para dominar el SEO en Amazon
-
-En el competitivo ecosistema de Amazon, la optimización para motores de búsqueda (SEO) se ha vuelto un factor determinante para el éxito. Las herramientas adecuadas pueden proporcionar la ventaja necesaria para destacar entre millones de productos y captar la atención de compradores potenciales.
-
-## 1. Helium 10
-
-**Funcionalidad estrella: Cerebro**
-
-Helium 10 se ha consolidado como una suite completa para vendedores de Amazon, pero su herramienta de investigación de palabras clave "Cerebro" sigue siendo su funcionalidad más potente para SEO.
-
-**Características destacadas:**
-- Análisis inverso de ASIN para descubrir las palabras clave que impulsan a tus competidores
-- Puntuación de relevancia para determinar el potencial de posicionamiento
-- Filtros avanzados para identificar oportunidades de nicho
-- Seguimiento de posición para múltiples palabras clave
-
-Según nuestros análisis con clientes, los vendedores que utilizan Helium 10 para investigación de palabras clave experimentan un aumento promedio del 32% en tráfico orgánico durante los primeros tres meses de implementación.
-
-## 2. Jungle Scout
-
-**Funcionalidad estrella: Keyword Scout**
-
-Aunque conocido principalmente como herramienta de investigación de productos, Jungle Scout ofrece capacidades robustas de SEO que complementan su suite de análisis de mercado.
-
-**Características destacadas:**
-- Datos precisos de volumen de búsqueda procedentes directamente de Amazon
-- Análisis de dificultad para evaluar la competencia por palabra clave
-- Sugerencias de palabras clave relacionadas con métricas de rendimiento
-- Integración con el Tracker de productos para vincular palabras clave con rendimiento
-
-Los datos propietarios de Jungle Scout sobre tendencias de búsqueda ofrecen insights que otras herramientas simplemente no pueden proporcionar.
-
-## 3. DataHawk
-
-**Funcionalidad estrella: Análisis de rendimiento orgánico**
-
-DataHawk se destaca por su enfoque analítico avanzado y visualizaciones intuitivas del rendimiento SEO.
-
-**Características destacadas:**
-- Seguimiento diario de posicionamiento en keywords
-- Análisis de correlación entre cambios en listing y rankings
-- Informes automatizados de rendimiento
-- Benchmarking competitivo en tiempo real
-
-La capacidad de DataHawk para identificar patrones y correlaciones entre cambios en listings y fluctuaciones en rankings lo convierte en una herramienta indispensable para SEO avanzado en Amazon.
-
-## 4. Sellics
-
-**Funcionalidad estrella: Optimizador de Contenido**
-
-Sellics destaca por su enfoque holístico que integra SEO con otras facetas del negocio en Amazon.
-
-**Características destacadas:**
-- Análisis de optimización de contenido con puntuación en tiempo real
-- Sugerencias para mejorar listings basadas en algoritmos propietarios
-- Seguimiento de rankings con alertas personalizables
-- Integración con módulos de PPC para estrategias complementarias
-
-El Optimizador de Contenido de Sellics ha demostrado mejorar las tasas de conversión hasta un 26% al identificar y corregir deficiencias en listings.
-
-## 5. AMZScout
-
-**Funcionalidad estrella: Keyword Tracker**
-
-AMZScout ofrece una solución más accesible pero igualmente potente para vendedores que buscan maximizar su SEO en Amazon.
-
-**Características destacadas:**
-- Investigación de palabras clave con datos históricos
-- Seguimiento de posición con actualizaciones diarias
-- Análisis de competidores para identificar gaps de palabras clave
-- Generador de listados optimizados
-
-Su interfaz intuitiva y precios competitivos lo convierten en una excelente opción para vendedores emergentes que buscan mejorar su presencia orgánica.
-
-## 6. Sonar
-
-**Funcionalidad estrella: Base de datos de palabras clave gratuita**
-
-Desarrollada por Sellics, Sonar es una herramienta gratuita que proporciona acceso a una vasta base de datos de palabras clave específicas de Amazon.
-
-**Características destacadas:**
-- Búsqueda inversa por ASIN
-- Relaciones entre palabras clave visualizadas en red
-- Integración con la Consola de Vendedor de Amazon
-- Sin límites de búsqueda en la versión gratuita
-
-Sonar es ideal para vendedores que recién comienzan o para complementar otras herramientas de investigación de keywords de pago.
-
-## 7. Merchant Words
-
-**Funcionalidad estrella: Datos globales de búsqueda**
-
-Merchant Words se distingue por su amplia cobertura internacional y datos detallados de búsqueda.
-
-**Características destacadas:**
-- Volúmenes de búsqueda para todos los marketplaces de Amazon
-- Más de 1.000 millones de términos de búsqueda en su base de datos
-- Análisis de tendencias estacionales
-- Exportación de datos para análisis avanzados
-
-La capacidad de Merchant Words para identificar patrones de búsqueda internacionales lo hace invaluable para vendedores con estrategias de expansión global.
-
-## 8. Viral Launch
-
-**Funcionalidad estrella: Keyword Research**
-
-Viral Launch combina investigación de palabras clave con análisis de mercado para una estrategia de SEO integral.
-
-**Características destacadas:**
-- Precisión verificada en estimaciones de volumen de búsqueda
-- Análisis de relevancia por categoría
-- Seguimiento histórico de tendencias de palabras clave
-- Recomendaciones basadas en oportunidad vs. competencia
-
-Su algoritmo propietario para calcular la dificultad de posicionamiento permite a los vendedores identificar oportunidades de "fruta al alcance" que otras herramientas podrían pasar por alto.
-
-## Estrategia de implementación efectiva
-
-La verdadera ventaja competitiva no viene de tener acceso a estas herramientas, sino de saber implementarlas estratégicamente:
-
-1. **Comienza con investigación exhaustiva**: Utiliza Helium 10 o Jungle Scout para identificar el universo completo de palabras clave relevantes.
-
-2. **Prioriza basado en datos**: Analiza volumen de búsqueda vs. competencia para identificar oportunidades de mayor impacto.
-
-3. **Implementa optimizaciones**: Utiliza Sellics o DataHawk para guiar la optimización de tus listings.
-
-4. **Monitorea resultados**: Establece un seguimiento sistemático con herramientas como AMZScout o Viral Launch.
-
-5. **Adapta continuamente**: El algoritmo de Amazon evoluciona constantemente; utiliza análisis de tendencias para mantenerte a la vanguardia.
-
-## Conclusión
-
-Las herramientas de SEO para Amazon han evolucionado significativamente en los últimos años, ofreciendo capacidades que van mucho más allá de la simple investigación de palabras clave. La combinación adecuada de estas soluciones, adaptada a las necesidades específicas de tu negocio, puede transformar radicalmente tu visibilidad y rendimiento en el marketplace.
-
-En Amazon Boost, ayudamos a nuestros clientes a seleccionar e implementar el conjunto óptimo de herramientas SEO, maximizando el retorno de inversión y evitando gastos innecesarios en funcionalidades redundantes. Nuestro enfoque probado no solo incrementa la visibilidad orgánica, sino que también impulsa conversiones y ventas sostenibles.
-  `,
-  tags: ["seo amazon", "herramientas amazon", "keywords amazon", "optimización amazon", "helium 10", "jungle scout", "datahawk", "sellics"],
+  slug: 'herramientas-seo', // Slug mantenido como solicitado
+  title: 'Las 8 Mejores Herramientas SEO para Amazon en 2025', // Título actualizado con año
+  date: '2025-04-01', // Fecha actualizada
+  image:
+    'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1200&auto=format&fit=crop', // URL de imagen verificada/optimizada
+  author: 'Miguel Sánchez',
+  category: 'Herramientas Amazon', // Categoría ajustada o mantenida
+  excerpt:
+    'Descubre las 8 herramientas SEO para Amazon más potentes en 2025 (Helium 10, Jungle Scout, etc.) y cómo usarlas para disparar tu ranking y ventas.', // Excerpt optimizado
+  sections: sections, // Usamos las nuevas secciones
+  // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
+  tags: [
+    'herramientas seo amazon',
+    'seo amazon',
+    'keywords amazon',
+    'optimización amazon',
+    'helium 10',
+    'jungle scout',
+    'datahawk',
+    'sellics',
+    'amazon 2025',
+    'mejorar ranking amazon',
+  ], // Tags revisados y con año
   callToAction: {
-    text: "¿Necesitas ayuda con tu estrategia SEO? Solicita nuestra auditoría gratuita",
-    url: "/#contact"
+    text: '¿Necesitas ayuda con tu estrategia SEO? Solicita nuestra auditoría gratuita', // CTA mantenido
+    url: '/#contact', // Verificar URL
   },
   relatedPosts: [
-    "10-estrategias-de-optimizacion-de-listings-para-aumentar-ventas-amazon",
-    "algoritmo-amazon-a9",
-    "analisis-competencia-amazon"
+    // Manteniendo los slugs originales proporcionados
+    '10-estrategias-de-optimizacion-de-listings-para-aumentar-ventas-amazon',
+    'algoritmo-amazon-a9', // Quizás actualizar a uno sobre A10 si existe?
+    'analisis-competencia-amazon',
   ],
   seo: {
-    metaTitle: "Las 8 Mejores Herramientas SEO para Amazon en 2024 | Amazon Boost",
-    metaDescription: "Guía completa de las herramientas SEO más potentes para Amazon: Helium 10, Jungle Scout, DataHawk y más. Optimiza tus listings y aumenta tus ventas orgánicas.",
-    keywords: ["herramientas seo amazon", "helium 10", "jungle scout", "sellics", "optimizacion amazon", "keywords amazon", "datahawk"]
-  }
-}; 
+    metaTitle:
+      'Las 8 Mejores Herramientas SEO para Amazon en 2025 | Guía Completa', // Meta título optimizado
+    metaDescription:
+      'Análisis de las 8 herramientas SEO esenciales para vendedores de Amazon en 2025: Helium 10, Jungle Scout, DataHawk, Sellics y más. ¡Optimiza y vende!', // Meta descripción optimizada
+    keywords: [
+      'herramientas seo amazon',
+      'helium 10',
+      'jungle scout',
+      'sellics',
+      'datahawk',
+      'viral launch',
+      'amzscout',
+      'sonar amazon',
+      'keywords amazon',
+      'seo para amazon 2025',
+    ], // Keywords revisadas y con año
+  },
+};

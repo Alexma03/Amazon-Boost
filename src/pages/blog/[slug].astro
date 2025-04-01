@@ -20,18 +20,21 @@ interface Props {
 const { post } = Astro.props;
 const { slug } = Astro.params;
 
-// Proceso el contenido para estructurarlo mejor
+// Proceso el contenido para estructurarlo mejor si es necesario
 const processContent = (content: string) => {
+  if (!content) return '';
   // Eliminamos los espacios en blanco iniciales y finales
   const trimmedContent = content.trim();
   
-  // Convertimos el contenido Markdown a HTML de forma mejorada
+  // Convertimos el contenido Markdown a HTML si fuera necesario
   return trimmedContent;
 };
 ---
 
 <Layout frontmatter={post}>
-  <div class="prose prose-lg max-w-none">
-    <Fragment set:html={processContent(post.content)} />
-  </div>
+  {post.content && !post.sections && (
+    <div class="prose prose-lg max-w-none">
+      <Fragment set:html={processContent(post.content)} />
+    </div>
+  )}
 </Layout>
