@@ -150,9 +150,9 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('es-ES', {
             </h3>
             <div class="flex flex-wrap gap-2">
               {frontmatter.tags.map((tag: string) => (
-                <a href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="bg-amazon-lightgray hover:bg-amazon-orange/20 text-amazon-darkblue px-3 py-1 rounded-full text-sm transition-colors">
+                <span class="bg-amazon-lightgray text-amazon-darkblue px-3 py-1 rounded-full text-sm">
                   #{tag}
-                </a>
+                </span>
               ))}
             </div>
           </div>
