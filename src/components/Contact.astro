@@ -8,7 +8,7 @@ const subjects = [
 ];
 
 const contactInfo = {
-  email: "info@amazonboost.agency",
+  email: "info@amznboost.es",
   phone: "+34 671 470 651",
   social: {
     linkedin: "linkedin.com/in/sergio-de-román-373b7634b",
@@ -17,7 +17,8 @@ const contactInfo = {
 ---
 
 <script> 
-  import { supabase } from '../lib/supabase';
+  import { db } from '../lib/firebase';
+  import { collection, addDoc } from 'firebase/firestore';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm') as HTMLFormElement;
@@ -36,23 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const formDataObj = Object.fromEntries(formData.entries());
       
-      // Guardar en Supabase
-      const { error } = await supabase
-        .from('email_submissions')
-        .insert([
-          {
-            name: formDataObj.name,
-            email: formDataObj.email,
-            phone: formDataObj.phone || null,
-            company: formDataObj.company || null,
-            subject: formDataObj.subject,
-            message: formDataObj.message,
-            status: 'unread',
-            created_at: new Date().toISOString()
-          }
-        ]);
-        
-      if (error) throw error;
+      // Guardar en Firestore
+      await addDoc(collection(db, 'email_submissions'), {
+        name: formDataObj.name,
+        email: formDataObj.email,
+        phone: formDataObj.phone || null,
+        company: formDataObj.company || null,
+        subject: formDataObj.subject,
+        message: formDataObj.message,
+        status: 'unread',
+        created_at: new Date().toISOString()
+      });
       
       // Enviar también al endpoint original
       await fetch(form.action, {
