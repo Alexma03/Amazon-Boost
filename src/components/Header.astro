@@ -32,6 +32,7 @@ const isAdminPage = Astro.url.pathname.startsWith('/admin');
           <a href="/#contact" class="nav-link">Contacto</a>
           <a href="/blog" class="nav-link">Blog</a>
           <a href="/#contact" class="header-cta-button">Auditoría Gratis</a>
+          <a href="/admin/mensajes" id="adminMessagesLink" class="nav-link hidden">Mensajes</a>
         </nav>
 
         <button class="md:hidden text-white" id="menuButton">
@@ -62,7 +63,7 @@ const isAdminPage = Astro.url.pathname.startsWith('/admin');
 
 <script>
   import { auth } from '../lib/firebase'; // Importar la instancia auth inicializada
-  import { signOut } from 'firebase/auth'; // Importar signOut directamente
+  import { signOut, onAuthStateChanged } from 'firebase/auth'; // Importar signOut y onAuthStateChanged
 
   // Script para menú móvil (solo si no es página de admin)
   const menuButton = document.getElementById('menuButton');
@@ -71,6 +72,18 @@ const isAdminPage = Astro.url.pathname.startsWith('/admin');
   menuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
+
+  // Mostrar enlace de mensajes si el usuario está autenticado
+  const adminMessagesLink = document.getElementById('adminMessagesLink');
+  if (adminMessagesLink) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        adminMessagesLink.classList.remove('hidden');
+      } else {
+        adminMessagesLink.classList.add('hidden');
+      }
+    });
+  }
 
   // Script para cerrar sesión (solo si es página de admin)
   const signOutButton = document.getElementById('signOutButton');

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import React, { useState, useEffect } from 'react';
+import useGoogleIdentityScript from './useGoogleIdentityScript';
+import { GoogleAuthProvider, signInWithCredential, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../lib/firebase';
 import { collection, getDocs, query, orderBy, Timestamp } from 'firebase/firestore'; // Importar Timestamp
 
@@ -7,7 +8,9 @@ const AdminMessages = () => {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true); // Añadir estado de carga
+  const { scriptLoaded, scriptError } = useGoogleIdentityScript();
 
+  // Control de autenticación
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -35,25 +38,110 @@ const AdminMessages = () => {
           setLoading(false); // Finalizar carga
         }
       } else {
-        const provider = new GoogleAuthProvider();
-        try {
-          await signInWithPopup(auth, provider);
-        } catch (error) {
-          console.error("Error during sign in:", error);
-          setLoading(false); // Detener carga si falla el inicio de sesión
-        }
+        setUser(null);
+        setLoading(false);
       }
     });
-    // Limpiar suscripción al desmontar
     return () => unsubscribe();
   }, []);
+
+  // Logs de depuración para el script de Google
+  useEffect(() => {
+    console.log("Estado de carga del script:", scriptLoaded ? "Cargado" : "No cargado");
+    console.log("¿Hay error en el script?", scriptError ? "Sí" : "No");
+    
+    if (scriptLoaded) {
+      console.log("Objeto window.google disponible:", !!window.google);
+      console.log("Objeto window.google.accounts disponible:", !!(window.google && window.google.accounts));
+      console.log("Objeto window.google.accounts.id disponible:", !!(window.google && window.google.accounts && window.google.accounts.id));
+    }
+  }, [scriptLoaded, scriptError]);
+
+  // Inicialización de Google Identity Services
+  useEffect(() => {
+    // Solo inicializar si el script está cargado, el usuario no está logado y tenemos acceso a la API
+    if (!user && scriptLoaded && window.google && window.google.accounts && window.google.accounts.id) {
+      console.log("Inicializando Google Identity Services");
+      
+      try {
+        window.google.accounts.id.initialize({
+          client_id: import.meta.env.PUBLIC_GOOGLE_IDENTITY_CLIENT_ID,
+          callback: async (response) => {
+            try {
+              console.log("Respuesta de autenticación recibida", response);
+              const credential = GoogleAuthProvider.credential(response.credential);
+              const auth = getAuth();
+              await signInWithCredential(auth, credential);
+            } catch (e) {
+              console.error("Error de autenticación:", e);
+              alert('Error al iniciar sesión con Google: ' + e.message);
+            }
+          },
+          ux_mode: 'popup',
+          auto_select: true, // Habilitar FedCM auto sign-in
+          cancel_on_tap_outside: false,
+          use_fedcm_for_prompt: true,
+          use_fedcm_for_button: true
+        });
+        
+        // Renderizar el botón después de inicializar
+        setTimeout(() => {
+          const btnContainer = document.getElementById('google-signin-btn');
+          if (btnContainer) {
+            console.log("Renderizando botón de Google");
+            window.google.accounts.id.renderButton(
+              btnContainer,
+              { 
+                theme: 'outline', 
+                size: 'medium',  // Tamaño más pequeño para la esquina superior
+                type: 'standard', 
+                text: 'signin_with',
+                shape: 'rectangular',
+                logo_alignment: 'center',
+                width: 200  // Ancho reducido para no ocupar tanto espacio
+              }
+            );
+            
+            // Mostrar prompt de One Tap
+            console.log("Mostrando prompt de One Tap");
+            window.google.accounts.id.prompt((notification) => {
+              console.log("Notificación de prompt:", notification);
+            });
+          } else {
+            console.error("Elemento google-signin-btn no encontrado en el DOM");
+          }
+        }, 100); // Pequeño retraso para asegurar que el DOM está listo
+      } catch (e) {
+        console.error("Error al inicializar Google Identity Services:", e);
+      }
+    }
+  }, [user, scriptLoaded]);
 
   if (loading) {
     return <p className="text-center mt-8 text-gray-600">Cargando mensajes...</p>;
   }
 
   if (!user) {
-    return <p className="text-center mt-8 text-gray-600">Redirigiendo a la pantalla de inicio de sesión...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center p-8 max-w-lg">
+          <h1 className="text-3xl font-bold mb-4 text-amazon-blue">Panel de Administración</h1>
+          <p className="mb-6 text-gray-600">
+            Acceso restringido. Por favor, inicia sesión con tu cuenta de Google para ver los mensajes.
+          </p>
+          {scriptError ? (
+            <p className="text-red-500 mb-4">Error al cargar servicio de autenticación.</p>
+          ) : !scriptLoaded ? (
+            <p className="mb-4">Cargando servicio de autenticación...</p>
+          ) : (
+            <div className="flex justify-center">
+              {/* Solo renderizar un contenedor para el botón de Google */}
+              <div id="google-signin-btn" className="rounded-lg overflow-hidden shadow" />
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 
   return (
