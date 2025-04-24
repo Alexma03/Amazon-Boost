@@ -1,7 +1,7 @@
-import { initializeApp, getApps, getApp } from 'firebase/app'; // Importar getApps y getApp
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth'; // Importar getAuth
+import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
