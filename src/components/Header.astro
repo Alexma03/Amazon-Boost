@@ -1,10 +1,15 @@
 ---
+import { getAuth, signOut } from 'firebase/auth'; // Importar funciones de auth
+
 const navItems = [
   { text: 'Servicios', href: '/#services' },
   { text: 'Casos de Éxito', href: '/#case-studies' },
   { text: 'Blog', href: '/blog' },
   { text: 'Contacto', href: '/#contact' }
 ];
+
+// Comprobar si la ruta actual está bajo /admin
+const isAdminPage = Astro.url.pathname.startsWith('/admin');
 ---
 
 <header class="fixed w-full bg-amazon-black text-white z-50">
@@ -12,44 +17,89 @@ const navItems = [
     <a href="/" class="text-2xl font-bold text-amazon-orange">
       Amazon Boost
     </a>
-    
-    <nav class="hidden md:flex items-center space-x-8">
-      <a href="/#services" class="nav-link">Servicios</a>
-      <a href="/#case-studies" class="nav-link">Casos de Éxito</a>
-      <a href="/#contact" class="nav-link">Contacto</a>
-      <a href="/blog" class="nav-link">Blog</a>
-      <a href="/#contact" class="header-cta-button">Auditoría Gratis</a>
-    </nav>
 
-    <button class="md:hidden text-white" id="menuButton">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+    {isAdminPage ? (
+      // Mostrar botón de Cerrar Sesión en páginas de admin
+      <button id="signOutButton" class="header-cta-button bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+        Cerrar Sesión
+      </button>
+    ) : (
+      // Mostrar navegación normal en otras páginas
+      <>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/#services" class="nav-link">Servicios</a>
+          <a href="/#case-studies" class="nav-link">Casos de Éxito</a>
+          <a href="/#contact" class="nav-link">Contacto</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/#contact" class="header-cta-button">Auditoría Gratis</a>
+        </nav>
+
+        <button class="md:hidden text-white" id="menuButton">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </>
+    )}
   </div>
 
-  <!-- Mobile menu -->
-  <div class="hidden md:hidden" id="mobileMenu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      {navItems.map(item => (
-        <a href={item.href} class="block px-3 py-2 text-base font-medium hover:bg-amazon-darkblue">
-          {item.text}
+  {/* Mobile menu - Ocultar si es página de admin */}
+  {!isAdminPage && (
+    <div class="hidden md:hidden" id="mobileMenu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        {navItems.map(item => (
+          <a href={item.href} class="block px-3 py-2 text-base font-medium hover:bg-amazon-darkblue">
+            {item.text}
+          </a>
+        ))}
+        <a href="/#contact" class="mobile-cta-button">
+          Auditoría Gratis
         </a>
-      ))}
-      <a href="/#contact" class="mobile-cta-button">
-        Auditoría Gratis
-      </a>
+      </div>
     </div>
-  </div>
+  )}
 </header>
 
 <script>
+  import { auth } from '../lib/firebase'; // Importar la instancia auth inicializada
+  import { signOut } from 'firebase/auth'; // Importar signOut directamente
+
+  // Script para menú móvil (solo si no es página de admin)
   const menuButton = document.getElementById('menuButton');
   const mobileMenu = document.getElementById('mobileMenu');
 
   menuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
+
+  // Script para cerrar sesión (solo si es página de admin)
+  const signOutButton = document.getElementById('signOutButton');
+  if (signOutButton) {
+    console.log('Botón de cerrar sesión encontrado.'); // Log 1
+
+    signOutButton.addEventListener('click', async () => {
+      console.log('Clic en el botón de cerrar sesión.'); // Log 2
+      try {
+        console.log('Intentando cerrar sesión con la instancia importada...'); // Log 3
+        await signOut(auth); // Usar la instancia auth importada
+        console.log('Sesión cerrada exitosamente. Redirigiendo...'); // Log 4
+        window.location.href = '/'; // Redirigir a la página de inicio
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        alert('Hubo un error al cerrar sesión.');
+      }
+    });
+
+  } else {
+    // Este log solo se mostraría si isAdminPage es true pero el botón no se encuentra
+    // O si el script corre antes de que el botón exista en el DOM (menos probable aquí)
+    const isAdminPageCheck = window.location.pathname.startsWith('/admin');
+    if (isAdminPageCheck) {
+        console.log('Botón de cerrar sesión NO encontrado en página de admin.');
+    }
+  }
+
+  // ... (código existente para resaltar enlace activo) ...
 </script>
 
 <style>

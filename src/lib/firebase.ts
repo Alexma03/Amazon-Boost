@@ -1,6 +1,7 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app'; // Importar getApps y getApp
 import { getAnalytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth'; // Importar getAuth
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,7 +14,9 @@ const firebaseConfig = {
   measurementId: import.meta.env.PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only if it hasn't been initialized yet
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
 export const analytics = getAnalytics(app);
 export const db = getFirestore(app);
+export const auth = getAuth(app); // Inicializar y exportar auth

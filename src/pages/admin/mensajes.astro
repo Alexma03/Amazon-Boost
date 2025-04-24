@@ -1,9 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import AdminMessages from '../../components/AdminMessages.jsx';
+import AdminMessages from '../../components/AdminMessages.jsx'; // Volver a importar .jsx
 ---
 
-<Layout title="Mensajes de Contacto">
-  <h1 class="text-3xl font-bold mb-6">Mensajes de Contacto</h1>
+<Layout title="Mensajes de Contacto - Admin">
   <AdminMessages client:only="react" />
 </Layout>
