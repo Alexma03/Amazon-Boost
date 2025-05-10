@@ -16,15 +16,27 @@ const AdminMessages = () => {
   const fetchMessages = async () => {
     setLoading(true);
     try {
-      // Construir la consulta base
-      let q = query(collection(db, 'email_submissions'), orderBy('created_at', 'desc'));
+      // Crear referencias y parámetros base
+      const messagesRef = collection(db, 'email_submissions');
+      let messagesQuery;
 
-      // Añadir filtro de estado si no es 'all'
-      if (filter !== 'all') {
-        q = query(collection(db, 'email_submissions'), where('status', '==', filter), orderBy('created_at', 'desc'));
+      // Aplicar filtros según el estado seleccionado
+      if (filter === 'all') {
+        // Si es "todos", solo ordenamos por fecha
+        messagesQuery = query(messagesRef, orderBy('created_at', 'desc'));
+      } else {
+        // Si es "read" o "unread", filtramos por el campo status
+        messagesQuery = query(
+          messagesRef, 
+          where('status', '==', filter),
+          orderBy('created_at', 'desc')
+        );
       }
 
-      const snapshot = await getDocs(q);
+      // Ejecutar la consulta
+      const snapshot = await getDocs(messagesQuery);
+      console.log(`Filtro: ${filter} - Mensajes encontrados: ${snapshot.docs.length}`);
+      
       const fetchedMessages = snapshot.docs.map(doc => {
         const data = doc.data();
         const createdAt = data.created_at instanceof Timestamp
@@ -40,6 +52,9 @@ const AdminMessages = () => {
       setMessages(fetchedMessages);
     } catch (error) {
       console.error("Error fetching messages:", error);
+      if (error.code === 'failed-precondition') {
+        console.error("Este error suele ocurrir cuando falta un índice compuesto en Firestore");
+      }
       setMessages([]); // Limpiar mensajes en caso de error
     } finally {
       setLoading(false);
