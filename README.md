@@ -133,3 +133,8 @@ If you wish to contribute to this project, please follow these steps:
 
 ## 📄 License
 
+Este proyecto está licenciado bajo la Licencia MIT.  
+Autor: Alejandro Marcos
+
+Consulta el archivo [`LICENSE`](./LICENSE) para más detalles.
+
