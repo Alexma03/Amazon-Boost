@@ -8,7 +8,7 @@ const subjects = [
 ];
 
 const contactInfo = {
-  email: "info@amazonboost.agency",
+  email: "info@amznboost.es",
   phone: "+34 671 470 651",
   social: {
     linkedin: "linkedin.com/in/sergio-de-román-373b7634b",
@@ -16,71 +16,67 @@ const contactInfo = {
 };
 ---
 
-<script> 
-  import { supabase } from '../lib/supabase';
+<script>
+  import { db } from "../lib/firebase";
+  import { collection, addDoc } from "firebase/firestore";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contactForm') as HTMLFormElement;
-  const formStatus = document.getElementById('formStatus');
-  
-  if (!form || !formStatus) return;
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactForm") as HTMLFormElement;
+    const formStatus = document.getElementById("formStatus");
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Mostrar estado de carga
-    formStatus.innerHTML = '<p class="text-gray-600">Enviando mensaje...</p>';
-    formStatus.classList.remove('hidden');
+    if (!form || !formStatus) return;
 
-    try {
-      const formData = new FormData(form);
-      const formDataObj = Object.fromEntries(formData.entries());
-      
-      // Guardar en Supabase
-      const { error } = await supabase
-        .from('email_submissions')
-        .insert([
-          {
-            name: formDataObj.name,
-            email: formDataObj.email,
-            phone: formDataObj.phone || null,
-            company: formDataObj.company || null,
-            subject: formDataObj.subject,
-            message: formDataObj.message,
-            status: 'unread',
-            created_at: new Date().toISOString()
-          }
-        ]);
-        
-      if (error) throw error;
-      
-      // Enviar también al endpoint original
-      await fetch(form.action, {
-        method: 'POST',
-        body: formData
-      });
-      
-      // Mensaje de éxito
-      formStatus.innerHTML = '<p class="text-green-600">¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.</p>';
-      form.reset();
-      
-    } catch (error) {
-      console.error('Error:', error);
-      formStatus.innerHTML = '<p class="text-red-600">Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.</p>';
-      
-      // Intentar enviar al endpoint original como respaldo
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Mostrar estado de carga
+      formStatus.innerHTML = '<p class="text-gray-600">Enviando mensaje...</p>';
+      formStatus.classList.remove("hidden");
+
       try {
-        const backupFormData = new FormData(form);
-        await fetch(form.action, {
-          method: 'POST',
-          body: backupFormData
+        const formData = new FormData(form);
+        const formDataObj = Object.fromEntries(formData.entries());
+
+        // Guardar en Firestore
+        await addDoc(collection(db, "email_submissions"), {
+          name: formDataObj.name,
+          email: formDataObj.email,
+          phone: formDataObj.phone || null,
+          company: formDataObj.company || null,
+          subject: formDataObj.subject,
+          message: formDataObj.message,
+          status: "unread",
+          created_at: new Date().toISOString(),
         });
-      } catch (backupError) {
-        console.error('Error en envío de respaldo:', backupError);
+
+        // Enviar también al endpoint original
+        await fetch(form.action, {
+          method: "POST",
+          body: formData,
+        });
+
+        // Mensaje de éxito
+        formStatus.innerHTML =
+          '<p class="text-green-600">¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.</p>';
+        form.reset();
+      } catch (error) {
+        console.error("Error:", error);
+        formStatus.innerHTML =
+          '<p class="text-red-600">Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.</p>';
+
+        // Intentar enviar al endpoint original como respaldo
+        try {
+          const backupFormData = new FormData(form);
+          await fetch(form.action, {
+            method: "POST",
+            body: backupFormData,
+          });
+        } catch (backupError) {
+          console.error("Error en envío de respaldo:", backupError);
+        }
       }
-    }
+    });
   });
-});
 </script>
 
 <section
@@ -334,23 +330,23 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div class="mt-8">
-              <h4 class="font-medium mb-4 flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 mr-2 text-amazon-orange"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-                Síguenos
-              </h4>
-              <div class="flex gap-4">
+              <div class="flex items-center gap-4 mb-4">
+                <h4 class="font-medium flex items-center mb-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2 text-amazon-orange"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                  Síguenos
+                </h4>
                 <a
                   href="https://www.linkedin.com/in/sergio-de-román-373b7634b"
                   target="_blank"
@@ -377,10 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
         </div>
-
-        <div
-          class="bg-amazon-orange bg-opacity-10 p-8 rounded-xl shadow-lg text-center"
-        >
+        <!-- Card de llamada separada -->
+        <div class="bg-amazon-orange bg-opacity-10 p-8 rounded-xl shadow-lg text-center">
           <h3 class="text-xl font-semibold mb-4">¿Prefieres una llamada?</h3>
           <p class="mb-4">
             Agenda una consulta gratuita de 30 minutos con nuestros expertos
@@ -399,37 +393,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <style>
   /* Efectos de foco mejorados para los inputs */
-  input:focus, select:focus, textarea:focus {
+  input:focus,
+  select:focus,
+  textarea:focus {
     @apply ring-2 ring-amazon-orange ring-opacity-50 border-amazon-orange;
     outline: none;
     transition: all 0.2s;
   }
-  
+
   /* Animación de entrada para los campos */
   .form-field {
     transform: translateY(0);
     opacity: 1;
     transition: all 0.3s ease;
   }
-  
+
   .form-field.animate {
     transform: translateY(10px);
     opacity: 0;
   }
-  
+
   /* Estilo para botones */
   .btn-primary {
     @apply bg-amazon-orange text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 shadow-md;
     position: relative;
     overflow: hidden;
   }
-  
+
   .btn-primary:hover {
     @apply bg-amber-600 shadow-lg;
   }
-  
+
   .btn-primary::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -440,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.5s;
   }
-  
+
   .btn-primary:active::after {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
@@ -477,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .sign svg path {
     fill: white;
   }
-  
+
   .text {
     position: absolute;
     right: 0%;
@@ -508,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
     padding-right: 15px; /* Aumentado de 10px a 15px */
     padding-left: 8px; /* Añadido padding izquierdo para separar del icono */
   }
-  
+
   .Btn:active {
     transform: translate(2px, 2px);
   }

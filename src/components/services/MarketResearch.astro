@@ -1,5 +1,5 @@
 ---
-import { Chart } from 'react-chartjs-2';
+import { Chart } from 'chart.js/auto';
 
 const researchAreas = [
   {
@@ -53,7 +53,7 @@ const successStories = [
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Investigación de Mercado Basada en Datos</h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Make informed decisions with our comprehensive market research methodology, powered by advanced analytics and industry expertise.
+        Tome decisiones informadas con nuestra metodología integral de investigación de mercado, impulsada por análisis avanzados y experiencia en la industria.
       </p>
     </div>
 
@@ -123,16 +123,25 @@ const successStories = [
 </section>
 
 <script>
-  import { Chart, registerables } from 'chart.js';
-  Chart.register(...registerables);
+  import { Chart } from 'chart.js/auto';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    initCharts();
+  });
 
-  // Market Share Chart
-  const marketShareCtx = document.getElementById('marketShareChart');
-  if (marketShareCtx) {
-    new Chart(marketShareCtx, {
+  function initCharts() {
+    initMarketShareChart();
+    initKeywordOpportunityChart();
+  }
+
+  function initMarketShareChart() {
+    const canvas = document.getElementById('marketShareChart') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    new Chart(canvas, {
       type: 'doughnut',
       data: {
-        labels: ['Your Store', 'Competitor A', 'Competitor B', 'Others'],
+        labels: ['Tu Tienda', 'Competidor A', 'Competidor B', 'Otros'],
         datasets: [{
           data: [25, 30, 20, 25],
           backgroundColor: ['#FF9900', '#232F3E', '#37475A', '#848484']
@@ -149,14 +158,15 @@ const successStories = [
     });
   }
 
-  // Keyword Opportunity Chart
-  const keywordCtx = document.getElementById('keywordChart');
-  if (keywordCtx) {
-    new Chart(keywordCtx, {
+  function initKeywordOpportunityChart() {
+    const canvas = document.getElementById('keywordChart') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    new Chart(canvas, {
       type: 'bubble',
       data: {
         datasets: [{
-          label: 'Keyword Opportunities',
+          label: 'Oportunidades de Palabras Clave',
           data: [
             { x: 2000, y: 0.8, r: 15 },
             { x: 5000, y: 0.6, r: 20 },
@@ -173,13 +183,13 @@ const successStories = [
           x: {
             title: {
               display: true,
-              text: 'Search Volume'
+              text: 'Volumen de Búsqueda'
             }
           },
           y: {
             title: {
               display: true,
-              text: 'Competition Score'
+              text: 'Puntuación de Competencia'
             }
           }
         }

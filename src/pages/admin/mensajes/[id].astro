@@ -1,0 +1,10 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MessageDetail from '../../../components/MessageDetail.jsx';
+
+const { id } = Astro.params;
+---
+
+<Layout title="Detalle de Mensaje - Admin">
+  <MessageDetail messageId={id} client:only="react" />
+</Layout>

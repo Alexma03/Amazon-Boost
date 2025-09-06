@@ -1,85 +1,40 @@
 ---
+import type { GetStaticPathsResult } from 'astro';
 import Layout from '../../layouts/BlogPostLayout.astro';
-import { posts } from '../../data/blog-posts.js';
+import type { BlogPost } from '../../data/blog/index.ts';
+import { allBlogPosts, blogPostsBySlug } from '../../data/blog/index.ts';
 
-export async function getStaticPaths() {
-  return posts.map(post => ({
+export const prerender = true;
+
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  return allBlogPosts.map(post => ({
     params: { slug: post.slug },
     props: { post }
   }));
 }
 
+interface Props {
+  post: BlogPost;
+}
+
 const { post } = Astro.props;
 const { slug } = Astro.params;
 
-// Import the markdown content dynamically
-const postContent = await import(`../../data/blog/${slug}.md`);
-const { Content } = postContent;
-
-// Get related posts (excluding the current post)
-const relatedPosts = posts
-  .filter(p => p.slug !== slug && p.category === post.category)
-  .slice(0, 2);
+// Proceso el contenido para estructurarlo mejor si es necesario
+const processContent = (content: string) => {
+  if (!content) return '';
+  // Eliminamos los espacios en blanco iniciales y finales
+  const trimmedContent = content.trim();
+  
+  // Convertimos el contenido Markdown a HTML si fuera necesario
+  return trimmedContent;
+};
 ---
 
 <Layout frontmatter={post}>
-  <div class="prose prose-lg max-w-none">
-    <Content />
-  </div>
-
-  {relatedPosts.length > 0 && (
-    <div class="mt-10 pt-8 border-t border-gray-200">
-      <h3 class="text-xl font-semibold mb-4">Related articles</h3>
-      <div class="grid md:grid-cols-2 gap-6">
-        {relatedPosts.map(relatedPost => (
-          <article class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="relative aspect-[16/9]">
-              <img 
-                src={relatedPost.image} 
-                alt={relatedPost.title} 
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div class="absolute top-4 right-4 bg-amazon-orange text-amazon-black px-3 py-1 rounded-full text-sm font-medium">
-                {relatedPost.category}
-              </div>
-            </div>
-            <div class="p-6">
-              <div class="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                <time datetime={relatedPost.date}>
-                  {new Date(relatedPost.date).toLocaleDateString('en-US', { 
-                    month: 'long', 
-                    day: 'numeric', 
-                    year: 'numeric' 
-                  })}
-                </time>
-                <span>by {relatedPost.author}</span>
-              </div>
-              <h3 class="text-xl font-semibold mb-3 line-clamp-2">
-                <a href={`/blog/${relatedPost.slug}`} class="hover:text-amazon-orange">
-                  {relatedPost.title}
-                </a>
-              </h3>
-              <p class="text-gray-600 mb-6 line-clamp-3">{relatedPost.excerpt}</p>
-              <a 
-                href={`/blog/${relatedPost.slug}`} 
-                class="text-amazon-orange font-medium hover:text-opacity-80 transition-colors inline-flex items-center group"
-              >
-                Read More
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  class="h-5 w-5 ml-1 transform transition-transform group-hover:translate-x-1" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
+  {post.content && !post.sections && (
+    <div class="prose prose-lg max-w-none">
+      <Fragment set:html={processContent(post.content)} />
     </div>
   )}
 </Layout>

@@ -70,7 +70,9 @@ function normalizeForUrl(text: string) {
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div class="absolute top-0 left-0 w-1 h-0 bg-amazon-orange group-hover:h-full transition-all duration-300 -mt-1"></div>
-            <h3 class="text-xl font-bold mb-3 group-hover:text-amazon-orange transition-colors">{study.title}</h3>
+            <a href={`/casos-de-exito/${normalizeForUrl(study.title)}`} class="block">
+              <h3 class="text-xl font-bold mb-3 group-hover:text-amazon-orange transition-colors">{study.title}</h3>
+            </a>
             <p class="text-gray-600 mb-4 line-clamp-3">{study.overview}</p>
             <div class="grid grid-cols-3 gap-4 my-4">
               <div class="text-center p-2 bg-amazon-lightgray rounded-lg transform transition-transform group-hover:scale-105 group-hover:bg-amazon-orange/10">

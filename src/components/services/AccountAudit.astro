@@ -1,5 +1,22 @@
 ---
-const auditSteps = [
+import { accountAuditData } from '../../data/services/account-audit.js';
+
+interface AuditStep {
+  title: string;
+  description: string;
+  metrics?: string[];
+  checklist?: string[];
+  areas?: string[];
+  evaluation?: string[];
+}
+
+interface CaseStudy {
+  title: string;
+  metric: string;
+  description: string;
+}
+
+const auditSteps: AuditStep[] = [
   {
     title: "Initial Performance Assessment",
     description: "Comprehensive analysis of your account's key performance indicators, sales trends, and operational metrics.",
@@ -22,7 +39,7 @@ const auditSteps = [
   }
 ];
 
-const caseStudies = [
+const caseStudies: CaseStudy[] = [
   {
     title: "Home & Kitchen Seller",
     metric: "127%",
@@ -39,10 +56,6 @@ const caseStudies = [
     description: "Reduction in policy compliance issues"
   }
 ];
----
-
----
-import { accountAuditData } from '../../data/services/account-audit.js';
 
 const { benefits } = accountAuditData;
 ---
@@ -59,11 +72,20 @@ const { benefits } = accountAuditData;
     <div class="space-y-4 mb-16">
       <h3 class="text-2xl font-bold mb-6 text-center">{benefits.title}</h3>
       <div class="max-w-4xl mx-auto space-y-4">
-        {benefits.items.map((item, index) => (
+        {benefits.items.map((item: {header: string, content: string}, index: number) => (
           <div class="border border-gray-200 rounded-lg overflow-hidden">
             <button
               class="w-full text-left px-6 py-4 bg-amazon-lightgray hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center"
-              onclick={`document.getElementById('content-${index}').classList.toggle('hidden')`}
+              aria-expanded="false"
+              aria-controls={`content-${index}`}
+              onclick={`
+                const button = this;
+                const content = document.getElementById('content-${index}');
+                const expanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !expanded);
+                content.classList.toggle('hidden');
+                button.querySelector('svg').classList.toggle('rotate-180');
+              `}
             >
               <span class="font-semibold text-lg">{item.header}</span>
               <svg
@@ -83,7 +105,7 @@ const { benefits } = accountAuditData;
             </button>
             <div id={`content-${index}`} class="hidden px-6 py-4 bg-white">
               <div class="prose max-w-none">
-                {item.content.split('\n').map((line) => (
+                {item.content.split('\n').map((line: string) => (
                   <p class="mb-2">{line}</p>
                 ))}
               </div>
@@ -95,7 +117,7 @@ const { benefits } = accountAuditData;
 
     <div class="grid md:grid-cols-2 gap-8 mb-16">
       {auditSteps.map((step, index) => (
-        <div class="bg-amazon-lightgray p-8 rounded-xl">
+        <div class="bg-amazon-lightgray p-8 rounded-xl hover:shadow-lg transition-shadow duration-300">
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-amazon-orange text-amazon-black rounded-full flex items-center justify-center font-bold text-xl">
               {index + 1}
@@ -104,7 +126,7 @@ const { benefits } = accountAuditData;
               <h3 class="text-xl font-semibold mb-3">{step.title}</h3>
               <p class="text-gray-600 mb-4">{step.description}</p>
               <ul class="space-y-2">
-                {(step.metrics || step.checklist || step.areas || step.evaluation).map(item => (
+                {(step.metrics || step.checklist || step.areas || step.evaluation)?.map(item => (
                   <li class="flex items-center gap-2">
                     <svg class="w-5 h-5 text-amazon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -119,45 +141,57 @@ const { benefits } = accountAuditData;
       ))}
     </div>
 
-    <div class="bg-amazon-black text-white p-8 rounded-xl">
+    <div class="bg-amazon-black text-white p-8 rounded-xl mb-16">
       <h3 class="text-2xl font-bold mb-8 text-center">Success Stories</h3>
       <div class="grid md:grid-cols-3 gap-8">
         {caseStudies.map(study => (
-          <div class="text-center">
-            <div class="text-4xl font-bold text-amazon-orange mb-2">{study.metric}</div>
-            <div class="font-semibold mb-2">{study.title}</div>
+          <div class="text-center p-6 bg-amazon-black bg-opacity-50 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+            <div class="text-5xl font-bold text-amazon-orange mb-3">{study.metric}</div>
+            <div class="font-semibold mb-3 text-xl">{study.title}</div>
             <p class="text-gray-300">{study.description}</p>
           </div>
         ))}
       </div>
     </div>
 
-    <div class="mt-12 text-center">
-      <h3 class="text-2xl font-bold mb-4">Audit Deliverables Timeline</h3>
-      <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-16 text-right font-semibold">Day 1</div>
-            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Initial Data Collection & Analysis</div>
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold mb-6 text-center">Audit Deliverables Timeline</h3>
+      <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+        <div class="space-y-6">
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="w-20 text-center md:text-right font-semibold">Day 1</div>
+            <div class="flex-1 bg-amazon-lightgray p-4 rounded-lg relative">
+              Initial Data Collection & Analysis
+              <div class="absolute h-full w-1 bg-amazon-orange left-0 top-0 rounded-l-lg"></div>
+            </div>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="w-16 text-right font-semibold">Day 2-3</div>
-            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Deep Dive Analysis & Opportunity Identification</div>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="w-20 text-center md:text-right font-semibold">Day 2-3</div>
+            <div class="flex-1 bg-amazon-lightgray p-4 rounded-lg relative">
+              Deep Dive Analysis & Opportunity Identification
+              <div class="absolute h-full w-1 bg-amazon-orange left-0 top-0 rounded-l-lg"></div>
+            </div>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="w-16 text-right font-semibold">Day 4</div>
-            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Report Preparation & Recommendation Development</div>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="w-20 text-center md:text-right font-semibold">Day 4</div>
+            <div class="flex-1 bg-amazon-lightgray p-4 rounded-lg relative">
+              Report Preparation & Recommendation Development
+              <div class="absolute h-full w-1 bg-amazon-orange left-0 top-0 rounded-l-lg"></div>
+            </div>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="w-16 text-right font-semibold">Day 5</div>
-            <div class="flex-1 bg-amazon-lightgray p-3 rounded">Presentation & Strategy Session</div>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div class="w-20 text-center md:text-right font-semibold">Day 5</div>
+            <div class="flex-1 bg-amazon-lightgray p-4 rounded-lg relative">
+              Presentation & Strategy Session
+              <div class="absolute h-full w-1 bg-amazon-orange left-0 top-0 rounded-l-lg"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="mt-12 text-center">
-      <a href="#contact" class="inline-block bg-amazon-orange text-amazon-black px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+      <a href="#contact" class="inline-block bg-amazon-orange text-amazon-black px-8 py-4 rounded-full font-medium hover:bg-opacity-90 transition-colors text-lg hover:shadow-lg transform hover:-translate-y-1 duration-300">
         Request Your Free Audit
       </a>
     </div>
