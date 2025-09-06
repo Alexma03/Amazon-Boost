@@ -1,0 +1,128 @@
+---
+---
+
+<style>
+  .rotating-border-container {
+    position: relative;
+    overflow: hidden;
+    padding: 3px;
+    border-radius: 1rem;
+    z-index: 10;
+  }
+
+  .rotating-border {
+    position: absolute;
+    content: "";
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      #ff9900 0%,
+      #232f3e 30%,
+      #131921 50%,
+      #232f3e 70%,
+      #ff9900 100%
+    );
+    animation: rotate 12s linear infinite;
+    z-index: 0;
+  }
+
+  .image-container {
+    position: relative;
+    z-index: 1;
+    background-color: #131921;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border-radius: 0.875rem;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .card {
+    background: linear-gradient(90deg, #ff9900, #ffb347, #ffc67a, #ff9900);
+    background-size: 300%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 153, 0, 0.3);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .rotating-border {
+      animation: none;
+    }
+  }
+</style>
+
+<section class="py-16 relative bg-amazon-black text-white">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="w-full md:w-1/2 flex justify-center">
+        <div class="rotating-border-container" style="max-width: 420px; max-height: 560px;">
+          <div class="rotating-border"></div>
+          <div class="image-container">
+            <img 
+              src="/images/linkedin foto.jpg" 
+              alt="Sergio Porras, fundador de AmazonBoost" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2">
+        <h2 class="text-4xl font-bold text-white mb-8 text-center md:text-left">¿Quiénes somos?</h2>
+        <div class="text-white space-y-4">
+          <p>Hola, soy Sergio Porras, CEO y fundador de AmazonBoost.</p>
+          <p>Después de varios años gestionando cuentas y proyectos en Amazon, decidí crear esta agencia para ayudar a marcas y empresas como la tuya a crecer de forma sólida en Amazon Europa.</p>
+          <p>En AmazonBoost combinamos experiencia, estrategia y un trato cercano para simplificar lo complejo y hacer que tus productos se posicionen mejor, vendan más y generen resultados reales.</p>
+          <p>Nuestro objetivo es claro: que puedas enfocarte en tu negocio mientras nosotros nos encargamos de que tu marca tenga éxito en Amazon.</p>
+        </div>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Tarjeta 1 -->
+          <div class="card">
+            <div class="mb-2 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amazon-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <p class="font-medium text-amazon-black">+20 clientes satisfechos</p>
+          </div>
+          
+          <!-- Tarjeta 2 -->
+          <div class="card">
+            <div class="mb-2 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amazon-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="font-medium text-amazon-black">+2 años de experiencia en Amazon</p>
+          </div>
+          
+          <!-- Tarjeta 3 -->
+          <div class="card">
+            <div class="mb-2 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amazon-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <p class="font-medium text-amazon-black">+50k € gestionados en publicidad</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
