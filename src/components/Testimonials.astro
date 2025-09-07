@@ -1,28 +1,21 @@
 ---
 import { testimonials } from '../data/testimonials.js';
-import { Image } from 'astro:assets';
 ---
 
 <section class="mb-20 bg-amazon-lightgray rounded-2xl py-8 md:py-12">
-  <h2 class="text-2xl font-bold mb-8 text-center">Reseñas de nuestros clientes</h2>
+  <div class="text-center mb-8">
+    <h2 class="text-2xl font-bold mb-4">Reseñas de nuestros clientes</h2>
+    <a href="/dejar-resena" class="inline-block bg-amazon-orange hover:bg-amazon-orange-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300">
+      Deja tu reseña
+    </a>
+  </div>
   <div class="carousel-container">
     <div class="carousel py-4">
       {testimonials.map(testimonial => (
         <div class="carousel-item bg-white h-auto rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
-          <div class="flex items-center gap-4 mb-6">
-            <Image 
-              src={testimonial.image} 
-              alt={testimonial.author} 
-              class="w-16 h-16 rounded-full object-cover"
-              loading="lazy"
-              width={64} 
-              height={64}
-            />
-            <div>
-              <div class="font-semibold">{testimonial.author}</div>
-              <div class="text-sm text-gray-600">{testimonial.role}</div>
-              <div class="text-sm text-amazon-orange">{testimonial.company}</div>
-            </div>
+          <div class="mb-6">
+            <div class="font-bold text-gray-900">{testimonial.author}</div>
+            <div class="text-sm text-gray-600 font-medium">{testimonial.role}</div>
           </div>
           <blockquote class="text-gray-600 line-clamp-6 flex-1 flex items-center justify-center">
             "{testimonial.quote}"

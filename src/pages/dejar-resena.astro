@@ -1,0 +1,249 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Deja tu reseña - Amazon Boost">
+  <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-amazon-black mb-4">Deja tu reseña</h1>
+      <p class="text-lg text-gray-600">
+        Nos encanta saber de nuestros clientes. Comparte tu experiencia trabajando con Amazon Boost.
+      </p>
+    </div>
+
+    <!-- Review Form -->
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+      <form id="reviewForm" class="space-y-6">
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+            Nombre completo *
+          </label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amazon-orange focus:border-transparent outline-none transition-all duration-300"
+            placeholder="Tu nombre completo"
+          >
+        </div>
+
+        <!-- Company/Role Field -->
+        <div>
+          <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">
+            Cargo y empresa
+          </label>
+          <input 
+            type="text" 
+            id="role" 
+            name="role"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amazon-orange focus:border-transparent outline-none transition-all duration-300"
+            placeholder="Ej: CEO, Director de Marketing, etc."
+          >
+        </div>
+
+        <!-- Service Used -->
+        <div>
+          <label for="service" class="block text-sm font-semibold text-gray-700 mb-2">
+            Servicio utilizado
+          </label>
+          <select 
+            id="service" 
+            name="service"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amazon-orange focus:border-transparent outline-none transition-all duration-300"
+          >
+            <option value="">Selecciona un servicio</option>
+            <option value="ppc-management">Gestión de PPC</option>
+            <option value="listing-optimization">Optimización de Listings</option>
+            <option value="account-management">Gestión de Cuenta</option>
+            <option value="account-audit">Auditoría de Cuenta</option>
+            <option value="varios">Varios servicios</option>
+          </select>
+        </div>
+
+        <!-- Rating -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Calificación *
+          </label>
+          <div class="flex space-x-2" id="rating">
+            {[1,2,3,4,5].map(star => (
+              <button 
+                type="button" 
+                class="star text-3xl text-gray-300 hover:text-amazon-orange transition-colors duration-200"
+                data-rating={star}
+              >
+                ⭐
+              </button>
+            ))}
+          </div>
+          <input type="hidden" id="ratingValue" name="rating" required>
+        </div>
+
+        <!-- Review Text -->
+        <div>
+          <label for="review" class="block text-sm font-semibold text-gray-700 mb-2">
+            Tu reseña *
+          </label>
+          <textarea 
+            id="review" 
+            name="review" 
+            rows="5" 
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amazon-orange focus:border-transparent outline-none transition-all duration-300 resize-vertical"
+            placeholder="Comparte tu experiencia con Amazon Boost. ¿Cómo te ayudamos a mejorar tu negocio en Amazon?"
+          ></textarea>
+        </div>
+
+        <!-- Email (Optional) -->
+        <div>
+          <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+            Email (opcional)
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amazon-orange focus:border-transparent outline-none transition-all duration-300"
+            placeholder="tu@email.com"
+          >
+          <p class="text-sm text-gray-500 mt-1">
+            Solo para contactarte si necesitamos aclarar algo sobre tu reseña.
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4">
+          <button 
+            type="submit" 
+            class="w-full bg-amazon-orange hover:bg-amazon-orange-dark text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300"
+          >
+            Enviar reseña
+          </button>
+        </div>
+
+        <!-- Privacy Note -->
+        <div class="text-center">
+          <p class="text-sm text-gray-500">
+            Al enviar tu reseña, aceptas que podamos usarla en nuestro sitio web y materiales de marketing.
+          </p>
+        </div>
+      </form>
+
+      <!-- Success Message (Initially Hidden) -->
+      <div id="successMessage" class="hidden text-center py-8">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+          <div class="text-green-600 text-4xl mb-4">✅</div>
+          <h3 class="text-xl font-semibold text-green-800 mb-2">¡Gracias por tu reseña!</h3>
+          <p class="text-green-700">
+            Hemos recibido tu reseña correctamente. La revisaremos y la publicaremos pronto.
+          </p>
+          <button 
+            onclick="location.href='/'"
+            class="mt-4 bg-amazon-orange hover:bg-amazon-orange-dark text-white px-6 py-2 rounded-lg transition-colors duration-300"
+          >
+            Volver al inicio
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Rating functionality
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('ratingValue');
+    let currentRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = parseInt(star.dataset.rating);
+        currentRating = rating;
+        ratingValue.value = rating;
+        
+        // Update star display
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.style.color = '#FF9900';
+          } else {
+            s.style.color = '#D1D5DB';
+          }
+        });
+      });
+
+      // Hover effect
+      star.addEventListener('mouseenter', () => {
+        const rating = parseInt(star.dataset.rating);
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.style.color = '#FF9900';
+          } else {
+            s.style.color = '#D1D5DB';
+          }
+        });
+      });
+    });
+
+    // Reset to current rating on mouse leave
+    document.getElementById('rating').addEventListener('mouseleave', () => {
+      stars.forEach((s, index) => {
+        if (index < currentRating) {
+          s.style.color = '#FF9900';
+        } else {
+          s.style.color = '#D1D5DB';
+        }
+      });
+    });
+
+    // Form submission
+    const form = document.getElementById('reviewForm');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Basic validation
+      const name = document.getElementById('name').value.trim();
+      const review = document.getElementById('review').value.trim();
+      const rating = ratingValue.value;
+
+      if (!name || !review || !rating) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return;
+      }
+
+      // Collect form data
+      const formData = new FormData(form);
+      const reviewData = {
+        name: formData.get('name'),
+        role: formData.get('role') || 'Cliente',
+        service: formData.get('service'),
+        rating: formData.get('rating'),
+        review: formData.get('review'),
+        email: formData.get('email'),
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // Here you would normally send to your backend/Firebase
+        // For now, we'll just simulate success
+        console.log('Review data:', reviewData);
+        
+        // Hide form and show success message
+        form.style.display = 'none';
+        successMessage.classList.remove('hidden');
+        
+        // Scroll to success message
+        successMessage.scrollIntoView({ behavior: 'smooth' });
+        
+      } catch (error) {
+        console.error('Error submitting review:', error);
+        alert('Hubo un error al enviar tu reseña. Por favor, inténtalo de nuevo.');
+      }
+    });
+  });
+</script>
