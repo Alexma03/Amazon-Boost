@@ -26,6 +26,16 @@ interface Props {
       position: string;
     };
     conclusion: string;
+    fullContent?: {
+      introduction: string;
+      sections: {
+        title: string;
+        content: string;
+        bulletPoints?: string[];
+        imageNote?: string;
+      }[];
+      cta: string;
+    };
   };
 }
 
@@ -60,7 +70,7 @@ const { title, description, caseStudy } = Astro.props;
         <!-- Challenge section -->
         <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
           <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            El Desafío
+            El reto
           </h2>
           <p class="text-gray-700">
             {caseStudy.challenge}
@@ -70,7 +80,7 @@ const { title, description, caseStudy } = Astro.props;
         <!-- Solution section -->
         <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
           <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            Nuestra Solución
+            La estrategia
           </h2>
           <p class="text-gray-700 mb-6">
             {caseStudy.solution}
@@ -94,7 +104,7 @@ const { title, description, caseStudy } = Astro.props;
         <!-- Results section -->
         <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
           <h2 class="text-2xl font-bold mb-6 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            Resultados
+            El resultado
           </h2>
           
           <div class="grid md:grid-cols-3 gap-6 mb-8">
@@ -150,11 +160,70 @@ const { title, description, caseStudy } = Astro.props;
           </p>
         </div>
         
+        <!-- Full Content Sections (if available) -->
+        {caseStudy.fullContent && (
+          <div class="space-y-8 mb-8">
+            <!-- Introduction -->
+            <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+              <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+                Introducción
+              </h2>
+              <p class="text-gray-700">
+                {caseStudy.fullContent.introduction}
+              </p>
+            </div>
+
+            <!-- Detailed Sections -->
+            {caseStudy.fullContent.sections.map((section, index) => (
+              <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
+                  {section.title}
+                </h2>
+                <p class="text-gray-700 mb-4">
+                  {section.content}
+                </p>
+                
+                {section.bulletPoints && (
+                  <ul class="space-y-3 mb-4">
+                    {section.bulletPoints.map(point => (
+                      <li class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                          </svg>
+                        </div>
+                        <span class="ml-3 text-gray-700">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                
+                {section.imageNote && (
+                  <div class={`bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4 ${caseStudy.title.includes('Categoría Bebés') ? 'max-w-md mx-auto' : ''}`}>
+                    <p class="text-amber-800 italic text-sm">
+                      {section.imageNote}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+        
         <!-- CTA -->
         <div class="mt-12 text-center">
-          <a href="/#contact" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
-            ¿Quieres resultados similares? Contáctanos
-          </a>
+          {caseStudy.fullContent?.cta ? (
+            <div class="bg-amazon-darkblue text-white rounded-xl p-8 shadow-lg mb-8">
+              <p class="text-lg mb-6">{caseStudy.fullContent.cta}</p>
+              <a href="/#contact" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+                Reservar Auditoría Gratuita
+              </a>
+            </div>
+          ) : (
+            <a href="/#contact" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+              ¿Quieres resultados similares? Contáctanos
+            </a>
+          )}
         </div>
       </div>
     </div>
