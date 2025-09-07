@@ -1,36 +1,41 @@
 export const casaModernaData = {
   slug: "historia-de-exito-en-hogar-y-cocina",
-  title: "Historia de Éxito en Hogar y Cocina",
-  image: "https://images.unsplash.com/photo-1556910585-09baa3a3998e?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  client: "Casa Moderna",
-  industry: "Hogar y Cocina",
-  challenge: "Casa Moderna era una marca nueva que intentaba introducirse en el competitivo mercado de productos para el hogar en Amazon. Como recién llegados, enfrentaban el desafío de tener cero reconocimiento de marca, ninguna reseña y visibilidad nula en una categoría dominada por marcas establecidas. Necesitaban no solo lanzar su línea de productos, sino hacerlo de manera que pudieran competir inmediatamente con los vendedores existentes.",
-  solution: "Diseñamos una estrategia de lanzamiento completa enfocada en maximizar la visibilidad rápidamente y establecer credibilidad a través de las primeras ventas y reseñas críticas.",
+  title: "Categoría Bebés - Top 1 sin PPC: Estrategia Orgánica y Logística Híbrida",
+  image: "https://plus.unsplash.com/premium_photo-1726873405579-e5affcbd91a6?q=80&w=1153&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  client: "Marca Especializada en Bebés",
+  industry: "Bebés",
+  challenge: "Como CEO de Amazon Boost, me enfrenté a un reto complejo: trabajar con una marca que lanzó un producto altamente especializado en el sector bebé, dirigido a un público muy segmentado. El desafío era claro: conseguir visibilidad y ventas sin invertir en PPC en uno de los mercados más competidos de Amazon, donde los grandes vendedores cuentan con presupuestos considerables para publicidad.",
+  solution: "Con mi equipo diseñamos una estrategia integral centrada en tres pilares: optimización orgánica al detalle, estrategia logística híbrida FBA + FBM, y generación de confianza a través de reseñas orgánicas en un sector donde los padres priorizan seguridad y reputación.",
   approach: [
-    "Desarrollamos un plan de pre-lanzamiento que incluía la construcción de una pequeña audiencia a través de redes sociales para las primeras ventas.",
-    "Creamos listados de productos con un enfoque en diferenciar claramente sus productos de la competencia, destacando características únicas y beneficios específicos.",
-    "Implementamos una estrategia de PPC agresiva durante el lanzamiento, con un presupuesto inicial mayor para ganar tracción rápidamente.",
-    "Establecimos un programa de seguimiento con descuentos por código para los primeros compradores que dejaran reseñas honestas.",
-    "Optimizamos continuamente los listados basándonos en datos de conversión y feedback de los clientes durante los primeros meses.",
-    "Implementamos promociones estratégicas para aumentar el ranking orgánico de sus productos clave."
+    "Realicé un análisis profundo de palabras clave, identificando aquellas con menor competencia pero alta relevancia dentro del nicho",
+    "Optimizamos los listings (títulos, bullets y descripciones) priorizando claridad, beneficios concretos y SEO interno de Amazon",
+    "Diseñamos una estrategia logística híbrida: FBA como principal canal por sus ventajas en visibilidad, con FBM como respaldo inmediato",
+    "Cuando se presentaron interrupciones de stock en FBA, activamos de inmediato la opción FBM para garantizar continuidad de ventas",
+    "Impulsamos un flujo constante de reseñas orgánicas, resultado de la buena experiencia del cliente",
+    "Priorizamos la atención postventa y comunicación clara, aspectos determinantes en la categoría bebé para obtener feedback positivo"
   ],
   results: {
-    revenue: "+180%",
-    ranking: "Página 1",
-    conversion: "9.5%",
+    revenue: "X 4",
+    ranking: "#1",
+    conversion: "0 € en PPC",
     additional: [
-      { label: "Tiempo para primeras ventas", value: "48 horas" },
-      { label: "Crecimiento de SKUs", value: "3 a 12 en 6 meses" },
-      { label: "Promedio de estrellas", value: "4.7 estrellas" },
-      { label: "Ventas orgánicas", value: "65% del total" }
-    ]
+      { label: "Posicionamiento", value: "#1" },
+      { label: "Escalado", value: "100% tráfico orgánico" },
+      { label: "Continuidad de ventas", value: "Sin pérdidas por stock" },
+      { label: "Consolidación de marca", value: "Referente en nicho específico" }
+    ],
+    proofImage: {
+      url: "/images/Grafico tarta.png",
+      caption: "Captura de pantalla real de Amazon Seller Central mostrando la evolución de ventas en Bebés (datos anonimizados).",
+      source: "",
+      alt: "Gráfico de tarta mostrando distribución de ventas en categoría Bebés"
+    }
   },
   testimonial: {
-    quote: "Como marca nueva, estábamos nerviosos por entrar en Amazon, pero el equipo de Amazon Boost hizo que el proceso fuera sorprendentemente efectivo. En 6 meses, pasamos de ser completamente desconocidos a tener una presencia significativa con ventas consistentes.",
-    author: "Laura Martínez",
-    position: "Fundadora, Casa Moderna"
+    quote: "Nuestra mayor preocupación era cómo entrar en un mercado tan competido sin invertir en publicidad. La estrategia que aplicamos nos permitió mantener ventas constantes incluso cuando hubo problemas de stock y, lo más sorprendente, alcanzar el Top 1 en nuestra categoría únicamente con tráfico orgánico. La gestión fue clara, ágil y muy enfocada en resultados.",
+    position: "Fundador, Marca Especializada en Bebés"
   },
-  conclusion: "Este caso demuestra que incluso en categorías altamente competitivas como Hogar y Cocina, las marcas nuevas pueden establecerse rápidamente con la estrategia correcta. Al enfocarnos en un lanzamiento fuerte y en construir rápidamente credibilidad a través de reseñas y posicionamiento, ayudamos a Casa Moderna a pasar de ser desconocida a tener una cuota de mercado significativa en solo 6 meses, estableciendo las bases para un crecimiento sostenible a largo plazo.",
-  metaTitle: "Caso de Éxito: Éxito en Hogar y Cocina | Amazon Boost",
-  metaDescription: "Descubre cómo lanzamos una nueva marca de productos para el hogar en Amazon y alcanzamos una cuota de mercado significativa con un aumento de ingresos del 180% en solo 6 meses."
+  conclusion: "Este caso confirma que en Amazon no todo depende de la publicidad. Como CEO de Amazon Boost, he comprobado que una estrategia bien ejecutada, que combine optimización orgánica, resiliencia logística y generación de confianza, puede llevar incluso a marcas de nicho a conseguir resultados sólidos y sostenibles. La clave está en entender que existen nichos específicos donde la especialización del producto y la confianza del consumidor tienen más peso que la inversión publicitaria.",
+  metaTitle: "Caso de Éxito: Top 1 en Bebés sin PPC - Estrategia Orgánica | Amazon Boost",
+  metaDescription: "Descubre cómo conseguimos el Top 1 en la categoría Bebés sin invertir en PPC, usando estrategia orgánica y logística híbrida FBA+FBM para superar interrupciones de stock."
 };
