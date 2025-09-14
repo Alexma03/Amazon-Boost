@@ -96,16 +96,16 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                     </div>
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="1">
                       <img 
-                        src="/images/1.3.png" 
-                        alt="Lifestyle con modelo aplicando el producto - contexto real de uso" 
+                        src="/images/1.4.png" 
+                        alt="Beneficios clave del producto de belleza - hidratación y cuidado" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
                     </div>
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="2">
                       <img 
-                        src="/images/1.4.png" 
-                        alt="Beneficios clave del producto de belleza - hidratación y cuidado" 
+                        src="/images/1.3.png" 
+                        alt="Lifestyle con modelo aplicando el producto - contexto real de uso" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
@@ -114,6 +114,14 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                       <img 
                         src="/images/1.5.png" 
                         alt="Ingredientes naturales y modo de uso del producto" 
+                        class="w-full h-full object-contain" 
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="4">
+                      <img 
+                        src="/images/1.6.png" 
+                        alt="Información adicional y detalles de belleza" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
@@ -146,6 +154,7 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="1" data-carousel="belleza" aria-label="Ir a imagen 2"></button>
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="2" data-carousel="belleza" aria-label="Ir a imagen 3"></button>
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="3" data-carousel="belleza" aria-label="Ir a imagen 4"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="4" data-carousel="belleza" aria-label="Ir a imagen 5"></button>
                   </div>
                 </div>
               </div>
@@ -176,8 +185,8 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
               <!-- Left Column - Main Image with Zoom -->
               <div class="relative aspect-square w-full overflow-hidden rounded-2xl shadow-sm bg-neutral-50 group cursor-zoom-in" id="bebe-main-image-container">
                 <img 
-                  src="/images/peluche.png" 
-                  alt="Peluche de bebé como muestra del producto básico" 
+                  src="/images/1.png" 
+                  alt="Imagen de producto básica enviada por el cliente (muestra)" 
                   class="w-full h-full object-contain transition-transform duration-300 ease-out" 
                   loading="priority"
                   id="bebe-main-image"
@@ -188,7 +197,7 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                 
                 <!-- Zoom Result (Hidden by default) -->
                 <div id="bebe-zoom-result" class="absolute top-0 left-full ml-4 w-80 h-80 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 pointer-events-none hidden md:block overflow-hidden z-20">
-                  <img id="bebe-zoom-image" src="/images/peluche.png" alt="Peluche de bebé - vista ampliada" class="absolute" />
+                  <img id="bebe-zoom-image" src="/images/1.png" alt="Imagen de producto básica - vista ampliada" class="absolute" />
                 </div>
               </div>
               
@@ -199,40 +208,32 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                   <div class="carousel-track flex h-full transition-transform duration-300 ease-in-out" id="bebe-carousel-track">
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="0">
                       <img 
-                        src="/images/1.2.png" 
-                        alt="Imagen principal con fondo blanco puro - producto destacado" 
+                        src="/images/2.png" 
+                        alt="Imagen principal sobre fondo blanco puro (producto ≥85%)" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
                     </div>
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="1">
                       <img 
-                        src="/images/1.3.png" 
-                        alt="Lifestyle en contexto real optimizado" 
+                        src="/images/3.png" 
+                        alt="Lifestyle en contexto real (bokeh suave, sin claims)" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
                     </div>
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="2">
                       <img 
-                        src="/images/1.5.png" 
-                        alt="Qué incluye y características del producto" 
+                        src="/images/4.png" 
+                        alt="Beneficios clave (texto corto y legible en móvil)" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
                     </div>
                     <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="3">
                       <img 
-                        src="/images/1.4.png" 
-                        alt="Beneficios clave del producto" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="4">
-                      <img 
-                        src="/images/1.6.png" 
-                        alt="Información adicional y detalles" 
+                        src="/images/5.png" 
+                        alt="Qué incluye y/o medidas del producto" 
                         class="w-full h-full object-contain" 
                         loading="lazy"
                       />
@@ -265,7 +266,6 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="1" data-carousel="bebe" aria-label="Ir a imagen 2"></button>
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="2" data-carousel="bebe" aria-label="Ir a imagen 3"></button>
                     <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="3" data-carousel="bebe" aria-label="Ir a imagen 4"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="4" data-carousel="bebe" aria-label="Ir a imagen 5"></button>
                   </div>
                 </div>
               </div>
@@ -275,80 +275,6 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
               <button class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1" data-cta="bebe">Quiero unas imágenes así</button>
             </div>
           </div>
-
-          <script>
-            // Carousel functionality
-            document.addEventListener('DOMContentLoaded', function() {
-              const track = document.getElementById('carousel-track');
-              const slides = track.querySelectorAll('.carousel-slide');
-              const dots = document.querySelectorAll('.carousel-dot');
-              const prevBtn = document.querySelector('.carousel-prev');
-              const nextBtn = document.querySelector('.carousel-next');
-              
-              let currentSlide = 0;
-              const totalSlides = slides.length;
-              
-              function updateCarousel() {
-                track.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                  dot.classList.toggle('active', index === currentSlide);
-                });
-              }
-              
-              function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateCarousel();
-              }
-              
-              function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-              }
-              
-              function goToSlide(index) {
-                currentSlide = index;
-                updateCarousel();
-              }
-              
-              // Event listeners
-              nextBtn.addEventListener('click', nextSlide);
-              prevBtn.addEventListener('click', prevSlide);
-              
-              dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => goToSlide(index));
-              });
-              
-              // Keyboard navigation
-              document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') prevSlide();
-                if (e.key === 'ArrowRight') nextSlide();
-              });
-              
-              // Touch/swipe support
-              let startX = 0;
-              let endX = 0;
-              
-              track.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-              });
-              
-              track.addEventListener('touchend', (e) => {
-                endX = e.changedTouches[0].clientX;
-                const diff = startX - endX;
-                
-                if (Math.abs(diff) > 50) {
-                  if (diff > 0) {
-                    nextSlide();
-                  } else {
-                    prevSlide();
-                  }
-                }
-              });
-            });
-          </script>
-
 
         </div>
       </div>
@@ -520,44 +446,44 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
         alt: "Imagen principal con fondo blanco puro - producto de belleza destacado"
       },
       {
-        src: "/images/1.3.png",
-        alt: "Lifestyle con modelo aplicando el producto - contexto real de uso"
-      },
-      {
         src: "/images/1.4.png",
         alt: "Beneficios clave del producto de belleza - hidratación y cuidado"
       },
       {
+        src: "/images/1.3.png",
+        alt: "Lifestyle con modelo aplicando el producto - contexto real de uso"
+      },
+      {
         src: "/images/1.5.png",
         alt: "Ingredientes naturales y modo de uso del producto"
+      },
+      {
+        src: "/images/1.6.png",
+        alt: "Información adicional y detalles de belleza"
       }
     ];
     
     // Baby section image data for lightbox
     const bebeImages = [
       {
-        src: "/images/peluche.png",
-        alt: "Peluche de bebé como muestra del producto básico"
+        src: "/images/1.png",
+        alt: "Imagen de producto básica enviada por el cliente (muestra)"
       },
       {
-        src: "/images/1.2.png",
-        alt: "Imagen principal con fondo blanco puro - producto destacado"
+        src: "/images/2.png",
+        alt: "Imagen principal sobre fondo blanco puro (producto ≥85%)"
       },
       {
-        src: "/images/1.3.png",
-        alt: "Lifestyle en contexto real optimizado"
+        src: "/images/3.png",
+        alt: "Lifestyle en contexto real (bokeh suave, sin claims)"
       },
       {
-        src: "/images/1.5.png",
-        alt: "Qué incluye y características del producto"
+        src: "/images/4.png",
+        alt: "Beneficios clave (texto corto y legible en móvil)"
       },
       {
-        src: "/images/1.4.png",
-        alt: "Beneficios clave del producto"
-      },
-      {
-        src: "/images/1.6.png",
-        alt: "Información adicional y detalles"
+        src: "/images/5.png",
+        alt: "Qué incluye y/o medidas del producto"
       }
     ];
     
@@ -998,29 +924,59 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
         }
       });
       
+      // Mouse leave to prevent stuck dragging state
       lightboxImage.addEventListener('mouseleave', () => {
         isDragging = false;
+        if (isZoomed) {
+          lightboxImage.style.cursor = 'grab';
+        }
       });
     }
     
-    function nextLightboxImage() {
+    // Lightbox navigation functions
+    function navigateLightbox(direction) {
       const images = currentActiveSection === 'belleza' ? bellezaImages : bebeImages;
-      currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
+      
+      if (direction === 'next') {
+        currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
+      } else {
+        currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
+      }
+      
       updateLightbox();
     }
     
-    function prevLightboxImage() {
-      const images = currentActiveSection === 'belleza' ? bellezaImages : bebeImages;
-      currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
-      updateLightbox();
+    // Event listeners for lightbox controls
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
     }
     
-    // Lightbox event listeners
-    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-    if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightboxImage);
-    if (lightboxNext) lightboxNext.addEventListener('click', nextLightboxImage);
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener('click', () => navigateLightbox('prev'));
+    }
     
-    // Close lightbox on background click
+    if (lightboxNext) {
+      lightboxNext.addEventListener('click', () => navigateLightbox('next'));
+    }
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('flex')) {
+        switch(e.key) {
+          case 'Escape':
+            closeLightbox();
+            break;
+          case 'ArrowLeft':
+            navigateLightbox('prev');
+            break;
+          case 'ArrowRight':
+            navigateLightbox('next');
+            break;
+        }
+      }
+    });
+    
+    // Close lightbox when clicking outside the image
     if (lightbox) {
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
@@ -1029,153 +985,25 @@ const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, ho
       });
     }
     
-    // Lightbox keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (lightbox && !lightbox.classList.contains('hidden')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') prevLightboxImage();
-        if (e.key === 'ArrowRight') nextLightboxImage();
-      }
-    });
-    
-    // Lightbox swipe support (only when not zoomed)
-    if (lightboxImage) {
-      let lightboxStartX = 0;
-      let lightboxEndX = 0;
-      
-      lightboxImage.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1 && !isZoomed) {
-          lightboxStartX = e.touches[0].clientX;
-        }
-      });
-      
-      lightboxImage.addEventListener('touchend', (e) => {
-        if (e.changedTouches.length === 1 && !isZoomed) {
-          lightboxEndX = e.changedTouches[0].clientX;
-          const diff = lightboxStartX - lightboxEndX;
-          
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-              nextLightboxImage();
-            } else {
-              prevLightboxImage();
-            }
-          }
-        }
-      });
-    }
-    
-    // Existing carousel functionality for other sections
-    const track = document.getElementById('carousel-track');
-    if (track) {
-      const slides = track.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('.carousel-dot:not([data-carousel])');
-      const prevBtn = document.querySelector('.carousel-prev:not([data-carousel])');
-      const nextBtn = document.querySelector('.carousel-next:not([data-carousel])');
-      
-      let currentSlide = 0;
-      const totalSlides = slides.length;
-      
-      function updateCarousel() {
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    // CTA buttons functionality
+    const ctaButtons = document.querySelectorAll('[data-cta]');
+    ctaButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
         
-        // Update dots
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentSlide);
-        });
-      }
-      
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateCarousel();
-      }
-      
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateCarousel();
-      }
-      
-      function goToSlide(index) {
-        currentSlide = index;
-        updateCarousel();
-      }
-      
-      // Event listeners
-      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-      
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-      });
-      
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox || lightbox.classList.contains('hidden')) {
-          if (e.key === 'ArrowLeft') prevSlide();
-          if (e.key === 'ArrowRight') nextSlide();
-        }
-      });
-      
-      // Touch/swipe support
-      let startX = 0;
-      let endX = 0;
-      
-      track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-      });
-      
-      track.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
+        // Redirect to the audit section on the main page
+        window.location.href = '/#solicita-tutoria';
         
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            nextSlide();
-          } else {
-            prevSlide();
-          }
+        // Analytics tracking
+        if (typeof gtag !== 'undefined') {
+          const ctaType = this.getAttribute('data-cta');
+          gtag('event', 'cta_click', {
+            'event_category': 'engagement',
+            'event_label': 'imagenes_' + ctaType,
+            'value': 1
+          });
         }
       });
-    }
-    
-    // CTA handling with proper anchor scrolling to audit section
-    function handleCTAClick(event) {
-      event.preventDefault();
-      
-      // Navigate to main page audit section
-      window.location.href = '/#solicita-tutoria';
-      
-      // Analytics event
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'cta_click', {
-          'event_category': 'conversion',
-          'event_label': 'service_audit_request'
-        });
-      }
-    }
-    
-    // Remove any remaining caption elements
-    document.querySelectorAll('.gallery-caption, .card-caption, .footnote, .description-text, [data-caption]')
-      .forEach(element => element.remove());
-    
-    // Unified CTA handling
-    const targetUrl = '/#solicita-tutoria';
-    
-    // Update all anchor elements to point to audit section
-    document.querySelectorAll('a[href*="agendar-llamada"], a[href*="reserva"], a[href*="solicita-tutoria"]').forEach(link => {
-      link.setAttribute('href', targetUrl);
-    });
-    
-    // Update all button elements and elements with role="button"
-    document.querySelectorAll('button, [role="button"]').forEach(element => {
-      // Skip carousel navigation buttons and lightbox buttons
-      if (element.classList.contains('carousel-btn') || 
-          element.classList.contains('carousel-dot') ||
-          element.id.includes('lightbox')) {
-        return;
-      }
-      
-      element.addEventListener('click', handleCTAClick, { passive: false });
     });
   });
 </script>
