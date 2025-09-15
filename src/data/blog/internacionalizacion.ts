@@ -128,7 +128,7 @@ export const internacionalizacionData: BlogPost = {
   ], // Tags revisados y con año
   callToAction: {
     text: '¿Listo para expandir tu negocio globalmente? Solicita una consulta estratégica', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales o puedes actualizarlos si tienes posts más relevantes

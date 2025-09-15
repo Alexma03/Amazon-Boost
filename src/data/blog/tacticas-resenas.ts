@@ -121,7 +121,7 @@ export const tacticasResenasData: BlogPost = {
   ], // Tags revisados, enfatizando legalidad y año
   callToAction: {
     text: '¿Necesitas ayuda para incrementar tus reseñas legalmente? Contáctanos', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales o puedes actualizarlos

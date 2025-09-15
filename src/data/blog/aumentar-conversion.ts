@@ -131,7 +131,7 @@ export const aumentarConversionData: BlogPost = {
   ], // Tags revisados y ampliados
   callToAction: {
     text: '¿Quieres aumentar tu tasa de conversión? Solicita un análisis gratuito', // CTA mantenido, es bueno
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     'optimizacion-listings-amazon', // Ajustar slugs si es necesario

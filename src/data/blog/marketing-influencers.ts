@@ -99,7 +99,7 @@ export const marketingInfluencersData: BlogPost = {
   ], // Tags revisados y con año
   callToAction: {
     text: '¿Quieres implementar una estrategia con influencers para tu marca? Contáctanos', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales o puedes actualizarlos

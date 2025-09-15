@@ -110,7 +110,7 @@ export const tendenciasEcommerceData: BlogPost = {
   ], // Tags actualizados a 2025
   callToAction: {
     text: '¿Quieres posicionar tu marca para el futuro? Agenda una consulta estratégica', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Ajusta estos slugs si tienes posts más relevantes sobre las tendencias específicas

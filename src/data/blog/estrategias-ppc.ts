@@ -114,7 +114,7 @@ export const estrategiasPpcData: BlogPost = {
   ], // Tags actualizados a 2025
   callToAction: {
     text: '¿Quieres optimizar tus campañas PPC? Solicita nuestro análisis gratuito', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales. Considera si 'algoritmo-amazon-a9' debería actualizarse.

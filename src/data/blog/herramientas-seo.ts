@@ -111,7 +111,7 @@ export const herramientasSeoData: BlogPost = {
   ], // Tags revisados y con año
   callToAction: {
     text: '¿Necesitas ayuda con tu estrategia SEO? Solicita nuestra auditoría gratuita', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales proporcionados

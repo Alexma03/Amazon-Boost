@@ -99,7 +99,7 @@ export const algoritmoAmazonData: BlogPost = {
   ], // Tags revisados y ampliados
   callToAction: {
     text: '¿Listo para escalar tu negocio en Amazon? Agenda tu consulta estratégica gratuita', // CTA más directo
-    url: '/#contact', // Asegúrate que esta URL es correcta
+    url: '/#solicita-tutoria', // Asegúrate que esta URL es correcta
   },
   relatedPosts: [
     'optimizacion-listings-amazon', // Slugs posiblemente más específicos

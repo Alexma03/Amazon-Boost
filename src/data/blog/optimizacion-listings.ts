@@ -123,7 +123,7 @@ export const optimizacionListingsData: BlogPost = {
   ], // Tags revisados y con año
   callToAction: {
     text: '¿Necesitas ayuda con tus listings? Contáctanos para una auditoría gratuita', // CTA mantenido
-    url: '/#contact', // Verificar URL
+    url: '/#solicita-tutoria', // Verificar URL
   },
   relatedPosts: [
     // Manteniendo los slugs originales o puedes actualizarlos
