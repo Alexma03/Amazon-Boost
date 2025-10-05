@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.2.4",
     "@astrojs/react": "^4.2.1",
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.0",
     "@fontsource/inter": "^5.0.16",
     "astro": "^5.2.5",

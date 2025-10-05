@@ -18,7 +18,17 @@ interface Props {
 const { title, description, service } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  type="website"
+  pageType="service"
+  contentSummary={description}
+  structuredData={{
+    type: 'service',
+    data: service
+  }}
+>
   <div class="py-12 md:py-20 bg-amazon-lightgray">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto">

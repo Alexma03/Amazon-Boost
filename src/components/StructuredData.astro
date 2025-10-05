@@ -1,0 +1,111 @@
+---
+// Componente para agregar Structured Data (Schema.org) a las páginas
+// Mejora cómo Google entiende y muestra tu contenido
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  type?: 'organization' | 'article' | 'service' | 'breadcrumb';
+  data?: {
+    items?: BreadcrumbItem[];
+    [key: string]: any;
+  };
+}
+
+const { type = 'organization', data } = Astro.props;
+const site = Astro.site;
+
+// Schema para Organization (usado en homepage)
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Amazon Boost",
+  "url": site?.toString() || "https://amznboost.es",
+  "logo": `${site}/images/logo.png`,
+  "description": "Agencia de Amazon España FBA/FMB - AmazonBoost expertos en Seller/Vendor",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": ["Spanish"]
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/sergioderomán",
+    "https://x.com/SergioRomanAB"
+  ]
+};
+
+// Schema para Article (usado en blog posts)
+const articleSchema = data && type === 'article' ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": data.title,
+  "description": data.description,
+  "image": data.image ? `${site}${data.image}` : undefined,
+  "datePublished": data.date,
+  "dateModified": data.dateModified || data.date,
+  "author": {
+    "@type": "Organization",
+    "name": "Amazon Boost"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Amazon Boost",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${site}/images/logo.png`
+    }
+  }
+} : null;
+
+// Schema para Service (usado en páginas de servicios)
+const serviceSchema = data && type === 'service' ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": data.title,
+  "description": data.description,
+  "provider": {
+    "@type": "Organization",
+    "name": "Amazon Boost"
+  },
+  "serviceType": "Agencia de Amazon"
+} : null;
+
+// Schema para Breadcrumbs
+const breadcrumbSchema = data && type === 'breadcrumb' ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": (data.items as BreadcrumbItem[]).map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": `${site}${item.url}`
+  }))
+} : null;
+
+// Seleccionar el schema apropiado
+let schema;
+switch(type) {
+  case 'article':
+    schema = articleSchema;
+    break;
+  case 'service':
+    schema = serviceSchema;
+    break;
+  case 'breadcrumb':
+    schema = breadcrumbSchema;
+    break;
+  default:
+    schema = organizationSchema;
+}
+---
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

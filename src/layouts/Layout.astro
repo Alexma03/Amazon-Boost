@@ -5,27 +5,159 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+import AIStructuredData from '../components/AIStructuredData.astro';
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+  structuredData?: {
+    type: 'organization' | 'article' | 'service' | 'breadcrumb';
+    data?: any;
+  };
+  aiOptimized?: boolean;
+  pageType?: 'homepage' | 'service' | 'blog' | 'case-study' | 'faq';
+  contentSummary?: string;
+  datePublished?: string;
+  dateModified?: string;
+  author?: string;
 }
 
 const { 
-  title = "Amazon Boost - Agencia experta en gestión de cuentas de Amazon",
-  description = "Transforma tu negocio de Amazon con nuestros servicios expertos de gestión de cuentas. Obtén una auditoría gratuita de tu cuenta hoy y aumenta tus ventas."
+  title = "Amazon Boost - Agencia de Amazon España FBA/FMB - AmazonBoost expertos en Seller/Vendor",
+  description = "Transforma tu negocio de Amazon con nuestros servicios expertos de gestión de cuentas. Obtén una auditoría gratuita de tu cuenta hoy y aumenta tus ventas.",
+  image = "/og-image.png",
+  type = "website",
+  noindex = false,
+  structuredData,
+  aiOptimized = true,
+  pageType = 'homepage',
+  contentSummary,
+  datePublished,
+  dateModified,
+  author
 } = Astro.props;
+
+// Obtener URL canónica
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// URL completa de la imagen para Open Graph
+const ogImageURL = new URL(image, Astro.site);
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Meta tags básicos de SEO -->
+    <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicons para todos los dispositivos y navegadores -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Theme color para navegadores móviles -->
+    <meta name="theme-color" content="#FF9900" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Amazon Boost" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- Preconnect para mejorar rendimiento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- AI Optimization Meta Tags -->
+    {aiOptimized && (
+      <>
+        <!-- Para ChatGPT y otros LLMs -->
+        <meta name="ai-content" content="educational,professional,business" />
+        <meta name="ai-audience" content="amazon-sellers,ecommerce-entrepreneurs" />
+        <meta name="ai-topics" content="amazon,fba,ecommerce,digital-marketing,seller-central" />
+        <meta name="ai-language" content="es-ES" />
+        <meta name="ai-complexity" content="intermediate" />
+        
+        <!-- Para Perplexity AI -->
+        <meta name="perplexity-topic" content="Amazon Business Services" />
+        <meta name="perplexity-expertise" content="Amazon FBA Consulting" />
+        
+        <!-- Para Claude Anthropic -->
+        <meta name="anthropic-context" content="professional consulting, e-commerce" />
+        
+        <!-- Para Google AI -->
+        <meta name="google-ai-category" content="Business Services" />
+        <meta name="google-ai-author" content="Amazon Boost Team" />
+        
+        <!-- Content summary for AI context -->
+        {contentSummary && <meta name="ai-summary" content={contentSummary} />}
+        
+        <!-- Entity recognition -->
+        <link rel="author" href={Astro.site + '#organization'} />
+        <link rel="publisher" href={Astro.site + '#organization'} />
+      </>
+    )}
+    
+    <!-- Structured Data (Schema.org) -->
+    {structuredData ? (
+      <StructuredData type={structuredData.type} data={structuredData.data} />
+    ) : (
+      <StructuredData type="organization" />
+    )}
+    
+    <!-- AI-Optimized Structured Data -->
+    {aiOptimized && (
+      <AIStructuredData 
+        type={pageType === 'blog' ? 'article' : pageType === 'service' ? 'service' : 'organization'}
+        pageContext={{
+          url: canonicalURL.href,
+          title,
+          description,
+          image,
+          datePublished,
+          dateModified,
+          author
+        }}
+        data={structuredData?.data}
+      />
+    )}
   </head>
   <body class="font-sans bg-white">
     <Header />

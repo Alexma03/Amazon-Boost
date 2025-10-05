@@ -1,0 +1,341 @@
+---
+// Componente avanzado de structured data optimizado para IA (ChatGPT, Claude, Perplexity, Gemini)
+// Incluye Schema.org 2025 y Entity Markup para mejor comprensión
+
+interface Props {
+  type?: 'organization' | 'article' | 'service' | 'faq' | 'website' | 'professionalService';
+  data?: any;
+  pageContext?: {
+    url: string;
+    title: string;
+    description: string;
+    image?: string;
+    datePublished?: string;
+    dateModified?: string;
+    author?: string;
+  };
+}
+
+const { 
+  type = 'organization', 
+  data, 
+  pageContext = {
+    url: Astro.url.href,
+    title: '',
+    description: '',
+    image: '/og-image.jpg'
+  }
+} = Astro.props;
+
+const site = Astro.site;
+
+// Entity Knowledge Graph para Amazon Boost
+const organizationEntity = {
+  "@context": [
+    "https://schema.org",
+    "https://ogp.me/ns#"
+  ],
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site}#organization`,
+      "name": "Amazon Boost",
+      "alternateName": "AmazonBoost",
+      "description": "Agencia experta en gestión de cuentas de Amazon. Servicios FBA/FMB para sellers y vendors.",
+      "url": site?.toString(),
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${site}/images/logo.png`,
+        "width": 512,
+        "height": 512
+      },
+      "image": `${site}/images/og-image.jpg`,
+      "sameAs": [
+        "https://www.linkedin.com/in/sergioderomán",
+        "https://x.com/SergioRomanAB"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": ["Spanish", "English"],
+        "hoursAvailable": "Mo-Fr 09:00-18:00"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES",
+        "addressRegion": "Madrid"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.4168,
+        "longitude": -3.7038
+      },
+      "knowsAbout": [
+        "Amazon Agency",
+        "Agencia Amazon",
+        "Amazon Listing",
+        "Amazon FBA",
+        "Amazon FMB", 
+        "Amazon Seller Central",
+        "Amazon Vendor Central",
+        "Amazon PPC",
+        "Amazon SEO",
+        "Listing Optimization",
+        "Product Photography",
+        "Amazon Analytics"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Amazon Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Auditoría de Cuentas Amazon",
+              "description": "Análisis completo de tu cuenta Amazon para identificar oportunidades de mejora"
+            }
+          },
+          {
+            "@type": "Offer", 
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Gestión PPC Amazon",
+              "description": "Campañas publicitarias optimizadas para máximo ROI"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service", 
+              "name": "Optimización de Listings",
+              "description": "Mejora de visibilidad y conversiones en tus productos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site}#website`,
+      "url": site?.toString(),
+      "name": "Amazon Boost",
+      "description": pageContext.description || "Expertos en gestión de cuentas Amazon FBA/FMB",
+      "inLanguage": "es-ES",
+      "isAccessibleForFree": true,
+      "isPartOf": {
+        "@id": `${site}#organization`
+      },
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": `${site}blog/`
+        },
+        {
+          "@type": "SearchAction",
+          "target": `${site}?q={search_term_string}`,
+          "query-input": "required name=search_term_string"
+        }
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site}#service`,
+      "name": "Amazon Consulting Services",
+      "description": "Consultoría especializada para sellers en Amazon",
+      "provider": {
+        "@id": `${site}#organization`
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Spain"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Amazon Consulting Services"
+      }
+    }
+  ]
+};
+
+// Schema para artículos de blog optimizado para IA
+const articleSchema = pageContext?.title ? {
+  "@context": [
+    "https://schema.org",
+    "https://ogp.me/ns#"
+  ],
+  "@type": ["Article", "BlogPosting"],
+  "@id": `${pageContext.url}#article`,
+  "headline": pageContext.title,
+  "description": pageContext.description,
+  "image": pageContext.image ? {
+    "@type": "ImageObject",
+    "url": new URL(pageContext.image, site).href,
+    "width": 1200,
+    "height": 630
+  } : undefined,
+  "datePublished": pageContext.datePublished,
+  "dateModified": pageContext.dateModified || pageContext.datePublished,
+  "author": {
+    "@type": "Organization",
+    "@id": `${site}#organization`,
+    "name": "Amazon Boost Team"
+  },
+  "publisher": {
+    "@type": "Organization", 
+    "@id": `${site}#organization`,
+    "name": "Amazon Boost",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${site}/images/logo.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": pageContext.url
+  },
+  "inLanguage": "es-ES",
+  "keywords": "Amazon, FBA, FMB, Seller Central, Amazon SEO, PPC",
+  "about": [
+    "Amazon FBA",
+    "Amazon Seller",
+    "E-commerce",
+    "Digital Marketing"
+  ],
+  "mentions": [
+    "Amazon",
+    "Seller Central",
+    "Product Listing"
+  ],
+  "educationalLevel": "Beginner to Advanced",
+  "learningResourceType": "Tutorial",
+  "teaches": pageContext.description.split('.')[0] + ".",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Amazon Seller"
+  }
+} : null;
+
+// Schema para páginas de servicios
+const serviceSchema = data && type === 'service' ? {
+  "@context": [
+    "https://schema.org",
+    "https://ogp.me/ns#"
+  ],
+  "@type": ["Service", "ProfessionalService"],
+  "@id": `${pageContext.url}#service`,
+  "name": data.title || pageContext.title,
+  "description": data.description || pageContext.description,
+  "provider": {
+    "@type": "Organization",
+    "@id": `${site}#organization`,
+    "name": "Amazon Boost"
+  },
+  "serviceType": "Amazon Consulting Services",
+  "category": "E-commerce Services",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "EUR",
+    "priceRange": "Custom pricing based on services"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": ["Spain", "Portugal", "Latin America"]
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Amazon Services Package",
+    "itemListElement": data.benefits?.items?.map((benefit: any) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": typeof benefit === 'string' ? benefit : benefit.header,
+        "description": typeof benefit === 'string' ? benefit : benefit.content
+      }
+    })) || []
+  }
+} : null;
+
+// Schema FAQ optimizado para IA comprehension
+const faqSchema = data && type === 'faq' ? {
+  "@context": [
+    "https://schema.org",
+    "https://ogp.me/ns#"
+  ],
+  "@type": "FAQPage",
+  "mainEntity": data.faqs?.map((faq: any) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "text": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer", 
+      "text": faq.answer
+    },
+    "suggestedAnswer": [{
+      "@type": "Answer",
+      "text": faq.answer.includes('?') ? faq.answer.split('?')[1].trim() : faq.answer
+    }]
+  })) || []
+} : null;
+
+// Breadcrumbs para navegación y contexto
+const breadcrumbSchema = pageContext ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": site?.toString()
+    },
+    {
+      "@type": "ListItem", 
+      "position": 2,
+      "name": pageContext.title.includes('Servicio') ? 'Servicios' : 
+             pageContext.title.includes('Caso') ? 'Casos de Éxito' :
+             pageContext.title.includes('Blog') ? 'Blog' : pageContext.title,
+      "item": pageContext.url
+    }
+  ]
+} : null;
+
+// Seleccionar el schema apropiado basado en el tipo
+let finalSchema;
+switch(type) {
+  case 'article':
+    finalSchema = articleSchema;
+    break;
+  case 'service':
+    finalSchema = serviceSchema;
+    break;
+  case 'faq':
+    finalSchema = faqSchema;
+    break;
+  case 'website':
+    finalSchema = organizationEntity;
+    break;
+  default:
+    finalSchema = organizationEntity;
+}
+
+// Combinar múltiples schemas si es necesario
+const combinedSchema = type === 'article' || type === 'service' 
+  ? {
+      "@context": [
+        "https://schema.org",
+        "https://ogp.me/ns#"
+      ],
+      "@graph": [
+        organizationEntity["@graph"][0], // Organization
+        organizationEntity["@graph"][1], // WebSite
+        finalSchema
+      ].filter(Boolean)
+    }
+  : finalSchema;
+---
+
+{combinedSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(combinedSchema)} />
+)}
