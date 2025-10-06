@@ -29,7 +29,7 @@ interface Props {
 const { 
   title = "Amazon Boost - Agencia de Amazon España FBA/FMB - AmazonBoost expertos en Seller/Vendor",
   description = "Transforma tu negocio de Amazon con nuestros servicios expertos de gestión de cuentas. Obtén una auditoría gratuita de tu cuenta hoy y aumenta tus ventas.",
-  image = "/og-image.png",
+  image = "/og-image.png", // Imagen que ya tienes en public/
   type = "website",
   noindex = false,
   structuredData,
@@ -116,11 +116,11 @@ const ogImageURL = new URL(image, Astro.site);
         <meta name="ai-complexity" content="intermediate" />
         
         <!-- Para Perplexity AI -->
-        <meta name="perplexity-topic" content="Amazon Business Services" />
-        <meta name="perplexity-expertise" content="Amazon FBA Consulting" />
+        <meta name="perplexity-topic" content="Agencia de Amazon para empresas" />
+        <meta name="perplexity-expertise" content="Agencia de Amazon FBA/FBM" />
         
         <!-- Para Claude Anthropic -->
-        <meta name="anthropic-context" content="professional consulting, e-commerce" />
+        <meta name="anthropic-context" content="Agencia de Amazon FBA/FBM e-commerce" />
         
         <!-- Para Google AI -->
         <meta name="google-ai-category" content="Business Services" />
