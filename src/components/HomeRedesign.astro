@@ -24,6 +24,41 @@ const process = [
   { number: "04", title: "Escalamos", text: "Más inversión cuando el sistema ya responde." },
 ];
 
+const reviewRail = [
+  ...homeShowcase.featuredCase.reviews.map((review) => ({
+    ...review,
+    tone: review.platform === "Trustpilot" ? "trustpilot" : "linkedin",
+    eyebrow: "Opinión pública",
+    action: "Ver original",
+  })),
+  {
+    platform: "Amazon Boost",
+    author: "Nuevas voces",
+    initials: "AB",
+    meta: "Contenido pendiente de validación",
+    date: "2026",
+    title: "Más experiencias reales, en preparación.",
+    quote: "Este espacio está preparado para incorporar nuevas reseñas internas con fecha, cliente y contexto verificables.",
+    url: "/dejar-resena",
+    tone: "internal",
+    eyebrow: "Próxima incorporación",
+    action: "Cómo dejar una reseña",
+  },
+  {
+    platform: "Tu experiencia",
+    author: "Cliente Amazon Boost",
+    initials: "+",
+    meta: "Trustpilot o LinkedIn",
+    date: "Abierto",
+    title: "¿Has trabajado con nosotros?",
+    quote: "Comparte qué problema resolvimos, cómo fue el proceso y qué cambió en tu cuenta de Amazon.",
+    url: "/dejar-resena",
+    tone: "invite",
+    eyebrow: "Tu voz puede ser la siguiente",
+    action: "Compartir experiencia",
+  },
+];
+
 const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 26, 36, 100, 31, 22, 36, 36, 63, 30, 53, 41, 68, 73];
 ---
 
@@ -256,11 +291,35 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={homeShowcase.featuredCase.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
     <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{homeShowcase.featuredCase.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={homeShowcase.featuredCase.href}>Ampliar el caso <span aria-hidden="true">↗</span></a></div>
   </div>
-  <div class="ab-case-reviews" data-reveal>
-    <div class="ab-review-intro"><span>La experiencia del cliente</span><h3>El resultado importa. El camino hasta él, también.</h3><p>Opiniones publicadas por clientes, referentes a casos de éxito, en plataformas externas.</p></div>
-    <div class="ab-review-grid">{homeShowcase.featuredCase.reviews.map((review) => <a class:list={["ab-review-card", `ab-review-${review.platform.toLowerCase()}`]} href={review.url} target="_blank" rel="noreferrer" aria-label={`Ver opinión original de ${review.author} en ${review.platform}`}><span class="ab-review-watermark" aria-hidden="true">{review.platform === "LinkedIn" ? "in" : "★"}</span><div class="ab-review-brand"><span aria-hidden="true">{review.platform === "LinkedIn" ? "in" : "★"}</span><strong>{review.platform}</strong><em>{review.date}</em></div>{review.platform === "Trustpilot" && <div class="ab-review-score" aria-label="5 de 5 estrellas">★★★★★</div>}<blockquote><strong>{review.title}</strong><p>“{review.quote}”</p></blockquote><div class="ab-review-person"><span>{review.initials}</span><div><strong>{review.author}</strong><small>{review.meta}</small></div><em>Ver original ↗</em></div></a>)}</div>
+  <div class="ab-case-client-voice" data-reveal>
+    <div><span>La voz detrás del resultado</span><strong>“{homeShowcase.featuredCase.reviews[1].title}”</strong><p>{homeShowcase.featuredCase.reviews[1].author} · Cliente de Amazon Boost</p></div>
+    <a href={homeShowcase.featuredCase.reviews[1].url} target="_blank" rel="noreferrer">Leer su experiencia en LinkedIn <span aria-hidden="true">↗</span></a>
   </div>
   <div class="ab-more-cases" data-reveal><a href="/casos-de-exito">Ver más casos de éxito <span aria-hidden="true">↗</span></a><span>Nuevos casos y resultados en preparación</span></div>
+</section>
+
+<section class="ab-client-reviews" id="resenas">
+  <div class="ab-client-reviews-heading" data-reveal>
+    <div><p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2></div>
+    <div><strong>Opiniones públicas hoy.</strong><p>Nuevas historias se incorporarán aquí cuando estén validadas. Trustpilot y LinkedIn llevan siempre a la publicación original.</p></div>
+  </div>
+  <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes">
+    <div class="ab-review-track">
+      {[0, 1].map((groupIndex) => (
+        <div class="ab-review-group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
+          {reviewRail.map((review) => (
+            <a class:list={["ab-client-review-card", `is-${review.tone}`]} href={review.url} target={review.url.startsWith("http") ? "_blank" : undefined} rel={review.url.startsWith("http") ? "noreferrer" : undefined} tabindex={groupIndex === 1 ? -1 : undefined}>
+              <div class="ab-client-review-top"><span>{review.platform === "LinkedIn" ? "in" : review.tone === "trustpilot" ? "★" : review.initials}</span><div><strong>{review.platform}</strong><small>{review.eyebrow}</small></div><time>{review.date}</time></div>
+              {review.tone === "trustpilot" && <div class="ab-client-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>}
+              <blockquote><strong>{review.title}</strong><p>“{review.quote}”</p></blockquote>
+              <footer><div><strong>{review.author}</strong><small>{review.meta}</small></div><span>{review.action} ↗</span></footer>
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="ab-review-actions" data-reveal><a href="/dejar-resena">Compartir mi experiencia <span aria-hidden="true">↗</span></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <span aria-hidden="true">↗</span></a></div>
 </section>
 
 <section class="ab-services-section" id="services">
