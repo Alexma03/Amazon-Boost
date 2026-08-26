@@ -78,11 +78,10 @@
 .ab-macbook-base-photo img{mix-blend-mode:screen;filter:brightness(.82) contrast(1.18)}
 .ab-macbook-base-photo{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
 
-/* Silver aluminium shell: the display bezel remains black while the chassis catches the hero light. */
+/* Restore the original single-piece chassis and change only its aluminium finish. */
 .ab-macbook-screen{border-color:#c4c7c9;box-shadow:0 38px 100px rgba(0,0,0,.64),inset 0 0 0 2px #15171a,0 0 0 1px rgba(232,234,235,.46)}
-.ab-macbook-base-photo{height:38px}
-.ab-macbook-base-photo img{object-position:center 76%;mix-blend-mode:screen;filter:grayscale(1) brightness(3.25) contrast(.67)}
-@media(max-width:760px){.ab-macbook-base-photo{height:25px}}
+.ab-macbook-base,.ab-macbook-hinge{display:block}
+.ab-macbook-base-photo{display:none}
 
 /* Compact, editorial service system with a restrained optical reflection. */
 .ab-services-section{padding-top:96px;padding-bottom:98px}.ab-services-intro{width:min(1180px,100%);margin-bottom:42px}.ab-services-intro h2[data-reflection]{max-width:1020px;margin-bottom:40px;font-size:clamp(2.9rem,5vw,5.45rem);line-height:.94}.ab-services-intro h2[data-reflection]:before{content:"";position:absolute;right:7%;bottom:-16px;left:7%;height:1px;background:linear-gradient(90deg,transparent,rgba(8,8,8,.16) 26%,rgba(8,8,8,.16) 74%,transparent);filter:blur(.35px);pointer-events:none}.ab-services-intro h2[data-reflection]:after{top:calc(100% + 1px);height:.4em;color:#090909;line-height:.94;opacity:.06;filter:blur(1.7px);clip-path:none;transform:translateY(var(--reflection-shift)) scaleY(-.38);-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.72),transparent 78%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.72),transparent 78%)}.ab-service-list{width:min(1180px,100%)}.ab-service-row{grid-template-columns:minmax(230px,.86fr) minmax(310px,1.14fr) minmax(210px,.72fr);gap:30px;min-height:146px;padding:23px 10px}.ab-service-row:hover{padding-left:18px;padding-right:18px;background:rgba(255,255,255,.6)}.ab-service-step{gap:8px;color:var(--ab-orange);font-size:.55rem;font-weight:900}.ab-service-step i{width:18px;background:var(--ab-orange)}.ab-service-title h3{margin-top:11px;font-size:clamp(1.55rem,2vw,2.3rem)}.ab-service-row>p{font-size:.92rem;line-height:1.55}.ab-service-tags{gap:5px}.ab-service-tags span{padding:5px 7px;font-size:.55rem}
