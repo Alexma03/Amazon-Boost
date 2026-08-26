@@ -1,1009 +1,202 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { imagenesParaAmazonData } from '../../data/services/imagenes-para-amazon.js';
+import '../../styles/subpage-redesign.css';
 
-const { title, metaTitle, metaDescription, heroSubtitle, beforeAfterExamples, howWeWork, guidelines } = imagenesParaAmazonData;
+const { metaTitle, metaDescription } = imagenesParaAmazonData;
+const collections = [
+  {
+    id: 'belleza',
+    category: 'Belleza',
+    title: 'Un producto premium debe parecerlo antes del primer clic.',
+    copy: 'Construimos el carrusel para explicar beneficios, uso y diferenciación sin perder la claridad que exige Amazon.',
+    source: '/images/1.1.png',
+    images: [
+      { src: '/images/1.2.png', alt: 'Imagen principal optimizada de un producto de belleza', label: 'Imagen principal' },
+      { src: '/images/1.4.png', alt: 'Infografía de beneficios para un producto de belleza', label: 'Beneficios' },
+      { src: '/images/1.3.png', alt: 'Imagen lifestyle de un producto de belleza', label: 'Lifestyle' },
+      { src: '/images/1.5.png', alt: 'Imagen de ingredientes y modo de uso', label: 'Ingredientes' },
+      { src: '/images/1.6.png', alt: 'Imagen de detalles para un producto de belleza', label: 'Detalles' },
+    ],
+  },
+  {
+    id: 'bebe',
+    category: 'Bebé y regalo',
+    title: 'De una foto de producto a una propuesta que se entiende y se recuerda.',
+    copy: 'El set visual ordena el contenido del pack, resuelve dudas y sitúa el producto en un contexto de compra real.',
+    source: '/images/1.png',
+    images: [
+      { src: '/images/2.png', alt: 'Imagen principal optimizada de una canastilla de bebé', label: 'Imagen principal' },
+      { src: '/images/3.png', alt: 'Imagen lifestyle de una canastilla de bebé', label: 'Lifestyle' },
+      { src: '/images/4.png', alt: 'Infografía de contenido de una canastilla', label: 'Contenido' },
+      { src: '/images/5.png', alt: 'Imagen de detalles de una canastilla de bebé', label: 'Detalles' },
+    ],
+  },
+];
 ---
 
-<Layout title={metaTitle} description={metaDescription}>
-  <!-- Breadcrumb -->
-  <div class="bg-gray-50 py-4">
-    <div class="container mx-auto px-4">
-      <nav class="flex" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2 text-sm text-gray-500">
-          <li><a href="/" class="hover:text-amazon-orange transition-colors">Inicio</a></li>
-          <li><svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></li>
-          <li><a href="/#services" class="hover:text-amazon-orange transition-colors">Servicios</a></li>
-          <li><svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></li>
-          <li class="text-gray-900 font-medium">Imágenes para Amazon</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
-
-  <!-- Header with Title Only -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-amazon-darkblue">Imágenes para Amazon (100% a medida)</h1>
-      </div>
-    </div>
-  </section>
-
-  <!-- Introductory Block -->
-  <section class="py-12 bg-gradient-to-b from-white to-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <p class="text-xl md:text-2xl font-medium text-amazon-darkblue mb-2 leading-relaxed">Explora cómo trabajamos.</p>
-        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">En Amazon Boost pensamos que la mejor forma de demostrar es mostrar. Por eso hemos preparado sets de imágenes orientativos creados a partir de una foto base, adaptados por nicho y optimizados para vender en Amazon Europa.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Niche Examples -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="space-y-16">
-          <!-- Belleza -->
-          <div class="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 text-amazon-darkblue text-center">Belleza</h2>
-            
-            <!-- Disclaimer -->
-            <div class="text-center mb-6">
-              <p class="text-sm text-gray-500 italic">Estas imágenes han sido preparadas por AmazonBoost con fines demostrativos del trabajo que realizamos.</p>
-            </div>
-            
-            <!-- Column Headers -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Imagen de producto (muestra)</h3>
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Imágenes 100% optimizadas para Amazon</h3>
-            </div>
-            
-            <!-- Main Layout - Desktop & Mobile -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Left Column - Main Image with Zoom -->
-              <div class="relative aspect-square w-full overflow-hidden rounded-2xl shadow-sm bg-neutral-50 group cursor-zoom-in" id="belleza-main-image-container">
-                <img 
-                  src="/images/1.1.png" 
-                  alt="Producto de belleza principal - sérum o aceite facial premium" 
-                  class="w-full h-full object-contain transition-transform duration-300 ease-out" 
-                  loading="priority"
-                  id="belleza-main-image"
-                />
-                
-                <!-- Zoom Lens (Hidden by default) -->
-                <div id="belleza-zoom-lens" class="absolute border-2 border-amazon-orange opacity-0 pointer-events-none hidden md:block"></div>
-                
-                <!-- Zoom Result (Hidden by default) -->
-                <div id="belleza-zoom-result" class="absolute top-0 left-full ml-4 w-80 h-80 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 pointer-events-none hidden md:block overflow-hidden z-20">
-                  <img id="belleza-zoom-image" src="/images/1.1.png" alt="Producto de belleza principal - vista ampliada" class="absolute" />
-                </div>
-              </div>
-              
-              <!-- Right Column - Carousel -->
-              <div class="relative aspect-square w-full overflow-hidden rounded-2xl shadow-sm bg-neutral-50">
-                <div class="carousel-container h-full w-full relative" aria-label="Carrusel de imágenes optimizadas para productos de belleza" id="belleza-carousel">
-                  <!-- Carousel Track -->
-                  <div class="carousel-track flex h-full transition-transform duration-300 ease-in-out" id="belleza-carousel-track">
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="0">
-                      <img 
-                        src="/images/1.2.png" 
-                        alt="Imagen principal con fondo blanco puro - producto de belleza destacado" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="1">
-                      <img 
-                        src="/images/1.4.png" 
-                        alt="Beneficios clave del producto de belleza - hidratación y cuidado" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="2">
-                      <img 
-                        src="/images/1.3.png" 
-                        alt="Lifestyle con modelo aplicando el producto - contexto real de uso" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="3">
-                      <img 
-                        src="/images/1.5.png" 
-                        alt="Ingredientes naturales y modo de uso del producto" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="4">
-                      <img 
-                        src="/images/1.6.png" 
-                        alt="Información adicional y detalles de belleza" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                  
-                  <!-- Navigation Arrows -->
-                  <button 
-                    class="carousel-btn carousel-prev absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 z-10 transition-all duration-200"
-                    aria-label="Imagen anterior"
-                    data-carousel="belleza"
-                  >
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button 
-                    class="carousel-btn carousel-next absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 z-10 transition-all duration-200"
-                    aria-label="Imagen siguiente"
-                    data-carousel="belleza"
-                  >
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  
-                  <!-- Pagination Dots -->
-                  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3">
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200 active" data-slide="0" data-carousel="belleza" aria-label="Ir a imagen 1"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="1" data-carousel="belleza" aria-label="Ir a imagen 2"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="2" data-carousel="belleza" aria-label="Ir a imagen 3"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="3" data-carousel="belleza" aria-label="Ir a imagen 4"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="4" data-carousel="belleza" aria-label="Ir a imagen 5"></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="text-center mt-8">
-              <button class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1" data-cta="belleza">Quiero unas imágenes así</button>
-            </div>
+<Layout
+  title={metaTitle}
+  description={metaDescription}
+  pageType="service"
+  contentSummary={metaDescription}
+  structuredData={{ type: 'service', data: imagenesParaAmazonData }}
+>
+  <article class="sub-page visual-page">
+    <section class="visual-hero">
+      <div class="sub-hero-grid" aria-hidden="true"></div>
+      <div class="sub-shell visual-hero-layout">
+        <div class="visual-hero-copy">
+          <p class="sub-kicker"><i></i> Creatividad orientada a conversión</p>
+          <h1>Imágenes para Amazon que hacen visible el valor de tu producto.</h1>
+          <p>Creamos sets visuales a medida para marcas privadas que necesitan explicar mejor, diferenciarse y convertir más dentro de Amazon Europa.</p>
+          <div class="sub-actions">
+            <a class="sub-button sub-button-primary" href="/#auditoria">Solicitar propuesta <span aria-hidden="true">↗</span></a>
+            <a class="sub-button sub-button-secondary" href="#trabajos">Ver trabajos <span aria-hidden="true">↓</span></a>
           </div>
+        </div>
+        <div class="visual-hero-media" aria-label="Muestra de imágenes creadas para Amazon">
+          <img class="visual-hero-back" src="/images/1.3.png" alt="Imagen lifestyle para Amazon" />
+          <img class="visual-hero-front" src="/images/2.png" alt="Imagen optimizada de producto para Amazon" />
+          <div class="visual-hero-tag"><span>Set visual</span><strong>Diseñado para vender</strong></div>
+        </div>
+      </div>
+      <div class="sub-hero-rail"><span>Estrategia visual</span><i></i><span>Imagen principal</span><i></i><span>Infografías</span><i></i><span>Lifestyle</span></div>
+    </section>
 
-          <!-- Bebé -->
-          <div class="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 text-amazon-darkblue text-center">Bebé</h2>
-            
-            <!-- Disclaimer -->
-            <div class="text-center mb-6">
-              <p class="text-sm text-gray-500 italic">Estas imágenes han sido preparadas por AmazonBoost con fines demostrativos del trabajo que realizamos.</p>
-            </div>
-            
-            <!-- Column Headers -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Imagen de producto (muestra)</h3>
-              <h3 class="text-xl font-semibold text-gray-800 text-center">Imágenes 100% optimizadas para Amazon</h3>
-            </div>
-            
-            <!-- Main Layout - Desktop & Mobile -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Left Column - Main Image with Zoom -->
-              <div class="relative aspect-square w-full overflow-hidden rounded-2xl shadow-sm bg-neutral-50 group cursor-zoom-in" id="bebe-main-image-container">
-                <img 
-                  src="/images/1.png" 
-                  alt="Imagen de producto básica enviada por el cliente (muestra)" 
-                  class="w-full h-full object-contain transition-transform duration-300 ease-out" 
-                  loading="priority"
-                  id="bebe-main-image"
-                />
-                
-                <!-- Zoom Lens (Hidden by default) -->
-                <div id="bebe-zoom-lens" class="absolute border-2 border-amazon-orange opacity-0 pointer-events-none hidden md:block"></div>
-                
-                <!-- Zoom Result (Hidden by default) -->
-                <div id="bebe-zoom-result" class="absolute top-0 left-full ml-4 w-80 h-80 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 pointer-events-none hidden md:block overflow-hidden z-20">
-                  <img id="bebe-zoom-image" src="/images/1.png" alt="Imagen de producto básica - vista ampliada" class="absolute" />
-                </div>
+    <nav class="sub-jump" aria-label="Navegación de la página">
+      <a href="#trabajos">Trabajos</a>
+      <a href="#criterio">Criterio visual</a>
+      <a href="#proceso">Proceso</a>
+      <a class="is-cta" href="/#auditoria">Pedir propuesta</a>
+    </nav>
+
+    <section id="criterio" class="sub-band visual-intro">
+      <div class="sub-shell visual-intro-layout">
+        <div>
+          <p class="sub-kicker sub-kicker-dark"><i></i> No decoramos listings</p>
+          <h2>Cada imagen tiene un trabajo.</h2>
+        </div>
+        <p>La primera consigue el clic. Las siguientes sostienen la decisión: explican el beneficio, resuelven objeciones, muestran el uso y hacen reconocible la marca. Diseñamos el conjunto como una secuencia, no como piezas independientes.</p>
+      </div>
+    </section>
+
+    <section id="trabajos" class="visual-work">
+      {collections.map((collection, collectionIndex) => (
+        <article class:list={['visual-case', collectionIndex % 2 === 1 && 'is-dark']} data-gallery={collection.id}>
+          <div class="sub-shell">
+            <header class="visual-case-head">
+              <div>
+                <p>{collection.category} / Muestra de trabajo</p>
+                <h2>{collection.title}</h2>
               </div>
-              
-              <!-- Right Column - Carousel -->
-              <div class="relative aspect-square w-full overflow-hidden rounded-2xl shadow-sm bg-neutral-50">
-                <div class="carousel-container h-full w-full relative" aria-label="Carrusel de imágenes optimizadas para productos de bebé" id="bebe-carousel">
-                  <!-- Carousel Track -->
-                  <div class="carousel-track flex h-full transition-transform duration-300 ease-in-out" id="bebe-carousel-track">
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="0">
-                      <img 
-                        src="/images/2.png" 
-                        alt="Imagen principal sobre fondo blanco puro (producto ≥85%)" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="1">
-                      <img 
-                        src="/images/3.png" 
-                        alt="Lifestyle en contexto real (bokeh suave, sin claims)" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="2">
-                      <img 
-                        src="/images/4.png" 
-                        alt="Beneficios clave (texto corto y legible en móvil)" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                    <div class="carousel-slide min-w-full h-full relative cursor-pointer" data-index="3">
-                      <img 
-                        src="/images/5.png" 
-                        alt="Qué incluye y/o medidas del producto" 
-                        class="w-full h-full object-contain" 
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                  
-                  <!-- Navigation Arrows -->
-                  <button 
-                    class="carousel-btn carousel-prev absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 z-10 transition-all duration-200"
-                    aria-label="Imagen anterior"
-                    data-carousel="bebe"
-                  >
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button 
-                    class="carousel-btn carousel-next absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 z-10 transition-all duration-200"
-                    aria-label="Imagen siguiente"
-                    data-carousel="bebe"
-                  >
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  
-                  <!-- Pagination Dots -->
-                  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3">
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200 active" data-slide="0" data-carousel="bebe" aria-label="Ir a imagen 1"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="1" data-carousel="bebe" aria-label="Ir a imagen 2"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="2" data-carousel="bebe" aria-label="Ir a imagen 3"></button>
-                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-200" data-slide="3" data-carousel="bebe" aria-label="Ir a imagen 4"></button>
-                  </div>
+              <p>{collection.copy}</p>
+            </header>
+
+            <div class="visual-comparison">
+              <div class="visual-source">
+                <div class="visual-label"><span>Material de partida</span><strong>Foto base</strong></div>
+                <button class="visual-open" type="button" data-full={collection.source} aria-label={`Ampliar foto base de ${collection.category}`}>
+                  <img src={collection.source} alt={`Foto base de producto de ${collection.category}`} loading="lazy" />
+                </button>
+              </div>
+
+              <div class="visual-result">
+                <div class="visual-label"><span>Resultado</span><strong>Set optimizado</strong></div>
+                <button class="visual-open visual-stage" type="button" data-full={collection.images[0].src} aria-label={`Ampliar resultado de ${collection.category}`}>
+                  <img src={collection.images[0].src} alt={collection.images[0].alt} loading="lazy" data-gallery-main />
+                </button>
+                <div class="visual-thumbs" aria-label={`Seleccionar imagen de ${collection.category}`}>
+                  {collection.images.map((image, imageIndex) => (
+                    <button
+                      class:list={['visual-thumb', imageIndex === 0 && 'is-active']}
+                      type="button"
+                      data-src={image.src}
+                      data-alt={image.alt}
+                      aria-label={`Ver ${image.label}`}
+                    >
+                      <img src={image.src} alt="" loading="lazy" />
+                      <span>{image.label}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
-            
-            <div class="text-center mt-8">
-              <button class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1" data-cta="bebe">Quiero unas imágenes así</button>
-            </div>
+            <p class="visual-note">Muestras visuales provisionales. La selección definitiva de trabajos se actualizará con nuevos casos reales.</p>
           </div>
+        </article>
+      ))}
+    </section>
 
+    <section id="proceso" class="sub-band visual-process-band">
+      <div class="sub-shell">
+        <div class="sub-heading">
+          <p class="sub-kicker sub-kicker-dark"><i></i> Cómo lo construimos</p>
+          <h2>Del producto al argumento visual.</h2>
+        </div>
+        <div class="visual-process">
+          <article><span>Entender</span><h3>Producto y cliente</h3><p>Leemos reseñas, competencia, beneficios, objeciones y contexto de compra.</p></article>
+          <article><span>Ordenar</span><h3>Guion del carrusel</h3><p>Asignamos una función concreta a cada imagen antes de diseñar.</p></article>
+          <article><span>Crear</span><h3>Dirección visual</h3><p>Producimos una estética propia, coherente con la marca y con Amazon.</p></article>
+          <article><span>Optimizar</span><h3>Conversión móvil</h3><p>Revisamos lectura, jerarquía y claridad en el espacio más exigente.</p></article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- How We Work -->
-  <section class="py-16 bg-amazon-lightgray">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-amazon-darkblue">{howWeWork.title}</h2>
-        <div class="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-          <ol class="space-y-6">
-            {howWeWork.steps.map((step, index) => (
-              <li class="flex items-start">
-                <span class="flex-shrink-0 w-8 h-8 bg-amazon-orange text-white rounded-full flex items-center justify-center font-bold mr-4 mt-1">{index + 1}</span>
-                <p class="text-gray-700 text-lg leading-relaxed">{step}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
+    <section class="sub-final">
+      <div class="sub-shell">
+        <div><p>Tu producto ya tiene algo que decir</p><h2>Hagamos que se entienda en segundos.</h2></div>
+        <a href="/#auditoria">Pedir propuesta <span aria-hidden="true">↗</span></a>
       </div>
-    </div>
-  </section>
+    </section>
+  </article>
 
-  <!-- Guidelines -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-amazon-darkblue">{guidelines.title}</h2>
-        <div class="bg-gradient-to-r from-amazon-darkblue to-blue-900 rounded-2xl p-8 md:p-12 text-white">
-          <ul class="space-y-4">
-            {guidelines.items.map((item) => (
-              <li class="flex items-start">
-                <svg class="flex-shrink-0 w-6 h-6 text-amazon-orange mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-lg leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="py-16 bg-gradient-to-r from-amazon-orange to-amber-500">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center text-white">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">¿Te encaja este enfoque personalizado?</h2>
-        <p class="text-lg mb-8 opacity-90">Hablemos de tu proyecto y veamos cómo podemos transformar tus imágenes</p>
-        <a href="/#solicita-tutoria" class="inline-block bg-white text-amazon-orange hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg">Agendar llamada</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center">
-    <div class="relative max-w-6xl max-h-screen p-4 w-full h-full flex items-center justify-center">
-      <!-- Close Button -->
-      <button 
-        id="lightbox-close" 
-        class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center"
-        aria-label="Cerrar lightbox"
-      >
-        ×
-      </button>
-      
-      <!-- Main Image Container with Zoom -->
-      <div class="relative max-w-full max-h-full overflow-hidden" id="lightbox-image-container">
-        <img 
-          id="lightbox-image" 
-          src="" 
-          alt="" 
-          class="max-w-full max-h-full object-contain cursor-grab transition-transform duration-200 ease-out"
-          draggable="false"
-        />
-      </div>
-      
-      <!-- Navigation Arrows -->
-      <button 
-        id="lightbox-prev" 
-        class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 transition-colors bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center"
-        aria-label="Imagen anterior"
-      >
-        ‹
-      </button>
-      <button 
-        id="lightbox-next" 
-        class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-gray-300 transition-colors bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center"
-        aria-label="Imagen siguiente"
-      >
-        ›
-      </button>
-      
-      <!-- Image Counter -->
-      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded">
-        <span id="lightbox-counter"></span>
-      </div>
-    </div>
-  </div>
+  <dialog class="visual-lightbox" aria-label="Imagen ampliada">
+    <button type="button" class="visual-lightbox-close" aria-label="Cerrar">×</button>
+    <img alt="Imagen ampliada" />
+  </dialog>
 </Layout>
 
-<style>
-  .aspect-square { aspect-ratio: 1 / 1; }
-  .transform { transition: transform 0.3s ease; }
-  .cursor-zoom-in { cursor: zoom-in; }
-  
-  /* Hide any caption text under image galleries */
-  .gallery-caption, .card-caption, .footnote, .description-text, [data-caption] {
-    display: none !important;
-  }
-  
-  /* Zoom styles for Beauty section */
-  #belleza-zoom-lens {
-    width: 100px;
-    height: 100px;
-    background-color: rgba(255, 155, 0, 0.3);
-    border-radius: 4px;
-  }
-  
-  /* Zoom styles for Baby section */
-  #bebe-zoom-lens {
-    width: 100px;
-    height: 100px;
-    background-color: rgba(255, 155, 0, 0.3);
-    border-radius: 4px;
-  }
-  
-  /* Carousel dot active state */
-  .carousel-dot.active {
-    transform: scale(1.2);
-    background-color: white !important;
-  }
-  
-  /* Lightbox styles */
-  #lightbox {
-    backdrop-filter: blur(5px);
-  }
-  
-  /* Lightbox zoom functionality */
-  #lightbox-image {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  }
-  
-  #lightbox-image.zoomed {
-    cursor: grab;
-  }
-  
-  #lightbox-image.zoomed:active {
-    cursor: grabbing;
-  }
-</style>
-
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Beauty section image data for lightbox
-    const bellezaImages = [
-      {
-        src: "/images/1.1.png",
-        alt: "Producto de belleza principal - sérum o aceite facial premium"
-      },
-      {
-        src: "/images/1.2.png",
-        alt: "Imagen principal con fondo blanco puro - producto de belleza destacado"
-      },
-      {
-        src: "/images/1.4.png",
-        alt: "Beneficios clave del producto de belleza - hidratación y cuidado"
-      },
-      {
-        src: "/images/1.3.png",
-        alt: "Lifestyle con modelo aplicando el producto - contexto real de uso"
-      },
-      {
-        src: "/images/1.5.png",
-        alt: "Ingredientes naturales y modo de uso del producto"
-      },
-      {
-        src: "/images/1.6.png",
-        alt: "Información adicional y detalles de belleza"
-      }
-    ];
-    
-    // Baby section image data for lightbox
-    const bebeImages = [
-      {
-        src: "/images/1.png",
-        alt: "Imagen de producto básica enviada por el cliente (muestra)"
-      },
-      {
-        src: "/images/2.png",
-        alt: "Imagen principal sobre fondo blanco puro (producto ≥85%)"
-      },
-      {
-        src: "/images/3.png",
-        alt: "Lifestyle en contexto real (bokeh suave, sin claims)"
-      },
-      {
-        src: "/images/4.png",
-        alt: "Beneficios clave (texto corto y legible en móvil)"
-      },
-      {
-        src: "/images/5.png",
-        alt: "Qué incluye y/o medidas del producto"
-      }
-    ];
-    
-    let currentLightboxIndex = 0;
-    let currentActiveSection = 'belleza'; // Track which section is active in lightbox
-    
-    // Amazon-style zoom functionality for Beauty section
-    const mainImageContainer = document.getElementById('belleza-main-image-container');
-    const mainImage = document.getElementById('belleza-main-image');
-    const zoomLens = document.getElementById('belleza-zoom-lens');
-    const zoomResult = document.getElementById('belleza-zoom-result');
-    const zoomImage = document.getElementById('belleza-zoom-image');
-    
-    if (mainImageContainer && window.innerWidth >= 768) {
-      mainImageContainer.addEventListener('mouseenter', function() {
-        zoomLens.style.opacity = '1';
-        zoomResult.style.opacity = '1';
-      });
-      
-      mainImageContainer.addEventListener('mouseleave', function() {
-        zoomLens.style.opacity = '0';
-        zoomResult.style.opacity = '0';
-      });
-      
-      mainImageContainer.addEventListener('mousemove', function(e) {
-        const rect = mainImageContainer.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Position zoom lens
-        const lensX = Math.max(0, Math.min(x - 50, rect.width - 100));
-        const lensY = Math.max(0, Math.min(y - 50, rect.height - 100));
-        zoomLens.style.left = lensX + 'px';
-        zoomLens.style.top = lensY + 'px';
-        
-        // Calculate zoom position
-        const cx = rect.width / 100;
-        const cy = rect.height / 100;
-        zoomImage.style.left = -(lensX * cx * 2.5) + 'px';
-        zoomImage.style.top = -(lensY * cy * 2.5) + 'px';
-        zoomImage.style.width = (rect.width * 2.5) + 'px';
-        zoomImage.style.height = (rect.height * 2.5) + 'px';
-      });
-    }
-    
-    // Click to open lightbox (all devices) - Beauty
-    if (mainImageContainer) {
-      mainImageContainer.addEventListener('click', function() {
-        openLightbox('belleza', 0);
-      });
-    }
-    
-    // Amazon-style zoom functionality for Baby section
-    const bebeMainImageContainer = document.getElementById('bebe-main-image-container');
-    const bebeMainImage = document.getElementById('bebe-main-image');
-    const bebeZoomLens = document.getElementById('bebe-zoom-lens');
-    const bebeZoomResult = document.getElementById('bebe-zoom-result');
-    const bebeZoomImage = document.getElementById('bebe-zoom-image');
-    
-    if (bebeMainImageContainer && window.innerWidth >= 768) {
-      bebeMainImageContainer.addEventListener('mouseenter', function() {
-        bebeZoomLens.style.opacity = '1';
-        bebeZoomResult.style.opacity = '1';
-      });
-      
-      bebeMainImageContainer.addEventListener('mouseleave', function() {
-        bebeZoomLens.style.opacity = '0';
-        bebeZoomResult.style.opacity = '0';
-      });
-      
-      bebeMainImageContainer.addEventListener('mousemove', function(e) {
-        const rect = bebeMainImageContainer.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Position zoom lens
-        const lensX = Math.max(0, Math.min(x - 50, rect.width - 100));
-        const lensY = Math.max(0, Math.min(y - 50, rect.height - 100));
-        bebeZoomLens.style.left = lensX + 'px';
-        bebeZoomLens.style.top = lensY + 'px';
-        
-        // Calculate zoom position
-        const cx = rect.width / 100;
-        const cy = rect.height / 100;
-        bebeZoomImage.style.left = -(lensX * cx * 2.5) + 'px';
-        bebeZoomImage.style.top = -(lensY * cy * 2.5) + 'px';
-        bebeZoomImage.style.width = (rect.width * 2.5) + 'px';
-        bebeZoomImage.style.height = (rect.height * 2.5) + 'px';
-      });
-    }
-    
-    // Click to open lightbox (all devices) - Baby
-    if (bebeMainImageContainer) {
-      bebeMainImageContainer.addEventListener('click', function() {
-        openLightbox('bebe', 0);
-      });
-    }
-    
-    // Beauty carousel functionality
-    const bellezaCarousel = document.getElementById('belleza-carousel');
-    if (bellezaCarousel) {
-      const track = document.getElementById('belleza-carousel-track');
-      const slides = track.querySelectorAll('.carousel-slide');
-      const dots = bellezaCarousel.querySelectorAll('.carousel-dot[data-carousel="belleza"]');
-      const prevBtn = bellezaCarousel.querySelector('.carousel-prev[data-carousel="belleza"]');
-      const nextBtn = bellezaCarousel.querySelector('.carousel-next[data-carousel="belleza"]');
-      
-      let currentSlide = 0;
-      const totalSlides = slides.length;
-      
-      function updateBellezaCarousel() {
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Update dots
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentSlide);
+  const prepareVisualPage = () => {
+    document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+      const main = gallery.querySelector<HTMLImageElement>('[data-gallery-main]');
+      const stage = gallery.querySelector<HTMLElement>('.visual-stage');
+      gallery.querySelectorAll<HTMLButtonElement>('.visual-thumb').forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          if (!main || !thumb.dataset.src) return;
+          main.src = thumb.dataset.src;
+          main.alt = thumb.dataset.alt || '';
+          if (stage) stage.dataset.full = thumb.dataset.src;
+          gallery.querySelectorAll('.visual-thumb').forEach((item) => item.classList.remove('is-active'));
+          thumb.classList.add('is-active');
         });
-      }
-      
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateBellezaCarousel();
-      }
-      
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateBellezaCarousel();
-      }
-      
-      function goToSlide(index) {
-        currentSlide = index;
-        updateBellezaCarousel();
-      }
-      
-      // Carousel event listeners
-      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-      
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-      });
-      
-      // Carousel slide click to lightbox
-      slides.forEach((slide, index) => {
-        slide.addEventListener('click', () => {
-          openLightbox('belleza', index + 1); // +1 because main image is index 0
-        });
-      });
-      
-      // Touch/swipe support for Beauty carousel
-      let startX = 0;
-      let endX = 0;
-      
-      track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-      });
-      
-      track.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            nextSlide();
-          } else {
-            prevSlide();
-          }
-        }
-      });
-    }
-    
-    // Baby carousel functionality
-    const bebeCarousel = document.getElementById('bebe-carousel');
-    if (bebeCarousel) {
-      const track = document.getElementById('bebe-carousel-track');
-      const slides = track.querySelectorAll('.carousel-slide');
-      const dots = bebeCarousel.querySelectorAll('.carousel-dot[data-carousel="bebe"]');
-      const prevBtn = bebeCarousel.querySelector('.carousel-prev[data-carousel="bebe"]');
-      const nextBtn = bebeCarousel.querySelector('.carousel-next[data-carousel="bebe"]');
-      
-      let currentSlide = 0;
-      const totalSlides = slides.length;
-      
-      function updateBebeCarousel() {
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Update dots
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentSlide);
-        });
-      }
-      
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateBebeCarousel();
-      }
-      
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateBebeCarousel();
-      }
-      
-      function goToSlide(index) {
-        currentSlide = index;
-        updateBebeCarousel();
-      }
-      
-      // Carousel event listeners
-      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-      
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-      });
-      
-      // Carousel slide click to lightbox
-      slides.forEach((slide, index) => {
-        slide.addEventListener('click', () => {
-          openLightbox('bebe', index + 1); // +1 because main image is index 0
-        });
-      });
-      
-      // Touch/swipe support for Baby carousel
-      let startX = 0;
-      let endX = 0;
-      
-      track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-      });
-      
-      track.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            nextSlide();
-          } else {
-            prevSlide();
-          }
-        }
-      });
-    }
-    
-    // Lightbox functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxImageContainer = document.getElementById('lightbox-image-container');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const lightboxPrev = document.getElementById('lightbox-prev');
-    const lightboxNext = document.getElementById('lightbox-next');
-    const lightboxCounter = document.getElementById('lightbox-counter');
-    
-    // Lightbox zoom variables
-    let isZoomed = false;
-    let scale = 1;
-    let translateX = 0;
-    let translateY = 0;
-    let isDragging = false;
-    let lastX = 0;
-    let lastY = 0;
-    
-    function openLightbox(section, index) {
-      currentActiveSection = section;
-      currentLightboxIndex = index;
-      updateLightbox();
-      lightbox.classList.remove('hidden');
-      lightbox.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-      
-      // Reset zoom state
-      resetZoom();
-      
-      // Analytics event
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'lightbox_open', {
-          'event_category': 'engagement',
-          'event_label': section + '_images'
-        });
-      }
-    }
-    
-    function closeLightbox() {
-      lightbox.classList.add('hidden');
-      lightbox.classList.remove('flex');
-      document.body.style.overflow = '';
-      resetZoom();
-    }
-    
-    function updateLightbox() {
-      const images = currentActiveSection === 'belleza' ? bellezaImages : bebeImages;
-      const image = images[currentLightboxIndex];
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
-      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${images.length}`;
-      resetZoom();
-    }
-    
-    function resetZoom() {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      isZoomed = false;
-      updateImageTransform();
-      lightboxImage.classList.remove('zoomed');
-    }
-    
-    function updateImageTransform() {
-      lightboxImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-    }
-    
-    // Zoom functionality
-    function handleZoom(event, zoomIn) {
-      event.preventDefault();
-      
-      const zoomFactor = 0.2;
-      const maxScale = 3;
-      const minScale = 1;
-      
-      if (zoomIn && scale < maxScale) {
-        scale += zoomFactor;
-        isZoomed = true;
-        lightboxImage.classList.add('zoomed');
-      } else if (!zoomIn && scale > minScale) {
-        scale -= zoomFactor;
-        if (scale <= minScale) {
-          resetZoom();
-          return;
-        }
-      }
-      
-      updateImageTransform();
-    }
-    
-    // Mouse wheel zoom
-    if (lightboxImageContainer) {
-      lightboxImageContainer.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        handleZoom(e, e.deltaY < 0);
-      });
-    }
-    
-    // Touch zoom (pinch)
-    let initialDistance = 0;
-    let initialScale = 1;
-    
-    function getDistance(touches) {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-    
-    if (lightboxImage) {
-      lightboxImage.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          initialDistance = getDistance(e.touches);
-          initialScale = scale;
-        } else if (e.touches.length === 1 && isZoomed) {
-          isDragging = true;
-          lastX = e.touches[0].clientX;
-          lastY = e.touches[0].clientY;
-        }
-      });
-      
-      lightboxImage.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          const distance = getDistance(e.touches);
-          const newScale = Math.max(1, Math.min(3, (distance / initialDistance) * initialScale));
-          scale = newScale;
-          isZoomed = scale > 1;
-          
-          if (isZoomed) {
-            lightboxImage.classList.add('zoomed');
-          } else {
-            lightboxImage.classList.remove('zoomed');
-          }
-          
-          updateImageTransform();
-        } else if (e.touches.length === 1 && isDragging && isZoomed) {
-          e.preventDefault();
-          const deltaX = e.touches[0].clientX - lastX;
-          const deltaY = e.touches[0].clientY - lastY;
-          
-          translateX += deltaX;
-          translateY += deltaY;
-          
-          updateImageTransform();
-          
-          lastX = e.touches[0].clientX;
-          lastY = e.touches[0].clientY;
-        }
-      });
-      
-      lightboxImage.addEventListener('touchend', (e) => {
-        if (e.touches.length === 0) {
-          isDragging = false;
-          if (scale <= 1) {
-            resetZoom();
-          }
-        }
-      });
-    }
-    
-    // Mouse drag for zoomed images
-    if (lightboxImage) {
-      lightboxImage.addEventListener('mousedown', (e) => {
-        if (isZoomed) {
-          e.preventDefault();
-          isDragging = true;
-          lastX = e.clientX;
-          lastY = e.clientY;
-          lightboxImage.style.cursor = 'grabbing';
-        }
-      });
-      
-      lightboxImage.addEventListener('mousemove', (e) => {
-        if (isDragging && isZoomed) {
-          e.preventDefault();
-          const deltaX = e.clientX - lastX;
-          const deltaY = e.clientY - lastY;
-          
-          translateX += deltaX;
-          translateY += deltaY;
-          
-          updateImageTransform();
-          
-          lastX = e.clientX;
-          lastY = e.clientY;
-        }
-      });
-      
-      lightboxImage.addEventListener('mouseup', () => {
-        isDragging = false;
-        if (isZoomed) {
-          lightboxImage.style.cursor = 'grab';
-        }
-      });
-      
-      // Mouse leave to prevent stuck dragging state
-      lightboxImage.addEventListener('mouseleave', () => {
-        isDragging = false;
-        if (isZoomed) {
-          lightboxImage.style.cursor = 'grab';
-        }
-      });
-    }
-    
-    // Lightbox navigation functions
-    function navigateLightbox(direction) {
-      const images = currentActiveSection === 'belleza' ? bellezaImages : bebeImages;
-      
-      if (direction === 'next') {
-        currentLightboxIndex = (currentLightboxIndex + 1) % images.length;
-      } else {
-        currentLightboxIndex = (currentLightboxIndex - 1 + images.length) % images.length;
-      }
-      
-      updateLightbox();
-    }
-    
-    // Event listeners for lightbox controls
-    if (lightboxClose) {
-      lightboxClose.addEventListener('click', closeLightbox);
-    }
-    
-    if (lightboxPrev) {
-      lightboxPrev.addEventListener('click', () => navigateLightbox('prev'));
-    }
-    
-    if (lightboxNext) {
-      lightboxNext.addEventListener('click', () => navigateLightbox('next'));
-    }
-    
-    // Keyboard navigation for lightbox
-    document.addEventListener('keydown', (e) => {
-      if (lightbox.classList.contains('flex')) {
-        switch(e.key) {
-          case 'Escape':
-            closeLightbox();
-            break;
-          case 'ArrowLeft':
-            navigateLightbox('prev');
-            break;
-          case 'ArrowRight':
-            navigateLightbox('next');
-            break;
-        }
-      }
-    });
-    
-    // Close lightbox when clicking outside the image
-    if (lightbox) {
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-    }
-    
-    // CTA buttons functionality
-    const ctaButtons = document.querySelectorAll('[data-cta]');
-    ctaButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Redirect to the audit section on the main page
-        window.location.href = '/#solicita-tutoria';
-        
-        // Analytics tracking
-        if (typeof gtag !== 'undefined') {
-          const ctaType = this.getAttribute('data-cta');
-          gtag('event', 'cta_click', {
-            'event_category': 'engagement',
-            'event_label': 'imagenes_' + ctaType,
-            'value': 1
-          });
-        }
       });
     });
-  });
+
+    const dialog = document.querySelector<HTMLDialogElement>('.visual-lightbox');
+    const dialogImage = dialog?.querySelector<HTMLImageElement>('img');
+    document.querySelectorAll<HTMLButtonElement>('.visual-open').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!dialog || !dialogImage || !button.dataset.full) return;
+        dialogImage.src = button.dataset.full;
+        dialogImage.alt = button.querySelector('img')?.alt || 'Imagen ampliada';
+        dialog.showModal();
+      });
+    });
+    dialog?.querySelector<HTMLButtonElement>('.visual-lightbox-close')?.addEventListener('click', () => dialog.close());
+    dialog?.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  };
+
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', prepareVisualPage, { once: true })
+    : prepareVisualPage();
 </script>
+
+<style>
+  .visual-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.visual-hero-layout{position:relative;z-index:1;min-height:760px;display:grid;grid-template-columns:minmax(0,.88fr) minmax(480px,1.12fr);gap:72px;align-items:center;padding:72px 0}.visual-hero-copy h1{max-width:770px;margin:0;font-size:clamp(3.7rem,6vw,6.7rem);line-height:.9;font-weight:850}.visual-hero-copy>p:not(.sub-kicker){max-width:670px;margin:25px 0 0;color:#b4b5af;line-height:1.7}.visual-hero-media{position:relative;height:590px}.visual-hero-media img{position:absolute;display:block;object-fit:cover;box-shadow:0 32px 90px rgba(0,0,0,.55)}.visual-hero-back{top:0;right:0;width:70%;aspect-ratio:1;border:1px solid #2a2a2a}.visual-hero-front{left:0;bottom:0;width:64%;aspect-ratio:1;border:8px solid #0d0d0d}.visual-hero-tag{position:absolute;right:0;bottom:20px;width:210px;padding:17px;background:#ff9900;color:#111}.visual-hero-tag span,.visual-hero-tag strong{display:block}.visual-hero-tag span{font-size:.56rem;font-weight:850;text-transform:uppercase}.visual-hero-tag strong{margin-top:7px;font-size:.85rem}.visual-intro{background:#f4f4ef}.visual-intro-layout{display:grid;grid-template-columns:1fr .75fr;gap:100px;align-items:end}.visual-intro h2{max-width:760px;margin:0;font-size:clamp(3.2rem,5.6vw,6.2rem);line-height:.92}.visual-intro-layout>p{margin:0;color:#53554f;font-size:1.04rem;line-height:1.75}.visual-case{padding:110px 0;background:#fff;color:#111}.visual-case.is-dark{background:#0b0b0b;color:#fff}.visual-case-head{display:grid;grid-template-columns:1fr .6fr;gap:80px;align-items:end;margin-bottom:54px}.visual-case-head p{margin:0;color:#6a6c66;line-height:1.65}.visual-case-head>div>p{margin-bottom:18px;color:#a46100;font-size:.62rem;font-weight:850;text-transform:uppercase}.is-dark .visual-case-head p{color:#9b9d97}.is-dark .visual-case-head>div>p{color:#ff9900}.visual-case-head h2{max-width:850px;margin:0;font-size:clamp(2.8rem,4.8vw,5.3rem);line-height:.94}.visual-comparison{display:grid;grid-template-columns:.62fr 1.38fr;gap:22px}.visual-source,.visual-result{min-width:0}.visual-label{display:flex;justify-content:space-between;gap:20px;margin-bottom:12px;padding:0 2px}.visual-label span{color:#7b7d76;font-size:.58rem;font-weight:850;text-transform:uppercase}.visual-label strong{font-size:.64rem}.visual-open{display:block;width:100%;padding:0;border:0;background:#ecece7;cursor:zoom-in}.visual-open img{display:block;width:100%;height:100%;object-fit:contain}.visual-source .visual-open{aspect-ratio:1}.visual-stage{aspect-ratio:16/10}.is-dark .visual-open{background:#141414}.visual-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:8px}.visual-thumb{min-width:0;padding:0 0 9px;border:0;border-bottom:2px solid transparent;background:transparent;color:inherit;cursor:pointer;text-align:left}.visual-thumb img{display:block;width:100%;aspect-ratio:1;object-fit:cover;opacity:.55;transition:opacity .2s ease}.visual-thumb span{display:block;margin-top:8px;overflow:hidden;font-size:.52rem;font-weight:800;text-overflow:ellipsis;white-space:nowrap}.visual-thumb:hover img,.visual-thumb.is-active img{opacity:1}.visual-thumb.is-active{border-color:#ff9900}.visual-note{margin:20px 0 0;color:#858780;font-size:.64rem}.visual-process-band{background:#f4f4ef}.visual-process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d2d2cb;border-left:1px solid #d2d2cb}.visual-process article{min-height:300px;padding:25px;border-right:1px solid #d2d2cb;border-bottom:1px solid #d2d2cb}.visual-process span{color:#a46100;font-size:.6rem;font-weight:850;text-transform:uppercase}.visual-process h3{margin:95px 0 15px;font-size:1.45rem}.visual-process p{margin:0;color:#5b5d57;font-size:.8rem;line-height:1.6}.visual-lightbox{width:min(1100px,calc(100% - 32px));height:min(90vh,900px);padding:0;border:1px solid #333;background:#0a0a0a}.visual-lightbox::backdrop{background:rgba(0,0,0,.88)}.visual-lightbox img{width:100%;height:100%;object-fit:contain}.visual-lightbox-close{position:absolute;z-index:2;top:12px;right:12px;width:42px;height:42px;border:1px solid #555;background:#111;color:#fff;font-size:1.7rem;cursor:pointer}
+  @media(max-width:1050px){.visual-hero-layout{grid-template-columns:1fr;padding-top:90px}.visual-hero-media{height:620px}.visual-hero-back{width:65%}.visual-hero-front{width:60%}.visual-intro-layout,.visual-case-head{grid-template-columns:1fr;gap:35px}.visual-comparison{grid-template-columns:1fr}.visual-source{max-width:620px}.visual-process{grid-template-columns:1fr 1fr}.visual-process article{min-height:230px}.visual-process h3{margin-top:55px}}
+  @media(max-width:700px){.visual-hero-layout{min-height:auto;gap:45px;padding:72px 0 54px}.visual-hero-copy h1{font-size:clamp(2.9rem,12vw,4.1rem)}.visual-hero-media{height:380px}.visual-hero-back{width:72%}.visual-hero-front{width:69%;border-width:5px}.visual-hero-tag{bottom:8px;width:165px;padding:13px}.visual-intro h2,.visual-case-head h2{font-size:clamp(2.55rem,11vw,3.75rem)}.visual-case{padding:75px 0}.visual-case-head{margin-bottom:35px}.visual-thumbs{grid-template-columns:repeat(3,1fr);gap:9px}.visual-thumb span{white-space:normal}.visual-process{grid-template-columns:1fr}.visual-process article{min-height:205px;padding:22px}.visual-process h3{margin-top:46px}}
+</style>

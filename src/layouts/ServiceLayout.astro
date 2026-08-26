@@ -1,5 +1,12 @@
 ---
 import Layout from './Layout.astro';
+import { allServices } from '../data/services/index.js';
+import '../styles/subpage-redesign.css';
+
+interface ServiceItem {
+  header?: string;
+  content?: string;
+}
 
 interface Props {
   title: string;
@@ -9,83 +16,181 @@ interface Props {
     description: string;
     benefits: {
       title: string;
-      items: Array<string | { header: string; content: string }>;
+      items: Array<string | ServiceItem>;
     };
     conclusion: string;
+    slug?: string;
   };
 }
 
 const { title, description, service } = Astro.props;
+const areas = service.benefits.items.map((item, index) => {
+  if (typeof item === 'string') {
+    return { title: item, points: [] as string[] };
+  }
+
+  return {
+    title: item.header || `Área de trabajo ${index + 1}`,
+    points: (item.content || '')
+      .split('\n')
+      .map((point) => point.replace(/^\s*[•-]\s*/, '').trim())
+      .filter(Boolean),
+  };
+});
+const relatedServices = allServices
+  .filter((item) => item.slug !== service.slug && item.slug !== 'imagenes-para-amazon')
+  .slice(0, 4);
 ---
 
-<Layout 
-  title={title} 
+<Layout
+  title={title}
   description={description}
   type="website"
   pageType="service"
   contentSummary={description}
-  structuredData={{
-    type: 'service',
-    data: service
-  }}
+  structuredData={{ type: 'service', data: service }}
 >
-  <div class="py-12 md:py-20 bg-amazon-lightgray">
-    <div class="container mx-auto px-4">
-      <div class="max-w-3xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-amazon-darkblue">{service.title}</h1>
-        <p class="text-lg text-gray-700 mb-8">
-          {service.description}
-        </p>
-        
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-          <h2 class="text-2xl font-bold mb-6 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            {service.benefits.title}
-          </h2>
-          
-          <ul class="space-y-6 mb-8">
-            {service.benefits.items.map((item) => {
-              if (typeof item === 'string') {
-                return (
-                  <li class="flex items-start">
-                    <div class="flex-shrink-0 mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                      </svg>
-                    </div>
-                    <span class="ml-3 text-gray-700">{item}</span>
-                  </li>
-                );
-              } else {
-                return (
-                  <li class="border-b pb-4 last:border-0 last:pb-0">
-                    <div class="flex items-start">
-                      <div class="flex-shrink-0 mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                      </div>
-                      <div class="ml-3">
-                        <h3 class="font-bold text-lg text-amazon-darkblue mb-2">{item.header}</h3>
-                        <div class="text-gray-700 whitespace-pre-line">{item.content}</div>
-                      </div>
-                    </div>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          
-          <p class="text-gray-700 italic border-l-4 border-amazon-orange pl-4 bg-amber-50 p-4 rounded">
-            {service.conclusion}
-          </p>
+  <article class="sub-page svc-page">
+    <section class="sub-hero svc-hero">
+      <div class="sub-hero-grid" aria-hidden="true"></div>
+      <div class="sub-shell sub-hero-shell svc-hero-shell">
+        <div class="sub-hero-copy">
+          <p class="sub-kicker"><i></i> Amazon Boost / Servicio especializado</p>
+          <h1>{service.title}</h1>
+          <p class="sub-lead">{service.description}</p>
+          <div class="sub-actions">
+            <a class="sub-button sub-button-primary" href="/#auditoria">
+              Solicitar auditoría <span aria-hidden="true">↗</span>
+            </a>
+            <a class="sub-button sub-button-secondary" href="#alcance">
+              Ver alcance <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </div>
-        
-        <div class="mt-12 text-center">
-          <a href="/#contact" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
-            ¿Te interesa este servicio? Contáctanos
-          </a>
+
+        <aside class="svc-map" aria-label="Áreas principales del servicio">
+          <div class="svc-map-top">
+            <div>
+              <span>Mapa de intervención</span>
+              <strong>{service.slug?.replaceAll('-', ' ') || 'Amazon Boost'}</strong>
+            </div>
+            <small>Cuenta + negocio</small>
+          </div>
+          <div class="svc-map-list">
+            {areas.slice(0, 5).map((area) => (
+              <div>
+                <i aria-hidden="true"></i>
+                <strong>{area.title}</strong>
+                <span>Incluido</span>
+              </div>
+            ))}
+          </div>
+          <div class="svc-map-foot">
+            <span>Lectura conectada</span>
+            <strong>Una prioridad clara para cada decisión.</strong>
+          </div>
+        </aside>
+      </div>
+      <div class="sub-hero-rail" aria-label="Método Amazon Boost">
+        <span>Diagnóstico</span><i></i><span>Prioridad</span><i></i><span>Ejecución</span><i></i><span>Medición</span>
+      </div>
+    </section>
+
+    <nav class="sub-jump" aria-label="Navegación de la página">
+      <a href="#alcance">Qué incluye</a>
+      <a href="#metodo">Cómo trabajamos</a>
+      <a href="#servicios-relacionados">Servicios relacionados</a>
+      <a class="is-cta" href="/#auditoria">Auditoría gratuita</a>
+    </nav>
+
+    <section id="alcance" class="sub-band sub-band-light">
+      <div class="sub-shell">
+        <div class="sub-heading sub-heading-split svc-heading">
+          <div>
+            <p class="sub-kicker sub-kicker-dark"><i></i> Alcance del servicio</p>
+            <h2>{service.benefits.title}</h2>
+          </div>
+          <p>No acumulamos tareas. Ordenamos cada frente según su impacto en visibilidad, conversión, rentabilidad y capacidad de escalar.</p>
+        </div>
+
+        <div class="svc-scope">
+          {areas.map((area) => (
+            <article>
+              <div class="svc-scope-title">
+                <i aria-hidden="true"></i>
+                <h3>{area.title}</h3>
+              </div>
+              {area.points.length > 0 && (
+                <ul>
+                  {area.points.map((point) => <li>{point}</li>)}
+                </ul>
+              )}
+            </article>
+          ))}
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <section class="svc-statement">
+      <div class="sub-shell">
+        <p>Amazon Boost / Gestión con criterio</p>
+        <h2>{service.conclusion}</h2>
+      </div>
+    </section>
+
+    <section id="metodo" class="sub-band svc-method-band">
+      <div class="sub-shell">
+        <div class="sub-heading">
+          <p class="sub-kicker sub-kicker-dark"><i></i> Nuestro método</p>
+          <h2>Primero entendemos la cuenta. Después movemos lo que importa.</h2>
+        </div>
+        <div class="svc-method">
+          <article>
+            <span>Leer</span>
+            <h3>Una visión completa</h3>
+            <p>Reunimos datos de catálogo, tráfico, publicidad, inventario y margen para evitar decisiones aisladas.</p>
+          </article>
+          <article>
+            <span>Decidir</span>
+            <h3>Prioridades con impacto</h3>
+            <p>Ordenamos las oportunidades por retorno, urgencia y capacidad real de ejecución dentro de la cuenta.</p>
+          </article>
+          <article>
+            <span>Ejecutar</span>
+            <h3>Un equipo sobre la cuenta</h3>
+            <p>Implementamos, medimos y corregimos. Menos informes decorativos y más decisiones que mueven el negocio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios-relacionados" class="sub-band sub-related-band">
+      <div class="sub-shell sub-related-layout">
+        <div>
+          <p class="sub-kicker"><i></i> Sistema Amazon Boost</p>
+          <h2>Este servicio funciona mejor conectado al resto de la cuenta.</h2>
+          <p>Explora las áreas que suelen intervenir en la misma oportunidad de crecimiento.</p>
+        </div>
+        <div class="sub-related-grid">
+          {relatedServices.map((item) => (
+            <a href={`/servicios/${item.slug}/`}>
+              <span>Servicio relacionado</span>
+              <strong>{item.title}</strong>
+              <p>{item.metaDescription}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sub-final">
+      <div class="sub-shell">
+        <div>
+          <p>Tu siguiente decisión empieza con una lectura clara</p>
+          <h2>Veamos qué está frenando tu cuenta de Amazon.</h2>
+        </div>
+        <a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </article>
 </Layout>

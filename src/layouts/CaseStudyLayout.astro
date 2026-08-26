@@ -1,315 +1,138 @@
 ---
 import Layout from './Layout.astro';
+import '../styles/subpage-redesign.css';
 
 interface Props {
   title: string;
   description: string;
-  caseStudy: {
-    title: string;
-    image: string;
-    industry: string;
-    challenge: string;
-    solution: string;
-    approach: string[];
-    results: {
-      revenue: string;
-      ranking: string;
-      conversion: string;
-      additional?: {
-        label: string;
-        value: string;
-      }[];
-    };
-    testimonial?: {
-      quote: string;
-      author: string;
-      position: string;
-    };
-    conclusion: string;
-    fullContent?: {
-      introduction: string;
-      sections: {
-        title: string;
-        content: string;
-        bulletPoints?: string[];
-        imageNote?: string;
-      }[];
-      cta: string;
-    };
-  };
+  caseStudy: any;
 }
 
 const { title, description, caseStudy } = Astro.props;
+const paragraphs = (value: string) => value.split('\n\n').filter(Boolean);
 ---
 
-<Layout title={title} description={description}>
-  <div class="py-12 md:py-20 bg-amazon-lightgray">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <!-- Hero section -->
-        <div class="mb-12">
-          <a href="/#case-studies" class="inline-flex items-center text-amazon-orange mb-6 hover:underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-            </svg>
-            Volver a Casos de Éxito
-          </a>
-          <h1 class="text-4xl md:text-5xl font-bold mb-6 text-amazon-darkblue">{caseStudy.title}</h1>
-          <div class="flex flex-wrap items-center text-gray-600 text-sm mb-8">
-            <span class="bg-amazon-orange/10 text-amazon-orange rounded-full px-3 py-1 mr-3 mb-2">
-              {caseStudy.industry}
-            </span>
-          </div>
+<Layout title={title} description={description} pageType="case-study" contentSummary={description}>
+  <article class="sub-page case-detail">
+    <section class="case-detail-hero">
+      <div class="sub-hero-grid" aria-hidden="true"></div>
+      <div class="sub-shell case-detail-hero-layout">
+        <div>
+          <a class="case-back" href="/casos-de-exito/">← Todos los casos</a>
+          <p class="sub-kicker"><i></i> {caseStudy.industry} / Caso de éxito</p>
+          <h1>{caseStudy.title}</h1>
+          <p>{description}</p>
         </div>
-        
-        <!-- Main image -->
-        <div class={`rounded-xl overflow-hidden shadow-lg mb-12 ${caseStudy.title.includes('Categoría Bebés') ? 'hidden' : ''}`}>
-          <img src={caseStudy.image} alt={caseStudy.title} class="w-full h-auto object-cover" />
-        </div>
-        
-        <!-- Challenge section -->
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
-          <div class={`${caseStudy.title.includes('Categoría Bebés') ? 'grid md:grid-cols-2 gap-8 items-start' : ''}`}>
-            <div>
-              <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-                El reto
-              </h2>
-              <div class="text-gray-700 space-y-4">
-                {caseStudy.challenge.split('\n\n').map(paragraph => (
-                  <p>{paragraph}</p>
-                ))}
-              </div>
-            </div>
-            {caseStudy.title.includes('Categoría Bebés') && (
-              <div class="flex justify-center">
-                <img src={caseStudy.image} alt={caseStudy.title} class="w-full max-w-xs rounded-lg shadow-md" />
+        <figure>
+          <img src={caseStudy.image} alt={caseStudy.title} />
+          <figcaption><span>Cliente</span><strong>{caseStudy.client || 'Marca en Amazon'}</strong></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-metrics" aria-label="Resultados principales">
+      <div class="sub-shell">
+        <div><strong>{caseStudy.results.revenue}</strong><span>Incremento de ingresos</span></div>
+        <div><strong>{caseStudy.results.ranking}</strong><span>Posicionamiento</span></div>
+        <div><strong>{caseStudy.results.conversion}</strong><span>Conversión / publicidad</span></div>
+        <p>Datos del caso actual. La colección se actualizará con la nueva selección verificada de Amazon Boost.</p>
+      </div>
+    </section>
+
+    <section class="case-story">
+      <div class="sub-shell case-story-layout">
+        <aside>
+          <span>La lectura</span>
+          <strong>Reto, estrategia y resultado.</strong>
+          <nav><a href="#reto">El reto</a><a href="#estrategia">La estrategia</a><a href="#resultado">El resultado</a></nav>
+        </aside>
+        <div class="case-story-content">
+          <section id="reto">
+            <p class="case-section-label">El punto de partida</p>
+            <h2>El reto</h2>
+            {paragraphs(caseStudy.challenge).map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+
+          <section id="estrategia">
+            <p class="case-section-label">La intervención</p>
+            <h2>La estrategia</h2>
+            <p>{caseStudy.solution}</p>
+            <ul>{caseStudy.approach.map((step: string) => <li>{step}</li>)}</ul>
+          </section>
+
+          <section id="resultado">
+            <p class="case-section-label">La consecuencia</p>
+            <h2>El resultado</h2>
+            <p>{caseStudy.conclusion}</p>
+            {caseStudy.results.additional && (
+              <div class="case-additional">
+                {caseStudy.results.additional.map((item: any) => <div><span>{item.label}</span><strong>{item.value}</strong></div>)}
               </div>
             )}
-          </div>
-        </div>
-        
-        <!-- Solution section -->
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
-          <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            La estrategia
-          </h2>
-          <p class="text-gray-700 mb-6">
-            {caseStudy.solution}
-          </p>
-          
-          <h3 class="text-xl font-semibold mb-4 text-amazon-darkblue">Cómo lo hicimos:</h3>
-          <ul class="space-y-4 mb-4">
-            {caseStudy.approach.map(step => (
-              <li class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <span class="ml-3 text-gray-700">{step}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        
-        <!-- Results section -->
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
-          <h2 class="text-2xl font-bold mb-6 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            El resultado
-          </h2>
-          
-          <div class="grid md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
-              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.revenue}</div>
-              <div class="text-gray-600 font-medium">Incremento de ingresos</div>
-            </div>
-            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
-              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.ranking}</div>
-              <div class="text-gray-600 font-medium">Posicionamiento</div>
-            </div>
-            <div class="bg-amazon-lightgray rounded-lg p-5 text-center transform hover:scale-105 transition-transform">
-              <div class="text-3xl font-bold text-amazon-orange mb-2">{caseStudy.results.conversion}</div>
-              <div class="text-gray-600 font-medium">Inversión publicitaria</div>
-            </div>
-          </div>
+            {caseStudy.results.proofImage && (
+              <figure class="case-proof">
+                <button type="button" data-case-proof={caseStudy.results.proofImage.url} aria-label="Ampliar prueba del resultado">
+                  <img src={caseStudy.results.proofImage.url} alt={caseStudy.results.proofImage.alt} loading="lazy" />
+                </button>
+                <figcaption>{caseStudy.results.proofImage.caption} <small>{caseStudy.results.proofImage.source}</small></figcaption>
+              </figure>
+            )}
+          </section>
 
-          {caseStudy.results.additional && (
-            <div class="space-y-3 mb-6">
-              {caseStudy.results.additional.map(item => (
-                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
-                  <span class="text-gray-600">{item.label}:</span>
-                  <span class="font-bold text-amazon-darkblue">{item.value}</span>
+          {caseStudy.fullContent && (
+            <section class="case-deep-dive">
+              <p class="case-section-label">Análisis completo</p>
+              <h2>Detrás del resultado</h2>
+              <p>{caseStudy.fullContent.introduction}</p>
+              {caseStudy.fullContent.sections.map((section: any) => (
+                <div>
+                  <h3>{section.title}</h3>
+                  <p>{section.content}</p>
+                  {section.bulletPoints && <ul>{section.bulletPoints.map((point: string) => <li>{point}</li>)}</ul>}
+                  {section.imageNote && <small>{section.imageNote}</small>}
                 </div>
               ))}
-            </div>
-          )}
-          
-          {caseStudy.results.proofImage && (
-            <div class={`mt-6 ${caseStudy.title.includes('Categoría Bebés') ? 'max-w-4xl mx-auto' : 'max-w-2xl mx-auto'}`}>
-              <div class={`${caseStudy.title.includes('Categoría Bebés') ? 'bg-gray-900 p-6 rounded-xl' : 'bg-white p-4 rounded-lg'} shadow-lg`}>
-                <div class="relative group cursor-pointer" onclick="openImageModal(this.querySelector('img').src, this.querySelector('img').alt)">
-                  <img 
-                    src={caseStudy.results.proofImage.url} 
-                    alt={caseStudy.results.proofImage.alt}
-                    class="w-full h-auto rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-                    <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-                <p class={`text-center text-sm font-medium mt-3 ${caseStudy.title.includes('Categoría Bebés') ? 'text-gray-300' : 'text-gray-700'}`}>
-                  {caseStudy.results.proofImage.caption}
-                </p>
-                <p class={`text-center text-xs mt-1 ${caseStudy.title.includes('Categoría Bebés') ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {caseStudy.results.proofImage.source}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-        
-        <!-- Testimonial section (if available) -->
-        {caseStudy.testimonial && (
-          <div class="bg-amazon-darkblue text-white rounded-xl p-8 shadow-lg mb-8">
-            <div class="flex flex-col items-center text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amazon-orange mb-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p class="text-lg italic mb-6">{caseStudy.testimonial.quote}</p>
-              <div>
-                <p class="font-bold">{caseStudy.testimonial.author}</p>
-                <p class="text-sm text-gray-300">{caseStudy.testimonial.position}</p>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        <!-- Conclusion -->
-        <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 mb-8">
-          <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-            Conclusión
-          </h2>
-          <p class="text-gray-700">
-            {caseStudy.conclusion}
-          </p>
-        </div>
-        
-        <!-- Full Content Sections (if available) -->
-        {caseStudy.fullContent && (
-          <div class="space-y-8 mb-8">
-            <!-- Introduction -->
-            <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-              <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-                Introducción
-              </h2>
-              <p class="text-gray-700">
-                {caseStudy.fullContent.introduction}
-              </p>
-            </div>
-
-            <!-- Detailed Sections -->
-            {caseStudy.fullContent.sections.map((section, index) => (
-              <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-                <h2 class="text-2xl font-bold mb-4 text-amazon-darkblue border-l-4 border-amazon-orange pl-4">
-                  {section.title}
-                </h2>
-                <p class="text-gray-700 mb-4">
-                  {section.content}
-                </p>
-                
-                {section.bulletPoints && (
-                  <ul class="space-y-3 mb-4">
-                    {section.bulletPoints.map(point => (
-                      <li class="flex items-start">
-                        <div class="flex-shrink-0 mt-1">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amazon-orange" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                          </svg>
-                        </div>
-                        <span class="ml-3 text-gray-700">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                
-                {section.imageNote && (
-                  <div class={`bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4 ${caseStudy.title.includes('Categoría Bebés') ? 'max-w-md mx-auto' : ''}`}>
-                    <p class="text-amber-800 italic text-sm">
-                      {section.imageNote}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-        
-        <!-- CTA -->
-        <div class="mt-12 text-center">
-          {caseStudy.fullContent?.cta ? (
-            <div class="bg-amazon-darkblue text-white rounded-xl p-8 shadow-lg mb-8">
-              <p class="text-lg mb-6">{caseStudy.fullContent.cta}</p>
-              <a href="/#solicita-tutoria" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
-                Reservar Auditoría Gratuita
-              </a>
-            </div>
-          ) : (
-            <a href="/#solicita-tutoria" class="inline-block bg-amazon-orange hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
-              ¿Quieres resultados similares? Contáctanos
-            </a>
+            </section>
           )}
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    {caseStudy.testimonial && (
+      <section class="case-testimonial">
+        <div class="sub-shell">
+          <p>“{caseStudy.testimonial.quote}”</p>
+          <div><strong>{caseStudy.testimonial.author}</strong><span>{caseStudy.testimonial.position}</span></div>
+        </div>
+      </section>
+    )}
+
+    <section class="sub-final">
+      <div class="sub-shell">
+        <div><p>Resultados distintos empiezan con decisiones distintas</p><h2>Veamos qué oportunidad esconde tu cuenta.</h2></div>
+        <a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </article>
+
+  <dialog class="case-proof-dialog" aria-label="Prueba ampliada"><button type="button" aria-label="Cerrar">×</button><img alt="Prueba ampliada" /></dialog>
 </Layout>
 
 <script>
-  function openImageModal(src, alt) {
-    // Create modal overlay
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
-    modal.style.cursor = 'zoom-out';
-    
-    // Create modal content
-    const modalContent = document.createElement('div');
-    modalContent.className = 'relative max-w-full max-h-full';
-    
-    // Create image
-    const modalImage = document.createElement('img');
-    modalImage.src = src;
-    modalImage.alt = alt;
-    modalImage.className = 'max-w-full max-h-full object-contain rounded-lg shadow-2xl';
-    
-    // Create close button
-    const closeButton = document.createElement('button');
-    closeButton.innerHTML = '×';
-    closeButton.className = 'absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 transition-colors duration-200 bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center';
-    closeButton.onclick = (e) => {
-      e.stopPropagation();
-      document.body.removeChild(modal);
-      document.body.style.overflow = '';
-    };
-    
-    // Assemble modal
-    modalContent.appendChild(modalImage);
-    modalContent.appendChild(closeButton);
-    modal.appendChild(modalContent);
-    
-    // Close on background click
-    modal.onclick = () => {
-      document.body.removeChild(modal);
-      document.body.style.overflow = '';
-    };
-    modalContent.onclick = (e) => e.stopPropagation();
-    
-    // Add to page and prevent body scroll
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-  }
-  
-  // Make function global
-  window.openImageModal = openImageModal;
+  const proofButton = document.querySelector<HTMLButtonElement>('[data-case-proof]');
+  const proofDialog = document.querySelector<HTMLDialogElement>('.case-proof-dialog');
+  const proofImage = proofDialog?.querySelector<HTMLImageElement>('img');
+  proofButton?.addEventListener('click', () => {
+    if (!proofDialog || !proofImage || !proofButton.dataset.caseProof) return;
+    proofImage.src = proofButton.dataset.caseProof;
+    proofImage.alt = proofButton.querySelector('img')?.alt || 'Prueba ampliada';
+    proofDialog.showModal();
+  });
+  proofDialog?.querySelector('button')?.addEventListener('click', () => proofDialog.close());
 </script>
+
+<style>
+  .case-detail-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.case-detail-hero-layout{position:relative;z-index:1;min-height:710px;display:grid;grid-template-columns:1.05fr .72fr;gap:85px;align-items:center;padding:74px 0}.case-back{display:inline-block;margin-bottom:50px;color:#aaa;font-size:.7rem;font-weight:800}.case-detail-hero h1{max-width:880px;margin:0;font-size:clamp(3.5rem,6.2vw,7rem);line-height:.89;font-weight:850}.case-detail-hero-layout>div>p:last-child{max-width:720px;margin:25px 0 0;color:#aaa;line-height:1.65}.case-detail-hero figure{position:relative;margin:0;aspect-ratio:4/5;background:#151515}.case-detail-hero figure img{width:100%;height:100%;object-fit:cover}.case-detail-hero figcaption{position:absolute;right:0;bottom:0;min-width:210px;padding:17px;background:#ff9900;color:#111}.case-detail-hero figcaption span,.case-detail-hero figcaption strong{display:block}.case-detail-hero figcaption span{font-size:.55rem;font-weight:850;text-transform:uppercase}.case-detail-hero figcaption strong{margin-top:6px;font-size:.75rem}.case-metrics{background:#ff9900;color:#111}.case-metrics .sub-shell{display:grid;grid-template-columns:repeat(3,.7fr) 1.2fr}.case-metrics .sub-shell>div,.case-metrics .sub-shell>p{min-height:160px;margin:0;padding:28px;border-left:1px solid rgba(0,0,0,.22)}.case-metrics .sub-shell>*:last-child{border-right:1px solid rgba(0,0,0,.22)}.case-metrics strong,.case-metrics span{display:block}.case-metrics strong{font-size:2.25rem}.case-metrics span{margin-top:45px;font-size:.57rem;font-weight:850;text-transform:uppercase}.case-metrics p{display:flex;align-items:flex-end;font-size:.72rem;line-height:1.6}.case-story{padding:115px 0;background:#f4f4ef;color:#111}.case-story-layout{display:grid;grid-template-columns:270px minmax(0,820px);gap:110px;justify-content:center}.case-story aside{position:sticky;top:145px;align-self:start;padding-top:7px}.case-story aside>span,.case-story aside>strong{display:block}.case-story aside>span{color:#a46100;font-size:.58rem;font-weight:850;text-transform:uppercase}.case-story aside>strong{margin-top:12px;font-size:1.25rem}.case-story aside nav{display:grid;margin-top:40px;border-top:1px solid #d0d0ca}.case-story aside a{padding:13px 0;border-bottom:1px solid #d0d0ca;color:#555750;font-size:.72rem}.case-story-content>section{padding:0 0 80px;margin-bottom:80px;border-bottom:1px solid #cecec8}.case-section-label{margin:0 0 18px!important;color:#a46100!important;font-size:.6rem!important;font-weight:850;text-transform:uppercase}.case-story-content h2{margin:0 0 30px;font-size:clamp(3rem,5vw,5.2rem);line-height:.94}.case-story-content h3{margin:38px 0 12px;font-size:1.55rem}.case-story-content p{color:#4f514b;font-size:1rem;line-height:1.78}.case-story-content ul{display:grid;gap:12px;margin:28px 0 0;padding:0;list-style:none}.case-story-content li{position:relative;padding:15px 0 15px 24px;border-top:1px solid #d0d0ca;color:#353732;line-height:1.55}.case-story-content li:before{content:"";position:absolute;left:2px;top:23px;width:7px;height:7px;background:#ff9900}.case-additional{margin-top:35px;border-top:1px solid #d0d0ca}.case-additional div{display:flex;justify-content:space-between;gap:30px;padding:16px 3px;border-bottom:1px solid #d0d0ca}.case-proof{margin:42px 0 0}.case-proof button{width:100%;padding:0;border:0;background:#111;cursor:zoom-in}.case-proof img{display:block;width:100%;height:auto}.case-proof figcaption{margin-top:12px;color:#555750;font-size:.68rem}.case-proof figcaption small{display:block;margin-top:5px}.case-deep-dive>div{padding:30px 0;border-top:1px solid #d0d0ca}.case-deep-dive small{display:block;margin-top:15px;color:#777970;line-height:1.5}.case-testimonial{padding:105px 0;background:#101010;color:#fff}.case-testimonial .sub-shell{display:grid;grid-template-columns:1fr auto;gap:70px;align-items:end}.case-testimonial p{max-width:1050px;margin:0;font-size:clamp(2.5rem,4.6vw,5rem);line-height:1}.case-testimonial strong,.case-testimonial span{display:block}.case-testimonial span{margin-top:6px;color:#92948e;font-size:.67rem}.case-proof-dialog{width:min(1100px,calc(100% - 32px));height:min(90vh,900px);padding:0;border:1px solid #333;background:#0a0a0a}.case-proof-dialog::backdrop{background:rgba(0,0,0,.88)}.case-proof-dialog img{width:100%;height:100%;object-fit:contain}.case-proof-dialog button{position:absolute;top:12px;right:12px;width:42px;height:42px;border:1px solid #555;background:#111;color:#fff;font-size:1.7rem}
+  @media(max-width:900px){.case-detail-hero-layout{grid-template-columns:1fr}.case-detail-hero figure{max-width:650px;aspect-ratio:4/3}.case-metrics .sub-shell{grid-template-columns:1fr 1fr}.case-metrics .sub-shell>*:nth-child(3){border-top:1px solid rgba(0,0,0,.22)}.case-story-layout{grid-template-columns:1fr;gap:60px}.case-story aside{position:static}.case-story aside nav{grid-template-columns:repeat(3,1fr)}.case-story aside a{border-right:1px solid #d0d0ca}.case-testimonial .sub-shell{grid-template-columns:1fr}}
+  @media(max-width:700px){.case-detail-hero-layout{min-height:auto;padding:72px 0 55px;gap:42px}.case-back{margin-bottom:35px}.case-detail-hero h1{font-size:clamp(2.9rem,12vw,4rem)}.case-metrics .sub-shell{grid-template-columns:1fr}.case-metrics .sub-shell>div,.case-metrics .sub-shell>p{min-height:115px;border-right:1px solid rgba(0,0,0,.22);border-bottom:1px solid rgba(0,0,0,.22)}.case-metrics span{margin-top:20px}.case-story{padding:75px 0}.case-story aside nav{grid-template-columns:1fr}.case-story-content>section{padding-bottom:55px;margin-bottom:55px}.case-story-content h2{font-size:clamp(2.7rem,12vw,3.8rem)}.case-testimonial{padding:75px 0}}
+</style>

@@ -1,0 +1,295 @@
+---
+import "../styles/home-redesign.css";
+import { homeShowcase } from "../data/home-showcase";
+
+const signals = [
+  { id: "ads", number: "01", label: "Amazon Ads" },
+  { id: "listing", number: "02", label: "Conversión" },
+  { id: "catalog", number: "03", label: "Catálogo" },
+  { id: "stock", number: "04", label: "FBA / FBM" },
+];
+
+const services = [
+  { step: "Detectar", name: "Auditoría de cuenta", copy: "Una lectura completa de Seller Central para saber qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/auditoria-cuenta-amazon" },
+  { step: "Rentabilizar", name: "PPC y Amazon Ads", copy: "Campañas construidas alrededor del beneficio del producto, no de métricas bonitas sin contexto.", tags: ["ACOS", "TACOS", "ROAS"], href: "/agencia-ppc-amazon" },
+  { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ alineados para ganar clics, convencer y sostener el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/optimizacion-listings-amazon" },
+  { step: "Comunicar", name: "Imágenes que venden", copy: "Imagen principal, infografías, comparativas y contenido A+ para explicar mejor el producto y elevar la conversión.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon" },
+  { step: "Escalar", name: "Gestión integral", copy: "Decisiones semanales sobre publicidad, stock, precio, catálogo y crecimiento en Amazon Europa.", tags: ["Seller Central", "FBA / FBM", "Europa"], href: "/gestion-cuenta-amazon-seller-central" },
+];
+
+const process = [
+  { number: "01", title: "Leemos", text: "Cuenta, producto, mercado y margen." },
+  { number: "02", title: "Priorizamos", text: "Lo urgente, lo rentable y lo que puede esperar." },
+  { number: "03", title: "Ejecutamos", text: "Cambios concretos con una métrica asociada." },
+  { number: "04", title: "Escalamos", text: "Más inversión cuando el sistema ya responde." },
+];
+
+const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 26, 36, 100, 31, 22, 36, 36, 63, 30, 53, 41, 68, 73];
+---
+
+<script>
+  import { Chart } from "chart.js/auto";
+
+  const signalCopy = {
+    ads: { label: "Amazon Ads", title: "El gasto sube, pero el margen no.", text: "Separamos crecimiento real de ventas compradas y encontramos campañas, términos y ASINs que merecen cada euro.", metric: "PPC", detail: "estructura y rentabilidad", tone: "orange", bars: [38, 52, 46, 72, 61, 84, 68, 93] },
+    listing: { label: "Conversión", title: "Hay visitas. Falta una razón para comprar.", text: "Trabajamos imagen principal, infografías, copy, precio, reseñas y A+ como un único sistema de conversión.", metric: "CTR", detail: "tráfico que sí entra", tone: "lime", bars: [44, 40, 55, 53, 68, 74, 82, 88] },
+    catalog: { label: "Catálogo", title: "Amazon está frenando la operativa.", text: "Variaciones rotas, incidencias, supresiones y errores de catálogo dejan de ser ruido y pasan a tener prioridad.", metric: "ASIN", detail: "catálogo bajo control", tone: "blue", bars: [71, 68, 61, 55, 49, 66, 79, 91] },
+    stock: { label: "FBA / FBM", title: "El ranking se pierde cuando falta stock.", text: "Coordinamos previsión, Buy Box, precio y logística híbrida para sostener ventas cuando FBA no llega.", metric: "FBA", detail: "stock y disponibilidad", tone: "red", bars: [82, 77, 69, 48, 42, 63, 78, 89] },
+  } as const;
+
+  const initHomeExperience = async () => {
+    const heroAxis = document.querySelector<HTMLElement>("[data-hero-axis]");
+    const heroMacbook = document.querySelector<HTMLElement>("[data-hero-macbook]");
+    let axisFrame = 0;
+    const updateHeroAxis = () => {
+      axisFrame = 0;
+      const progress = Math.min(1, Math.max(0, window.scrollY / 420));
+      if (heroAxis) {
+        heroAxis.style.setProperty("--axis-turn", `${progress * 90}deg`);
+        heroAxis.style.setProperty("--axis-scale", `${1 + progress * .5}`);
+      }
+      if (heroMacbook) {
+        const mobileTrigger = (window.innerHeight * .82 - heroMacbook.getBoundingClientRect().top) / 180;
+        const openProgress = Math.min(1, Math.max(0, window.innerWidth <= 760 ? mobileTrigger : window.scrollY / 160));
+        heroMacbook.style.setProperty("--lid-angle", `${-84 + openProgress * 84}deg`);
+        heroMacbook.style.setProperty("--screen-opacity", String(.12 + openProgress * .88));
+        heroMacbook.classList.toggle("is-open", openProgress >= .98);
+      }
+    };
+    updateHeroAxis();
+    window.addEventListener("scroll", () => {
+      if (!axisFrame) axisFrame = window.requestAnimationFrame(updateHeroAxis);
+    }, { passive: true });
+
+    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-signal]");
+    const get = (name: string) => document.querySelector<HTMLElement>(`[data-signal-${name}]`);
+    const visual = document.querySelector<HTMLElement>("[data-signal-visual]");
+    const bars = document.querySelectorAll<HTMLElement>("[data-signal-bar]");
+
+    buttons.forEach((button) => button.addEventListener("click", () => {
+      const next = signalCopy[button.dataset.signal as keyof typeof signalCopy];
+      if (!next) return;
+      buttons.forEach((item) => { item.classList.toggle("active", item === button); item.setAttribute("aria-pressed", String(item === button)); });
+      const values = { label: next.label, title: next.title, text: next.text, metric: next.metric, detail: next.detail };
+      Object.entries(values).forEach(([key, value]) => { const node = get(key); if (node) node.textContent = value; });
+      if (visual) visual.dataset.tone = next.tone;
+      bars.forEach((bar, index) => bar.style.setProperty("--bar-height", `${next.bars[index] ?? 50}%`));
+    }));
+
+    const caseChart = document.querySelector<HTMLCanvasElement>("[data-case-chart]");
+    if (caseChart && !caseChart.dataset.ready) {
+      const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
+      new Chart(caseChart, {
+        type: "line",
+        data: {
+          labels: ["Mes 1", "Mes 2", "Mes 3", "Mes 4", "Mes 5", "Mes 6"],
+          datasets: [{
+            data: [600, 820, 1080, 2380, 5904.74, 5280],
+            borderColor: "#ff9900",
+            backgroundColor: "#ff9900",
+            borderWidth: 3,
+            pointBackgroundColor: "#ff9900",
+            pointBorderColor: "#fff",
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 8,
+            pointHitRadius: 24,
+            tension: .3,
+            fill: false,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? false : { duration: 900 },
+          interaction: { mode: "nearest", axis: "x", intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              displayColors: false,
+              backgroundColor: "#11151b",
+              titleColor: "#ff9900",
+              bodyColor: "#fff",
+              padding: 12,
+              callbacks: { label: (context) => `Facturación aprox.: ${euro.format(context.parsed.y)}` },
+            },
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { color: "#777b75", font: { size: 11, weight: 700 } } },
+            y: { beginAtZero: true, suggestedMax: 6500, border: { display: false }, grid: { color: "rgba(17,21,27,.09)" }, ticks: { color: "#777b75", callback: (value) => `${Number(value) / 1000}k €` } },
+          },
+        },
+      });
+      caseChart.dataset.ready = "true";
+    }
+
+    const reflectionHeading = document.querySelector<HTMLElement>("[data-reflection]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const clamp = (value: number) => Math.min(1, Math.max(0, value));
+    let reflectionFrame = 0;
+    const updateReflection = () => {
+      reflectionFrame = 0;
+
+      if (reflectionHeading && !reduceMotion) {
+        const rect = reflectionHeading.getBoundingClientRect();
+        const travel = clamp((window.innerHeight * .72 - rect.top) / (window.innerHeight + rect.height));
+        reflectionHeading.style.setProperty("--reflection-shift", `${(travel - .5) * 6}px`);
+      }
+    };
+    updateReflection();
+    window.addEventListener("scroll", () => {
+      if (!reflectionFrame) reflectionFrame = window.requestAnimationFrame(updateReflection);
+    }, { passive: true });
+    window.addEventListener("resize", updateReflection);
+
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal], [data-phone-rise]").forEach((element) => observer.observe(element));
+
+    document.querySelectorAll<HTMLFormElement>(".audit-form").forEach((form) => {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const status = form.querySelector<HTMLElement>("[data-form-status]");
+        const submit = form.querySelector<HTMLButtonElement>("button[type='submit']");
+        if (!status || !submit) return;
+        const values = Object.fromEntries(new FormData(form).entries());
+        status.textContent = "Enviando solicitud..."; status.dataset.state = "sending"; submit.disabled = true;
+        try {
+          const [{ db }, { collection, addDoc }] = await Promise.all([
+            import("../lib/firebase"),
+            import("firebase/firestore"),
+          ]);
+          await addDoc(collection(db, "email_submissions"), { name: values.name, email: values.email, phone: values.phone || null, monthly_sales: values.monthly_sales || null, subject: "Solicitud de auditoría Amazon", message: values.message || "Quiero detectar oportunidades en mi cuenta de Amazon.", source: "home-experience-2026", status: "unread", created_at: new Date().toISOString() });
+          status.textContent = "Solicitud recibida. Hablamos muy pronto."; status.dataset.state = "success"; form.reset();
+        } catch (error) {
+          console.error("Error al enviar la solicitud:", error); status.textContent = "No se ha podido enviar. Escríbenos a info@amznboost.es."; status.dataset.state = "error";
+        } finally { submit.disabled = false; }
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHomeExperience, { once: true });
+  } else {
+    initHomeExperience();
+  }
+</script>
+
+<section class="ab-hero" id="inicio">
+  <div class="ab-hero-lines" aria-hidden="true"></div>
+  <div class="ab-hero-shell">
+    <div class="ab-hero-copy" data-reveal>
+      <p class="ab-overline"><span data-hero-axis></span> España · Europa · FBA · FBM</p>
+      <h1><small>Agencia Amazon para marcas privadas</small><span>Amazon</span><em>Boost.</em></h1>
+      <p class="ab-hero-statement">Convertimos Amazon en un canal rentable.</p>
+      <p class="ab-hero-description">Tu cuenta ya está diciendo por qué no crece. Leemos esas señales, priorizamos las que afectan al margen y ejecutamos una estrategia conectada de PPC, listings, catálogo, precio y stock.</p>
+      <div class="ab-hero-actions">
+        <a class="ab-button ab-button-primary" href="#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+        <a class="ab-button ab-button-ghost" href="#caso-real">Ver un caso real <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+
+    <div class="ab-account-stage" data-reveal>
+      <div class="ab-stage-caption"><span>Amazon Boost / Gestión integral</span></div>
+      <div class="ab-macbook" data-hero-macbook>
+        <div class="ab-macbook-screen">
+          <div class="ab-macbook-camera" aria-hidden="true"><i></i></div>
+          <div class="ab-seller-window" aria-label="Vista de ejemplo de una cuenta de Seller Central">
+            <div class="ab-seller-topbar">
+              <div class="ab-seller-brand"><b>amazon</b><span>seller central</span></div>
+              <div class="ab-seller-search">Buscar en Seller Central</div>
+              <div class="ab-seller-market">España <b>ES</b></div>
+            </div>
+            <div class="ab-seller-layout">
+              <aside class="ab-seller-sidebar" aria-hidden="true">
+                <strong>INICIO</strong><span>Pedidos</span><span>Inventario</span><span>Publicidad</span><span>Informes</span>
+              </aside>
+              <div class="ab-seller-dashboard">
+                <div class="ab-seller-health"><i>✓</i><strong>Tu tienda es saludable</strong><span>›</span></div>
+                <div class="ab-seller-heading">
+                  <div><small>VENTAS DE PRODUCTOS</small><h2>Últimos 30 días</h2></div>
+                  <span>Actualizado ahora</span>
+                </div>
+                <div class="ab-seller-performance">
+                  <article><strong>487.930 €</strong><small>Últimos 30 días</small></article>
+                  <article class="is-down"><strong>12 % ↓</strong><small>Periodo anterior</small></article>
+                  <article class="is-up"><strong>742 % ↑</strong><small>El año pasado</small></article>
+                </div>
+                <div class="ab-seller-bar-chart" role="img" aria-label="Gráfico de barras de ventas diarias durante los últimos 30 días">
+                  <div class="ab-seller-grid-lines"><i></i><i></i><i></i><i></i></div>
+                  <div class="ab-seller-bars">{sellerBars.map((height) => <i style={`--seller-bar:${height}%`}></i>)}</div>
+                  <div class="ab-seller-axis"><span>28 jul</span><span>7 ago</span><span>17 ago</span><span>26 ago</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="ab-macbook-label">MacBook Pro</span>
+        </div>
+        <div class="ab-macbook-base-photo" aria-hidden="true"><img src="/images/macbook-pro-base-real.png" alt="" /></div>
+      </div>
+      <div class="ab-stage-note">PPC · Contenido · Catálogo · Stock · Expansión</div>
+    </div>
+  </div>
+  <div class="ab-proof-status"><strong>Base provisional</strong><span>{homeShowcase.proofNote}</span></div>
+  <div class="ab-proof-rail">{homeShowcase.proof.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}</div>
+</section>
+
+<div class="ab-ticker"><div><span>Seller Central</span><i></i><span>Amazon Ads</span><i></i><span>SEO Amazon</span><i></i><span>FBA / FBM</span><i></i><span>Buy Box</span><i></i><span>Conversión</span><i></i><span>Catálogo</span><i></i><span>Seller Central</span><i></i><span>Amazon Ads</span><i></i><span>SEO Amazon</span><i></i><span>FBA / FBM</span><i></i><span>Buy Box</span></div></div>
+
+<section class="ab-signal-section" id="diagnostico">
+  <div class="ab-section-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Diagnóstico inicial</p><h2>¿Dónde se está escapando el crecimiento?</h2><p>La cuenta rara vez tiene un solo problema. Estas son las cuatro señales que conectamos antes de decidir.</p></div>
+  <div class="ab-signal-experience" data-reveal>
+    <div class="ab-signal-tabs" role="group" aria-label="Áreas de diagnóstico">
+      {signals.map((signal, index) => <button type="button" class:list={["ab-signal-tab", { active: index === 0 }]} data-signal={signal.id} aria-pressed={index === 0 ? "true" : "false"}><span>{signal.number}</span><strong>{signal.label}</strong><i aria-hidden="true">→</i></button>)}
+    </div>
+    <div class="ab-signal-visual" data-signal-visual data-tone="orange">
+      <div class="ab-signal-copy"><span class="ab-signal-label" data-signal-label>Amazon Ads</span><h3 data-signal-title>El gasto sube, pero el margen no.</h3><p data-signal-text>Separamos crecimiento real de ventas compradas y encontramos campañas, términos y ASINs que merecen cada euro.</p><a href="#auditoria">Analizar mi cuenta <span aria-hidden="true">↗</span></a></div>
+      <div class="ab-signal-data"><div class="ab-signal-score"><strong data-signal-metric>PPC</strong><span data-signal-detail>estructura y rentabilidad</span></div><div class="ab-signal-bars" aria-hidden="true">{[38,52,46,72,61,84,68,93].map((height) => <i data-signal-bar style={`--bar-height:${height}%`}></i>)}</div><div class="ab-signal-axis"><span>Estructura</span><span>Control</span><span>Escala</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ab-case-section" id="caso-real">
+  <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {homeShowcase.featuredCase.status}</p><h2>{homeShowcase.featuredCase.title}</h2><p>{homeShowcase.featuredCase.description}</p></div>
+  <div class="ab-case-layout">
+    <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={homeShowcase.featuredCase.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
+    <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{homeShowcase.featuredCase.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={homeShowcase.featuredCase.href}>Ampliar el caso <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="ab-case-reviews" data-reveal>
+    <div class="ab-review-intro"><span>La experiencia del cliente</span><h3>El resultado importa. El camino hasta él, también.</h3><p>Opiniones publicadas por clientes, referentes a casos de éxito, en plataformas externas.</p></div>
+    <div class="ab-review-grid">{homeShowcase.featuredCase.reviews.map((review) => <a class:list={["ab-review-card", `ab-review-${review.platform.toLowerCase()}`]} href={review.url} target="_blank" rel="noreferrer" aria-label={`Ver opinión original de ${review.author} en ${review.platform}`}><span class="ab-review-watermark" aria-hidden="true">{review.platform === "LinkedIn" ? "in" : "★"}</span><div class="ab-review-brand"><span aria-hidden="true">{review.platform === "LinkedIn" ? "in" : "★"}</span><strong>{review.platform}</strong><em>{review.date}</em></div>{review.platform === "Trustpilot" && <div class="ab-review-score" aria-label="5 de 5 estrellas">★★★★★</div>}<blockquote><strong>{review.title}</strong><p>“{review.quote}”</p></blockquote><div class="ab-review-person"><span>{review.initials}</span><div><strong>{review.author}</strong><small>{review.meta}</small></div><em>Ver original ↗</em></div></a>)}</div>
+  </div>
+  <div class="ab-more-cases" data-reveal><a href="/casos-de-exito">Ver más casos de éxito <span aria-hidden="true">↗</span></a><span>Nuevos casos y resultados en preparación</span></div>
+</section>
+
+<section class="ab-services-section" id="services">
+  <div class="ab-section-intro ab-services-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> El sistema Amazon Boost</p><h2 data-reflection="No gestionamos piezas sueltas. Gestionamos el efecto que tienen entre sí.">No gestionamos piezas sueltas. Gestionamos el efecto que tienen entre sí.</h2></div>
+  <div class="ab-service-list">{services.map((service) => <a class="ab-service-row" href={service.href} data-reveal><div class="ab-service-title"><span class="ab-service-step"><i></i>{service.step}</span><h3>{service.name}</h3></div><p>{service.copy}</p><div class="ab-service-tags">{service.tags.map((tag) => <span>{tag}</span>)}</div></a>)}</div>
+</section>
+
+<section class="ab-method-section">
+  <div class="ab-method-copy" data-reveal><div><p class="ab-overline"><span></span> Método de trabajo</p><h2>Menos informes. Más decisiones que mueven la cuenta.</h2></div><p>Una forma de trabajar sencilla de entender y difícil de ejecutar mal.</p></div>
+  <div class="ab-method-grid">{process.map((item) => <article data-reveal><span>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+</section>
+
+<section class="ab-founder-section">
+  <div class="ab-founder-portrait" data-reveal><img src="/images/linkedin foto.jpg" alt="Sergio Porras, fundador de Amazon Boost" loading="lazy" /><div class="ab-portrait-label"><strong>Sergio Porras</strong><span>Fundador / Amazon Boost</span></div></div>
+  <div class="ab-founder-copy" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Cerca de la cuenta</p><h2>Delega tu cuenta. Nosotros nos encargamos de escalarla.</h2><p>Soy Sergio Porras. Creé Amazon Boost para que marcas y vendedores tengan una lectura clara de su cuenta y un equipo al que delegar completamente la gestión: desde la operativa diaria hasta la estrategia de crecimiento.</p><blockquote>“Primero entendemos dónde está el margen. Después decidimos cómo crecer.”</blockquote><a href="#auditoria">Hablar con Sergio <span aria-hidden="true">↗</span></a></div>
+</section>
+
+<section class="ab-audit-section" id="auditoria">
+  <div class="ab-audit-shell">
+    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría inicial</p><h2>Tu cuenta ya tiene la respuesta. Vamos a encontrarla.</h2><p>Cuéntanos el punto de partida. Revisaremos si hay una oportunidad real y te diremos qué tendría sentido mover primero.</p><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
+    <form class="audit-form ab-phone-form" data-phone-rise>
+      <div class="ab-phone-speaker" aria-hidden="true"><i></i></div>
+      <div class="ab-phone-side ab-phone-action" aria-hidden="true"></div><div class="ab-phone-side ab-phone-volume" aria-hidden="true"></div>
+      <div class="ab-phone-title"><span>Amazon Boost</span><small>Auditoría inicial</small></div>
+      <div class="ab-field-pair"><label>Nombre<input type="text" name="name" autocomplete="name" placeholder="Tu nombre" required /></label><label>Email<input type="email" name="email" autocomplete="email" placeholder="tu@empresa.com" required /></label></div>
+      <div class="ab-field-pair"><label>Teléfono<input type="tel" name="phone" autocomplete="tel" placeholder="+34 600 000 000" /></label><label>Ventas mensuales<select name="monthly_sales"><option value="">Selecciona un rango</option><option value="0-5k">0 – 5.000 €</option><option value="5k-25k">5.000 – 25.000 €</option><option value="25k-100k">25.000 – 100.000 €</option><option value="100k+">Más de 100.000 €</option></select></label></div>
+      <label>¿Qué te preocupa ahora?<textarea name="message" rows="3" placeholder="PPC, listings, stock, catálogo, lanzamiento..."></textarea></label>
+      <label class="ab-consent"><input type="checkbox" name="consent" required /><span>Acepto que Amazon Boost contacte conmigo sobre esta solicitud.</span></label>
+      <button type="submit">Solicitar auditoría <span aria-hidden="true">↗</span></button><a class="ab-call-expert" href="tel:+34650606400"><span>Hablar con un experto</span><strong>+34 650 606 400</strong></a><p class="ab-form-note">Sin compromiso. Respuesta personal, no automática.</p><p class="ab-form-status" data-form-status aria-live="polite"></p><div class="ab-phone-home" aria-hidden="true"></div>
+    </form>
+  </div>
+</section>

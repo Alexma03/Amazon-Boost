@@ -1,0 +1,434 @@
+---
+import ControlLayout from '../layouts/ControlLayout.astro';
+---
+
+<ControlLayout
+  title="Agency Control | Amazon Boost"
+  description="Centro operativo de Amazon Boost para monitorizar cuentas, Buy Box, publicidad e inventario."
+>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="/control" aria-label="Amazon Boost Control">
+        <span class="brand-mark">ab</span>
+        <span><b>amazon boost</b><small>AGENCY CONTROL</small></span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <span class="nav-label">OPERACIONES</span>
+        <a class="nav-item active" href="#resumen" data-nav="Resumen"><span class="nav-icon">⌂</span>Resumen</a>
+        <a class="nav-item" href="#cuentas" data-nav="Cuentas"><span class="nav-icon">◫</span>Cuentas <em>8</em></a>
+        <a class="nav-item" href="#buybox" data-nav="Buy Box"><span class="nav-icon">◇</span>Buy Box <em class="danger">3</em></a>
+        <a class="nav-item" href="#publicidad" data-nav="Publicidad"><span class="nav-icon">↗</span>Publicidad</a>
+        <a class="nav-item" href="#inventario" data-nav="Inventario"><span class="nav-icon">□</span>Inventario <em>6</em></a>
+        <span class="nav-label secondary">GESTIÓN</span>
+        <a class="nav-item" href="#acciones" data-nav="Acciones"><span class="nav-icon">✓</span>Acciones <em>12</em></a>
+        <a class="nav-item" href="#informes" data-nav="Informes"><span class="nav-icon">≡</span>Informes</a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="avatar">SP</div>
+        <span><b>Sergio Porras</b><small>Administrador</small></span>
+        <button aria-label="Abrir opciones">···</button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">ab</span><b>Agency Control</b></div>
+        <div class="top-actions">
+          <span class="demo-pill">ENTORNO DEMO</span>
+          <button class="sync"><span></span> Datos actualizados hace 4 min</button>
+          <button class="icon-btn" id="search-button" aria-label="Buscar">⌕</button>
+          <button class="icon-btn notification" id="notification-button" aria-label="Notificaciones">♢<i></i></button>
+        </div>
+      </header>
+
+      <div class="workspace" id="resumen">
+        <section class="intro">
+          <div>
+            <p class="eyebrow">MARTES, 25 DE AGOSTO</p>
+            <h1>Buenos días, Sergio.</h1>
+            <p>Tu agencia necesita atención en <strong>5 puntos</strong>. Hemos ordenado lo importante.</p>
+          </div>
+          <div class="intro-actions">
+            <label class="market-select" aria-label="Filtrar por marketplace">
+              <select id="marketplace-filter">
+                <option value="all">Todos los marketplaces</option>
+                <option value="es">Amazon.es</option>
+                <option value="fr">Amazon.fr</option>
+                <option value="de">Amazon.de</option>
+                <option value="it">Amazon.it</option>
+              </select>
+              <span>⌄</span>
+            </label>
+            <button class="primary" id="connect-account">＋ Conectar cuenta</button>
+          </div>
+        </section>
+
+        <section class="health-strip" aria-label="Estado general de la agencia">
+          <div class="score"><div class="score-ring"><b>82</b><small>/100</small></div><span><small>SALUD DE LA AGENCIA</small><b>Todo bajo control</b></span></div>
+          <div class="health-stat"><i class="green"></i><span><b>5</b><small>Cuentas saludables</small></span></div>
+          <div class="health-stat"><i class="amber"></i><span><b>2</b><small>Necesitan atención</small></span></div>
+          <div class="health-stat"><i class="red"></i><span><b>1</b><small>En riesgo</small></span></div>
+          <button>Ver todas las cuentas <span>→</span></button>
+        </section>
+
+        <section class="metrics" aria-label="Métricas principales">
+          <article>
+            <div class="metric-head"><span>VENTAS 30 DÍAS</span><i>€</i></div>
+            <strong>482.640 €</strong>
+            <p class="positive">↗ 12,4% <span>vs. periodo anterior</span></p>
+            <div class="sparkline bars" aria-hidden="true">
+              <i style="height:35%"></i><i style="height:47%"></i><i style="height:43%"></i><i style="height:59%"></i><i style="height:54%"></i><i style="height:71%"></i><i style="height:65%"></i><i style="height:84%"></i><i style="height:76%"></i><i style="height:92%"></i><i style="height:82%"></i><i style="height:100%"></i>
+            </div>
+          </article>
+          <article>
+            <div class="metric-head"><span>INVERSIÓN PUBLICITARIA</span><i>↗</i></div>
+            <strong>78.320 €</strong>
+            <p class="positive">↗ 4,8% <span>con TACoS del 16,2%</span></p>
+            <div class="progress"><span style="width:68%"></span></div>
+            <small>68% del presupuesto mensual</small>
+          </article>
+          <article>
+            <div class="metric-head"><span>BUY BOX GLOBAL</span><i>◇</i></div>
+            <strong>91,4%</strong>
+            <p class="negative">↘ 2,1% <span>desde ayer</span></p>
+            <div class="mini-donut"><span></span><b>3 ASIN<br><small>en riesgo</small></b></div>
+          </article>
+          <article>
+            <div class="metric-head"><span>STOCK EN RIESGO</span><i>□</i></div>
+            <strong>6 SKU</strong>
+            <p class="negative">2 críticos <span>con menos de 7 días</span></p>
+            <div class="stock-tags"><span class="critical">2 críticos</span><span>4 próximos</span></div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="attention-card" id="acciones">
+            <div class="section-head">
+              <div><span class="pulse"></span><h2>Requiere tu atención</h2><small>Ordenado por impacto estimado</small></div>
+              <button>Ver las 12 acciones →</button>
+            </div>
+
+            <div class="alert-row critical-alert">
+              <div class="alert-symbol">!</div>
+              <div class="alert-copy">
+                <div class="alert-meta"><span>BUY BOX</span><small>Hace 18 min</small></div>
+                <h3>Pet & Joy ha perdido la Buy Box en su ASIN principal</h3>
+                <p>B0C8N4K2PL · El precio está un 4,8% por encima de la oferta ganadora.</p>
+                <div class="impact"><b>−93 €/día</b><span>Pérdida estimada</span><i></i><b>22%</b><span>Margen protegido</span></div>
+              </div>
+              <button class="review" data-action="buybox">Revisar recomendación <span>→</span></button>
+            </div>
+
+            <div class="alert-row warning-alert">
+              <div class="alert-symbol">□</div>
+              <div class="alert-copy">
+                <div class="alert-meta"><span>INVENTARIO</span><small>Hace 1 h</small></div>
+                <h3>Casa Moderna agotará existencias en 6 días</h3>
+                <p>SKU CM-LAMP-02 · 84 unidades disponibles · Velocidad: 14 uds/día.</p>
+              </div>
+              <button class="review" data-action="stock">Calcular reposición <span>→</span></button>
+            </div>
+
+            <div class="alert-row info-alert">
+              <div class="alert-symbol">↗</div>
+              <div class="alert-copy">
+                <div class="alert-meta"><span>PUBLICIDAD</span><small>Hace 3 h</small></div>
+                <h3>Una campaña rentable agota presupuesto antes de las 14:00</h3>
+                <p>Ganhu · SP | Exact | Top sellers · ROAS 5,8 durante los últimos 14 días.</p>
+              </div>
+              <button class="review" data-action="ads">Ver oportunidad <span>→</span></button>
+            </div>
+          </article>
+
+          <aside class="accounts-card" id="cuentas">
+            <div class="section-head"><div><h2>Cuentas</h2><small>Rendimiento de hoy</small></div><button>Ver todas →</button></div>
+            <div class="account-row">
+              <span class="account-logo pet">P</span><div><b>Pet & Joy</b><small>Amazon.es</small></div><span class="account-sales"><b>8.420 €</b><small class="positive">↗ 18,2%</small></span><i class="status warn"></i>
+            </div>
+            <div class="account-row">
+              <span class="account-logo casa">CM</span><div><b>Casa Moderna</b><small>Amazon.es · .fr</small></div><span class="account-sales"><b>6.185 €</b><small class="positive">↗ 7,4%</small></span><i class="status warn"></i>
+            </div>
+            <div class="account-row">
+              <span class="account-logo ganhu">G</span><div><b>Ganhu</b><small>Amazon.es · .it</small></div><span class="account-sales"><b>5.740 €</b><small class="positive">↗ 12,1%</small></span><i class="status good"></i>
+            </div>
+            <div class="account-row">
+              <span class="account-logo tech">TL</span><div><b>Tech Life</b><small>Amazon.es · .de</small></div><span class="account-sales"><b>4.290 €</b><small class="negative">↘ 3,8%</small></span><i class="status bad"></i>
+            </div>
+            <div class="account-row">
+              <span class="account-logo bebe">BB</span><div><b>Bebé Bonito</b><small>Amazon.es</small></div><span class="account-sales"><b>3.890 €</b><small class="positive">↗ 5,6%</small></span><i class="status good"></i>
+            </div>
+            <div class="legend"><span><i class="good"></i>Saludable</span><span><i class="warn"></i>Atención</span><span><i class="bad"></i>En riesgo</span></div>
+          </aside>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-layer" id="connect-modal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="Cerrar ventana"></button>
+    <section class="connect-dialog" role="dialog" aria-modal="true" aria-labelledby="connect-title">
+      <button class="dialog-close" data-close-modal aria-label="Cerrar">×</button>
+      <span class="dialog-logo">ab</span>
+      <p class="eyebrow">NUEVA INTEGRACIÓN</p>
+      <h2 id="connect-title">Conecta una cuenta de cliente</h2>
+      <p>El cliente autorizará el acceso de solo lectura mediante Amazon. Amazon Boost nunca recibe su contraseña.</p>
+      <div class="connect-steps">
+        <span class="done"><b>1</b><small>Marketplace</small></span><i></i>
+        <span><b>2</b><small>Autorización</small></span><i></i>
+        <span><b>3</b><small>Sincronización</small></span>
+      </div>
+      <label class="dialog-label" for="account-name">Nombre interno del cliente</label>
+      <input id="account-name" type="text" placeholder="Ej. Marca Mediterránea" autocomplete="off" />
+      <label class="dialog-label" for="account-region">Región principal</label>
+      <select id="account-region">
+        <option>Europa — España, Francia, Alemania, Italia…</option>
+        <option>Norteamérica — EE. UU., Canadá y México</option>
+        <option>Lejano Oriente — Japón, Australia y Singapur</option>
+      </select>
+      <button class="amazon-connect" id="start-connection">Continuar con Amazon <span>→</span></button>
+      <small class="dialog-note">Prototipo: esta acción simula el inicio del flujo OAuth de Amazon.</small>
+    </section>
+  </div>
+
+  <aside class="action-drawer" id="action-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+    <div class="drawer-top">
+      <div><span id="drawer-category">BUY BOX</span><small id="drawer-time">Detectado hace 18 min</small></div>
+      <button id="close-drawer" aria-label="Cerrar detalle">×</button>
+    </div>
+    <div class="drawer-content">
+      <span class="priority" id="drawer-priority">PRIORIDAD CRÍTICA</span>
+      <h2 id="drawer-title">Pet & Joy ha perdido la Buy Box</h2>
+      <p id="drawer-description">El precio actual está un 4,8% por encima de la oferta ganadora. La caída de conversión ya es visible.</p>
+      <div class="impact-grid">
+        <article><small>IMPACTO ESTIMADO</small><b id="drawer-impact">−93 €/día</b></article>
+        <article><small>CONFIANZA</small><b id="drawer-confidence">Alta · 91%</b></article>
+      </div>
+      <section class="reason-box">
+        <span>POR QUÉ LO RECOMENDAMOS</span>
+        <p id="drawer-reason">El precio ganador es 27,95 €, frente a tus 29,29 €. Puedes igualarlo manteniendo un margen estimado del 22%.</p>
+      </section>
+      <section class="steps-box">
+        <span>PLAN PROPUESTO</span>
+        <ol id="drawer-steps">
+          <li>Validar el margen mínimo acordado con el cliente.</li>
+          <li>Ajustar el precio a 27,95 €.</li>
+          <li>Vigilar la recuperación durante las próximas 2 horas.</li>
+        </ol>
+      </section>
+      <label class="dialog-label" for="assignee">Responsable</label>
+      <select id="assignee"><option>Sergio Porras</option><option>Equipo PPC</option><option>Account Manager</option></select>
+    </div>
+    <div class="drawer-actions">
+      <button class="secondary-btn" id="dismiss-action">Descartar</button>
+      <button class="approve-btn" id="approve-action">Aprobar acción</button>
+    </div>
+  </aside>
+
+  <div class="search-layer" id="search-layer" hidden>
+    <button class="search-backdrop" data-close-search aria-label="Cerrar búsqueda"></button>
+    <section class="search-box" role="search">
+      <span>⌕</span><input id="global-search" type="search" placeholder="Buscar cuenta, ASIN, SKU o campaña…" autocomplete="off" /><kbd>ESC</kbd>
+      <div id="search-results"><p>Prueba con “Pet & Joy”, “B0C8N4K2PL” o “Ganhu”.</p></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span>✓</span><p><b>Acción actualizada</b><small>El cambio se ha guardado correctamente.</small></p></div>
+</ControlLayout>
+
+<style>
+  :global(:root) { --ink:#172033; --muted:#718096; --line:#e6eaf0; --orange:#ff9900; --navy:#101828; --green:#13a777; --red:#e45b60; --amber:#e8a329; }
+  .shell { min-height:100vh; display:grid; grid-template-columns:248px minmax(0,1fr); background:#f5f7fb; }
+  .sidebar { position:fixed; inset:0 auto 0 0; width:248px; padding:24px 18px 18px; background:#111827; color:#fff; display:flex; flex-direction:column; z-index:20; }
+  .brand { display:flex; gap:11px; align-items:center; color:#fff; text-decoration:none; padding:0 10px 30px; }
+  .brand-mark { width:36px; height:36px; border-radius:10px; display:grid; place-items:center; background:var(--orange); color:#111827; font-weight:800; letter-spacing:-1px; }
+  .brand span:last-child { display:flex; flex-direction:column; line-height:1.05; }
+  .brand b { font-size:16px; letter-spacing:-.3px; }
+  .brand small { color:#7f8b9c; font-size:8px; letter-spacing:1.7px; margin-top:5px; }
+  nav { display:flex; flex-direction:column; gap:4px; }
+  .nav-label { color:#657184; font-size:10px; letter-spacing:1.4px; font-weight:700; padding:6px 12px 8px; }
+  .nav-label.secondary { margin-top:19px; }
+  .nav-item { min-height:43px; display:flex; align-items:center; gap:12px; padding:0 12px; border-radius:9px; color:#aab4c3; text-decoration:none; font-size:13px; font-weight:500; }
+  .nav-item:hover { color:#fff; background:#1d2736; }
+  .nav-item.active { background:#263244; color:#fff; box-shadow:inset 3px 0 var(--orange); }
+  .nav-icon { width:20px; text-align:center; color:#8691a2; font-size:17px; }
+  .nav-item.active .nav-icon { color:var(--orange); }
+  .nav-item em { margin-left:auto; min-width:21px; height:20px; border-radius:10px; background:#303c4d; color:#aab4c3; display:grid; place-items:center; font-size:10px; font-style:normal; }
+  .nav-item em.danger { background:#512c35; color:#ff8e93; }
+  .sidebar-foot { margin-top:auto; border-top:1px solid #263142; padding:18px 7px 0; display:grid; grid-template-columns:36px 1fr auto; align-items:center; gap:10px; }
+  .avatar { width:36px; height:36px; display:grid; place-items:center; border-radius:50%; background:#344155; font-size:11px; font-weight:700; }
+  .sidebar-foot span { display:flex; flex-direction:column; gap:3px; }
+  .sidebar-foot b { font-size:11px; }.sidebar-foot small { font-size:9px; color:#7e8a9b; }
+  .sidebar-foot button { border:0; background:transparent; color:#738095; font-size:17px; }
+  main { grid-column:2; min-width:0; }
+  .topbar { height:66px; padding:0 36px; background:#fff; border-bottom:1px solid var(--line); display:flex; justify-content:flex-end; align-items:center; position:sticky; top:0; z-index:10; }
+  .top-actions { display:flex; align-items:center; gap:10px; }
+  .demo-pill { padding:5px 8px; border-radius:5px; background:#fff5e5; color:#b56e00; font-size:7px; font-weight:800; letter-spacing:1px; }
+  .sync { border:0; background:transparent; color:#7c8797; font-size:11px; display:flex; gap:8px; align-items:center; }
+  .sync span { width:7px; height:7px; background:var(--green); border-radius:50%; box-shadow:0 0 0 4px #e6f7f1; }
+  .icon-btn { width:34px; height:34px; border:1px solid var(--line); background:#fff; border-radius:8px; color:#5f6c7d; font-size:18px; position:relative; }
+  .notification i { position:absolute; width:6px; height:6px; border-radius:50%; background:var(--orange); top:6px; right:7px; border:1px solid #fff; }
+  .mobile-brand { display:none; align-items:center; gap:10px; }
+  .workspace { max-width:1510px; margin:auto; padding:32px 36px 52px; }
+  .intro { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:27px; }
+  .eyebrow { color:#9aa4b2 !important; font-size:9px !important; font-weight:700; letter-spacing:1.6px; margin:0 0 7px !important; }
+  .intro h1 { font-size:28px; line-height:1.2; margin:0; letter-spacing:-.8px; color:var(--ink); }
+  .intro p { margin:7px 0 0; font-size:13px; color:#758193; }
+  .intro p strong { color:var(--ink); }
+  .intro-actions { display:flex; gap:10px; }
+  .market-select { height:40px; min-width:210px; padding:0 13px; border:1px solid #dfe4ea; border-radius:8px; background:#fff; display:flex; align-items:center; justify-content:space-between; color:#556173; font-size:11px; }
+  .market-select select { appearance:none; border:0; outline:0; background:transparent; color:#556173; font-size:11px; width:100%; cursor:pointer; }
+  .primary { height:40px; border:0; border-radius:8px; padding:0 17px; background:var(--orange); color:#151b26; font-size:11px; font-weight:700; box-shadow:0 6px 13px rgba(255,153,0,.18); }
+  .health-strip { min-height:90px; background:linear-gradient(102deg,#111c2d,#1e2b3e); border-radius:12px; color:#fff; display:grid; grid-template-columns:1.65fr repeat(3,1fr) 1.2fr; align-items:center; margin-bottom:17px; box-shadow:0 8px 25px rgba(24,35,52,.08); overflow:hidden; }
+  .score { display:flex; align-items:center; gap:13px; padding-left:24px; }
+  .score-ring { width:58px; height:58px; border-radius:50%; display:grid; place-content:center; text-align:center; background:radial-gradient(circle at center,#172437 58%,transparent 59%),conic-gradient(var(--green) 82%,#334257 0); }
+  .score-ring b { font-size:18px; line-height:1; }.score-ring small { color:#8794a6; font-size:8px; margin-top:2px; }
+  .score>span,.health-stat span { display:flex; flex-direction:column; gap:6px; }.score>span small { color:#7f8ca0; font-size:8px; letter-spacing:1px; }.score>span b { font-size:13px; }
+  .health-stat { height:46px; display:flex; align-items:center; gap:10px; border-left:1px solid #314054; padding-left:23px; }
+  .health-stat i,.status,.legend i { display:block; width:8px; height:8px; border-radius:50%; }.green,.good { background:var(--green); }.amber,.warn { background:var(--amber); }.red,.bad { background:var(--red); }
+  .health-stat b { font-size:18px; line-height:1; }.health-stat small { color:#8290a3; font-size:9px; }
+  .health-strip>button { border:0; background:transparent; color:#bbc5d3; font-size:10px; padding:20px; }.health-strip>button span { color:var(--orange); margin-left:6px; }
+  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:17px; }
+  .metrics article,.attention-card,.accounts-card { background:#fff; border:1px solid var(--line); border-radius:11px; box-shadow:0 3px 12px rgba(28,39,57,.025); }
+  .metrics article { min-height:160px; padding:17px 18px; position:relative; overflow:hidden; }
+  .metric-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }.metric-head span { color:#8c97a6; font-size:8px; font-weight:700; letter-spacing:1px; }.metric-head i { width:26px; height:26px; border-radius:7px; display:grid; place-items:center; background:#fff5e5; color:#d98200; font-size:12px; font-style:normal; }
+  .metrics strong { display:block; font-size:24px; letter-spacing:-.7px; color:var(--ink); }
+  .metrics p { font-size:10px; font-weight:700; margin:7px 0; }.metrics p span { color:#9aa4b1; font-weight:400; margin-left:4px; }.positive { color:var(--green)!important; }.negative { color:var(--red)!important; }
+  .sparkline { position:absolute; left:18px; right:18px; bottom:16px; height:29px; display:flex; align-items:flex-end; gap:4px; border-bottom:1px solid #edf0f4; }.sparkline i { flex:1; background:#dff4ec; border-radius:2px 2px 0 0; }.sparkline i:nth-last-child(-n+4){background:#56b994;}
+  .progress { margin:21px 0 7px; height:5px; border-radius:5px; background:#edf0f4; overflow:hidden; }.progress span { display:block; height:100%; border-radius:5px; background:var(--orange); }.metrics article>small { font-size:8px; color:#98a2b0; }
+  .mini-donut { position:absolute; bottom:12px; right:18px; left:18px; display:flex; align-items:center; gap:10px; }.mini-donut span { width:35px; height:35px; border-radius:50%; background:radial-gradient(circle,#fff 52%,transparent 54%),conic-gradient(var(--orange) 91%,#edf0f4 0); }.mini-donut b { font-size:9px; line-height:1.15; }.mini-donut small { color:#8b96a6; font-weight:400; }
+  .stock-tags { display:flex; gap:7px; margin-top:19px; }.stock-tags span { border-radius:5px; background:#f4f5f7; padding:6px 9px; font-size:8px; color:#7f8a99; }.stock-tags .critical { color:#ce484f; background:#fff0f0; }
+  .content-grid { display:grid; grid-template-columns:minmax(0,1.75fr) minmax(320px,.75fr); gap:14px; }
+  .section-head { min-height:61px; padding:0 19px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+  .section-head>div { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }.section-head h2 { font-size:14px; margin:0; color:var(--ink); }.section-head small { font-size:9px; color:#9aa4b1; flex-basis:100%; margin-left:16px; margin-top:-6px; }.accounts-card .section-head small { margin-left:0; }
+  .section-head button { border:0; background:transparent; color:#637083; font-size:9px; }.pulse { width:8px; height:8px; background:var(--red); border-radius:50%; box-shadow:0 0 0 4px #fff0f0; }
+  .alert-row { min-height:112px; display:grid; grid-template-columns:36px minmax(0,1fr) auto; gap:12px; align-items:center; padding:14px 18px; border-bottom:1px solid #edf0f4; position:relative; }.alert-row:last-child{border-bottom:0;}.alert-row:before { content:""; position:absolute; left:0; width:3px; height:48px; border-radius:0 3px 3px 0; }.critical-alert:before{background:var(--red);}.warning-alert:before{background:var(--amber);}.info-alert:before{background:#527cca;}
+  .alert-symbol { width:34px; height:34px; border-radius:8px; display:grid; place-items:center; font-weight:700; font-size:14px; }.critical-alert .alert-symbol{background:#fff0f0;color:var(--red);}.warning-alert .alert-symbol{background:#fff7e9;color:#d28a11}.info-alert .alert-symbol{background:#eef4ff;color:#527cca;}
+  .alert-meta { display:flex; gap:9px; align-items:center; }.alert-meta span { color:#8591a1; font-size:7px; font-weight:700; letter-spacing:1px; }.alert-meta small { color:#b0b7c1; font-size:8px; }
+  .alert-copy h3 { font-size:11px; margin:5px 0 4px; color:#273247; }.alert-copy p { font-size:9px; margin:0; color:#8b96a5; }.impact { display:flex; align-items:center; gap:5px; margin-top:8px; }.impact b { color:var(--red); font-size:9px; }.impact span { color:#99a3b0; font-size:8px; }.impact i { width:1px; height:11px; background:#dfe3e9; margin:0 6px; }.impact b:nth-of-type(2){color:#344155;}
+  .review { min-width:145px; height:32px; border:1px solid #dfe4ea; border-radius:7px; background:#fff; color:#465366; font-size:9px; }.review span { margin-left:6px; color:#909aa8; }
+  .accounts-card { overflow:hidden; }.accounts-card .section-head { min-height:61px; }.accounts-card .section-head>div { display:block; }.accounts-card .section-head h2 { margin-bottom:5px; }
+  .account-row { min-height:65px; display:grid; grid-template-columns:34px minmax(0,1fr) auto 8px; align-items:center; gap:9px; margin:0 17px; border-bottom:1px solid #edf0f4; }.account-logo { width:32px; height:32px; border-radius:8px; display:grid; place-items:center; font-size:9px; font-weight:800; }.pet{background:#fff0ed;color:#d76553}.casa{background:#eef1ff;color:#6977c4}.ganhu{background:#e9f7f0;color:#268861}.tech{background:#edf4ff;color:#497fc0}.bebe{background:#fff1f6;color:#cc6a8e}
+  .account-row>div { display:flex; flex-direction:column; gap:4px; }.account-row>div b { font-size:10px; color:#313c4e; }.account-row>div small { font-size:8px; color:#9ca5b2; }.account-sales { text-align:right; display:flex; flex-direction:column; gap:3px; }.account-sales b { font-size:9px; }.account-sales small { font-size:8px; }.account-row .status { width:7px; height:7px; }
+  .legend { height:48px; display:flex; justify-content:center; align-items:center; gap:16px; }.legend span { display:flex; align-items:center; gap:5px; font-size:7px; color:#9aa3b0; }.legend i { width:5px; height:5px; }
+  .modal-layer[hidden],.search-layer[hidden]{display:none}.modal-layer,.search-layer{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:18px}.modal-backdrop,.search-backdrop{position:absolute;inset:0;border:0;background:rgba(10,18,31,.62);backdrop-filter:blur(3px)}
+  .connect-dialog{position:relative;width:min(440px,100%);border-radius:16px;background:#fff;padding:30px;box-shadow:0 30px 80px rgba(9,15,27,.28);animation:dialog-in .22s ease-out}.dialog-close{position:absolute;right:15px;top:13px;width:32px;height:32px;border:0;background:#f2f4f7;border-radius:8px;color:#6f7a8a;font-size:19px}.dialog-logo{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--orange);color:#111827;font-weight:800;margin-bottom:20px}.connect-dialog h2{font-size:22px;letter-spacing:-.5px;margin:0 0 8px}.connect-dialog>p:not(.eyebrow){font-size:11px;line-height:1.6;color:#7a8697;margin:0 0 22px}.connect-steps{display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:start;margin:22px 0}.connect-steps>span{display:flex;align-items:center;flex-direction:column;gap:5px}.connect-steps b{width:25px;height:25px;border:1px solid #dfe4ea;border-radius:50%;display:grid;place-items:center;color:#9aa4b1;font-size:9px}.connect-steps .done b{background:#e9f8f2;border-color:#d5f0e6;color:var(--green)}.connect-steps small{font-size:7px;color:#919ba9}.connect-steps i{height:1px;background:#e2e6ec;margin:12px 7px}.dialog-label{display:block;font-size:8px;font-weight:700;letter-spacing:.7px;color:#7a8696;margin:14px 0 7px;text-transform:uppercase}.connect-dialog input,.connect-dialog select,.action-drawer select{width:100%;height:42px;border:1px solid #dfe4ea;border-radius:8px;background:#fff;padding:0 12px;color:#465265;font-size:10px;outline:none}.connect-dialog input:focus,.connect-dialog select:focus,.action-drawer select:focus{border-color:#f3a52f;box-shadow:0 0 0 3px #fff4e1}.amazon-connect{width:100%;height:43px;border:0;border-radius:8px;background:#172335;color:#fff;font-size:10px;font-weight:700;margin-top:20px}.amazon-connect span{color:var(--orange);margin-left:7px}.dialog-note{display:block;text-align:center;color:#a1a9b5;font-size:7px;margin-top:10px}
+  .action-drawer{position:fixed;z-index:55;top:0;right:0;width:min(470px,100%);height:100vh;background:#fff;box-shadow:-20px 0 70px rgba(18,28,43,.16);transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column}.action-drawer.open{transform:translateX(0)}.drawer-top{min-height:70px;border-bottom:1px solid var(--line);padding:0 22px;display:flex;align-items:center;justify-content:space-between}.drawer-top>div{display:flex;flex-direction:column;gap:4px}.drawer-top span{font-size:8px;color:#d26c28;font-weight:800;letter-spacing:1px}.drawer-top small{font-size:8px;color:#9ba5b2}.drawer-top button{width:34px;height:34px;border:0;border-radius:8px;background:#f3f5f7;color:#788395;font-size:20px}.drawer-content{padding:25px 23px;overflow:auto;flex:1}.priority{display:inline-flex;background:#fff0f0;color:#d74f54;border-radius:5px;padding:5px 8px;font-size:7px;font-weight:800;letter-spacing:.8px}.drawer-content h2{font-size:22px;line-height:1.25;letter-spacing:-.5px;margin:12px 0 9px}.drawer-content>p{font-size:11px;line-height:1.6;color:#7b8797;margin:0}.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}.impact-grid article{border:1px solid var(--line);border-radius:9px;padding:13px}.impact-grid small,.reason-box>span,.steps-box>span{display:block;font-size:7px;color:#929dab;font-weight:800;letter-spacing:.9px;margin-bottom:7px}.impact-grid b{font-size:14px;color:#273347}.impact-grid article:first-child b{color:var(--red)}.reason-box{border-radius:9px;background:#fff8eb;border:1px solid #ffebc6;padding:14px;margin-bottom:21px}.reason-box>span{color:#b7791f}.reason-box p{font-size:10px;line-height:1.55;color:#6c5a3f;margin:0}.steps-box{margin-bottom:21px}.steps-box ol{margin:10px 0 0;padding:0;list-style:none;counter-reset:steps}.steps-box li{counter-increment:steps;position:relative;padding:0 0 13px 30px;color:#5f6c7d;font-size:10px;line-height:1.45}.steps-box li:before{content:counter(steps);position:absolute;left:0;top:-3px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef1f5;color:#687487;font-size:8px;font-weight:700}.drawer-actions{padding:16px 22px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.6fr;gap:9px}.drawer-actions button{height:41px;border-radius:8px;font-size:10px;font-weight:700}.secondary-btn{border:1px solid #dfe4ea;background:#fff;color:#647083}.approve-btn{border:0;background:var(--orange);color:#172033}
+  .search-layer{place-items:start center;padding-top:12vh}.search-box{position:relative;width:min(620px,100%);background:#fff;border-radius:13px;box-shadow:0 30px 80px rgba(9,15,27,.3);display:grid;grid-template-columns:28px 1fr auto;align-items:center;padding:12px 15px}.search-box>span{color:#8792a2;font-size:20px}.search-box input{height:34px;border:0;outline:0;color:#303b4e;font-size:13px}.search-box kbd{border:1px solid #dfe4ea;background:#f6f7f9;color:#8a94a3;border-radius:5px;padding:4px 6px;font-size:7px}.search-box #search-results{grid-column:1/-1;border-top:1px solid var(--line);margin-top:10px;padding:11px 2px 2px}.search-box #search-results p{margin:0;color:#9aa4b1;font-size:9px}.search-result{display:flex;align-items:center;gap:10px;border-radius:7px;padding:9px;text-decoration:none;color:#475366;font-size:10px}.search-result:hover{background:#f5f7fa}.search-result b{display:block;color:#273347;margin-bottom:3px}.search-result small{color:#9aa4b1}.toast{position:fixed;z-index:80;right:22px;bottom:22px;min-width:290px;background:#172335;color:#fff;border-radius:10px;box-shadow:0 15px 45px rgba(10,18,30,.24);padding:13px 15px;display:flex;gap:11px;align-items:center;transform:translateY(130%);opacity:0;transition:.25s ease}.toast.show{transform:translateY(0);opacity:1}.toast>span{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#1e9d73;font-size:10px}.toast p{display:flex;flex-direction:column;gap:3px;margin:0}.toast b{font-size:9px}.toast small{font-size:8px;color:#9eabba}@keyframes dialog-in{from{transform:translateY(10px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+  @media (max-width:1180px){.metrics{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}.accounts-card{order:-1}.health-strip{grid-template-columns:1.5fr repeat(3,1fr)}.health-strip>button{display:none}}
+  @media (max-width:760px){.shell{display:block}.sidebar{display:none}main{display:block}.topbar{height:62px;padding:0 16px;justify-content:space-between}.mobile-brand{display:flex}.mobile-brand .brand-mark{width:31px;height:31px}.sync,.demo-pill{display:none}.workspace{padding:23px 15px 40px}.intro{align-items:flex-start;flex-direction:column}.intro-actions{width:100%}.market-select{flex:1;min-width:0}.health-strip{grid-template-columns:1fr 1fr;gap:0;padding:8px 0}.score{grid-column:1/-1;padding:10px 20px 16px}.health-stat{padding-left:20px;margin:7px 0}.health-stat:nth-of-type(3){display:none}.metrics{grid-template-columns:1fr 1fr}.content-grid{display:block}.accounts-card{margin-bottom:14px}.alert-row{grid-template-columns:34px 1fr;padding:15px}.review{grid-column:2;width:max-content}.intro h1{font-size:25px}}
+  @media (max-width:480px){.metrics{grid-template-columns:1fr}.intro-actions{flex-direction:column}.market-select,.primary{width:100%}.content-grid{margin-top:0}.account-row{grid-template-columns:32px 1fr auto 7px}.alert-copy h3{font-size:11px}.impact{flex-wrap:wrap}}
+</style>
+
+<script>
+  const modal = document.querySelector<HTMLElement>('#connect-modal');
+  const drawer = document.querySelector<HTMLElement>('#action-drawer');
+  const searchLayer = document.querySelector<HTMLElement>('#search-layer');
+  const toast = document.querySelector<HTMLElement>('#toast');
+  let toastTimer: number | undefined;
+
+  const showToast = (title: string, detail: string) => {
+    if (!toast) return;
+    const titleEl = toast.querySelector('b');
+    const detailEl = toast.querySelector('small');
+    if (titleEl) titleEl.textContent = title;
+    if (detailEl) detailEl.textContent = detail;
+    toast.classList.add('show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 3200);
+  };
+
+  document.querySelector('#connect-account')?.addEventListener('click', () => {
+    if (!modal) return;
+    modal.hidden = false;
+    window.setTimeout(() => modal.querySelector<HTMLInputElement>('input')?.focus(), 30);
+  });
+  document.querySelectorAll('[data-close-modal]').forEach((button) => button.addEventListener('click', () => { if (modal) modal.hidden = true; }));
+  document.querySelector('#start-connection')?.addEventListener('click', () => {
+    const name = document.querySelector<HTMLInputElement>('#account-name')?.value.trim();
+    if (!name) {
+      document.querySelector<HTMLInputElement>('#account-name')?.focus();
+      showToast('Falta el nombre del cliente', 'Añade un nombre interno para continuar.');
+      return;
+    }
+    if (modal) modal.hidden = true;
+    showToast('Conexión preparada', `${name}: el flujo de autorización está listo.`);
+  });
+
+  const actionData = {
+    buybox: {
+      category: 'BUY BOX', time: 'Detectado hace 18 min', priority: 'PRIORIDAD CRÍTICA',
+      title: 'Pet & Joy ha perdido la Buy Box',
+      description: 'El precio actual está un 4,8% por encima de la oferta ganadora. La caída de conversión ya es visible.',
+      impact: '−93 €/día', confidence: 'Alta · 91%',
+      reason: 'El precio ganador es 27,95 €, frente a tus 29,29 €. Puedes igualarlo manteniendo un margen estimado del 22%.',
+      steps: ['Validar el margen mínimo acordado con el cliente.', 'Ajustar el precio a 27,95 €.', 'Vigilar la recuperación durante las próximas 2 horas.']
+    },
+    stock: {
+      category: 'INVENTARIO', time: 'Detectado hace 1 h', priority: 'PRIORIDAD ALTA',
+      title: 'Casa Moderna agotará existencias en 6 días',
+      description: 'El SKU CM-LAMP-02 mantiene una velocidad de 14 unidades diarias y solo quedan 84 unidades vendibles.',
+      impact: '−1.280 €/día', confidence: 'Alta · 94%',
+      reason: 'La previsión combina ventas de 30 días, tendencia de la última semana y unidades entrantes confirmadas.',
+      steps: ['Confirmar 430 unidades disponibles en proveedor.', 'Crear reposición prioritaria.', 'Revisar fecha prevista de recepción en FBA.']
+    },
+    ads: {
+      category: 'PUBLICIDAD', time: 'Detectado hace 3 h', priority: 'OPORTUNIDAD',
+      title: 'La campaña rentable se queda sin presupuesto',
+      description: 'SP | Exact | Top sellers se detiene antes de las 14:00 pese a mantener un ROAS de 5,8.',
+      impact: '+74 €/día', confidence: 'Media · 83%',
+      reason: 'La campaña convierte por encima del objetivo y pierde aproximadamente el 38% de impresiones por presupuesto.',
+      steps: ['Aumentar el presupuesto diario de 35 € a 50 €.', 'Mantener las pujas actuales durante 72 horas.', 'Revisar ROAS y cuota de impresiones al tercer día.']
+    }
+  } as const;
+
+  const setDrawerText = (selector: string, value: string) => { const node = document.querySelector(selector); if (node) node.textContent = value; };
+  document.querySelectorAll<HTMLButtonElement>('[data-action]').forEach((button) => button.addEventListener('click', () => {
+    const key = button.dataset.action as keyof typeof actionData;
+    const data = actionData[key];
+    if (!data || !drawer) return;
+    setDrawerText('#drawer-category', data.category); setDrawerText('#drawer-time', data.time); setDrawerText('#drawer-priority', data.priority);
+    setDrawerText('#drawer-title', data.title); setDrawerText('#drawer-description', data.description); setDrawerText('#drawer-impact', data.impact);
+    setDrawerText('#drawer-confidence', data.confidence); setDrawerText('#drawer-reason', data.reason);
+    const steps = document.querySelector('#drawer-steps');
+    if (steps) steps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join('');
+    drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false');
+  }));
+  const closeDrawer = () => { drawer?.classList.remove('open'); drawer?.setAttribute('aria-hidden', 'true'); };
+  document.querySelector('#close-drawer')?.addEventListener('click', closeDrawer);
+  document.querySelector('#dismiss-action')?.addEventListener('click', () => { closeDrawer(); showToast('Recomendación descartada', 'Queda registrada en el historial de la cuenta.'); });
+  document.querySelector('#approve-action')?.addEventListener('click', () => { closeDrawer(); showToast('Acción aprobada', 'Se ha asignado a Sergio Porras para su ejecución.'); });
+
+  const openSearch = () => { if (!searchLayer) return; searchLayer.hidden = false; window.setTimeout(() => document.querySelector<HTMLInputElement>('#global-search')?.focus(), 20); };
+  const closeSearch = () => { if (searchLayer) searchLayer.hidden = true; };
+  document.querySelector('#search-button')?.addEventListener('click', openSearch);
+  document.querySelectorAll('[data-close-search]').forEach((button) => button.addEventListener('click', closeSearch));
+  document.querySelector<HTMLInputElement>('#global-search')?.addEventListener('input', (event) => {
+    const query = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const results = document.querySelector('#search-results');
+    if (!results) return;
+    if (!query) { results.innerHTML = '<p>Prueba con “Pet & Joy”, “B0C8N4K2PL” o “Ganhu”.</p>'; return; }
+    const records = [
+      { title: 'Pet & Joy', meta: 'Cuenta · Amazon.es · Atención requerida' },
+      { title: 'B0C8N4K2PL', meta: 'ASIN · Pet & Joy · Buy Box perdida' },
+      { title: 'Ganhu', meta: 'Cuenta · Amazon.es y Amazon.it · Saludable' },
+      { title: 'CM-LAMP-02', meta: 'SKU · Casa Moderna · Stock crítico' }
+    ].filter(item => `${item.title} ${item.meta}`.toLowerCase().includes(query));
+    results.innerHTML = records.length ? records.map(item => `<a class="search-result" href="#acciones"><span>⌕</span><span><b>${item.title}</b><small>${item.meta}</small></span></a>`).join('') : '<p>No hemos encontrado coincidencias en las cuentas conectadas.</p>';
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') { if (modal) modal.hidden = true; closeDrawer(); closeSearch(); }
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); openSearch(); }
+  });
+  document.querySelector('#notification-button')?.addEventListener('click', () => showToast('3 alertas nuevas', 'La más urgente es una pérdida de Buy Box en Pet & Joy.'));
+  document.querySelector<HTMLSelectElement>('#marketplace-filter')?.addEventListener('change', (event) => {
+    const labels: Record<string,string> = { all: 'todos los marketplaces', es: 'Amazon.es', fr: 'Amazon.fr', de: 'Amazon.de', it: 'Amazon.it' };
+    showToast('Vista actualizada', `Mostrando datos de ${labels[(event.target as HTMLSelectElement).value]}.`);
+  });
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav]').forEach((link) => link.addEventListener('click', () => {
+    document.querySelectorAll('[data-nav]').forEach(item => item.classList.remove('active'));
+    link.classList.add('active');
+  }));
+</script>

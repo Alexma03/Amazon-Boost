@@ -1,0 +1,26 @@
+---
+import SeoLandingLayout from "../layouts/SeoLandingLayout.astro";
+import { seoLandingPages, seoPagesBySlug } from "../data/seo-pages";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return seoLandingPages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug || typeof slug !== "string") {
+  return Astro.redirect("/404");
+}
+
+const page = seoPagesBySlug[slug];
+
+if (!page) {
+  return Astro.redirect("/404");
+}
+---
+
+<SeoLandingLayout page={page} />

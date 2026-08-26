@@ -1,50 +1,52 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const serviceLinks = [
+  ["Auditoría de cuenta", "/auditoria-cuenta-amazon"],
+  ["Gestión PPC", "/agencia-ppc-amazon"],
+  ["Optimización de listings", "/optimizacion-listings-amazon"],
+  ["Gestión Seller Central", "/gestion-cuenta-amazon-seller-central"],
+];
+
+const strategicLinks = [
+  ["Agencia Amazon", "/agencia-amazon"],
+  ["Consultoría Amazon", "/consultoria-amazon"],
+  ["Amazon FBA / FBM", "/amazon-fba-fbm"],
+  ["Blog", "/blog"],
+];
 ---
 
-<footer class="bg-amazon-black text-white py-12">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="text-2xl font-bold text-amazon-orange mb-4">Amazon Boost</h3>
-        <p class="text-gray-400">
-          Tu socio de confianza para el éxito en Amazon. Ayudamos a los vendedores a optimizar sus listados, gestionar campañas PPC y aumentar las ventas.
-        </p>
-      </div>
-      
-      <div>
-        <h4 class="font-semibold mb-4">Servicios</h4>
-        <ul class="space-y-2">
-          <li><a href="#audit" class="text-gray-400 hover:text-amazon-orange">Auditoría de Cuenta</a></li>
-          <li><a href="#research" class="text-gray-400 hover:text-amazon-orange">Investigación de Mercado</a></li>
-          <li><a href="#optimization" class="text-gray-400 hover:text-amazon-orange">Optimización de Listados</a></li>
-          <li><a href="#advertising" class="text-gray-400 hover:text-amazon-orange">Gestión de PPC</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 class="font-semibold mb-4">Empresa</h4>
-        <ul class="space-y-2">
-          <li><a href="/#services" class="text-gray-400 hover:text-amazon-orange">Servicios</a></li>
-          <li><a href="/#case-studies" class="text-gray-400 hover:text-amazon-orange">Casos de Éxito</a></li>
-          <li><a href="/#contact" class="text-gray-400 hover:text-amazon-orange">Contacto</a></li>
-          <li><a href="/blog" class="text-gray-400 hover:text-amazon-orange">Blog</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 class="font-semibold mb-4">Contáctanos</h4>
-        <ul class="space-y-2 text-gray-400">
-          <li>Teléfono: +34 671 470 651</li>
-          <li>Correo: info@amznboost.es</li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-center items-center">
-      <p class="text-gray-400 text-sm">
-        © {currentYear} Amazon Boost. Todos los derechos reservados.
-      </p>
-    </div>
+<footer class="ab-footer">
+  <div class="ab-footer-top">
+    <a class="ab-footer-brand" href="/">Amazon Boost<span>.</span></a>
+    <p>Cuenta, publicidad, catálogo y operativa trabajando en la misma dirección.</p>
+    <a class="ab-footer-audit" href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
   </div>
+
+  <div class="ab-footer-grid">
+    <div><span class="ab-footer-label">Servicios</span>{serviceLinks.map(([label, href]) => <a href={href}>{label}</a>)}</div>
+    <div><span class="ab-footer-label">Explorar</span>{strategicLinks.map(([label, href]) => <a href={href}>{label}</a>)}</div>
+    <div><span class="ab-footer-label">Contacto</span><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a><span>España / Amazon Europa</span></div>
+  </div>
+
+  <div class="ab-footer-bottom"><span>© {currentYear} Amazon Boost</span><span>Especialistas en Amazon FBA / FBM</span></div>
 </footer>
+
+<style>
+  .ab-footer { padding: 72px 24px 24px; background: #080808; color: #fff; border-top: 1px solid rgba(255,255,255,.12); }
+  .ab-footer-top, .ab-footer-grid, .ab-footer-bottom { width: min(1280px,100%); margin: 0 auto; }
+  .ab-footer-top { display: grid; grid-template-columns: 1fr 1fr auto; gap: 42px; align-items: end; padding-bottom: 58px; }
+  .ab-footer-brand { color: #fff; font-size: clamp(2.6rem,5vw,5.8rem); line-height: .9; font-weight: 850; }
+  .ab-footer-brand span { color: #ff9900; }
+  .ab-footer-top p { max-width: 410px; margin: 0; color: #9d9f9a; line-height: 1.65; }
+  .ab-footer-audit { min-height: 48px; display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; padding: 0 15px; border-radius: 4px; background: #ff9900; color: #111; font-size: .78rem; font-weight: 850; }
+  .ab-footer-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(255,255,255,.13); border-bottom: 1px solid rgba(255,255,255,.13); }
+  .ab-footer-grid > div { min-height: 250px; display: flex; flex-direction: column; gap: 13px; padding: 28px; border-right: 1px solid rgba(255,255,255,.13); }
+  .ab-footer-grid > div:first-child { padding-left: 0; }
+  .ab-footer-grid > div:last-child { border-right: 0; }
+  .ab-footer-label { margin-bottom: 12px; color: #ff9900 !important; font-size: .62rem !important; font-weight: 850; text-transform: uppercase; }
+  .ab-footer-grid a, .ab-footer-grid span { color: #b8bab5; font-size: .82rem; }
+  .ab-footer-grid a:hover { color: #fff; }
+  .ab-footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; color: #777a75; font-size: .62rem; text-transform: uppercase; }
+  @media (max-width:800px) { .ab-footer-top { grid-template-columns: 1fr; align-items: start; }.ab-footer-audit { width: 100%; }.ab-footer-grid { grid-template-columns: 1fr; }.ab-footer-grid > div { min-height: auto; padding: 25px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.13); }.ab-footer-grid > div:last-child { border-bottom: 0; }.ab-footer-bottom { flex-direction: column; } }
+</style>

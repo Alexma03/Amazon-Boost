@@ -1,0 +1,93 @@
+---
+import Layout from "./Layout.astro";
+import type { SeoLandingPage } from "../data/seo-pages";
+import { seoLandingPages } from "../data/seo-pages";
+import "../styles/subpage-redesign.css";
+
+interface Props { page: SeoLandingPage; }
+
+const { page } = Astro.props;
+const relatedPages = seoLandingPages.filter((item) => item.slug !== page.slug).slice(0, 4);
+const diagnosticSignals = page.signals.slice(0, 5);
+const primaryBullets = page.sections.flatMap((section) => section.bullets).slice(0, 6);
+---
+
+<Layout title={page.metaTitle} description={page.metaDescription} pageType="service" contentSummary={page.metaDescription} structuredData={{ type: "service", data: { title: page.title, description: page.metaDescription } }}>
+  <article class="sub-page">
+    <section class="sub-hero">
+      <div class="sub-hero-grid" aria-hidden="true"></div>
+      <div class="sub-shell sub-hero-shell">
+        <div class="sub-hero-copy">
+          <p class="sub-kicker"><i></i> Amazon Boost / {page.eyebrow}</p>
+          <h1>{page.hero}</h1>
+          <p class="sub-lead">{page.intro}</p>
+          <div class="sub-actions">
+            <a class="sub-button sub-button-primary" href="/#auditoria">{page.primaryCta}<span aria-hidden="true">↗</span></a>
+            <a class="sub-button sub-button-secondary" href="#diagnostico">Ver diagnóstico<span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <aside class="sub-diagnostic" data-diagnostic>
+          <div class="sub-tool-top"><div><span>Lectura inicial</span><strong>{page.title}</strong></div><small>Amazon Boost</small></div>
+          <p>Marca las señales que reconoces en tu cuenta.</p>
+          <div class="sub-checklist">
+            {diagnosticSignals.map((signal, index) => <label><input type="checkbox" data-diagnostic-check /><span>{String(index + 1).padStart(2, "0")}</span><strong>{signal}</strong></label>)}
+          </div>
+          <div class="sub-score"><div><span data-score-count>0/5</span><strong data-score-label>Sin señales marcadas</strong></div><a href="/#auditoria">Revisar mi cuenta</a></div>
+        </aside>
+      </div>
+      <div class="sub-hero-rail"><span>Seller Central</span><i></i><span>PPC</span><i></i><span>Conversión</span><i></i><span>Catálogo</span><i></i><span>FBA / FBM</span></div>
+    </section>
+
+    <nav class="sub-jump" aria-label="Navegación de la página">
+      <a href="#diagnostico">Diagnóstico</a><a href="#enfoque">Enfoque</a><a href="#plan">Plan</a><a href="#faq">Preguntas</a><a class="is-cta" href="/#auditoria">Auditoría gratis</a>
+    </nav>
+
+    <section id="diagnostico" class="sub-band sub-band-light"><div class="sub-shell">
+      <div class="sub-heading"><p class="sub-kicker sub-kicker-dark"><i></i> Señales de cuenta</p><h2>Si algo de esto te suena, el problema no es trabajar más. Es decidir mejor.</h2></div>
+      <div class="sub-signal-grid">{page.signals.map((signal, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><strong>{signal}</strong><p>Una señal que puede estar limitando ventas, margen o estabilidad operativa.</p></article>)}</div>
+    </div></section>
+
+    <section id="enfoque" class="sub-band sub-band-dark"><div class="sub-shell sub-intent">
+      <div><p class="sub-kicker"><i></i> La búsqueda detrás del problema</p><h2>{page.title}: la duda suele empezar en una métrica y termina afectando a toda la cuenta.</h2></div>
+      <div class="sub-intent-copy"><p>{page.intent}</p><ul>{primaryBullets.map((bullet) => <li>{bullet}</li>)}</ul></div>
+    </div></section>
+
+    <section id="plan" class="sub-band sub-plan-band"><div class="sub-shell">
+      <div class="sub-heading sub-heading-split"><div><p class="sub-kicker sub-kicker-dark"><i></i> Cómo lo trabajamos</p><h2>Un plan conectado, no una suma de tareas.</h2></div><p>Primero entendemos el bloqueo. Después ordenamos las decisiones que pueden mover la cuenta.</p></div>
+      <div class="sub-plan">{page.sections.map((section, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{section.title}</h3><p>{section.text}</p></div><ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul></article>)}</div>
+    </div></section>
+
+    <section class="sub-break"><div class="sub-shell"><div><p class="sub-kicker"><i></i> No lo dejes en lectura</p><h2>La página orienta. La auditoría te dice qué ocurre en tu cuenta.</h2></div><a class="sub-button sub-button-primary" href="/#auditoria">Pedir auditoría gratuita<span aria-hidden="true">↗</span></a></div></section>
+
+    <section id="faq" class="sub-band sub-faq-band"><div class="sub-shell sub-faq-layout">
+      <div class="sub-heading"><p class="sub-kicker sub-kicker-dark"><i></i> Preguntas frecuentes</p><h2>Dudas habituales sobre {page.title.toLowerCase()}.</h2></div>
+      <div class="sub-faq-list">{page.faqs.map((faq) => <details><summary>{faq.question}<span>+</span></summary><p>{faq.answer}</p></details>)}</div>
+    </div></section>
+
+    <section class="sub-band sub-related-band"><div class="sub-shell sub-related-layout">
+      <div><p class="sub-kicker"><i></i> Decisiones conectadas</p><h2>Amazon rara vez tiene un solo problema.</h2><p>Continúa por la parte de la cuenta que necesitas entender ahora.</p></div>
+      <div class="sub-related-grid">{relatedPages.map((related) => <a href={`/${related.slug}`}><span>{related.eyebrow}</span><strong>{related.title}</strong><p>{related.metaDescription}</p></a>)}</div>
+    </div></section>
+
+    <section class="sub-final"><div class="sub-shell"><div><p>Auditoría inicial</p><h2>Antes de invertir más, entendamos qué está frenando tu cuenta.</h2></div><a href="/#auditoria">Solicitar auditoría gratuita<span aria-hidden="true">↗</span></a></div></section>
+  </article>
+</Layout>
+
+<script>
+  const initDiagnostic = () => {
+    document.querySelectorAll("[data-diagnostic]").forEach((panel) => {
+      const checks = Array.from(panel.querySelectorAll<HTMLInputElement>("[data-diagnostic-check]"));
+      const count = panel.querySelector("[data-score-count]");
+      const label = panel.querySelector("[data-score-label]");
+      const update = () => {
+        const selected = checks.filter((check) => check.checked).length;
+        if (count) count.textContent = `${selected}/${checks.length}`;
+        if (label) label.textContent = selected === 0 ? "Sin señales marcadas" : selected <= 2 ? "Hay margen de mejora" : selected <= 4 ? "Revisión recomendable" : "Auditoría prioritaria";
+      };
+      checks.forEach((check) => check.addEventListener("change", update));
+      update();
+    });
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initDiagnostic, { once: true }); else initDiagnostic();
+</script>

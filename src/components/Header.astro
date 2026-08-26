@@ -1,326 +1,153 @@
 ---
-import { getAuth, signOut } from 'firebase/auth'; // Importar funciones de auth
+const isAdminPage = Astro.url.pathname.startsWith("/admin");
 
 const navItems = [
-  { text: 'Servicios', href: '/#services' },
-  { text: 'Casos de Éxito', href: '/#case-studies' },
-  { text: 'Blog', href: '/blog' },
-  { text: 'Contacto', href: '/#solicita-tutoria' }
+  { text: "Servicios", href: "/#services" },
+  { text: "Diagnóstico", href: "/#diagnostico" },
+  { text: "Caso real", href: "/#caso-real" },
+  { text: "Blog", href: "/blog" },
 ];
-
-// Comprobar si la ruta actual está bajo /admin
-const isAdminPage = Astro.url.pathname.startsWith('/admin');
 ---
 
-<header class="fixed w-full bg-amazon-black text-white z-50">
-  <div class="container mx-auto px-4 md:px-0 py-4 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold text-amazon-orange">
-      Amazon Boost
+<header class="ab-site-header" data-site-header>
+  <div class="ab-header-inner">
+    <a href="/" class="ab-brand" aria-label="Amazon Boost, inicio">
+      <img class="ab-brand-symbol" src="/favicon.svg" alt="" />
+      <span>Amazon Boost<em>.</em></span>
     </a>
 
     {isAdminPage ? (
-      // Mostrar botón de Cerrar Sesión en páginas de admin
-      <button id="signOutButton" class="header-cta-button bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Cerrar Sesión
-      </button>
+      <button id="signOutButton" class="ab-header-action">Cerrar sesión <span aria-hidden="true">↗</span></button>
     ) : (
-      // Mostrar navegación normal en otras páginas
       <>
-        <nav class="hidden md:flex items-center space-x-8">
-          <a href="/#services" class="nav-link">Servicios</a>
-          <a href="/#case-studies" class="nav-link">Casos de Éxito</a>
-          <a href="/#solicita-tutoria" class="nav-link">Contacto</a>
-          <a href="/blog" class="nav-link">Blog</a>
-          <a href="/#solicita-tutoria" class="header-cta-button">Auditoría Gratis</a>
-          <a href="/admin/mensajes" id="adminMessagesLink" class="nav-link hidden">Mensajes</a>
+        <nav class="ab-desktop-nav" aria-label="Navegación principal">
+          {navItems.map((item) => <a href={item.href}>{item.text}</a>)}
         </nav>
-
-        <button class="md:hidden text-white" id="menuButton">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <a class="ab-header-action ab-desktop-action" href="/#auditoria">Auditoría gratis <span aria-hidden="true">↗</span></a>
+        <button class="ab-menu-button" id="menuButton" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
         </button>
       </>
     )}
   </div>
 
-  {/* Mobile menu - Ocultar si es página de admin */}
   {!isAdminPage && (
-    <div class="hidden md:hidden" id="mobileMenu">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        {navItems.map(item => (
-          <a href={item.href} class="block px-3 py-2 text-base font-medium hover:bg-amazon-darkblue">
-            {item.text}
-          </a>
-        ))}
-        <a href="/#solicita-tutoria" class="mobile-cta-button">
-          Auditoría Gratis
-        </a>
-      </div>
-    </div>
+    <nav class="ab-mobile-menu" id="mobileMenu" aria-label="Navegación móvil">
+      {navItems.map((item) => <a href={item.href}>{item.text}<span aria-hidden="true">↗</span></a>)}
+      <a class="ab-mobile-cta" href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+    </nav>
   )}
 </header>
 
 <script>
-  import { auth } from '../lib/firebase'; // Importar la instancia auth inicializada
-  import { signOut, onAuthStateChanged } from 'firebase/auth'; // Importar signOut y onAuthStateChanged
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+  const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
+  const mobileMenu = document.querySelector<HTMLElement>("#mobileMenu");
 
-  // Script para menú móvil (solo si no es página de admin)
-  const menuButton = document.getElementById('menuButton');
-  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = () => {
+    mobileMenu?.classList.remove("open");
+    menuButton?.setAttribute("aria-expanded", "false");
+    menuButton?.setAttribute("aria-label", "Abrir menú");
+  };
 
-  menuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  menuButton?.addEventListener("click", () => {
+    const willOpen = !mobileMenu?.classList.contains("open");
+    mobileMenu?.classList.toggle("open", willOpen);
+    menuButton.setAttribute("aria-expanded", String(willOpen));
+    menuButton.setAttribute("aria-label", willOpen ? "Cerrar menú" : "Abrir menú");
   });
 
-  // Mostrar enlace de mensajes si el usuario está autenticado
-  const adminMessagesLink = document.getElementById('adminMessagesLink');
-  if (adminMessagesLink) {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        adminMessagesLink.classList.remove('hidden');
-      } else {
-        adminMessagesLink.classList.add('hidden');
-      }
-    });
-  }
+  mobileMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  window.addEventListener("scroll", () => header?.classList.toggle("scrolled", window.scrollY > 16), { passive: true });
 
-  // Script para cerrar sesión (solo si es página de admin)
-  const signOutButton = document.getElementById('signOutButton');
-  if (signOutButton) {
-    console.log('Botón de cerrar sesión encontrado.'); // Log 1
-
-    signOutButton.addEventListener('click', async () => {
-      console.log('Clic en el botón de cerrar sesión.'); // Log 2
-      try {
-        console.log('Intentando cerrar sesión con la instancia importada...'); // Log 3
-        await signOut(auth); // Usar la instancia auth importada
-        console.log('Sesión cerrada exitosamente. Redirigiendo...'); // Log 4
-        window.location.href = '/'; // Redirigir a la página de inicio
-      } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-        alert('Hubo un error al cerrar sesión.');
-      }
-    });
-
-  } else {
-    // Este log solo se mostraría si isAdminPage es true pero el botón no se encuentra
-    // O si el script corre antes de que el botón exista en el DOM (menos probable aquí)
-    const isAdminPageCheck = window.location.pathname.startsWith('/admin');
-    if (isAdminPageCheck) {
-        console.log('Botón de cerrar sesión NO encontrado en página de admin.');
+  document.querySelector("#signOutButton")?.addEventListener("click", async () => {
+    try {
+      const [{ auth }, { signOut }] = await Promise.all([import("../lib/firebase"), import("firebase/auth")]);
+      await signOut(auth);
+      window.location.href = "/";
+    } catch (error) {
+      console.error("No se ha podido cerrar sesión:", error);
     }
-  }
-
-  // ... (código existente para resaltar enlace activo) ...
+  });
 </script>
 
 <style>
-  .mobile-cta-button {
-    display: block;
-    margin: 0.5rem 0.75rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    font-weight: 600;
-    border-radius: 9999px;
-    background: linear-gradient(90deg, #ff9900, #ffb347, #ff9900);
-    color: #131921;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px -1px rgba(255, 153, 0, 0.2);
+  .ab-site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: 64px;
+    color: #fff;
+    background: rgba(255, 153, 0, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(18px);
+    transition: background 180ms ease;
   }
 
-  .mobile-cta-button:after {
-    content: "";
-    position: absolute;
-    left: -100%;
-    top: 0;
-    width: 100%;
+  .ab-site-header.scrolled { background: rgba(244, 112, 37, 0.97); }
+
+  .ab-header-inner {
+    width: min(1440px, 100%);
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: 0.5s;
-    z-index: -1;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 32px;
   }
 
-  .mobile-cta-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px -1px rgba(255, 153, 0, 0.2);
+  .ab-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 10px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 850;
   }
 
-  @media (hover: hover) {
-    .mobile-cta-button:hover {
-      box-shadow: 0 6px 12px -2px rgba(255, 153, 0, 0.25);
-    }
-    
-    .mobile-cta-button:hover:after {
-      left: 100%;
-      animation: shine 1.5s infinite;
-    }
+  .ab-brand em { color: #fff; font-style: normal; }
+  .ab-brand-symbol { width: 34px; height: 34px; display: block; border-radius: 4px; object-fit: cover; }
+  .ab-desktop-nav { display: flex; align-items: center; gap: 30px; }
+  .ab-desktop-nav a { position: relative; padding: 22px 0 20px; color: rgba(255,255,255,.86); font-size: .76rem; font-weight: 750; }
+  .ab-desktop-nav a::after { content: ""; position: absolute; right: 0; bottom: 13px; left: 0; height: 2px; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
+  .ab-desktop-nav a:hover { color: #fff; }
+  .ab-desktop-nav a:hover::after { transform: scaleX(1); }
+
+  .ab-header-action {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-self: end;
+    gap: 20px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 4px;
+    background: #fff;
+    color: #111;
+    font-size: .72rem;
+    font-weight: 850;
+    cursor: pointer;
+    transition: background 180ms ease, transform 180ms ease;
   }
 
-  @keyframes shine {
-    0% {
-      left: -100%;
-    }
-    20%, 100% {
-      left: 100%;
-    }
-  }
+  .ab-header-action:hover { background: #111; color: #fff; transform: translateY(-1px); }
+  .ab-menu-button { display: none; width: 39px; height: 39px; padding: 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 4px; background: transparent; cursor: pointer; }
+  .ab-menu-button span { display: block; width: 100%; height: 2px; margin: 4px 0; background: #fff; transition: transform 180ms ease, opacity 180ms ease; }
+  .ab-menu-button[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .ab-menu-button[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .ab-menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  /* Estilos para el botón CTA del header */
-  .header-cta-button {
-    position: relative;
-    background: linear-gradient(90deg, #ff9900, #ffb347, #ff9900);
-    background-size: 200%;
-    color: #131921;
-    padding: 0.5rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    box-shadow: 0 4px 8px -2px rgba(255, 153, 0, 0.25);
-    z-index: 1;
-  }
+  .ab-mobile-menu { display: none; position: absolute; top: 64px; right: 0; left: 0; padding: 10px 16px 18px; background: #0b0b0b; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .ab-mobile-menu > a { min-height: 52px; display: flex; align-items: center; justify-content: space-between; color: #fff; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 1rem; font-weight: 750; }
+  .ab-mobile-menu .ab-mobile-cta { margin-top: 12px; padding: 0 14px; border: 0; border-radius: 4px; background: #ff9900; color: #111; }
 
-  .header-cta-button:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #ffb347, #ff9900, #ffb347);
-    background-size: 200%;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s ease;
-  }
-
-  .header-cta-button:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-radius: 9999px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
-    opacity: 0;
-    transform: scale(0.5);
-    z-index: -2;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-  }
-
-  .header-cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px -4px rgba(255, 153, 0, 0.4);
-    animation: shimmer-header 2s infinite;
-  }
-  
-  .header-cta-button:hover:before {
-    opacity: 1;
-    animation: bg-slide 2s infinite;
-  }
-  
-  .header-cta-button:hover:after {
-    opacity: 0.15;
-    transform: scale(2);
-    animation: pulse-glow 2s infinite;
-  }
-  
-  .header-cta-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px -1px rgba(255, 153, 0, 0.3);
-  }
-  
-  @keyframes shimmer-header {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  @keyframes bg-slide {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  @keyframes pulse-glow {
-    0% {
-      opacity: 0.1;
-    }
-    50% {
-      opacity: 0.2;
-    }
-    100% {
-      opacity: 0.1;
-    }
-  }
-
-  /* Estilos para los enlaces de navegación */
-  .nav-link {
-    position: relative;
-    padding: 0.25rem 0;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    color: white;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: linear-gradient(90deg, transparent, #ff9900, transparent);
-    transform-origin: center;
-    transition: transform 0.3s ease-out;
-    opacity: 0;
-  }
-
-  .nav-link:hover {
-    color: #ff9900;
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-
-  /* Efecto adicional de destello al interactuar */
-  .nav-link:active {
-    text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
-  }
-
-  /* Animación para detectar la página activa */
-  .nav-link.active::after {
-    transform: scaleX(1);
-    opacity: 0.8;
-    animation: pulse-underline 2s infinite;
-  }
-
-  @keyframes pulse-underline {
-    0%, 100% {
-      opacity: 0.6;
-    }
-    50% {
-      opacity: 1;
-    }
+  @media (max-width: 900px) {
+    .ab-header-inner { grid-template-columns: 1fr auto; padding: 0 16px; }
+    .ab-desktop-nav, .ab-desktop-action { display: none; }
+    .ab-menu-button { display: block; }
+    .ab-mobile-menu.open { display: grid; }
   }
 </style>
