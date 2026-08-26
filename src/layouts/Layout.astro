@@ -7,6 +7,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StructuredData from '../components/StructuredData.astro';
 import AIStructuredData from '../components/AIStructuredData.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 interface Props {
   title: string;
@@ -46,6 +47,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // URL completa de la imagen para Open Graph
 const ogImageURL = new URL(image, Astro.site);
+const isAdminPage = Astro.url.pathname.startsWith('/admin');
 ---
 
 <!doctype html>
@@ -165,6 +167,7 @@ const ogImageURL = new URL(image, Astro.site);
       <slot />
     </main>
     <Footer />
+    {!isAdminPage && <WhatsAppFloat />}
   </body>
 </html>
 

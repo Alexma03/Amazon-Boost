@@ -4,6 +4,7 @@ import { listingOptimizationData } from './listing-optimization.js';
 import { ppcManagementData } from './ppc-management.js';
 import { imagenesParaAmazonData } from './imagenes-para-amazon.js';
 import { bellezaData } from './belleza.js';
+import { accountUnlockingData } from './account-unlocking.js';
 
 // Array con todos los servicios
 export const allServices = [
@@ -12,7 +13,8 @@ export const allServices = [
   listingOptimizationData,
   ppcManagementData,
   imagenesParaAmazonData,
-  bellezaData
+  bellezaData,
+  accountUnlockingData
 ];
 
 // Mapa de servicios por slug para búsquedas rápidas
@@ -22,5 +24,6 @@ export const servicesBySlug = {
   [listingOptimizationData.slug]: listingOptimizationData,
   [ppcManagementData.slug]: ppcManagementData,
   [imagenesParaAmazonData.slug]: imagenesParaAmazonData,
-  [bellezaData.slug]: bellezaData
+  [bellezaData.slug]: bellezaData,
+  [accountUnlockingData.slug]: accountUnlockingData
 };

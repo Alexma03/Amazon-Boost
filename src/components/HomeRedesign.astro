@@ -11,6 +11,7 @@ const signals = [
 
 const services = [
   { step: "Detectar", name: "Auditoría de cuenta", copy: "Una lectura completa de Seller Central para saber qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/auditoria-cuenta-amazon" },
+  { step: "Resolver", name: "Desbloqueos e incidencias", copy: "Recuperación de cuentas bloqueadas, fondos retenidos y situaciones críticas que frenan la operativa o la facturación.", tags: ["Suspensiones", "Fondos retenidos", "Apelaciones"], href: "/servicios/desbloqueos-amazon/" },
   { step: "Rentabilizar", name: "PPC y Amazon Ads", copy: "Campañas construidas alrededor del beneficio del producto, no de métricas bonitas sin contexto.", tags: ["ACOS", "TACOS", "ROAS"], href: "/agencia-ppc-amazon" },
   { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ alineados para ganar clics, convencer y sostener el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/optimizacion-listings-amazon" },
   { step: "Comunicar", name: "Imágenes que venden", copy: "Imagen principal, infografías, comparativas y contenido A+ para explicar mejor el producto y elevar la conversión.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon" },
@@ -88,6 +89,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         const openProgress = Math.min(1, Math.max(0, window.innerWidth <= 760 ? mobileTrigger : window.scrollY / 160));
         heroMacbook.style.setProperty("--lid-angle", `${-84 + openProgress * 84}deg`);
         heroMacbook.style.setProperty("--screen-opacity", String(.12 + openProgress * .88));
+        heroMacbook.style.setProperty("--open-progress", String(openProgress));
         heroMacbook.classList.toggle("is-open", openProgress >= .98);
       }
     };
@@ -228,6 +230,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <div class="ab-account-stage" data-reveal>
       <div class="ab-stage-caption"><span>Amazon Boost / Gestión integral</span></div>
       <div class="ab-macbook" data-hero-macbook>
+        <img class="ab-macbook-device" src="/images/macbook-graphite-frame.png" alt="" aria-hidden="true" />
         <div class="ab-macbook-screen">
           <div class="ab-macbook-camera" aria-hidden="true"><i></i></div>
           <div class="ab-seller-window" aria-label="Vista de ejemplo de una cuenta de Seller Central">
@@ -261,7 +264,6 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
           </div>
           <span class="ab-macbook-label">MacBook Pro</span>
         </div>
-        <div class="ab-macbook-base-photo" aria-hidden="true"><img src="/images/macbook-pro-base-real.png" alt="" /></div>
       </div>
       <div class="ab-stage-note">PPC · Contenido · Catálogo · Stock · Expansión</div>
     </div>
