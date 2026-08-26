@@ -79,13 +79,16 @@
 .ab-macbook-base-photo{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
 
 /* One-piece graphite device frame with Seller Central fitted inside its real display opening. */
-.ab-macbook{--open-progress:0;padding:0;aspect-ratio:1640/965;perspective:none;opacity:calc(.62 + var(--open-progress) * .38);transform:translateY(calc(16px - var(--open-progress) * 16px)) scale(calc(.975 + var(--open-progress) * .025));transform-origin:center bottom;transition:transform .08s linear,opacity .08s linear}
-.ab-macbook-device{position:absolute;z-index:1;inset:0;width:100%;height:100%;display:block;object-fit:contain;pointer-events:none}
+.ab-macbook{--open-progress:0;padding:0;aspect-ratio:1640/965;perspective:1800px;transform:none;transform-style:preserve-3d}
+.ab-macbook-lid{position:absolute;z-index:3;inset:0;clip-path:inset(0 0 11.6% 0);transform:rotateX(var(--lid-angle));transform-origin:center 88.4%;backface-visibility:hidden;transform-style:preserve-3d;transition:transform .08s linear;will-change:transform}
+.ab-macbook-device{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;pointer-events:none}
+.ab-macbook-device-lid{z-index:1}
+.ab-macbook-device-base{z-index:4;clip-path:inset(87.5% 0 0 0)}
 .ab-macbook-screen{position:absolute;z-index:2;top:8.1%;right:14.8%;bottom:16.8%;left:14.8%;aspect-ratio:auto;padding:0;border:0;border-radius:2px;background:#08090a;box-shadow:none;transform:none;transition:none}
 .ab-macbook-camera,.ab-macbook-label,.ab-macbook-base-photo{display:none}
 .ab-seller-window{border-radius:2px}
 @media(max-width:760px){.ab-macbook{padding:0}.ab-macbook-screen{top:8.1%;right:14.8%;bottom:16.8%;left:14.8%;padding:0;border-radius:1px}}
-@media(prefers-reduced-motion:reduce){.ab-macbook{--open-progress:1!important;opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ab-macbook{--open-progress:1!important}.ab-macbook-lid{transform:none;transition:none}}
 
 /* Compact, editorial service system with a restrained optical reflection. */
 .ab-services-section{padding-top:96px;padding-bottom:98px}.ab-services-intro{width:min(1180px,100%);margin-bottom:42px}.ab-services-intro h2[data-reflection]{max-width:1020px;margin-bottom:40px;font-size:clamp(2.9rem,5vw,5.45rem);line-height:.94}.ab-services-intro h2[data-reflection]:before{content:"";position:absolute;right:7%;bottom:-16px;left:7%;height:1px;background:linear-gradient(90deg,transparent,rgba(8,8,8,.16) 26%,rgba(8,8,8,.16) 74%,transparent);filter:blur(.35px);pointer-events:none}.ab-services-intro h2[data-reflection]:after{top:calc(100% + 1px);height:.4em;color:#090909;line-height:.94;opacity:.06;filter:blur(1.7px);clip-path:none;transform:translateY(var(--reflection-shift)) scaleY(-.38);-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.72),transparent 78%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.72),transparent 78%)}.ab-service-list{width:min(1180px,100%)}.ab-service-row{grid-template-columns:minmax(230px,.86fr) minmax(310px,1.14fr) minmax(210px,.72fr);gap:30px;min-height:146px;padding:23px 10px}.ab-service-row:hover{padding-left:18px;padding-right:18px;background:rgba(255,255,255,.6)}.ab-service-step{gap:8px;color:var(--ab-orange);font-size:.55rem;font-weight:900}.ab-service-step i{width:18px;background:var(--ab-orange)}.ab-service-title h3{margin-top:11px;font-size:clamp(1.55rem,2vw,2.3rem)}.ab-service-row>p{font-size:.92rem;line-height:1.55}.ab-service-tags{gap:5px}.ab-service-tags span{padding:5px 7px;font-size:.55rem}
