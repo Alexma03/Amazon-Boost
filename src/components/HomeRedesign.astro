@@ -21,10 +21,10 @@ const services = [
 ];
 
 const process = [
-  { number: "01", title: "Leemos", text: "Cuenta, producto, mercado y margen." },
-  { number: "02", title: "Priorizamos", text: "Lo urgente, lo rentable y lo que puede esperar." },
-  { number: "03", title: "Ejecutamos", text: "Cambios concretos con una métrica asociada." },
-  { number: "04", title: "Escalamos", text: "Más inversión cuando el sistema ya responde." },
+  { title: "Leemos", text: "Convertimos ventas, publicidad y margen en informes claros. Sabes dónde está tu cuenta y qué merece atención." },
+  { title: "Priorizamos", text: "Ordenamos las oportunidades por impacto y urgencia. Acordamos las prioridades y el siguiente paso para tu cuenta." },
+  { title: "Ejecutamos", text: "Conectamos publicidad, catálogo y operativa. Aplicamos los cambios y medimos su efecto sobre ventas, conversión y rentabilidad." },
+  { title: "Escalamos", text: "Reforzamos lo que funciona. Ajustamos inversión y stock para crecer con margen y sostener el ritmo de la cuenta." },
 ];
 
 const reviewRail = [
@@ -387,9 +387,22 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   <div class="ab-service-list">{services.map((service) => <a class="ab-service-row" href={service.href} data-reveal><div class="ab-service-title"><span class="ab-service-step"><i></i>{service.step}</span><h3>{service.name}</h3></div><p>{service.copy}</p><div class="ab-service-tags">{service.tags.map((tag) => <span>{tag}</span>)}</div></a>)}</div>
 </section>
 
-<section class="ab-method-section">
-  <div class="ab-method-copy" data-reveal><div><p class="ab-overline"><span></span> Método de trabajo</p><h2>Menos informes. Más decisiones que mueven la cuenta.</h2></div><p>Una forma de trabajar sencilla de entender y difícil de ejecutar mal.</p></div>
-  <div class="ab-method-grid">{process.map((item) => <article data-reveal><span>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+<section class="ab-method-section" id="direccion-estrategica" aria-labelledby="ab-strategy-title">
+  <div class="ab-strategy-shell">
+    <div class="ab-strategy-copy" data-reveal>
+      <p class="ab-overline"><span aria-hidden="true"></span> Dirección estratégica</p>
+      <h2 id="ab-strategy-title"><span>Datos claros.</span> <span>Decisiones conectadas.</span> <span>Crecimiento con margen.</span></h2>
+      <p class="ab-strategy-description">Los informes dan contexto. La estrategia marca el siguiente paso. Tú sabes qué ocurre en tu cuenta, qué estamos haciendo y por qué.</p>
+    </div>
+    <ol class="ab-strategy-flow" role="list" aria-label="De los datos al crecimiento">
+      {process.map((item) => (
+        <li data-reveal>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
 </section>
 
 <section class="ab-founder-section">
