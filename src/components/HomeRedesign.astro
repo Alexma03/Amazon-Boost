@@ -1,6 +1,6 @@
 ---
 import "../styles/home-redesign.css";
-import { homeShowcase } from "../data/home-showcase";
+import { homeShowcase, websiteReviews } from "../data/home-showcase";
 
 const signals = [
   { id: "ads", number: "01", label: "Amazon Ads" },
@@ -28,31 +28,30 @@ const process = [
 ];
 
 const reviewRail = [
-  ...homeShowcase.featuredCase.reviews.map((review) => ({
+  ...homeShowcase.featuredCase.reviews.map((review, index) => ({
     ...review,
+    id: `external-${index}`,
     tone: review.platform === "Trustpilot" ? "trustpilot" : "linkedin",
     eyebrow: "Opinión pública",
     action: "Ver original",
   })),
-  {
+  ...websiteReviews.map((review) => ({
+    ...review,
     platform: "Amazon Boost",
-    author: "Nuevas voces",
     initials: "AB",
-    meta: "Contenido pendiente de validación",
-    date: "2026",
-    title: "Más experiencias reales, en preparación.",
-    quote: "Este espacio está preparado para incorporar nuevas reseñas internas con fecha, cliente y contexto verificables.",
-    url: "/dejar-resena",
+    date: null,
+    url: null,
     tone: "internal",
-    eyebrow: "Próxima incorporación",
-    action: "Cómo dejar una reseña",
-  },
+    eyebrow: "Reseña de la web",
+    action: "Leer completa",
+  })),
   {
+    id: "invitation",
     platform: "Tu experiencia",
     author: "Cliente Amazon Boost",
     initials: "+",
     meta: "Trustpilot o LinkedIn",
-    date: "Abierto",
+    date: null,
     title: "¿Has trabajado con nosotros?",
     quote: "Comparte qué problema resolvimos, cómo fue el proceso y qué cambió en tu cuenta de Amazon.",
     url: "/dejar-resena",
@@ -114,6 +113,36 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
       if (visual) visual.dataset.tone = next.tone;
       bars.forEach((bar, index) => bar.style.setProperty("--bar-height", `${next.bars[index] ?? 50}%`));
     }));
+
+    const reviewMarquee = document.querySelector<HTMLElement>(".ab-review-marquee");
+    const reviewPause = document.querySelector<HTMLButtonElement>("[data-review-pause]");
+    reviewPause?.addEventListener("click", () => {
+      const paused = reviewPause.getAttribute("aria-pressed") !== "true";
+      reviewPause.setAttribute("aria-pressed", String(paused));
+      reviewPause.textContent = paused ? "Reanudar reseñas" : "Pausar reseñas";
+      reviewMarquee?.classList.toggle("is-paused", paused);
+    });
+    document.querySelectorAll<HTMLButtonElement>("[data-review-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const dialog = document.getElementById(`review-${button.dataset.reviewOpen}`);
+        if (!(dialog instanceof HTMLDialogElement) || dialog.open) return;
+        dialog.showModal();
+        reviewMarquee?.classList.add("has-dialog");
+        document.documentElement.classList.add("ab-review-dialog-open");
+        dialog.addEventListener("close", () => {
+          reviewMarquee?.classList.remove("has-dialog");
+          document.documentElement.classList.remove("ab-review-dialog-open");
+          button.focus({ preventScroll: true });
+        }, { once: true });
+      });
+    });
+    document.querySelectorAll<HTMLDialogElement>(".ab-review-dialog").forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+      });
+    });
 
     const caseChart = document.querySelector<HTMLCanvasElement>("[data-case-chart]");
     if (caseChart && !caseChart.dataset.ready) {
@@ -322,23 +351,35 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <div><p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2></div>
     <div><strong>Opiniones públicas hoy.</strong><p>Nuevas historias se incorporarán aquí cuando estén validadas. Trustpilot y LinkedIn llevan siempre a la publicación original.</p></div>
   </div>
-  <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes">
+  <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes" style={`--review-duration:${reviewRail.length * 12}s`}>
     <div class="ab-review-track">
       {[0, 1].map((groupIndex) => (
         <div class="ab-review-group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
-          {reviewRail.map((review) => (
-            <a class:list={["ab-client-review-card", `is-${review.tone}`]} href={review.url} target={review.url.startsWith("http") ? "_blank" : undefined} rel={review.url.startsWith("http") ? "noreferrer" : undefined} tabindex={groupIndex === 1 ? -1 : undefined}>
-              <div class="ab-client-review-top"><span>{review.platform === "LinkedIn" ? "in" : review.tone === "trustpilot" ? "★" : review.initials}</span><div><strong>{review.platform}</strong><small>{review.eyebrow}</small></div><time>{review.date}</time></div>
+          {reviewRail.map((review) => {
+            const internal = review.tone === "internal";
+            const Card = internal ? "article" : "a";
+            return (
+            <Card class:list={["ab-client-review-card", `is-${review.tone}`]} href={review.url ?? undefined} target={review.url?.startsWith("http") ? "_blank" : undefined} rel={review.url?.startsWith("http") ? "noreferrer" : undefined} tabindex={!internal && groupIndex === 1 ? -1 : undefined}>
+              <div class="ab-client-review-top"><span>{review.platform === "LinkedIn" ? "in" : review.tone === "trustpilot" ? "★" : review.initials}</span><div><strong>{review.platform}</strong><small>{review.eyebrow}</small></div>{review.date && <time>{review.date}</time>}</div>
               {review.tone === "trustpilot" && <div class="ab-client-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>}
               <blockquote><strong>{review.title}</strong><p>“{review.quote}”</p></blockquote>
-              <footer><div><strong>{review.author}</strong><small>{review.meta}</small></div><span>{review.action} ↗</span></footer>
-            </a>
-          ))}
+              <footer><div><strong>{review.author}</strong><small>{review.meta}</small></div>{internal ? <button type="button" data-review-open={review.id} aria-haspopup="dialog" aria-controls={`review-${review.id}`} aria-label={`Leer reseña completa: ${review.title}`} tabindex={groupIndex === 1 ? -1 : undefined}>{review.action} <span aria-hidden="true">↗</span></button> : <span>{review.action} ↗</span>}</footer>
+            </Card>
+          );})}
         </div>
       ))}
     </div>
   </div>
-  <div class="ab-review-actions" data-reveal><a href="/dejar-resena">Compartir mi experiencia <span aria-hidden="true">↗</span></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <span aria-hidden="true">↗</span></a></div>
+  <div class="ab-review-actions" data-reveal><button class="ab-review-pause" type="button" data-review-pause aria-pressed="false">Pausar reseñas</button><a href="/dejar-resena">Compartir mi experiencia <span aria-hidden="true">↗</span></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <span aria-hidden="true">↗</span></a></div>
+  {websiteReviews.map((review) => (
+    <dialog class="ab-review-dialog" id={`review-${review.id}`} aria-labelledby={`review-title-${review.id}`}>
+      <form method="dialog"><button type="submit" aria-label="Cerrar reseña" title="Cerrar reseña">×</button></form>
+      <p class="ab-review-dialog-source">Amazon Boost · Reseña de la web</p>
+      <h3 id={`review-title-${review.id}`}>{review.title}</h3>
+      <blockquote><p>“{review.quote}”</p></blockquote>
+      <footer><strong>{review.author}</strong><span>{review.meta}</span></footer>
+    </dialog>
+  ))}
 </section>
 
 <section class="ab-services-section" id="services">

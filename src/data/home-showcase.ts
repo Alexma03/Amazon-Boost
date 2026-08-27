@@ -54,3 +54,55 @@ export const homeShowcase = {
     ],
   },
 };
+
+export const websiteReviews = [
+  {
+    id: "suplementacion-personas",
+    title: "Suplementación para personas",
+    author: "Director de E-commerce",
+    meta: "Marca de Suplementación y Salud",
+    quote: "Nos abrieron el canal desde cero. Hemos escalado la facturación manteniendo un TACOS muy rentable y ya nos estamos posicionando con un margen de beneficio muy sólido. Haber superado los 15.000 € de facturación mensual partiendo de cero demuestra su control absoluto del ecosistema.",
+  },
+  {
+    id: "suplementacion-animales",
+    title: "Suplementación para animales",
+    author: "Founder",
+    meta: "Nutrición Animal Premium",
+    quote: "Antes de trabajar con Amazon Boost ya estábamos en Amazon, pero pagábamos más en publicidad de lo que facturábamos. Optimizaron los listados y reestructuraron toda la arquitectura de campañas PPC, consiguiendo un TACOS del 15%. Ahora el canal es predecible, rentable y, gracias a que fomentaron la compra recurrente, mucho más orgánico.",
+  },
+  {
+    id: "suplementacion-perros",
+    title: "Suplementación para perros",
+    author: "CEO",
+    meta: "Marca de Salud Canina",
+    quote: "Lanzar un condroprotector canino en Amazon parecía un suicidio por el altísimo nivel de competencia. Amazon Boost preparó unos listings súper optimizados con unas imágenes tremendas y muy profesionales. En el primer mes ya estábamos en la primera página. Un trabajo excelente; ya estamos pensando en ampliar el catálogo con ellos.",
+  },
+  {
+    id: "cosmetica-general",
+    title: "Cosmética general",
+    author: "CMO",
+    meta: "Firma de Dermocosmética",
+    quote: "Teníamos un catálogo amplio, pero la conversión era pésima al competir contra marcas extranjeras. Al empezar a trabajar con ellos, alinearon el PPC con un Contenido A+ brutal, un SEO preciso y unas imágenes milimétricas. Entienden perfectamente la psicología de compra de belleza en móvil. Nos hemos hecho nuestro hueco en el mercado y estamos rindiendo muy bien.",
+  },
+  {
+    id: "cosmetica-coreana",
+    title: "Cosmética coreana",
+    author: "Co-Founder",
+    meta: "Marca de Cosmética Coreana",
+    quote: "El nicho de K-Beauty va muy rápido, impulsado por tendencias virales. Lograron capturar todo ese tráfico orgánico optimizando nuestro listado y gestionando el inventario con una dinámica logística perfecta para no romper stock en los picos de demanda. Son unos cracks.",
+  },
+  {
+    id: "cosmetica-tradicional",
+    title: "Cosmética tradicional",
+    author: "Director General",
+    meta: "Laboratorios Cosméticos",
+    quote: "Llevamos décadas en el mercado tradicional, pero Amazon era un agujero negro operativo. Digitalizaron nuestro catálogo manteniendo intacto el prestigio institucional de la marca, gestionaron toda la burocracia de los algoritmos y consiguieron que el canal se vuelva rentable en menos de seis meses. Pura ingeniería de cuenta.",
+  },
+  {
+    id: "higiene-jabones",
+    title: "Higiene y jabones",
+    author: "Responsable Digital",
+    meta: "Marca de Higiene y Cuidado Personal",
+    quote: "Vender geles y jabones en FBA es muy complejo porque el peso del producto y el ticket medio bajo pulverizan el margen. Entendieron nuestra estructura de costes desde la auditoría inicial, reestructuraron la oferta y nos hicieron rentables donde otras agencias fracasaron. Muy recomendables.",
+  },
+] as const;
