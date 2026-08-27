@@ -187,8 +187,14 @@
   --photo-height:max(100cqh,118.264cqw);
   --label-height:max(80px,calc(var(--photo-height) * .115));
   top:clamp(0px,calc(var(--photo-height) * .825 + (100cqh - var(--photo-height)) * var(--portrait-focus-y)),calc(100% - var(--label-height)));
-  bottom:auto;min-height:var(--label-height);display:flex;flex-direction:column;justify-content:center;background:#080808;
+  bottom:auto;min-height:var(--label-height);display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:16px;align-items:center;background:#080808;
 }
+.ab-portrait-identity{min-width:0}
+.ab-founder-linkedin{display:grid;place-items:center;width:44px;height:44px;border-radius:6px;background:#0a66c2;color:#fff;transition:background .2s ease}
+.ab-founder-linkedin>span{margin:0;color:inherit;font-family:Arial,Helvetica,sans-serif;font-size:1.5rem;font-weight:700;line-height:1;letter-spacing:0;text-transform:none}
+.ab-founder-linkedin:hover{background:#004182}
+.ab-founder-linkedin:focus-visible{outline:2px solid var(--ab-orange);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.ab-founder-linkedin{transition:none}}
 @media(max-width:1100px){.ab-founder-portrait{min-height:0;aspect-ratio:4/3}}
 @media(max-width:760px){.ab-founder-portrait{aspect-ratio:4/5;--portrait-focus-y:.5}.ab-founder-portrait img{object-position:62% center}}
 
