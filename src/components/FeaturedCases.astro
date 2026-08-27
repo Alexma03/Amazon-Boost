@@ -1,0 +1,125 @@
+---
+import { homeShowcase, pharmaCase, caseChartSeries } from "../data/home-showcase";
+import "../styles/featured-cases.css";
+
+const original = homeShowcase.featuredCase;
+const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(amount);
+---
+
+<section class="ab-case-section ab-case-carousel" id="caso-real" data-case-carousel role="region" aria-roledescription="carrusel" aria-label="Casos de éxito de Amazon Boost">
+  <div class="ab-case-navigation">
+    <div class="ab-case-selector" role="group" aria-label="Elegir caso de éxito">
+      <button type="button" data-case-select="0" aria-controls="caso-organico" aria-pressed="true">Crecimiento orgánico</button>
+      <button type="button" data-case-select="1" aria-controls="caso-farmaceutico" aria-pressed="false">Marca farmacéutica</button>
+    </div>
+    <div class="ab-case-controls">
+      <span data-case-status aria-live="polite" aria-atomic="true">1 / 2</span>
+      <button type="button" data-case-step="-1" aria-label="Caso anterior" title="Caso anterior" disabled><img src="/icons/lucide/arrow-left.svg" width="22" height="22" alt="" /></button>
+      <button type="button" data-case-step="1" aria-label="Siguiente caso" title="Siguiente caso"><img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></button>
+    </div>
+  </div>
+  <div class="ab-case-viewport" data-case-viewport tabindex="0" aria-label="Casos de éxito">
+    <article class="ab-case-slide" id="caso-organico" data-case-slide role="group" aria-roledescription="diapositiva" aria-label="1 de 2: Crecimiento orgánico">
+      <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {original.status}</p><h2>{original.title}</h2><p>{original.description}</p></div>
+      <div class="ab-case-layout">
+        <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={original.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" draggable="false" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
+        <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{original.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart="organic" role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={original.href}>Ampliar el caso <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="ab-case-client-voice" data-reveal>
+        <div>
+          <span>La voz detrás del resultado</span>
+          <blockquote class="ab-client-quote">
+            <span class="ab-client-quote-mark" aria-hidden="true">“</span>
+            <p>{original.reviews[0].title}. {original.reviews[0].quote}</p>
+            <span class="ab-client-quote-mark ab-client-quote-close" aria-hidden="true">”</span>
+          </blockquote>
+          <p>{original.reviews[1].author} · Cliente de Amazon Boost <a class="ab-case-review-source" href={original.reviews[0].url} target="_blank" rel="noreferrer">Reseña en Trustpilot <span aria-hidden="true">↗</span></a></p>
+        </div>
+        <a href={original.reviews[1].url} target="_blank" rel="noreferrer">Leer su experiencia en LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+
+    <article class="ab-case-slide ab-case-pharma" id="caso-farmaceutico" data-case-slide role="group" aria-roledescription="diapositiva" aria-label="2 de 2: Marca farmacéutica">
+      <div class="ab-case-heading" data-reveal>
+        <p class="ab-overline"><span></span> Caso de éxito · Sector farmacéutico</p>
+        <h2>{pharmaCase.title}</h2>
+        <p>{pharmaCase.description}</p>
+      </div>
+      <div class="ab-case-layout">
+        <div class="ab-case-comparison" data-reveal>
+          <p class="ab-overline"><span></span> Una marca con más de 100 años</p>
+          <h3>La misma autoridad.<br />Una nueva dimensión en Amazon.</h3>
+          <dl>
+            <div><dt>Mismo periodo del año anterior</dt><dd>{euro(pharmaCase.previousSales)}</dd></div>
+            <div><dt>Periodo analizado</dt><dd>{euro(pharmaCase.currentSales)}</dd></div>
+          </dl>
+          <p class="ab-case-period">{pharmaCase.period}.</p>
+          <p class="ab-case-comparison-note">{pharmaCase.comparisonNote}</p>
+          <span class="ab-case-confidential">Identidad de la marca reservada por confidencialidad</span>
+        </div>
+        <div class="ab-case-evidence" data-reveal>
+          <div class="ab-case-numbers">{pharmaCase.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+          <figure>
+            <figcaption><span>Facturación mensual</span><small>Sep 2025 a jul 2026 · Datos aportados de Seller Central</small></figcaption>
+            <div class="ab-case-chart"><canvas data-case-chart="pharma" role="img" aria-label="Facturación mensual: de 1.116,15 euros en septiembre de 2025 a 5.044,01 euros en julio de 2026, con un mínimo de 788,60 euros en febrero de 2026"></canvas><span>Julio 2026 <strong>5.044,01 €</strong></span></div>
+          </figure>
+          <details class="ab-case-source-data">
+            <summary>Ver datos mensuales</summary>
+            <table><caption>Ventas de productos encargados</caption><thead><tr><th scope="col">Mes</th><th scope="col">Ventas</th></tr></thead><tbody>{caseChartSeries.pharma.labels.map((label, i) => <tr><th scope="row">{label}</th><td>{euro(caseChartSeries.pharma.values[i])}</td></tr>)}</tbody></table>
+          </details>
+          <p class="ab-case-unit-note">De <strong>{pharmaCase.previousUnits}</strong> a <strong>{pharmaCase.currentUnits.toLocaleString("es-ES")}</strong> unidades frente al mismo intervalo del año anterior.</p>
+        </div>
+      </div>
+      <div class="ab-case-decisions" data-reveal>
+        <p class="ab-overline"><span></span> Qué cambió en la cuenta</p>
+        <div>{pharmaCase.decisions.map((decision) => <div><h3>{decision.title}</h3><p>{decision.text}</p></div>)}</div>
+      </div>
+    </article>
+  </div>
+  <div class="ab-case-bottom-navigation">
+    <a href="/casos-de-exito">Ver más casos de éxito <span aria-hidden="true">↗</span></a>
+    <div class="ab-case-controls">
+      <button type="button" data-case-step="-1" aria-label="Caso anterior" title="Caso anterior" disabled><img src="/icons/lucide/arrow-left.svg" width="22" height="22" alt="" /></button>
+      <button type="button" data-case-step="1" aria-label="Siguiente caso" title="Siguiente caso"><img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { Chart } from "chart.js/auto";
+  import { caseChartSeries } from "../data/home-showcase";
+  import { mountCaseCarousel } from "../lib/case-carousel";
+
+  document.querySelectorAll<HTMLElement>("[data-case-carousel]").forEach((root) => {
+    const cleanup = mountCaseCarousel(root);
+    const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
+    const charts: Chart<"line">[] = [];
+    root.querySelectorAll<HTMLCanvasElement>("[data-case-chart]").forEach((canvas) => {
+      const key = canvas.dataset.caseChart as keyof typeof caseChartSeries;
+      const series = caseChartSeries[key];
+      if (!series || Chart.getChart(canvas)) return;
+      charts.push(new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: [...series.labels],
+          datasets: [{ data: [...series.values], borderColor: "#ff9900", backgroundColor: "#ff9900", borderWidth: 3, pointBackgroundColor: "#ff9900", pointBorderColor: "#fff", pointBorderWidth: 2, pointRadius: 4, pointHoverRadius: 8, pointHitRadius: 24, tension: series.approximate ? .3 : 0, fill: false }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? false : { duration: 900 },
+          interaction: { mode: "nearest", axis: "x", intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { displayColors: false, backgroundColor: "#11151b", titleColor: "#ff9900", bodyColor: "#fff", padding: 12, callbacks: { label: (context) => `${series.approximate ? "Facturación aprox." : "Facturación"}: ${euro.format(context.parsed.y ?? 0)}` } },
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { color: "#777b75", maxRotation: 0, maxTicksLimit: 6, font: { size: 11, weight: 700 } } },
+            y: { beginAtZero: true, suggestedMax: key === "organic" ? 6500 : 5500, border: { display: false }, grid: { color: "rgba(17,21,27,.09)" }, ticks: { color: "#777b75", callback: (value) => `${Number(value) / 1000}k €` } },
+          },
+        },
+      }));
+    });
+    document.addEventListener("astro:before-swap", () => { cleanup?.(); charts.forEach((chart) => chart.destroy()); }, { once: true });
+  });
+</script>

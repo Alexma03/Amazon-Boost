@@ -106,3 +106,39 @@ export const websiteReviews = [
     quote: "Vender geles y jabones en FBA es muy complejo porque el peso del producto y el ticket medio bajo pulverizan el margen. Entendieron nuestra estructura de costes desde la auditoría inicial, reestructuraron la oferta y nos hicieron rentables donde otras agencias fracasaron. Muy recomendables.",
   },
 ] as const;
+
+// Case 02: supplied dossier, pages 6-9. Keep the client anonymous (NDA).
+// The year-on-year comparison and the monthly series cover different intervals.
+export const pharmaCase = {
+  title: "+994,63% en ventas para una marca farmacéutica centenaria.",
+  description: "Una institución española con más de cien años de historia necesitaba convertir su autoridad en ventas dentro de Amazon. Conectamos diseño, inversión publicitaria y disponibilidad para escalar un catálogo en un mercado muy competido.",
+  period: "Finales de octubre de 2025 a finales de julio de 2026",
+  comparisonNote: "Mismo intervalo frente al año anterior. Aproximadamente nueve meses, no un ejercicio anual completo.",
+  previousSales: 2537.70,
+  currentSales: 27778.49,
+  previousUnits: 190,
+  currentUnits: 2169,
+  metrics: [
+    { value: "+994,63%", label: "ventas frente al año anterior" },
+    { value: "2.169", label: "unidades en el periodo" },
+    { value: "9 meses", label: "periodo comparado, aprox." },
+  ],
+  decisions: [
+    { title: "Diseño para convertir", text: "Jerarquía visual móvil e infografías que explican el producto y transmiten confianza." },
+    { title: "Inversión con foco", text: "Productos prioritarios para concentrar la demanda y controlar el TACOS durante el arranque." },
+    { title: "Stock preparado", text: "Planificación FBA antes del verano para sostener la demanda sin frenar la disponibilidad." },
+  ],
+} as const;
+
+export const caseChartSeries = {
+  organic: {
+    labels: ["Mes 1", "Mes 2", "Mes 3", "Mes 4", "Mes 5", "Mes 6"],
+    values: [600, 820, 1080, 2380, 5904.74, 5280],
+    approximate: true,
+  },
+  pharma: {
+    labels: ["Sep 25", "Oct 25", "Nov 25", "Dic 25", "Ene 26", "Feb 26", "Mar 26", "Abr 26", "May 26", "Jun 26", "Jul 26"],
+    values: [1116.15, 1438.45, 1426.40, 1001.40, 990.55, 788.60, 1743.48, 2934.45, 3989.54, 4379.23, 5044.01],
+    approximate: false,
+  },
+} as const;

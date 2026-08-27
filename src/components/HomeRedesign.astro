@@ -1,6 +1,7 @@
 ---
 import "../styles/home-redesign.css";
 import { homeShowcase, websiteReviews } from "../data/home-showcase";
+import FeaturedCases from "./FeaturedCases.astro";
 
 const signals = [
   { id: "ads", number: "01", label: "Amazon Ads" },
@@ -65,8 +66,6 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 ---
 
 <script>
-  import { Chart } from "chart.js/auto";
-
   const signalCopy = {
     ads: { label: "Amazon Ads", title: "El gasto sube, pero el margen no.", text: "Separamos crecimiento real de ventas compradas y encontramos campañas, términos y ASINs que merecen cada euro.", metric: "PPC", detail: "estructura y rentabilidad", tone: "orange", bars: [38, 52, 46, 72, 61, 84, 68, 93] },
     listing: { label: "Conversión", title: "Hay visitas. Falta una razón para comprar.", text: "Trabajamos imagen principal, infografías, copy, precio, reseñas y A+ como un único sistema de conversión.", metric: "CTR", detail: "tráfico que sí entra", tone: "lime", bars: [44, 40, 55, 53, 68, 74, 82, 88] },
@@ -143,53 +142,6 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
       });
     });
-
-    const caseChart = document.querySelector<HTMLCanvasElement>("[data-case-chart]");
-    if (caseChart && !caseChart.dataset.ready) {
-      const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
-      new Chart(caseChart, {
-        type: "line",
-        data: {
-          labels: ["Mes 1", "Mes 2", "Mes 3", "Mes 4", "Mes 5", "Mes 6"],
-          datasets: [{
-            data: [600, 820, 1080, 2380, 5904.74, 5280],
-            borderColor: "#ff9900",
-            backgroundColor: "#ff9900",
-            borderWidth: 3,
-            pointBackgroundColor: "#ff9900",
-            pointBorderColor: "#fff",
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 8,
-            pointHitRadius: 24,
-            tension: .3,
-            fill: false,
-          }],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? false : { duration: 900 },
-          interaction: { mode: "nearest", axis: "x", intersect: false },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              displayColors: false,
-              backgroundColor: "#11151b",
-              titleColor: "#ff9900",
-              bodyColor: "#fff",
-              padding: 12,
-              callbacks: { label: (context) => `Facturación aprox.: ${euro.format(context.parsed.y)}` },
-            },
-          },
-          scales: {
-            x: { grid: { display: false }, border: { display: false }, ticks: { color: "#777b75", font: { size: 11, weight: 700 } } },
-            y: { beginAtZero: true, suggestedMax: 6500, border: { display: false }, grid: { color: "rgba(17,21,27,.09)" }, ticks: { color: "#777b75", callback: (value) => `${Number(value) / 1000}k €` } },
-          },
-        },
-      });
-      caseChart.dataset.ready = "true";
-    }
 
     const reflectionHeading = document.querySelector<HTMLElement>("[data-reflection]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -325,26 +277,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   </div>
 </section>
 
-<section class="ab-case-section" id="caso-real">
-  <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {homeShowcase.featuredCase.status}</p><h2>{homeShowcase.featuredCase.title}</h2><p>{homeShowcase.featuredCase.description}</p></div>
-  <div class="ab-case-layout">
-    <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={homeShowcase.featuredCase.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
-    <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{homeShowcase.featuredCase.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={homeShowcase.featuredCase.href}>Ampliar el caso <span aria-hidden="true">↗</span></a></div>
-  </div>
-  <div class="ab-case-client-voice" data-reveal>
-    <div>
-      <span>La voz detrás del resultado</span>
-      <blockquote class="ab-client-quote">
-        <span class="ab-client-quote-mark" aria-hidden="true">“</span>
-        <p>{homeShowcase.featuredCase.reviews[0].title}. {homeShowcase.featuredCase.reviews[0].quote}</p>
-        <span class="ab-client-quote-mark ab-client-quote-close" aria-hidden="true">”</span>
-      </blockquote>
-      <p>{homeShowcase.featuredCase.reviews[1].author} · Cliente de Amazon Boost <a class="ab-case-review-source" href={homeShowcase.featuredCase.reviews[0].url} target="_blank" rel="noreferrer">Reseña en Trustpilot <span aria-hidden="true">↗</span></a></p>
-    </div>
-    <a href={homeShowcase.featuredCase.reviews[1].url} target="_blank" rel="noreferrer">Leer su experiencia en LinkedIn <span aria-hidden="true">↗</span></a>
-  </div>
-  <div class="ab-more-cases" data-reveal><a href="/casos-de-exito">Ver más casos de éxito <span aria-hidden="true">↗</span></a><span>Nuevos casos y resultados en preparación</span></div>
-</section>
+<FeaturedCases />
 
 <section class="ab-client-reviews" id="resenas">
   <div class="ab-client-reviews-heading" data-reveal>
