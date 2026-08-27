@@ -10,7 +10,13 @@ const signals = [
   { id: "stock", number: "04", label: "FBA / FBM" },
 ];
 
-const tickerItems = ["Seller Central", "Amazon Ads", "SEO Amazon", "FBA / FBM", "Buy Box", "Conversión", "Catálogo"];
+const tickerItems = [
+  "Seller Central", "Amazon Ads", "SEO Amazon", "FBA", "FBM", "Buy Box",
+  "Conversión", "Catálogo", "Stock", "Escalado", "Paneuropeo", "Amazon Europa",
+  "Amazon.es", "Amazon.fr", "Amazon.it", "Amazon.de", "Logística europea",
+  "Contenido A+", "Brand Store", "PPC", "TACOS", "Ranking orgánico",
+  "Inventario", "Margen", "Gestión integral", "Expansión internacional",
+];
 
 const services = [
   { step: "Detectar", name: "Auditoría de cuenta", copy: "Una lectura completa de Seller Central para saber qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/auditoria-cuenta-amazon" },
@@ -254,8 +260,8 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   <div class="ab-proof-rail">{homeShowcase.proof.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}</div>
 </section>
 
-<div class="ab-ticker" aria-label={tickerItems.join(", ")}>
-  <div class="ab-ticker-track">
+<div class="ab-ticker" id="especialidades" aria-label={tickerItems.join(", ")}>
+  <div class="ab-ticker-track" style={`--ticker-duration:${tickerItems.length * 4.3}s`}>
     {[0, 1].map((groupIndex) => (
       <div class="ab-ticker-group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
         {tickerItems.map((item) => <><span>{item}</span><i></i></>)}

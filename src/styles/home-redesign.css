@@ -198,9 +198,12 @@
 @media(max-width:1100px){.ab-founder-portrait{min-height:0;aspect-ratio:4/3}}
 @media(max-width:760px){.ab-founder-portrait{aspect-ratio:4/5;--portrait-focus-y:.5}.ab-founder-portrait img{object-position:62% center}}
 
-/* Two identical groups make the orange rail loop without a visible end. */
-.ab-ticker-track{gap:0!important;animation-duration:30s!important;will-change:transform}
-.ab-ticker-group{height:100%;display:flex;flex:none;align-items:center;gap:20px;padding-right:20px}
+/* Each identical group covers at least one viewport, including on wide screens. */
+.ab-ticker{scroll-margin-top:80px}
+.ab-ticker .ab-ticker-track{gap:0;animation:ab-ticker var(--ticker-duration,112s) linear infinite;will-change:transform}
+.ab-ticker-group{height:100%;min-width:100vw;display:flex;flex:none;align-items:center;justify-content:space-around;gap:20px;padding-right:20px;white-space:nowrap}
+.ab-ticker-group>span,.ab-ticker-group>i{flex:none}
+@media(prefers-reduced-motion:reduce){.ab-ticker .ab-ticker-track{animation:none;will-change:auto}}
 
 /* Air between the hero wordmark lines and a quieter secondary action. */
 .ab-hero h1>em{margin-top:.035em}
