@@ -180,9 +180,17 @@
 
 /* Keep the new portrait in color, with its focal point on the founder. */
 .ab-founder-section{scroll-margin-top:90px}
+.ab-founder-portrait{container-type:size;--portrait-focus-y:.36}
 .ab-founder-portrait img{position:absolute;inset:0;display:block;object-position:62% 36%;filter:none}
+.ab-founder-portrait .ab-portrait-label{
+  /* Follow the wrist in the cover-cropped photo, including at wider aspect ratios. */
+  --photo-height:max(100cqh,118.264cqw);
+  --label-height:max(80px,calc(var(--photo-height) * .115));
+  top:clamp(0px,calc(var(--photo-height) * .825 + (100cqh - var(--photo-height)) * var(--portrait-focus-y)),calc(100% - var(--label-height)));
+  bottom:auto;min-height:var(--label-height);display:flex;flex-direction:column;justify-content:center;background:#080808;
+}
 @media(max-width:1100px){.ab-founder-portrait{min-height:0;aspect-ratio:4/3}}
-@media(max-width:760px){.ab-founder-portrait{aspect-ratio:4/5}.ab-founder-portrait img{object-position:62% center}}
+@media(max-width:760px){.ab-founder-portrait{aspect-ratio:4/5;--portrait-focus-y:.5}.ab-founder-portrait img{object-position:62% center}}
 
 /* Two identical groups make the orange rail loop without a visible end. */
 .ab-ticker-track{gap:0!important;animation-duration:30s!important;will-change:transform}
