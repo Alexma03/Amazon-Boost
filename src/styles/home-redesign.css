@@ -178,6 +178,12 @@
 @media(max-width:760px){.ab-signal-section .ab-section-intro{margin-bottom:44px;text-align:left}.ab-signal-section .ab-overline{justify-content:flex-start;font-size:.76rem}.ab-signal-section .ab-section-intro h2{font-size:2.65rem}.ab-signal-section .ab-section-intro>p:last-child{margin:22px 0 0;font-size:1rem}.ab-signal-experience{grid-template-columns:1fr;gap:12px}.ab-signal-tabs{grid-template-columns:1fr 1fr;gap:8px;padding:0;border:0}.ab-signal-tab{min-height:72px;padding:14px;border:0}.ab-signal-tab:hover{transform:none}}
 @media(max-width:360px){.ab-signal-section .ab-section-intro h2{font-size:2.3rem}}
 
+/* Keep the new portrait in color, with its focal point on the founder. */
+.ab-founder-section{scroll-margin-top:90px}
+.ab-founder-portrait img{position:absolute;inset:0;display:block;object-position:62% 36%;filter:none}
+@media(max-width:1100px){.ab-founder-portrait{min-height:0;aspect-ratio:4/3}}
+@media(max-width:760px){.ab-founder-portrait{aspect-ratio:4/5}.ab-founder-portrait img{object-position:62% center}}
+
 /* Two identical groups make the orange rail loop without a visible end. */
 .ab-ticker-track{gap:0!important;animation-duration:30s!important;will-change:transform}
 .ab-ticker-group{height:100%;display:flex;flex:none;align-items:center;gap:20px;padding-right:20px}
