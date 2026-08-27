@@ -14,9 +14,9 @@ const tickerItems = ["Seller Central", "Amazon Ads", "SEO Amazon", "FBA / FBM", 
 const services = [
   { step: "Detectar", name: "Auditoría de cuenta", copy: "Una lectura completa de Seller Central para saber qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/auditoria-cuenta-amazon" },
   { step: "Resolver", name: "Desbloqueos e incidencias", copy: "Recuperación de cuentas bloqueadas, fondos retenidos y situaciones críticas que frenan la operativa o la facturación.", tags: ["Suspensiones", "Fondos retenidos", "Apelaciones"], href: "/servicios/desbloqueos-amazon/" },
-  { step: "Rentabilizar", name: "PPC y Amazon Ads", copy: "Campañas construidas alrededor del beneficio del producto, no de métricas bonitas sin contexto.", tags: ["ACOS", "TACOS", "ROAS"], href: "/agencia-ppc-amazon" },
-  { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ alineados para ganar clics, convencer y sostener el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/optimizacion-listings-amazon" },
-  { step: "Comunicar", name: "Imágenes que venden", copy: "Imagen principal, infografías, comparativas y contenido A+ para explicar mejor el producto y elevar la conversión.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon" },
+  { step: "Rentabilizar y escalar", name: "PPC y Amazon Ads", copy: "Estrategia diseñada para escalar la cuenta, aumentar el posicionamiento y trabajar desde el primer momento con una publicidad rentable.", tags: ["ACOS", "TACOS", "ROAS"], href: "/agencia-ppc-amazon" },
+  { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ alineados para ganar clics, convencer e impulsar el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/optimizacion-listings-amazon" },
+  { step: "Vender", name: "Imágenes que venden", copy: "Imagen principal, infografías, comparativas y contenido A+ para explicar mejor el producto y elevar la conversión.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon" },
   { step: "Escalar", name: "Gestión integral", copy: "Decisiones semanales sobre publicidad, stock, precio, catálogo y crecimiento en Amazon Europa.", tags: ["Seller Central", "FBA / FBM", "Europa"], href: "/gestion-cuenta-amazon-seller-central" },
 ];
 
@@ -383,7 +383,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 </section>
 
 <section class="ab-services-section" id="services">
-  <div class="ab-section-intro ab-services-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> El sistema Amazon Boost</p><h2 data-reflection="No gestionamos piezas sueltas. Gestionamos el efecto que tienen entre sí.">No gestionamos piezas sueltas. Gestionamos el efecto que tienen entre sí.</h2></div>
+  <div class="ab-section-intro ab-services-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> El sistema Amazon Boost</p><h2 data-reflection="No gestionamos piezas sueltas. Gestionamos el mecanismo completo.">No gestionamos piezas sueltas. Gestionamos el mecanismo completo.</h2></div>
   <div class="ab-service-list">{services.map((service) => <a class="ab-service-row" href={service.href} data-reveal><div class="ab-service-title"><span class="ab-service-step"><i></i>{service.step}</span><h3>{service.name}</h3></div><p>{service.copy}</p><div class="ab-service-tags">{service.tags.map((tag) => <span>{tag}</span>)}</div></a>)}</div>
 </section>
 
