@@ -12,6 +12,8 @@ class ElementStub {
   textContent = '';
   scrollLeft = 0;
   clientWidth = 1280;
+  offsetHeight = 1100;
+  style = { height: '' };
   captured = false;
   classes = new Set();
   classList = { add: name => this.classes.add(name), remove: name => this.classes.delete(name) };
@@ -42,6 +44,7 @@ function fixture(reduced = false) {
   const root = new ElementStub();
   const viewport = new ElementStub();
   const slides = [new ElementStub(), new ElementStub()];
+  slides[1].offsetHeight = 830;
   const selectors = slides.map((_, i) => Object.assign(new ElementStub(), { dataset: { caseSelect: String(i) } }));
   const controls = [-1, 1, -1, 1].map(step => Object.assign(new ElementStub(), { dataset: { caseStep: String(step) } }));
   const status = new ElementStub();
@@ -52,7 +55,8 @@ function fixture(reduced = false) {
   globalThis.window = { matchMedia: () => ({ matches: reduced }) };
   globalThis.ResizeObserver = class {
     constructor(callback) { this.callback = callback; observers.push(this); }
-    observe() {}
+    observed = [];
+    observe(element) { this.observed.push(element); }
     disconnect() { this.disconnected = true; }
   };
   const cleanup = mountCaseCarousel(root);
@@ -134,6 +138,29 @@ test('mouse drag advances, while charts and canceled drags keep their behavior',
   f.viewport.emit('pointermove', { ...pointer, clientX: 600 });
   f.viewport.emit('pointercancel', { ...pointer, clientX: 600 });
   assert.equal(f.status.textContent, '2 / 2');
+});
+
+test('viewport follows the active case height without retaining space from the taller case', () => {
+  const f = fixture();
+  assert.equal(f.viewport.style.height, '1100px');
+  assert.deepEqual(f.observers[0].observed, [f.viewport, ...f.slides]);
+  f.root.emit('click', { target: f.selectors[1] });
+  assert.equal(f.viewport.style.height, '830px');
+  const navigation = f.viewport.lastScroll;
+  f.slides[1].offsetHeight = 1250;
+  f.observers[0].callback();
+  assert.equal(f.viewport.style.height, '1250px');
+  assert.equal(f.viewport.lastScroll, navigation);
+  f.slides[1].offsetHeight = 830;
+  f.observers[0].callback();
+  assert.equal(f.viewport.style.height, '830px');
+  f.slides[0].offsetHeight = 1450;
+  f.observers[0].callback();
+  assert.equal(f.viewport.style.height, '830px');
+  f.root.emit('click', { target: f.selectors[0] });
+  assert.equal(f.viewport.style.height, '1450px');
+  f.cleanup();
+  assert.equal(f.viewport.style.height, '');
 });
 
 test('cleanup removes listeners and restores access to both cases', () => {

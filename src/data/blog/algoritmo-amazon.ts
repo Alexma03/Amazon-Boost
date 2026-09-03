@@ -1,124 +1,28 @@
-import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
-
-// --- Secciones del Blog Reestructuradas y Optimizadas (manteniendo nombre original 'sections') ---
-
-const sections: BlogSection[] = [
-  {
-    title: '¿Qué es el Algoritmo A10 de Amazon y Por Qué Debería Importarte?',
-    content: `<p>El algoritmo <strong>A10 de Amazon</strong> es el motor inteligente que decide qué productos se muestran primero en los resultados de búsqueda. Entenderlo no es opcional si quieres <strong>dominar el ranking en 2025</strong> y superar a tu competencia. A diferencia de su predecesor (A9), el A10 valora una experiencia de compra más completa.</p>`,
-    type: 'text',
-  },
-  {
-    title: 'Factores Clave que Impulsan tu Visibilidad en Amazon',
-    content: `<p>El A10 considera múltiples factores. Aquí te desglosamos los más críticos:</p>`,
-    type: 'text',
-  },
-  {
-    title: '1. Optimización y Relevancia del Listing',
-    content: `<p>Tu listing es tu carta de presentación. El A10 analiza:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Palabras Clave Estratégicas:</strong> No solo incluirlas, sino entender la intención de búsqueda. ¡El título sigue siendo crucial!',
-      '<strong>Contenido Completo y Atractivo:</strong> Imágenes de alta calidad, vídeos, A+ Content. Un listing completo puede mejorar tu ranking hasta un 20%.',
-      '<strong>Backend Keywords:</strong> No olvides los términos de búsqueda ocultos para capturar búsquedas secundarias.',
-    ],
-  },
-  {
-    // Nueva sección de imagen para romper visualmente y reforzar el tema
-    title: 'Visualiza el Éxito: Un Listing Optimizado',
-    content: `<p>Una imagen vale más que mil palabras, especialmente en Amazon. Asegúrate de que tus imágenes y contenido A+ destaquen.</p>`,
-    type: 'image',
-    imageUrl:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Imagen de gráficos y análisis de datos
-  },
-  {
-    title: '2. Rendimiento de Ventas y Conversión',
-    content: `<p>Amazon quiere vender. Tu capacidad para convertir visitas en ventas es fundamental:</p>
-    <ul>
-      <li><strong>Historial de Conversión (CVR):</strong> Un buen CVR es una señal potente para el A10.</li>
-      <li><strong>Velocidad de Ventas:</strong> Ventas consistentes son mejor valoradas que picos esporádicos.</li>
-      <li><strong>Métricas de Vendedor:</strong> La salud de tu cuenta (defectos, cancelaciones) impacta directamente. ¡Un buen vendedor rankea mejor!</li>
-    </ul>`,
-    type: 'text', // Mantenemos como texto pero con lista interna bien formateada
-  },
-  {
-    title: '3. Engagement y Señales Externas',
-    content: `<p>El A10 mira más allá de la compra directa:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Interacción del Cliente:</strong> Tiempo en página, clics, visualización de contenido.',
-      '<strong>Reseñas (Cantidad y Calidad):</strong> Son prueba social crucial. Superar las 100 reseñas marca una diferencia notable.',
-      '<strong>Tráfico Externo:</strong> ¡Novedad importante! Amazon valora que atraigas compradores desde fuera (redes sociales, blogs). Puede mejorar tu posición entre un 10-25%.',
-    ],
-  },
-  {
-    // Sección destacada para un punto crítico
-    title: '¡Cuidado con el PPC Mal Optimizado!',
-    content: `<p>A diferencia del A9, con el A10, las campañas de PPC (Pay-Per-Click) que generan clics pero <strong>no convierten</strong> pueden <strong>perjudicar tu ranking orgánico</strong>. La relevancia es clave.</p>`,
-    type: 'highlight',
-  },
-  {
-    title: 'Estrategias Accionables para Vencer al A10',
-    content: `<p>Adapta tu enfoque según la madurez de tu producto:</p>
-    <ul>
-      <li><strong>Nuevos Productos:</strong> Enfócate en nichos, acelera ventas iniciales (promociones, Vine) y usa PPC preciso.</li>
-      <li><strong>Productos Establecidos:</strong> Audita palabras clave, optimiza CTR (pruebas A/B), implementa tráfico externo y expande a nuevos términos.</li>
-    </ul>
-    <p><strong>Recuerda:</strong> Monitoriza tus rankings y adapta tu estrategia constantemente.</p>`,
-    type: 'text', // Combinamos las estrategias en una sección más concisa
-  },
-  {
-    title: 'Conclusión: Adapta tu Estrategia para Triunfar en Amazon',
-    content: `<p>Dominar el <strong>algoritmo A10 de Amazon</strong> requiere una estrategia integral. Ya no basta con optimizar palabras clave; necesitas enfocarte en la calidad del listing, el rendimiento de ventas, la reputación del vendedor y el engagement del cliente.</p>
-    <p>En <strong>Amazon Boost</strong>, te ayudamos a implementar estas estrategias avanzadas para que tus productos alcancen y mantengan las primeras posiciones. Nuestro enfoque basado en datos asegura resultados medibles y sostenibles.</p>`, // Asegúrate que "Amazon Boost" es tu marca o ajústalo.
-    type: 'text',
-  },
-];
-
-// --- Objeto BlogPost Actualizado (manteniendo nombre original 'algoritmoAmazonData') ---
+import type { BlogPost } from './index';
 
 export const algoritmoAmazonData: BlogPost = {
-  slug: 'algoritmo-amazon', // Debe coincidir con el nombre del archivo y referencias existentes
-  title: 'Domina el Algoritmo A10 de Amazon: Guía SEO Definitiva 2025', // Título más atractivo y con keywords
-  date: '2025-04-01', // Fecha actualizada a hoy (o la que prefieras)
-  image:
-    'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Imagen de análisis de datos/algoritmos
-  category: 'SEO Amazon', // Categoría más específica
-  excerpt:
-    'Desbloquea el potencial de tus productos en Amazon. Aprende cómo funciona el algoritmo A10 en 2025 y aplica estrategias SEO probadas para disparar tu ranking y ventas.', // Excerpt más orientado a beneficios y SEO
-  sections: sections, // Usamos las nuevas secciones manteniendo el nombre original
-  tags: [
-    'algoritmo amazon',
-    'A10',
-    'seo amazon',
-    'ranking amazon',
-    'vender en amazon',
-    'optimizar listing',
-    'amazon 2025', // Puedes actualizar a 2025 si aplica
-    'aumentar ventas amazon',
-  ], // Tags revisados y ampliados
-  callToAction: {
-    text: '¿Listo para escalar tu negocio en Amazon? Agenda tu consulta estratégica gratuita', // CTA más directo
-    url: '/#solicita-tutoria', // Asegúrate que esta URL es correcta
-  },
-  relatedPosts: [
-    'optimizacion-listings-amazon', // Slugs posiblemente más específicos
-    'estrategias-ppc-rentables',
-    'herramientas-imprescindibles-amazon',
-  ], // Revisar slugs de posts relacionados
+  slug: 'algoritmo-amazon',
+  title: 'Algoritmo de Amazon: qué puedes trabajar y qué no debes dar por hecho',
+  date: '2025-04-01',
+  updatedAt: '2026-08-28',
+  image: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  category: 'SEO y catálogo',
+  excerpt: 'Relevancia, oferta y resultados de búsqueda sin fórmulas secretas. Una lectura práctica del SEO de Amazon para decidir con evidencia.',
+  takeaway: 'No utilizamos A9 o A10 como una fórmula pública confirmada con pesos conocidos. La estrategia debe apoyarse en información verificable del producto, una oferta preparada y observaciones que puedas contrastar.',
+  sections: [
+    { id: 'limites', title: 'Separa la explicación útil de la fórmula supuesta', paragraphs: ['La guía oficial de SEO de Amazon utilizada como referencia describe búsqueda, filtros, contenido y oferta. No proporciona una ponderación que permita calcular cuánto subirá un ASIN por cambiar una imagen o recibir tráfico externo.', 'Los nombres A9 y A10 aparecen en conversaciones sobre posicionamiento, pero no justifican reglas como que una señal pesa un porcentaje fijo. Tampoco utilizamos la falta de conversión de una campaña como prueba automática de una penalización orgánica. Una hipótesis necesita evidencia antes de convertirse en recomendación.'], source: 0 },
+    { id: 'intencion', title: 'Trabaja la relación entre búsqueda y producto', paragraphs: ['Nuestra primera revisión sería si el producto responde realmente a la intención de las consultas que quieres captar. Una palabra puede tener volumen y, aun así, describir otro formato, uso o destinatario.', 'Organiza búsquedas por intención y relaciona cada grupo con referencias concretas. No añadas compatibilidades, usos o beneficios que el producto no tenga para ampliar alcance. El posicionamiento no debe construirse a costa de prometer una oferta diferente de la que entregas.'] },
+    { id: 'lectura', title: 'Distingue presencia, clics y elección', paragraphs: ['Una observación de posición no resume toda la experiencia de búsqueda. Registra país, consulta, momento y condiciones de la comprobación. Después contrasta los informes disponibles en la cuenta para no decidir por una captura aislada.', 'Cuando tengas acceso a Brand Analytics, utiliza sus definiciones y separa vista de marca, ASIN y periodo. Las cuotas de clics o compras no equivalen a una tasa de conversión ni describen todo el tráfico de la cuenta. Un dato orienta una investigación; no revela el funcionamiento interno completo del buscador.'] },
+    { id: 'oferta', title: 'No confundas clasificación de ventas y posición de búsqueda', paragraphs: ['Amazon presenta Best Sellers Rank como una medida del rendimiento de ventas dentro de categorías. No es la posición de tu producto para una palabra clave concreta. Mantén separados ambos conceptos al informar del progreso.', 'Revisa también que el comprador pueda elegir la referencia correcta y recibirla en las condiciones previstas. Nuestra recomendación es coordinar SEO con catálogo, contenido y disponibilidad, sin prometer que una actuación aislada garantice una posición.'], source: 0 },
+    { id: 'seguimiento', title: 'Construye un registro de cambios y conclusiones', paragraphs: ['Anota qué se cambió, cuándo y por qué: título, imágenes, precio, campaña o disponibilidad. Si varias cosas cambian al mismo tiempo, conserva ese límite al interpretar el resultado.', 'El informe debería distinguir hechos, hipótesis y siguientes pasos. Una mejora de posición no demuestra por sí sola rentabilidad; una caída no demuestra automáticamente una sanción. Investiga con contexto y evita recetas que prometen dominar el algoritmo con una sola acción.'], items: ['Consultas y referencias prioritarias.', 'Fuentes y alcance de los datos.', 'Cambios de cuenta y fechas.', 'Conclusión y grado de certeza.'] },
+  ],
+  tags: ['algoritmo Amazon', 'A9', 'A10', 'posicionamiento', 'SEO'],
+  service: '/servicios/optimizacion-de-listados/',
+  guides: ['brand-analytics-amazon', 'como-redactar-listings-amazon', 'buy-box-amazon-oferta-destacada'],
+  relatedPosts: ['herramientas-seo-amazon', 'optimizacion-listings-amazon'],
+  sources: [{ label: 'Amazon: SEO y funcionamiento de la búsqueda', url: 'https://sell.amazon.com/blog/amazon-seo', note: 'Orientación oficial, no una fórmula de ranking con ponderaciones públicas. Comprueba las reglas de contenido vigentes en tu cuenta.' }],
   seo: {
-    metaTitle:
-      'Guía Algoritmo Amazon A10 (2025/2025) | Optimiza tu SEO y Ranking', // Meta título optimizado (puedes ajustar año)
-    metaDescription:
-      'Descubre los secretos del algoritmo A10 de Amazon. Estrategias SEO actualizadas para mejorar tu posicionamiento, visibilidad y ventas en 2025/2025.', // Meta descripción optimizada (puedes ajustar año)
-    keywords: [
-      'algoritmo amazon a10',
-      'seo amazon 2025', // Ajustar año si es necesario
-      'ranking productos amazon',
-      'optimizar amazon',
-      'vender en amazon',
-      'guia a10',
-      'posicionamiento amazon',
-    ], // Keywords revisadas
+    metaTitle: 'Algoritmo Amazon y SEO: relevancia, ranking y mitos de A10',
+    metaDescription: 'Entiende qué trabajar en el SEO de Amazon sin fórmulas de A9 o A10: intención, contenido, oferta y seguimiento. Diferencia posicionamiento y ranking de ventas.',
   },
 };

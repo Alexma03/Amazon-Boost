@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HomeRedesign from '../components/HomeRedesign.astro';
+export const prerender = true;
 ---
 
 <Layout
-  title="Amazon Boost - Agencia Amazon FBA/FBM para escalar ventas rentables"
-  description="Auditoría gratuita para vendedores y marcas en Amazon. Detectamos oportunidades en PPC, listings, imágenes, stock, precio y posicionamiento para vender más con margen."
+  title="Amazon Boost | Agencia Amazon para marcas privadas"
+  description="Agencia Amazon para marcas privadas. Conectamos Amazon Ads, listings, catálogo y stock para crecer en España y Europa con una gestión orientada al margen."
   image="/og-home-v2.png"
+  canonicalPath="/"
 >
   <HomeRedesign />
 </Layout>

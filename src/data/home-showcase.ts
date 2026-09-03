@@ -1,35 +1,34 @@
-// Temporary proof content from the previous website. Replace this file when the
-// new 2026 metrics, case studies and approved imagery are ready.
+// Central source for public proof, case studies and approved homepage imagery.
 export const homeShowcase = {
-  status: "provisional" as const,
-  proofNote: "Cifras de la versión anterior. Pendientes de actualizar con los datos y casos de 2026.",
+  status: "pending-verification" as const,
+  proofNote: "Cifras sujetas a la verificación previa a publicación definida en release-status.ts.",
   proof: [
-    { value: "+20", label: "marcas y vendedores confían en nosotros" },
-    { value: "+3 años", label: "trabajando y gestionando cuentas Amazon" },
+    { value: "+20", label: "empresas y marcas confían en Amazon Boost" },
+    { value: "+3 años", label: "escalando y gestionando marcas en Amazon" },
     { value: "+50k €/año", label: "en publicidad Amazon gestionada" },
     { value: "FBA + FBM", label: "operativa y crecimiento conectados" },
   ],
   heroDemo: {
-    status: "Demo visual · Datos de muestra",
-    health: "Panel de muestra",
+    status: "Demostración visual",
+    health: "Vista de diagnóstico",
     metrics: [
-      { label: "Publicidad", value: "PPC", detail: "métrica por actualizar" },
+      { label: "Publicidad", value: "PPC", detail: "estructura de campañas" },
       { label: "Oportunidades", value: "04", detail: "áreas de análisis" },
-      { label: "Marketplace", value: "EU", detail: "estructura de muestra" },
+      { label: "Marketplace", value: "EU", detail: "operativa europea" },
     ],
   },
   featuredCase: {
     status: "Caso de éxito",
     title: "De 600 € a facturar 6.000 € al mes sin publicidad.",
-    description: "Por los requisitos del producto, tuvimos que alternar entre FBA y FBM. Aun así, sin invertir un solo euro en publicidad, escalamos de 600 € a 6.000 € mensuales en menos de cinco meses mediante posicionamiento SEO e imágenes.",
+    description: "La facturación pasó de unos 600 € a 5.904,74 € mensuales en menos de cinco meses, sin publicidad y con trabajo de SEO Amazon, imágenes y operativa FBA + FBM.",
     lifestyleImage: "/images/caso-exito-bebe-producto-negro-v2.png",
     chartImage: "/images/Gráfico de facturación mensual – categoría Bebés (datos parcialmente anonimizados).png",
     metrics: [
-      { value: "+1000%", label: "facturación mensual" },
+      { value: "Casi 10x", label: "facturación mensual" },
       { value: "0 €", label: "gasto publicitario" },
-      { value: "#1", label: "posición orgánica conseguida" },
+      { value: "FBA + FBM", label: "operativa coordinada" },
     ],
-    href: "/casos-de-exito/bebes-estrategia-precios-logistica",
+    href: "/casos-de-exito/bebes-estrategia-precios-logistica/",
     reviews: [
       {
         platform: "Trustpilot",
@@ -37,6 +36,9 @@ export const homeShowcase = {
         initials: "AL",
         meta: "ES · 2 reseñas",
         date: "26 feb 2026",
+        publishedAt: "2026-02-26",
+        context: "Opinión espontánea",
+        fullQuote: "Una empresa muy recomendable si vendes en Amazon. Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.",
         title: "Una empresa muy recomendable si vendes en Amazon",
         quote: "Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.",
         url: "https://es.trustpilot.com/review/amznboost.es",
@@ -47,6 +49,9 @@ export const homeShowcase = {
         initials: "AG",
         meta: "Principal Chief Executive Officer en Momentosgourmet",
         date: "26 feb 2026",
+        publishedAt: "2026-02-26",
+        context: "Alberto fue cliente de Sergio",
+        fullQuote: 'Sergio es de las personas más competentes que puedes encontrarte. Es un placer haber podido contar con él, ya que es un "solucionador". Una persona muy atenta y enfocada, siempre centrada en el objetivo.',
         title: "Una persona muy atenta y enfocada, siempre centrada en el objetivo.",
         quote: "Sergio es de las personas más competentes que puedes encontrarte. Es un placer haber podido contar con él, ya que es un solucionador.",
         url: "https://www.linkedin.com/in/sergio-deroman-amazon/",
@@ -110,8 +115,8 @@ export const websiteReviews = [
 // Case 02: supplied dossier, pages 6-9. Keep the client anonymous (NDA).
 // The year-on-year comparison and the monthly series cover different intervals.
 export const pharmaCase = {
-  title: "+994,63% en ventas para una marca farmacéutica centenaria.",
-  description: "Una institución española con más de cien años de historia necesitaba convertir su autoridad en ventas dentro de Amazon. Conectamos diseño, inversión publicitaria y disponibilidad para escalar un catálogo en un mercado muy competido.",
+  growthSummary: "+994,63% en ventas frente al mismo periodo del año anterior.",
+  description: "Una institución española con más de cien años necesitaba convertir su autoridad en ventas en Amazon. Conectamos diseño, Amazon Ads y stock para escalar el catálogo.",
   period: "Finales de octubre de 2025 a finales de julio de 2026",
   comparisonNote: "Mismo intervalo frente al año anterior. Aproximadamente nueve meses, no un ejercicio anual completo.",
   previousSales: 2537.70,
@@ -124,9 +129,9 @@ export const pharmaCase = {
     { value: "9 meses", label: "periodo comparado, aprox." },
   ],
   decisions: [
-    { title: "Diseño para convertir", text: "Jerarquía visual móvil e infografías que explican el producto y transmiten confianza." },
-    { title: "Inversión con foco", text: "Productos prioritarios para concentrar la demanda y controlar el TACOS durante el arranque." },
-    { title: "Stock preparado", text: "Planificación FBA antes del verano para sostener la demanda sin frenar la disponibilidad." },
+    { title: "Diseño para convertir", text: "Imágenes e infografías que explican el producto, refuerzan la confianza y facilitan la compra." },
+    { title: "Inversión con foco", text: "Productos prioritarios para concentrar demanda y controlar el TACOS." },
+    { title: "Stock preparado", text: "Planificación FBA para sostener la demanda sin roturas." },
   ],
 } as const;
 

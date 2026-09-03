@@ -1,157 +1,28 @@
-import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
-
-// --- Secciones Optimizadas para 'aumentarConversionData' ---
-
-const sections: BlogSection[] = [
-  {
-    title: 'La Conversión: Tu Factor Clave de Éxito en Amazon',
-    content: `<p>Atraer visitantes a tu listing es solo el principio. La verdadera rentabilidad en Amazon viene de convertir esas visitas en ventas. Incrementar tu <strong>tasa de conversión (CVR)</strong>, incluso en un pequeño porcentaje, puede disparar tus ingresos. Te mostramos cómo.</p>`,
-    type: 'text',
-  },
-  {
-    title: '1. Imágenes que Venden: Optimización Visual Estratégica',
-    content: `<p>Tus imágenes son tu principal herramienta de persuasión visual. Optimízalas para captar la atención y generar confianza:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Imagen Principal Impecable:</strong> Fondo blanco puro, producto claro y ocupando ~85% del espacio.',
-      '<strong>Calidad y Zoom:</strong> Mínimo 1000x1000 píxeles para activar el zoom y mostrar detalles.',
-      '<strong>Secuencia Lógica:</strong> Muestra el producto en uso, beneficios clave y comparativas.',
-      '<strong>Infografías y Dimensiones:</strong> Usa texto sobre imagen (con moderación) para destacar características o tamaño.',
-    ],
-  },
-  {
-    // Sección de imagen para ilustrar el punto anterior
-    title: 'Ejemplo Visual: Impacto de una Buena Imagen',
-    content: `<p>Una secuencia de imágenes bien planificada guía al cliente y resuelve dudas antes de que surjan.</p>`,
-    type: 'image',
-    imageUrl:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1080&auto=format&fit=crop', // Puedes usar una imagen más específica si la tienes
-  },
-  {
-    title: '2. A+ Content: Más Allá de la Descripción Básica',
-    content: `<p>Si tienes Brand Registry, el <strong>Contenido A+</strong> es tu lienzo para contar la historia de tu producto y marca:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Conecta Emocionalmente:</strong> Usa módulos para explicar la historia de tu marca o producto.',
-      '<strong>Destaca Ventajas:</strong> Módulos de comparación visual contra alternativas.',
-      '<strong>Resuelve Dudas:</strong> Aborda objeciones comunes y muestra casos de uso.',
-      '<strong>Refuerza Confianza:</strong> Muestra garantías o testimonios visualmente.',
-    ],
-  },
-  {
-    title: '3. Títulos y Puntos Clave: SEO + Persuasión',
-    content: `<p>Equilibra la optimización para búsquedas (SEO) con mensajes claros que inciten a la compra:</p>
-      <ul>
-        <li><strong>Título Efectivo:</strong> [Marca] + [Beneficio Principal] + [Característica Clave] + [Keyword Principal].</li>
-        <li><strong>Bullets Enfocados:</strong> Empieza por el beneficio más potente. Sigue con características únicas, calidad, usos y garantía. ¡Sé claro y conciso!</li>
-      </ul>`,
-    type: 'text', // Usamos texto con lista interna para combinar explicación y puntos
-  },
-  {
-    title: '4. Precio y Promociones: El Factor Psicológico',
-    content: `<p>El precio adecuado y las ofertas bien planteadas pueden inclinar la balanza:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Precios Psicológicos:</strong> Terminar en .99 o .97 suele funcionar (¡prueba!).',
-      '<strong>Descuentos Visibles:</strong> Asegúrate que el precio tachado y el ahorro son claros.',
-      '<strong>Urgencia y Valor:</strong> Usa ofertas por tiempo limitado o bundles atractivos.',
-      '<strong>Suscripción:</strong> Si aplica, promueve activamente el "Suscríbete y Ahorra".',
-    ],
-  },
-  {
-    title: '5. Reseñas: La Prueba Social Indispensable',
-    content: `<p>Las reseñas son cruciales para la confianza. Una buena gestión marca la diferencia:</p>
-      <ul>
-        <li><strong>Volumen y Calidad:</strong> Superar las 20-25 reseñas con +4.5 estrellas es un gran impulso.</li>
-        <li><strong>Gestión Activa:</strong> Responde a reseñas (positivas y negativas) profesionalmente.</li>
-        <li><strong>Solicitud Inteligente:</strong> Usa el botón "Solicitar Reseña" de Amazon estratégicamente.</li>
-      </ul>`,
-    type: 'text',
-  },
-  {
-    // Sección destacada para un punto cada vez más relevante
-    title: '¡Alerta Móvil! Optimiza para Compras sobre la Marcha',
-    content: `<p>Más del 60% de las compras en Amazon se hacen desde el móvil. Tu listing <strong>debe</strong> estar optimizado: títulos concisos (primeros 80 caracteres vitales), imágenes claras en miniatura, y A+ Content responsive.</p>`,
-    type: 'highlight',
-  },
-  {
-    title: '6. Backstage: Inventario y Métricas de Vendedor',
-    content: `<p>Factores operativos que impactan directamente tu conversión:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Stock Siempre Disponible:</strong> Las roturas de stock penalizan tu ranking y conversión.',
-      '<strong>Salud de la Cuenta:</strong> Un Perfect Order Percentage (POP) alto y bajo ODR (Order Defect Rate) son vitales.',
-      '<strong>Envío Rápido:</strong> Compite con las mejores opciones de envío (Prime).',
-      '<strong>Atención al Cliente:</strong> Responde preguntas en menos de 24h.',
-    ],
-  },
-  {
-    title: '7. Implementación y Mejora Continua',
-    content: `<p>No apliques todo a la vez. Sigue un proceso:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Analiza:</strong> Mide tu CVR actual por ASIN.',
-      '<strong>Implementa por Fases:</strong> Cambia un elemento a la vez para medir impacto.',
-      '<strong>Prueba (A/B Test):</strong> Indispensable para imágenes y títulos.',
-      '<strong>Monitoriza y Refina:</strong> Adapta tu estrategia basándote en datos.',
-    ],
-  },
-  {
-    title: 'Conclusión: Convierte Visitas en Clientes Fieles',
-    content: `<p>Aumentar tu <strong>tasa de conversión en Amazon</strong> es un arte y una ciencia. Combinando optimización visual, contenido persuasivo, estrategias de precio, gestión de reputación y excelencia operativa, transformarás tu rendimiento.</p>
-    <p>En <strong>Amazon Boost</strong>, somos expertos en identificar y ejecutar las palancas de conversión más efectivas para tu negocio. ¿Quieres ver cómo podemos ayudarte?</p>`, // Ajusta "Amazon Boost" si es necesario
-    type: 'text',
-  },
-];
-
-// --- Objeto BlogPost Actualizado (manteniendo nombre original 'aumentarConversionData') ---
+import type { BlogPost } from './index';
 
 export const aumentarConversionData: BlogPost = {
   slug: 'aumentar-conversion-amazon',
-  title: '12 Estrategias Probadas para Aumentar la Tasa de Conversión en Amazon',
+  title: 'Mejorar la conversión en Amazon: de la hipótesis al experimento',
   date: '2025-03-20',
-  image:
-    'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  updatedAt: '2026-08-28',
+  image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
   category: 'Conversión',
-  excerpt:
-    'Descubre 12 tácticas efectivas para aumentar significativamente la tasa de conversión de tus productos en Amazon. Desde optimización de imágenes hasta estrategias de precios y más.',
-  sections: sections, // Usamos las nuevas secciones
-  // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
-  tags: [
-    'conversión amazon',
-    'aumentar ventas amazon',
-    'optimización listados',
-    'tasa de conversion',
-    'cvr amazon',
-    'a+ content',
-    'imágenes amazon',
-    'precios amazon',
-    'reseñas amazon',
-    'seo amazon',
-  ], // Tags revisados y ampliados
-  callToAction: {
-    text: '¿Quieres aumentar tu tasa de conversión? Solicita un análisis gratuito', // CTA mantenido, es bueno
-    url: '/#solicita-tutoria', // Verificar URL
-  },
-  relatedPosts: [
-    'optimizacion-listings-amazon', // Ajustar slugs si es necesario
-    'gestion-resenas-amazon',
-    'estrategias-precios-amazon',
-  ], // Posts relacionados actualizados
+  excerpt: 'Cómo construir un programa de mejora de conversión: separar señales, priorizar cambios y evaluar el resultado sin atribuirlo todo al diseño.',
+  takeaway: 'La conversión mejora con un proceso de investigación, no con una lista universal de trucos. Primero aclara qué mide tu informe; después decide qué fricción vas a investigar y cómo comprobarás el cambio.',
+  sections: [
+    { id: 'medida', title: 'Acuerda qué significa conversión en tu análisis', paragraphs: ['Antes de comparar cifras, identifica el informe, el periodo y el denominador. Unidades por sesión, compras por visita y conversión publicitaria no son medidas intercambiables. Evita reunirlas en una única gráfica sin explicar las diferencias.', 'Separa referencias y mercados. Un promedio de cuenta puede cambiar porque aumenta el peso de un producto, aunque sus fichas no hayan mejorado. Guarda también el contexto de disponibilidad, precio y captación para no atribuir al contenido lo que responde a otro factor.'] },
+    { id: 'friccion', title: 'Investiga la fricción que tiene evidencia', paragraphs: ['Reúne dudas de compradores, motivos de devolución y observaciones de la oferta. Busca patrones: tamaño poco claro, contenido del pack ambiguo, imágenes que no corresponden o condiciones de entrega que alteran la decisión.', 'No todas las señales piden un rediseño. Si la referencia que recibe el clic no está disponible, empieza por la oferta. Si llega tráfico incompatible con el producto, revisa captación. Si el producto no cumple lo prometido, implica al responsable de calidad.'] },
+    { id: 'priorizar', title: 'Construye una cola de mejoras, no una reforma permanente', paragraphs: ['Nuestra propuesta es ordenar cada oportunidad por evidencia, impacto esperado y esfuerzo. Escribe una hipótesis que explique por qué el cambio puede ayudar al comprador. Evita producir una nueva imagen únicamente porque resulta más vistosa.', 'Distingue correcciones de pruebas. Un tamaño incorrecto se corrige; una forma alternativa de presentar un dato correcto se puede evaluar. No mantengas información engañosa para comparar cuál genera más pedidos.'], items: ['Problema observado y referencias afectadas.', 'Cambio propuesto y resultado que se espera observar.', 'Condiciones que deben mantenerse comparables.', 'Responsable de aprobar, publicar y revisar.'] },
+    { id: 'prueba', title: 'Elige una evaluación que permita esa referencia', paragraphs: ['Manage Your Experiments permite comparar versiones de contenido en productos elegibles. Amazon evalúa el acceso y el tráfico disponible; no todos los ASIN pueden utilizar la herramienta ni todos los tipos de prueba estarán disponibles en cualquier cuenta.', 'Cuando no puedas realizar un experimento controlado, registra cambios y observa periodos comparables. Presenta la conclusión como una señal con límites. Comparar una semana promocional con otra sin promoción no aísla el efecto de un nuevo diseño.'], source: 0 },
+    { id: 'aprendizaje', title: 'Evalúa también lo que ocurre después de comprar', paragraphs: ['Una ficha que genera pedidos pero confunde sobre el contenido puede trasladar el problema a devoluciones y atención. Combina la lectura de conversión con las incidencias que correspondan a esa referencia y periodo.', 'Documenta resultados inconclusos y cambios que no funcionaron. El objetivo es construir un criterio reutilizable sin convertirlo en una regla universal. Una conclusión obtenida con un producto no se traslada automáticamente a toda la gama o a otro mercado.'] },
+  ],
+  tags: ['conversión', 'CRO', 'imágenes', 'experimentos'],
+  service: '/servicios/optimizacion-de-listados/',
+  guides: ['listing-amazon-visitas-sin-ventas', 'tests-ab-listings-amazon', 'reducir-devoluciones-amazon'],
+  relatedPosts: ['optimizacion-listings-amazon', 'tacticas-resenas'],
+  sources: [{ label: 'Amazon: pruebas de contenido con Manage Your Experiments', url: 'https://sell.amazon.com/tools/manage-your-experiments', note: 'Comprueba acceso, elegibilidad y configuración en tu cuenta. No se adoptan porcentajes de mejora de otras marcas.' }],
   seo: {
-    metaTitle:
-      '7 Tácticas para Aumentar tu Conversión en Amazon | Guía 2025', // Meta título optimizado
-    metaDescription:
-      'Aprende cómo disparar tu tasa de conversión en Amazon con 7 técnicas efectivas: imágenes, A+ Content, precios, reseñas y optimización móvil.', // Meta descripción optimizada
-    keywords: [
-      'aumentar conversión amazon',
-      'tasa de conversión amazon',
-      'cvr amazon',
-      'optimización de listados amazon',
-      'vender más en amazon',
-      'a+ content',
-      'imágenes producto amazon',
-      'estrategias amazon 2025',
-    ], // Keywords revisadas
+    metaTitle: 'Mejorar la conversión en Amazon: hipótesis, pruebas y revisión',
+    metaDescription: 'Crea un proceso de mejora de conversión en Amazon: entiende tus métricas, investiga fricciones, prioriza pruebas y revisa pedidos e incidencias con contexto.',
   },
 };

@@ -1,0 +1,70 @@
+---
+import Layout from './Layout.astro';
+import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
+import GuideLinks from '../components/GuideLinks.astro';
+import ServiceContact from '../components/ServiceContact.astro';
+import { serviceDirectory, type ServicePage } from '../data/service-pages';
+import { homeShowcase } from '../data/home-showcase';
+import '../styles/growth-pages.css';
+interface Props { page: ServicePage }
+const { page } = Astro.props;
+const proof = homeShowcase.featuredCase;
+const related = page.related.map((path) => serviceDirectory.find((item) => item.path === path)).filter(Boolean);
+const image = page.proof === 'organic' ? proof.lifestyleImage : page.proof === 'visual' ? '/images/1.3.png' : '/images/sergio-porras-amazon-boost-v2-800.webp';
+---
+<Layout title={page.metaTitle} description={page.description} image={image} canonicalPath={page.path} pageType="service" aiOptimized={false} structuredData={{ type: 'service', data: { title: page.title, description: page.description } }}>
+  <article class="growth-page">
+    <header class="growth-hero">
+      <div class="growth-shell">
+        <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Servicios', path: '/servicios/' }, { name: page.title, path: page.path }]} />
+        <p class="growth-eyebrow">Amazon Boost / {page.category}</p>
+        <h1>{page.title}</h1>
+        <p class="growth-promise">{page.promise}</p>
+        <p class="growth-lead">{page.intro}</p>
+        <div class="growth-actions">
+          <a class="growth-button" href="#contacto">Hablemos de tu cuenta <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
+          <a class="growth-text-link" href="#alcance">Qué incluye el servicio</a>
+        </div>
+      </div>
+    </header>
+    <nav class="growth-jump" aria-label="En esta página"><div class="growth-shell">
+      <a href="#encaje">¿Es para ti?</a><a href="#alcance">Alcance</a><a href="#preguntas">Preguntas</a><a href="/guias/">Guías</a><a href="#contacto">Contacto</a>
+    </div></nav>
+    <section class="growth-band" id="encaje">
+      <div class="growth-shell growth-intro-grid">
+        <div class="growth-section-head"><p class="growth-eyebrow">El punto de partida</p><h2>Si esto te suena,<br />hablemos.</h2></div>
+        <ul class="growth-needs">{page.needs.map((need) => <li>{need}</li>)}</ul>
+      </div>
+    </section>
+    <section class="growth-band growth-scope-band" id="alcance">
+      <div class="growth-shell">
+        <div class="growth-section-head"><p class="growth-eyebrow">Qué trabajamos</p><h2>El alcance.<br /><span>Sin letra pequeña.</span></h2></div>
+        <div class="growth-scope">
+          {page.scope.map((part) => <section><h3>{part.title}</h3><div><p>{part.text}</p><ul>{part.items.map((item) => <li>{item}</li>)}</ul></div></section>)}
+        </div>
+        <div class="growth-deliverable"><p class="growth-eyebrow">Qué te llevas</p><p>{page.deliverable}</p></div>
+      </div>
+    </section>
+    <section class="growth-proof growth-band">
+      <div class="growth-shell growth-proof-grid">
+        {page.proof === 'organic' ? <>
+          <img class="growth-proof-image" src={proof.lifestyleImage} alt="Presentación del producto del caso de crecimiento orgánico" width="900" height="900" loading="lazy" />
+          <div><p class="growth-eyebrow">Un caso, no una promesa</p><h2>{proof.title}</h2><p>{proof.description}</p><a class="growth-text-link" href="/#caso-real">Ver el caso y sus datos</a></div>
+        </> : page.proof === 'visual' ? <>
+          <img class="growth-proof-image" src="/images/1.3.png" alt="Muestra de composición visual para un producto de belleza" width="900" height="900" loading="lazy" />
+          <div><p class="growth-eyebrow">Del producto a su presentación</p><h2>La diferencia<br />también se ve.</h2><p>Explora la selección de trabajos visuales de la web. Estas muestras se actualizarán con los nuevos proyectos aprobados.</p><a class="growth-text-link" href="/servicios/imagenes-para-amazon/#trabajos">Ver muestras de imágenes</a></div>
+        </> : <>
+          <img class="growth-proof-image growth-team-image" src="/images/sergio-porras-amazon-boost-v2-800.webp" srcset="/images/sergio-porras-amazon-boost-v2-800.webp 800w, /images/sergio-porras-amazon-boost-v2-1440.webp 1440w" sizes="(max-width: 740px) min(440px, calc(100vw - 36px)), 42vw" alt="Sergio, fundador de Amazon Boost" width="800" height="800" loading="lazy" decoding="async" />
+          <div><p class="growth-eyebrow">Quién está al otro lado</p><h2>Estrategia que<br />puedes hablar.</h2><p>Dirección cercana para entender tu situación y un alcance definido antes de empezar. Los informes conectan el análisis con prioridades claras y cada siguiente paso se puede hablar con el equipo.</p><a class="growth-text-link" href="https://www.linkedin.com/in/sergio-deroman-amazon/" target="_blank" rel="noopener noreferrer">Conocer a Sergio en LinkedIn</a></div>
+        </>}
+      </div>
+    </section>
+    <section class="growth-band" id="preguntas"><div class="growth-shell growth-faq-grid">
+      <div class="growth-section-head"><p class="growth-eyebrow">Antes de empezar</p><h2>Las preguntas<br />importantes.</h2></div>
+      <div class="growth-faqs">{page.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+    </div></section>
+    <GuideLinks slugs={page.guides} />
+    <section class="growth-band growth-related"><div class="growth-shell"><p class="growth-eyebrow">Servicios conectados</p><div class="growth-related-links">{related.map((item) => item && <a href={item.path}>{item.title}<img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></a>)}</div><a class="growth-text-link" href="/servicios/">Todos los servicios</a></div></section>
+    <ServiceContact topic={page.title} service={page.path} preparation={page.preparation} />
+  </article>
+</Layout>

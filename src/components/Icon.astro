@@ -1,0 +1,75 @@
+---
+import ArrowDown from "@lucide/astro/icons/arrow-down";
+import ArrowRight from "@lucide/astro/icons/arrow-right";
+import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
+import BadgeDollarSign from "@lucide/astro/icons/badge-dollar-sign";
+import Bell from "@lucide/astro/icons/bell";
+import Box from "@lucide/astro/icons/box";
+import Check from "@lucide/astro/icons/check";
+import ChevronDown from "@lucide/astro/icons/chevron-down";
+import ChevronRight from "@lucide/astro/icons/chevron-right";
+import Ellipsis from "@lucide/astro/icons/ellipsis";
+import FileText from "@lucide/astro/icons/file-text";
+import House from "@lucide/astro/icons/house";
+import ListChecks from "@lucide/astro/icons/list-checks";
+import Megaphone from "@lucide/astro/icons/megaphone";
+import Package from "@lucide/astro/icons/package";
+import Plus from "@lucide/astro/icons/plus";
+import Search from "@lucide/astro/icons/search";
+import Star from "@lucide/astro/icons/star";
+import TrendingDown from "@lucide/astro/icons/trending-down";
+import TrendingUp from "@lucide/astro/icons/trending-up";
+import UsersRound from "@lucide/astro/icons/users-round";
+import X from "@lucide/astro/icons/x";
+
+const icons = {
+  "arrow-down": ArrowDown,
+  "arrow-right": ArrowRight,
+  "arrow-up-right": ArrowUpRight,
+  "badge-dollar-sign": BadgeDollarSign,
+  bell: Bell,
+  box: Box,
+  check: Check,
+  "chevron-down": ChevronDown,
+  "chevron-right": ChevronRight,
+  ellipsis: Ellipsis,
+  "file-text": FileText,
+  house: House,
+  "list-checks": ListChecks,
+  megaphone: Megaphone,
+  package: Package,
+  plus: Plus,
+  search: Search,
+  star: Star,
+  "trending-down": TrendingDown,
+  "trending-up": TrendingUp,
+  "users-round": UsersRound,
+  x: X,
+} as const;
+
+type IconName = keyof typeof icons;
+interface Props {
+  name: IconName;
+  size?: number;
+  strokeWidth?: number;
+  filled?: boolean;
+  class?: string;
+}
+
+const { name, size = 18, strokeWidth = 2, filled = false, class: className } = Astro.props;
+const LucideIcon = icons[name];
+---
+
+<LucideIcon
+  class:list={["ab-icon", className]}
+  width={size}
+  height={size}
+  stroke-width={strokeWidth}
+  fill={filled ? "currentColor" : "none"}
+  aria-hidden="true"
+  focusable="false"
+/>
+
+<style>
+  .ab-icon { display: inline-block; flex: none; vertical-align: middle; }
+</style>

@@ -13,28 +13,22 @@
 .ab-case-controls button:hover:not(:disabled) img{filter:none}
 .ab-case-controls button:disabled{opacity:.3;cursor:default}
 .ab-case-carousel button:focus-visible,.ab-case-bottom-navigation a:focus-visible,.ab-case-source-data summary:focus-visible{outline:2px solid var(--ab-orange);outline-offset:5px}
-.ab-case-viewport{display:flex;align-items:flex-start;width:min(1280px,100%);margin:0 auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.ab-case-viewport{display:flex;align-items:flex-start;width:min(1280px,100%);margin:0 auto;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .ab-case-viewport::-webkit-scrollbar{display:none}
 .ab-case-viewport:focus-visible{outline:2px solid var(--ab-orange);outline-offset:6px}
 .ab-case-viewport.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
 .ab-case-slide{flex:0 0 100%;width:100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
+.ab-case-heading>.ab-case-description{max-width:900px;margin:24px 0 0}
 .ab-case-bottom-navigation{padding-top:38px}
-.ab-case-bottom-navigation>a{color:#fff;font-size:.85rem;font-weight:750;border-bottom:1px solid #777;padding:10px 0}
-.ab-case-bottom-navigation>a span{margin-left:22px}
-.ab-case-comparison{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:36px 36px 36px 0}
-.ab-case-comparison .ab-overline{color:var(--ab-orange);font-size:.7rem}
-.ab-case-comparison h3{margin:0;max-width:460px;font-size:2.1rem;line-height:1.2;font-weight:750}
-.ab-case-comparison dl{display:grid;gap:26px;margin:38px 0 28px}
-.ab-case-comparison dt{margin-bottom:8px;color:#acada7;font-size:.8rem}
-.ab-case-comparison dd{margin:0;font-size:2.65rem;line-height:1.1;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
-.ab-case-comparison dl>div:first-child dd{color:#a9aaa5;font-size:2rem}
-.ab-case-comparison dl>div:last-child dd{color:var(--ab-orange)}
-.ab-case-period{margin:0 0 12px;color:#e3e3db;font-size:.85rem;line-height:1.6}
-.ab-case-comparison-note{margin:0;color:#a9aaa5;font-size:.8rem;line-height:1.65}
-.ab-case-confidential{margin-top:26px;color:#8c8e88;font-size:.7rem;line-height:1.6}
-.ab-case-pharma .ab-case-numbers strong{font-size:2.05rem;white-space:nowrap}
-.ab-case-pharma .ab-case-numbers span{font-size:.62rem;line-height:1.6}
-.ab-case-pharma .ab-case-evidence{padding:28px}
+.ab-case-bottom-navigation>a{display:inline-flex;align-items:center;gap:22px;color:#fff;font-size:.85rem;font-weight:750;border-bottom:1px solid #777;padding:10px 0}
+.ab-case-comparison{min-width:0;display:flex;flex-direction:column;justify-content:flex-start;padding:0 28px 0 0}
+.ab-case-comparison .ab-overline{color:var(--ab-orange);font-size:.95rem;line-height:1.5}
+.ab-case-comparison h3{margin:0;max-width:460px;font-size:2.35rem;line-height:1.16;font-weight:750}
+.ab-case-period{margin:20px 0 0;color:#e3e3db;font-size:.85rem;line-height:1.6}
+.ab-case-confidential{margin-top:12px;color:#8c8e88;font-size:.7rem;line-height:1.6}
+.ab-case-pharma .ab-case-layout{align-items:start}
+.ab-case-pharma .ab-case-evidence{padding:24px}
+.ab-case-pharma .ab-case-evidence figure{margin-top:0}
 .ab-case-unit-note{margin:22px 0 0;color:#a9aaa5;font-size:.8rem;line-height:1.6}
 .ab-case-unit-note strong{color:#fff}
 .ab-case-source-data{margin-top:18px;color:#c8c9c1;font-size:.8rem}
@@ -44,32 +38,35 @@
 .ab-case-source-data th,.ab-case-source-data td{padding:8px 0;border-bottom:1px solid #363632;text-align:left}
 .ab-case-source-data th{font-weight:600}
 .ab-case-source-data td,.ab-case-source-data th:last-child{text-align:right}
-.ab-case-decisions{margin-top:54px;padding:30px 0;border-top:1px solid var(--ab-dark-line);border-bottom:1px solid var(--ab-dark-line)}
+.ab-case-decisions{margin-top:28px;padding:24px 0;border-top:1px solid var(--ab-dark-line);border-bottom:1px solid var(--ab-dark-line)}
 .ab-case-decisions>.ab-overline{font-size:.72rem;color:var(--ab-orange)}
 .ab-case-decisions>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px}
 .ab-case-decisions h3{margin:0 0 12px;font-size:1.2rem;line-height:1.3}
 .ab-case-decisions div p{margin:0;color:#a9aaa5;font-size:.9rem;line-height:1.65}
-@media(min-width:1101px){.ab-case-pharma .ab-case-heading h2{font-size:5rem;line-height:1.06}}
-@media(max-width:1100px){.ab-case-comparison{padding:20px 0 32px}.ab-case-comparison h3{max-width:700px}.ab-case-comparison dl{grid-template-columns:1fr 1fr}.ab-case-comparison-note{max-width:650px}}
+.ab-case-pharma .ab-case-heading{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);grid-template-areas:"label label" "sales story" "growth story";column-gap:40px;margin-bottom:36px}
+.ab-case-pharma .ab-case-heading>.ab-overline{grid-area:label}
+.ab-case-pharma .ab-case-heading>.ab-case-description{grid-area:story;align-self:start;max-width:none;margin:60px 0 0}
+.ab-case-pharma .ab-case-sales-headline{grid-area:sales;min-width:0;font-size:5.75rem;line-height:1.08;font-variant-numeric:tabular-nums;letter-spacing:0}
+.ab-case-sales-headline>span{display:block;margin-bottom:12px;color:#a9aaa5;font-size:.5em;font-weight:650}
+.ab-case-sales-headline>strong{display:block;color:var(--ab-orange);font-weight:850;white-space:nowrap}
+.ab-case-growth-summary{grid-area:growth;max-width:760px;margin:20px 0 0;color:#e3e3db;font-size:1.1rem;line-height:1.65}
+.ab-case-growth-summary>span{display:block;color:#a9aaa5;font-size:.9rem}
+@media(max-width:1199px){.ab-case-pharma .ab-case-heading{grid-template-columns:1fr;grid-template-areas:"label" "sales" "growth" "story"}.ab-case-pharma .ab-case-heading>.ab-case-description{max-width:700px;margin-top:20px}}
+@media(max-width:1100px){.ab-case-comparison{padding:0 0 14px}.ab-case-comparison h3{max-width:700px}}
 @media(max-width:760px){
   .ab-case-navigation{flex-wrap:wrap;gap:20px;margin-bottom:38px}
   .ab-case-selector{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%}
   .ab-case-selector button{font-size:.8rem;text-align:left;line-height:1.5}
   .ab-case-navigation>.ab-case-controls{margin-left:auto}
   .ab-case-comparison{padding-top:4px}
-  .ab-case-comparison h3{font-size:1.75rem}
-  .ab-case-comparison dl{grid-template-columns:1fr;gap:24px}
-  .ab-case-comparison dd{font-size:2.45rem}
-  .ab-case-comparison dl>div:first-child dd{font-size:1.8rem}
-  .ab-case-pharma .ab-case-heading h2{font-size:2.8rem;line-height:1.1}
+  .ab-case-comparison h3{font-size:1.95rem}
+  .ab-case-pharma .ab-case-heading{margin-bottom:28px}
+  .ab-case-pharma .ab-case-sales-headline{font-size:3.1rem;line-height:1.1}
   .ab-case-pharma .ab-case-evidence{padding:18px 12px}
-  .ab-case-pharma .ab-case-numbers strong{font-size:1.25rem}
-  .ab-case-pharma .ab-case-numbers span{font-size:.5rem}
   .ab-case-decisions>div{grid-template-columns:1fr;gap:26px}
-  .ab-case-decisions{margin-top:36px}
+  .ab-case-decisions{margin-top:28px}
   .ab-case-bottom-navigation{gap:16px}
-  .ab-case-bottom-navigation>a{font-size:.75rem}
-  .ab-case-bottom-navigation>a span{margin-left:8px}
+  .ab-case-bottom-navigation>a{gap:8px;font-size:.75rem}
 }
-@media(max-width:380px){.ab-case-pharma .ab-case-heading h2{font-size:2.35rem}.ab-case-controls{gap:6px}.ab-case-pharma .ab-case-numbers strong{font-size:1.1rem}}
+@media(max-width:380px){.ab-case-pharma .ab-case-sales-headline{font-size:2.65rem}.ab-case-controls{gap:6px}}
 @media(prefers-reduced-motion:reduce){.ab-case-controls button{transition:none}}

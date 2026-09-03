@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
+import ServiceContact from '../../components/ServiceContact.astro';
+import ResourceNav from '../../components/ResourceNav.astro';
+import GuideQuickAnswers from '../../components/GuideQuickAnswers.astro';
+import { guides } from '../../data/guides';
+import '../../styles/growth-pages.css';
+export const prerender = true;
+const categories = [...new Set(guides.map((guide) => guide.category))];
+---
+<Layout title="Guías Amazon para marcas y vendedores | Amazon Boost" description="Respuestas prácticas sobre Amazon Ads, conversión, catálogo, bloqueos y stock. Guías para entender los problemas de tu cuenta y preparar el siguiente paso." canonicalPath="/guias/" aiOptimized={false}>
+  <div class="growth-page">
+    <header class="growth-hero"><div class="growth-shell"><SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Guías Amazon', path: '/guias/' }]} /><p class="growth-eyebrow">Recursos para marcas</p><h1>Guías Amazon.</h1><p class="growth-promise">Preguntas concretas.<br />Decisiones mejor informadas.</p><p class="growth-lead">Lo que conviene revisar antes de invertir más, cambiar un listing o responder a una incidencia. Elige la pregunta que se parece a la tuya.</p><ResourceNav current="guides" /></div></header>
+    <nav class="growth-jump" aria-label="Temas de las guías"><div class="growth-shell"><a href="#respuestas">Primeras respuestas</a>{categories.map((category, index) => <a href={`#tema-${index}`}>{category}</a>)}</div></nav>
+    <GuideQuickAnswers />
+    <div class="growth-band"><div class="growth-shell">{categories.map((category, index) => <section class="guide-hub-group" id={`tema-${index}`}><h2>{category}</h2><div class="growth-link-grid">{guides.filter((guide) => guide.category === category).map((guide) => <a href={guide.path}><span class="growth-eyebrow">Guía práctica</span><h3>{guide.title}</h3><p>{guide.description}</p><span class="growth-link-label">Leer guía<img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></span></a>)}</div></section>)}</div></div>
+    <ServiceContact topic="una revisión de mi cuenta Amazon" />
+  </div>
+</Layout>

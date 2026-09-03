@@ -1,102 +1,41 @@
 ---
 import Layout from './Layout.astro';
-import '../styles/subpage-redesign.css';
+import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
+import GuideLinks from '../components/GuideLinks.astro';
+import BlogCard from '../components/BlogCard.astro';
+import ServiceContact from '../components/ServiceContact.astro';
+import { blogPostsBySlug, readingMinutes, type BlogPost } from '../data/blog';
+import { serviceDirectory } from '../data/service-pages';
+import '../styles/growth-pages.css';
+import '../styles/blog.css';
 
-interface Section {
-  title: string;
-  content: string;
-  type?: 'text' | 'list' | 'highlight' | 'image';
-  items?: string[];
-  imageUrl?: string;
-}
-
-interface Props {
-  frontmatter: {
-    title: string;
-    date: string;
-    image: string;
-    category: string;
-    excerpt: string;
-    sections?: Section[];
-    content?: string;
-    tags: string[];
-    callToAction?: { text: string; url: string };
-    seo?: { metaTitle: string; metaDescription: string; keywords: string[] };
-  };
-}
-
-const { frontmatter } = Astro.props;
-const formattedDate = new Date(frontmatter.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+interface Props { frontmatter: BlogPost }
+const { frontmatter: post } = Astro.props;
+const path = '/blog/' + post.slug + '/';
+const service = serviceDirectory.find((item) => item.path === post.service)!;
+const related = post.relatedPosts.map((slug) => blogPostsBySlug[slug]);
+const formatDate = (value: string) => new Date(value + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
 ---
-
-<Layout
-  title={frontmatter.seo?.metaTitle || `${frontmatter.title} | Amazon Boost`}
-  description={frontmatter.seo?.metaDescription || frontmatter.excerpt}
-  image={frontmatter.image}
-  type="article"
-  pageType="blog"
-  datePublished={frontmatter.date}
-  author="Amazon Boost"
-  contentSummary={frontmatter.excerpt}
-  structuredData={{ type: 'article', data: { title: frontmatter.title, description: frontmatter.excerpt, image: frontmatter.image, date: frontmatter.date } }}
->
-  <article class="sub-page post-page">
-    <header class="post-hero">
-      <div class="sub-hero-grid" aria-hidden="true"></div>
-      <div class="sub-shell post-hero-layout">
-        <div>
-          <a class="post-back" href="/blog/">← Todos los recursos</a>
-          <p class="sub-kicker"><i></i> {frontmatter.category} / Amazon Boost</p>
-          <h1>{frontmatter.title}</h1>
-          <p>{frontmatter.excerpt}</p>
-          <div class="post-meta"><time datetime={frontmatter.date}>{formattedDate}</time><span>Lectura estratégica</span></div>
-        </div>
-        <figure><img src={frontmatter.image} alt={frontmatter.title} /></figure>
+<Layout title={post.seo.metaTitle} description={post.seo.metaDescription} image={post.image} canonicalPath={path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: post.title, description: post.seo.metaDescription, image: post.image, date: post.date, dateModified: post.updatedAt } }}>
+  <article class="growth-page blog-page">
+    <header class="growth-hero blog-post-hero"><div class="growth-shell">
+      <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Blog', path: '/blog/' }, { name: post.title, path }]} />
+      <p class="growth-eyebrow">{post.category} / Análisis</p>
+      <h1>{post.title}</h1>
+      <p class="growth-lead">{post.excerpt}</p>
+      <div class="blog-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{readingMinutes(post)} min de lectura</span><span>Publicado <time datetime={post.date}>{formatDate(post.date)}</time></span><span>Actualizado <time datetime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span></div>
+    </div></header>
+    <div class="growth-shell blog-reading">
+      <aside class="blog-toc"><p class="growth-eyebrow">En este análisis</p><nav aria-label="Índice del artículo"><a href="#idea-clave">La idea clave</a>{post.sections.map((section) => <a href={'#apartado-' + section.id}>{section.title}</a>)}<a href="#fuentes">Fuentes y contexto</a></nav><a class="blog-toc-service" href={service.path}><span>Trabajarlo en tu cuenta</span><strong>{service.title}</strong></a></aside>
+      <div class="blog-article-content">
+        <img class="blog-article-cover" src={post.image} alt="" width="1080" height="472" decoding="async" />
+        <section class="blog-takeaway" id="idea-clave"><p class="growth-eyebrow">La idea clave</p><p>{post.takeaway}</p></section>
+        {post.sections.map((section) => <section class="blog-section" id={'apartado-' + section.id}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}{section.source !== undefined && <p class="blog-citation">Referencia: <a href={post.sources[section.source].url} target="_blank" rel="noopener noreferrer">{post.sources[section.source].label}</a></p>}</section>)}
+        <section class="blog-sources" id="fuentes"><h2>Fuentes y contexto</h2><ul>{post.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>{source.note && <p>{source.note}</p>}</li>)}</ul><p>Los criterios de análisis son orientativos. Comprueba las funciones, condiciones y políticas aplicables en tu cuenta y marketplace antes de actuar.</p></section>
       </div>
-    </header>
-
-    <section class="post-body">
-      <div class="sub-shell post-body-layout">
-        <aside>
-          <p>En este análisis</p>
-          <nav>
-            {frontmatter.sections?.map((section, index) => <a href={`#seccion-${index + 1}`}>{section.title}</a>)}
-          </nav>
-          {frontmatter.tags?.length > 0 && <div class="post-tags">{frontmatter.tags.map((tag) => <span>#{tag}</span>)}</div>}
-        </aside>
-
-        <div class="post-content">
-          {frontmatter.sections ? (
-            frontmatter.sections.map((section, index) => (
-              <section id={`seccion-${index + 1}`} class:list={[section.type === 'highlight' && 'is-highlight']}>
-                {section.title && <h2>{section.title}</h2>}
-                {section.type === 'list' && section.items ? (
-                  <ul>{section.items.map((item) => <li set:html={item}></li>)}</ul>
-                ) : section.type === 'image' && section.imageUrl ? (
-                  <figure><img src={section.imageUrl} alt={section.title || 'Imagen del artículo'} loading="lazy" />{section.content && <figcaption>{section.content}</figcaption>}</figure>
-                ) : (
-                  <div class="post-copy" set:html={section.content} />
-                )}
-              </section>
-            ))
-          ) : <slot />}
-        </div>
-      </div>
-    </section>
-
-    <section class="post-bridge">
-      <div class="sub-shell">
-        <div><p>Aplicar es más difícil que leer</p><h2>Convirtamos este criterio en decisiones para tu cuenta.</h2></div>
-        <a href={frontmatter.callToAction?.url || '/#auditoria'}>{frontmatter.callToAction?.text || 'Solicitar auditoría'} <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-
-    <section class="sub-final"><div class="sub-shell"><div><p>Amazon Boost / Gestión integral</p><h2>Tu cuenta ya contiene la respuesta. Vamos a encontrarla.</h2></div><a href="/#auditoria">Hablar con el equipo <span aria-hidden="true">↗</span></a></div></section>
+    </div>
+    <GuideLinks slugs={post.guides} title="Lleva este análisis al siguiente paso." />
+    <section class="growth-band blog-related"><div class="growth-shell"><div class="growth-section-head"><p class="growth-eyebrow">Para seguir pensando</p><h2>Otros análisis conectados.</h2></div><div class="blog-grid">{related.map((entry) => <BlogCard post={entry} />)}</div></div></section>
+    <ServiceContact topic={post.title} service={post.service} />
   </article>
 </Layout>
-
-<style>
-  .post-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.post-hero-layout{position:relative;z-index:1;min-height:720px;display:grid;grid-template-columns:1.08fr .68fr;gap:85px;align-items:center;padding:72px 0}.post-back{display:inline-block;margin-bottom:45px;color:#aaa;font-size:.7rem;font-weight:800}.post-hero h1{max-width:900px;margin:0;font-size:clamp(3.4rem,5.8vw,6.5rem);line-height:.9;font-weight:850}.post-hero-layout>div>p:not(.sub-kicker){max-width:740px;margin:25px 0 0;color:#aeb0aa;line-height:1.7}.post-meta{display:flex;gap:22px;margin-top:30px;color:#83857f;font-size:.62rem;font-weight:800;text-transform:uppercase}.post-meta span{padding-left:22px;border-left:1px solid #444}.post-hero figure{margin:0;aspect-ratio:4/5;background:#151515}.post-hero figure img{width:100%;height:100%;object-fit:cover}.post-body{padding:110px 0;background:#f4f4ef;color:#111}.post-body-layout{display:grid;grid-template-columns:260px minmax(0,820px);gap:110px;justify-content:center}.post-body aside{position:sticky;top:145px;align-self:start}.post-body aside>p{margin:0;color:#a46100;font-size:.59rem;font-weight:850;text-transform:uppercase}.post-body aside nav{display:grid;margin-top:22px;border-top:1px solid #d0d0ca}.post-body aside nav a{padding:13px 0;border-bottom:1px solid #d0d0ca;color:#51534d;font-size:.7rem;line-height:1.35}.post-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px}.post-tags span{padding:6px 8px;border:1px solid #c9c9c2;color:#676962;font-size:.58rem}.post-content>section{padding:0 0 68px;margin-bottom:68px;border-bottom:1px solid #cecec8;scroll-margin-top:135px}.post-content h2{margin:0 0 28px;font-size:clamp(2.4rem,4vw,4.3rem);line-height:.98}.post-copy,.post-content li,.post-content figcaption{color:#464842;font-size:1rem;line-height:1.8}.post-copy :global(p){margin:0 0 1.3em}.post-copy :global(h3){margin:1.8em 0 .6em;font-size:1.55rem;line-height:1.15}.post-copy :global(a){color:#8d5707;text-decoration:underline}.post-content ul{display:grid;gap:12px;margin:0;padding:0;list-style:none}.post-content li{position:relative;padding:15px 0 15px 24px;border-top:1px solid #d0d0ca}.post-content li:before{content:"";position:absolute;left:2px;top:24px;width:7px;height:7px;background:#ff9900}.post-content section.is-highlight{padding:38px;margin-bottom:68px;border:1px solid #d0d0ca;background:#fff}.post-content figure{margin:0}.post-content figure img{display:block;width:100%;height:auto}.post-content figcaption{margin-top:12px;font-size:.72rem}.post-bridge{padding:90px 0;background:#111;color:#fff}.post-bridge .sub-shell{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:end}.post-bridge p{margin:0 0 20px;color:#ff9900;font-size:.62rem;font-weight:850;text-transform:uppercase}.post-bridge h2{max-width:1000px;margin:0;font-size:clamp(3rem,5vw,5.4rem);line-height:.94}.post-bridge a{min-height:54px;display:inline-flex;align-items:center;gap:25px;padding:0 20px;border:1px solid #fff;color:#fff;font-size:.75rem;font-weight:850}
-  @media(max-width:950px){.post-hero-layout{grid-template-columns:1fr}.post-hero figure{max-width:700px;aspect-ratio:16/10}.post-body-layout{grid-template-columns:1fr;gap:60px}.post-body aside{position:static}.post-bridge .sub-shell{grid-template-columns:1fr}.post-bridge a{justify-self:start}}
-  @media(max-width:700px){.post-hero-layout{min-height:auto;padding:72px 0 55px;gap:42px}.post-back{margin-bottom:35px}.post-hero h1{font-size:clamp(2.85rem,11.8vw,4rem)}.post-body{padding:75px 0}.post-content>section{padding-bottom:50px;margin-bottom:50px}.post-content h2{font-size:clamp(2.35rem,10.5vw,3.4rem)}.post-content section.is-highlight{padding:24px 20px}.post-bridge{padding:70px 0}.post-bridge h2{font-size:clamp(2.7rem,11vw,3.8rem)}}
-</style>

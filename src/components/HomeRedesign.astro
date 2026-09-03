@@ -1,14 +1,11 @@
 ---
 import "../styles/home-redesign.css";
+import "../styles/macbook-scroll.css";
 import { homeShowcase, websiteReviews } from "../data/home-showcase";
 import FeaturedCases from "./FeaturedCases.astro";
-
-const signals = [
-  { id: "ads", number: "01", label: "Amazon Ads" },
-  { id: "listing", number: "02", label: "Conversión" },
-  { id: "catalog", number: "03", label: "Catálogo" },
-  { id: "stock", number: "04", label: "FBA / FBM" },
-];
+import ReviewCard from "./ReviewCard.astro";
+import DiagnosticExperience from "./DiagnosticExperience.astro";
+import Icon from "./Icon.astro";
 
 const tickerItems = [
   "Seller Central", "Amazon Ads", "SEO Amazon", "FBA", "FBM", "Buy Box",
@@ -19,19 +16,19 @@ const tickerItems = [
 ];
 
 const services = [
-  { step: "Detectar", name: "Auditoría de cuenta", copy: "Una lectura completa de Seller Central para saber qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/auditoria-cuenta-amazon" },
-  { step: "Resolver", name: "Desbloqueos e incidencias", copy: "Recuperación de cuentas bloqueadas, fondos retenidos y situaciones críticas que frenan la operativa o la facturación.", tags: ["Suspensiones", "Fondos retenidos", "Apelaciones"], href: "/servicios/desbloqueos-amazon/" },
-  { step: "Rentabilizar y escalar", name: "PPC y Amazon Ads", copy: "Estrategia diseñada para escalar la cuenta, aumentar el posicionamiento y trabajar desde el primer momento con una publicidad rentable.", tags: ["ACOS", "TACOS", "ROAS"], href: "/agencia-ppc-amazon" },
-  { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ alineados para ganar clics, convencer e impulsar el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/optimizacion-listings-amazon" },
-  { step: "Vender", name: "Imágenes que venden", copy: "Imagen principal, infografías, comparativas y contenido A+ para explicar mejor el producto y elevar la conversión.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon" },
-  { step: "Escalar", name: "Gestión integral", copy: "Decisiones semanales sobre publicidad, stock, precio, catálogo y crecimiento en Amazon Europa.", tags: ["Seller Central", "FBA / FBM", "Europa"], href: "/gestion-cuenta-amazon-seller-central" },
+  { step: "Detectar", name: "Auditoría de cuenta", copy: "Leemos Seller Central para detectar qué frena ventas, margen y posicionamiento.", tags: ["Cuenta", "Catálogo", "Oportunidades"], href: "/servicios/auditoria-de-cuenta/" },
+  { step: "Resolver", name: "Desbloqueos e incidencias", copy: "Ordenamos la documentación y la respuesta para cuentas bloqueadas, fondos retenidos e incidencias críticas.", tags: ["Suspensiones", "Fondos retenidos", "Apelaciones"], href: "/servicios/desbloqueos-amazon/" },
+  { step: "Rentabilizar", name: "PPC y Amazon Ads", copy: "Estrategia publicitaria conectada con posicionamiento, ventas y margen.", tags: ["ACOS", "TACOS", "ROAS"], href: "/servicios/gestion-de-ppc/" },
+  { step: "Convertir", name: "Listings que convierten", copy: "SEO, copy, imágenes y A+ para ganar clics, convertir y mejorar el ranking orgánico.", tags: ["SEO Amazon", "CTR", "Conversión"], href: "/servicios/optimizacion-de-listados/" },
+  { step: "Vender", name: "Imágenes que ayudan a vender", copy: "Imagen principal, infografías y A+ para explicar el producto y facilitar la decisión de compra.", tags: ["Creatividad", "Infografías", "A+"], href: "/servicios/imagenes-para-amazon/" },
+  { step: "Escalar", name: "Gestión integral", copy: "Decisiones semanales sobre Amazon Ads, stock, precio, catálogo y Amazon Europa.", tags: ["Seller Central", "FBA / FBM", "Europa"], href: "/servicios/gestion-de-cuenta/" },
 ];
 
 const process = [
-  { title: "Leemos", text: "Convertimos ventas, publicidad y margen en informes claros. Sabes dónde está tu cuenta y qué merece atención." },
-  { title: "Priorizamos", text: "Ordenamos las oportunidades por impacto y urgencia. Acordamos las prioridades y el siguiente paso para tu cuenta." },
-  { title: "Ejecutamos", text: "Conectamos publicidad, catálogo y operativa. Aplicamos los cambios y medimos su efecto sobre ventas, conversión y rentabilidad." },
-  { title: "Escalamos", text: "Reforzamos lo que funciona. Ajustamos inversión y stock para crecer con margen y sostener el ritmo de la cuenta." },
+  { title: "Leemos", text: "Unimos ventas, publicidad y margen en informes claros." },
+  { title: "Priorizamos", text: "Ordenamos oportunidades por impacto y definimos el siguiente paso." },
+  { title: "Ejecutamos", text: "Conectamos publicidad, catálogo y operativa; aplicamos y medimos." },
+  { title: "Escalamos", text: "Reforzamos lo que funciona con inversión, stock y margen." },
 ];
 
 const reviewRail = [
@@ -49,7 +46,7 @@ const reviewRail = [
     date: null,
     url: null,
     tone: "internal",
-    eyebrow: "Reseña de la web",
+    eyebrow: "Experiencia compartida",
     action: "Leer completa",
   })),
   {
@@ -72,16 +69,14 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 ---
 
 <script>
-  const signalCopy = {
-    ads: { label: "Amazon Ads", title: "El gasto sube, pero el margen no.", text: "Separamos crecimiento real de ventas compradas y encontramos campañas, términos y ASINs que merecen cada euro.", metric: "PPC", detail: "estructura y rentabilidad", tone: "orange", bars: [38, 52, 46, 72, 61, 84, 68, 93] },
-    listing: { label: "Conversión", title: "Hay visitas. Falta una razón para comprar.", text: "Trabajamos imagen principal, infografías, copy, precio, reseñas y A+ como un único sistema de conversión.", metric: "CTR", detail: "tráfico que sí entra", tone: "lime", bars: [44, 40, 55, 53, 68, 74, 82, 88] },
-    catalog: { label: "Catálogo", title: "Amazon está frenando la operativa.", text: "Variantes rotas, incidencias, supresiones y errores de catálogo dejan de ser ruido y pasan a tener prioridad.", metric: "ASIN", detail: "catálogo bajo control", tone: "blue", bars: [71, 68, 61, 55, 49, 66, 79, 91] },
-    stock: { label: "FBA / FBM", title: "El ranking se pierde cuando falta stock.", text: "Coordinamos previsión, Buy Box, precio y logística híbrida para sostener ventas cuando FBA no llega.", metric: "FBA", detail: "stock y disponibilidad", tone: "red", bars: [82, 77, 69, 48, 42, 63, 78, 89] },
-  } as const;
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { mountMacbookScroll } from "../lib/macbook-scroll";
 
   const initHomeExperience = async () => {
     const heroAxis = document.querySelector<HTMLElement>("[data-hero-axis]");
-    const heroMacbook = document.querySelector<HTMLElement>("[data-hero-macbook]");
+    const hero = document.querySelector<HTMLElement>(".ab-hero");
+    if (hero) mountMacbookScroll(hero, { gsap, ScrollTrigger });
     let axisFrame = 0;
     const updateHeroAxis = () => {
       axisFrame = 0;
@@ -90,34 +85,11 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         heroAxis.style.setProperty("--axis-turn", `${progress * 90}deg`);
         heroAxis.style.setProperty("--axis-scale", `${1 + progress * .5}`);
       }
-      if (heroMacbook) {
-        const mobileTrigger = (window.innerHeight * .82 - heroMacbook.getBoundingClientRect().top) / 180;
-        const openProgress = Math.min(1, Math.max(0, window.innerWidth <= 760 ? mobileTrigger : window.scrollY / 160));
-        heroMacbook.style.setProperty("--lid-angle", `${-84 + openProgress * 84}deg`);
-        heroMacbook.style.setProperty("--screen-opacity", String(.12 + openProgress * .88));
-        heroMacbook.style.setProperty("--open-progress", String(openProgress));
-        heroMacbook.classList.toggle("is-open", openProgress >= .98);
-      }
     };
     updateHeroAxis();
     window.addEventListener("scroll", () => {
       if (!axisFrame) axisFrame = window.requestAnimationFrame(updateHeroAxis);
     }, { passive: true });
-
-    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-signal]");
-    const get = (name: string) => document.querySelector<HTMLElement>(`[data-signal-${name}]`);
-    const visual = document.querySelector<HTMLElement>("[data-signal-visual]");
-    const bars = document.querySelectorAll<HTMLElement>("[data-signal-bar]");
-
-    buttons.forEach((button) => button.addEventListener("click", () => {
-      const next = signalCopy[button.dataset.signal as keyof typeof signalCopy];
-      if (!next) return;
-      buttons.forEach((item) => { item.classList.toggle("active", item === button); item.setAttribute("aria-pressed", String(item === button)); });
-      const values = { label: next.label, title: next.title, text: next.text, metric: next.metric, detail: next.detail };
-      Object.entries(values).forEach(([key, value]) => { const node = get(key); if (node) node.textContent = value; });
-      if (visual) visual.dataset.tone = next.tone;
-      bars.forEach((bar, index) => bar.style.setProperty("--bar-height", `${next.bars[index] ?? 50}%`));
-    }));
 
     const reviewMarquee = document.querySelector<HTMLElement>(".ab-review-marquee");
     const reviewPause = document.querySelector<HTMLButtonElement>("[data-review-pause]");
@@ -208,14 +180,14 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
       <p class="ab-overline"><span data-hero-axis></span> España · Europa · FBA · FBM</p>
       <h1><small>Agencia Amazon para marcas privadas</small><span>Amazon</span><em>Boost.</em></h1>
       <p class="ab-hero-statement">Convertimos Amazon en un canal rentable.</p>
-      <p class="ab-hero-description">Tu cuenta ya está diciendo por qué no crece. Leemos esas señales, priorizamos las que afectan al margen y ejecutamos una estrategia conectada de PPC, listings, catálogo, precio y stock.</p>
+      <p class="ab-hero-description">Hacemos que publicidad, catálogo y stock trabajen juntos para vender más sin perder rentabilidad.</p>
       <div class="ab-hero-actions">
-        <a class="ab-button ab-button-primary" href="#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
-        <a class="ab-button ab-button-ghost" href="#caso-real">Ver un caso real <span aria-hidden="true">↓</span></a>
+        <a class="ab-button ab-button-primary" href="#auditoria">Solicitar auditoría <Icon name="arrow-up-right" size={18} /></a>
+        <a class="ab-button ab-button-ghost" href="#caso-real">Ver un caso real <Icon name="arrow-down" size={18} /></a>
       </div>
     </div>
 
-    <div class="ab-account-stage" data-reveal>
+    <div class="ab-account-stage" data-macbook-stage>
       <div class="ab-macbook" data-hero-macbook>
         <div class="ab-macbook-lid">
           <img class="ab-macbook-device ab-macbook-device-lid" src="/images/macbook-graphite-frame.png" alt="" aria-hidden="true" />
@@ -232,15 +204,15 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
                 <strong>INICIO</strong><span>Pedidos</span><span>Inventario</span><span>Publicidad</span><span>Informes</span>
               </aside>
               <div class="ab-seller-dashboard">
-                <div class="ab-seller-health"><i>✓</i><strong>Tu tienda es saludable</strong><span>›</span></div>
+                <div class="ab-seller-health"><i><Icon name="check" size={11} strokeWidth={3} /></i><strong>Tu tienda es saludable</strong><span><Icon name="chevron-right" size={15} /></span></div>
                 <div class="ab-seller-heading">
                   <div><small>VENTAS DE PRODUCTOS</small><h2>Últimos 30 días</h2></div>
-                  <span>Actualizado ahora</span>
+                  <span class="ab-seller-demo">Simulación visual</span>
                 </div>
                 <div class="ab-seller-performance">
                   <article><strong>487.930 €</strong><small>Últimos 30 días</small></article>
-                  <article class="is-down"><strong>12 % ↓</strong><small>Periodo anterior</small></article>
-                  <article class="is-up"><strong>742 % ↑</strong><small>El año pasado</small></article>
+                  <article class="is-down"><strong>12 % <Icon name="trending-down" size={12} /></strong><small>Periodo anterior</small></article>
+                  <article class="is-up"><strong>742 % <Icon name="trending-up" size={12} /></strong><small>El año pasado</small></article>
                 </div>
                 <div class="ab-seller-bar-chart" role="img" aria-label="Gráfico de barras de ventas diarias durante los últimos 30 días">
                   <div class="ab-seller-grid-lines"><i></i><i></i><i></i><i></i></div>
@@ -256,8 +228,23 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         <img class="ab-macbook-device ab-macbook-device-base" src="/images/macbook-graphite-frame.png" alt="" aria-hidden="true" />
       </div>
     </div>
+
   </div>
-  <div class="ab-proof-rail">{homeShowcase.proof.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}</div>
+  <div class="ab-proof-rail" data-reveal>
+    {homeShowcase.proof.map((item, index) => (
+      <div class:list={{ "ab-proof-reviews": index === 0 }}>
+        <strong>{item.value}</strong>
+        <span>{item.label}</span>
+        {index === 0 && (
+          <a class="ab-proof-rating" href="#resenas" aria-label="Ver opiniones de clientes de Amazon Boost">
+            <span class="ab-proof-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={12} strokeWidth={1.8} filled />)}</span>
+            <small>5/5 en reseñas</small>
+            <Icon name="arrow-up-right" size={13} />
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
 </section>
 
 <div class="ab-ticker" id="especialidades" aria-label={tickerItems.join(", ")}>
@@ -271,49 +258,38 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 </div>
 
 <section class="ab-signal-section" id="diagnostico">
-  <div class="ab-section-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Diagnóstico inicial</p><h2><span>¿Dónde se está escapando </span><span>el crecimiento?</span></h2><p>La cuenta rara vez tiene un solo problema. Estas son las cuatro señales que conectamos antes de decidir.</p></div>
-  <div class="ab-signal-experience" data-reveal>
-    <div class="ab-signal-tabs" role="group" aria-label="Áreas de diagnóstico">
-        {signals.map((signal, index) => <button type="button" class:list={["ab-signal-tab", { active: index === 0 }]} data-signal={signal.id} aria-pressed={index === 0 ? "true" : "false"}><span>{signal.number}</span><strong>{signal.label}</strong></button>)}
-    </div>
-    <div class="ab-signal-visual" data-signal-visual data-tone="orange">
-      <div class="ab-signal-copy"><span class="ab-signal-label" data-signal-label>Amazon Ads</span><h3 data-signal-title>El gasto sube, pero el margen no.</h3><p data-signal-text>Separamos crecimiento real de ventas compradas y encontramos campañas, términos y ASINs que merecen cada euro.</p><a href="#auditoria">Analizar mi cuenta <span aria-hidden="true">↗</span></a></div>
-      <div class="ab-signal-data"><div class="ab-signal-score"><strong data-signal-metric>PPC</strong><span data-signal-detail>estructura y rentabilidad</span></div><div class="ab-signal-bars" aria-hidden="true">{[38,52,46,72,61,84,68,93].map((height) => <i data-signal-bar style={`--bar-height:${height}%`}></i>)}</div><div class="ab-signal-axis"><span>Estructura</span><span>Control</span><span>Escala</span></div></div>
-    </div>
-  </div>
+  <div class="ab-section-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Diagnóstico inicial</p><h2><span>¿Dónde se está escapando </span><span>el crecimiento?</span></h2><p>Analizamos dónde se pierden ventas y rentabilidad para decidir qué cambiar primero.</p></div>
+  <DiagnosticExperience />
 </section>
 
 <FeaturedCases />
 
 <section class="ab-client-reviews" id="resenas">
-  <div class="ab-client-reviews-heading" data-reveal>
-    <div><p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2></div>
-    <div><strong>Opiniones públicas hoy.</strong><p>Nuevas historias se incorporarán aquí cuando estén validadas. Trustpilot y LinkedIn llevan siempre a la publicación original.</p></div>
+  <div class="ab-client-reviews-heading is-unified" data-reveal>
+    <p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2>
   </div>
   <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes" style={`--review-duration:${reviewRail.length * 12}s`}>
     <div class="ab-review-track">
       {[0, 1].map((groupIndex) => (
         <div class="ab-review-group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
           {reviewRail.map((review) => {
-            const internal = review.tone === "internal";
-            const Card = internal ? "article" : "a";
+            if (review.tone !== "invite") return <ReviewCard review={review} duplicate={groupIndex === 1} />;
             return (
-            <Card class:list={["ab-client-review-card", `is-${review.tone}`]} href={review.url ?? undefined} target={review.url?.startsWith("http") ? "_blank" : undefined} rel={review.url?.startsWith("http") ? "noreferrer" : undefined} tabindex={!internal && groupIndex === 1 ? -1 : undefined}>
-              <div class="ab-client-review-top"><span>{review.platform === "LinkedIn" ? "in" : review.tone === "trustpilot" ? "★" : review.initials}</span><div><strong>{review.platform}</strong><small>{review.eyebrow}</small></div>{review.date && <time>{review.date}</time>}</div>
-              {review.tone === "trustpilot" && <div class="ab-client-review-stars" aria-label="5 de 5 estrellas">★★★★★</div>}
+            <a class="ab-client-review-card is-invite" href={review.url ?? undefined} tabindex={groupIndex === 1 ? -1 : undefined}>
+              <div class="ab-client-review-top"><span>{review.initials}</span><div><strong>{review.platform}</strong><small>{review.eyebrow}</small></div></div>
               <blockquote><strong>{review.title}</strong><p>“{review.quote}”</p></blockquote>
-              <footer><div><strong>{review.author}</strong><small>{review.meta}</small></div>{internal ? <button type="button" data-review-open={review.id} aria-haspopup="dialog" aria-controls={`review-${review.id}`} aria-label={`Leer reseña completa: ${review.title}`} tabindex={groupIndex === 1 ? -1 : undefined}>{review.action} <span aria-hidden="true">↗</span></button> : <span>{review.action} ↗</span>}</footer>
-            </Card>
+              <footer><div><strong>{review.author}</strong><small>{review.meta}</small></div><span>{review.action} <Icon name="arrow-up-right" size={14} /></span></footer>
+            </a>
           );})}
         </div>
       ))}
     </div>
   </div>
-  <div class="ab-review-actions" data-reveal><button class="ab-review-pause" type="button" data-review-pause aria-pressed="false">Pausar reseñas</button><a href="/dejar-resena">Compartir mi experiencia <span aria-hidden="true">↗</span></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <span aria-hidden="true">↗</span></a></div>
+  <div class="ab-review-actions" data-reveal><button class="ab-review-pause" type="button" data-review-pause aria-pressed="false">Pausar reseñas</button><a href="/dejar-resena">Compartir mi experiencia <Icon name="arrow-up-right" size={17} /></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <Icon name="arrow-up-right" size={17} /></a></div>
   {websiteReviews.map((review) => (
     <dialog class="ab-review-dialog" id={`review-${review.id}`} aria-labelledby={`review-title-${review.id}`}>
-      <form method="dialog"><button type="submit" aria-label="Cerrar reseña" title="Cerrar reseña">×</button></form>
-      <p class="ab-review-dialog-source">Amazon Boost · Reseña de la web</p>
+      <form method="dialog"><button type="submit" aria-label="Cerrar reseña" title="Cerrar reseña"><Icon name="x" size={20} /></button></form>
+      <p class="ab-review-dialog-source">Experiencia compartida</p>
       <h3 id={`review-title-${review.id}`}>{review.title}</h3>
       <blockquote><p>“{review.quote}”</p></blockquote>
       <footer><strong>{review.author}</strong><span>{review.meta}</span></footer>
@@ -330,8 +306,9 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   <div class="ab-strategy-shell">
     <div class="ab-strategy-copy" data-reveal>
       <p class="ab-overline"><span aria-hidden="true"></span> Dirección estratégica</p>
-      <h2 id="ab-strategy-title"><span>Datos claros.</span> <span>Decisiones conectadas.</span> <span>Crecimiento con margen.</span></h2>
-      <p class="ab-strategy-description">Los informes dan contexto. La estrategia marca el siguiente paso. Tú sabes qué ocurre en tu cuenta, qué estamos haciendo y por qué.</p>
+      <h2 id="ab-strategy-title"><span>Datos que importan.</span> <span>Decisiones con criterio.</span> <span>Crecimiento con margen.</span></h2>
+      <p class="ab-strategy-description">Los informes dan contexto y la estrategia marca el siguiente paso. Sabes qué ocurre, qué hacemos y por qué.</p>
+      <a class="ab-strategy-cta" href="#auditoria">Quiero una auditoría <Icon name="arrow-up-right" size={17} /></a>
     </div>
     <ol class="ab-strategy-flow" role="list" aria-label="De los datos al crecimiento">
       {process.map((item) => (
@@ -344,29 +321,33 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   </div>
 </section>
 
-<section class="ab-founder-section" id="fundador">
+<section class="ab-founder-section" id="fundador" aria-labelledby="ab-founder-heading">
+  <header class="ab-founder-copy ab-founder-heading" data-reveal>
+    <p class="ab-overline ab-overline-dark"><span></span> Quiénes somos</p>
+    <h2 id="ab-founder-heading">Tu cuenta, dirigida como una parte más de tu negocio.</h2>
+  </header>
   <div class="ab-founder-portrait" data-reveal>
-    <img src="/images/sergio-porras-amazon-boost-1440.webp" srcset="/images/sergio-porras-amazon-boost-800.webp 800w, /images/sergio-porras-amazon-boost-1440.webp 1440w" sizes="(max-width: 1100px) 100vw, 41vw" width="1440" height="1703" alt="Sergio Porras, fundador de Amazon Boost" loading="lazy" decoding="async" />
+    <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" srcset="/images/sergio-porras-amazon-boost-v2-800.webp 800w, /images/sergio-porras-amazon-boost-v2-1440.webp 1440w" sizes="(max-width: 1100px) 100vw, 41vw" width="1440" height="1440" alt="Sergio Porras, fundador de Amazon Boost" loading="lazy" decoding="async" />
     <div class="ab-portrait-label">
       <div class="ab-portrait-identity"><strong>Sergio Porras</strong><span>Fundador / Amazon Boost</span></div>
       <a class="ab-founder-linkedin" href="https://www.linkedin.com/in/sergio-deroman-amazon/" target="_blank" rel="noopener noreferrer" aria-label="Ver el perfil de Sergio Porras en LinkedIn (se abre en una pestaña nueva)" title="Ver perfil en LinkedIn"><span aria-hidden="true">in</span></a>
     </div>
   </div>
-  <div class="ab-founder-copy" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Cerca de la cuenta</p><h2>Delega tu cuenta. Nosotros nos encargamos de escalarla.</h2><p>Soy Sergio Porras. Creé Amazon Boost para que marcas y vendedores tengan una lectura clara de su cuenta y un equipo al que delegar completamente la gestión: desde la operativa diaria hasta la estrategia de crecimiento.</p><blockquote>“Primero entendemos dónde está el margen. Después decidimos cómo crecer.”</blockquote><a href="#auditoria">Hablar con Sergio <span aria-hidden="true">↗</span></a></div>
+  <div class="ab-founder-copy ab-founder-details" data-reveal><p>Creé Amazon Boost para que las marcas puedan delegar Amazon en un equipo que conecta estrategia, publicidad, catálogo y operativa sin perder de vista el margen.</p><blockquote>“Primero entendemos el negocio. Después construimos cómo hacerlo crecer.”</blockquote><a href="#auditoria">Hablar con Sergio <Icon name="arrow-up-right" size={17} /></a></div>
 </section>
 
 <section class="ab-audit-section" id="auditoria">
   <div class="ab-audit-shell">
-    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría inicial</p><h2>Tu cuenta ya tiene la respuesta. Vamos a encontrarla.</h2><p>Cuéntanos el punto de partida. Revisaremos si hay una oportunidad real y te diremos qué tendría sentido mover primero.</p><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
+    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría gratuita</p><h2>Tu marca ya tiene la respuesta. Vamos a encontrarla.</h2><p>Cuéntanos el punto de partida. Revisaremos dónde está la oportunidad y qué mover primero.</p><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
     <form class="audit-form ab-phone-form" data-phone-rise>
       <div class="ab-phone-speaker" aria-hidden="true"><i></i></div>
       <div class="ab-phone-side ab-phone-action" aria-hidden="true"></div><div class="ab-phone-side ab-phone-volume" aria-hidden="true"></div>
-      <div class="ab-phone-title"><span>Amazon Boost</span><small>Auditoría inicial</small></div>
+      <div class="ab-phone-title"><span>Amazon Boost</span><small>Auditoría gratuita</small></div>
       <div class="ab-field-pair"><label>Nombre<input type="text" name="name" autocomplete="name" placeholder="Tu nombre" required /></label><label>Email<input type="email" name="email" autocomplete="email" placeholder="tu@empresa.com" required /></label></div>
       <div class="ab-field-pair"><label>Teléfono<input type="tel" name="phone" autocomplete="tel" placeholder="+34 600 000 000" /></label><label>Ventas mensuales<select name="monthly_sales"><option value="">Selecciona un rango</option><option value="0-5k">0 – 5.000 €</option><option value="5k-25k">5.000 – 25.000 €</option><option value="25k-100k">25.000 – 100.000 €</option><option value="100k+">Más de 100.000 €</option></select></label></div>
       <label>¿Qué te preocupa ahora?<textarea name="message" rows="3" placeholder="PPC, listings, stock, catálogo, lanzamiento..."></textarea></label>
       <label class="ab-consent"><input type="checkbox" name="consent" required /><span>Acepto que Amazon Boost contacte conmigo sobre esta solicitud.</span></label>
-      <button type="submit">Solicitar auditoría <span aria-hidden="true">↗</span></button><a class="ab-call-expert" href="tel:+34650606400"><span>Hablar con un experto</span><strong>+34 650 606 400</strong></a><p class="ab-form-note">Sin compromiso. Respuesta personal, no automática.</p><p class="ab-form-status" data-form-status aria-live="polite"></p><div class="ab-phone-home" aria-hidden="true"></div>
+      <button type="submit">Solicitar auditoría gratuita <Icon name="arrow-up-right" size={18} /></button><a class="ab-call-expert" href="tel:+34650606400"><span>Hablar con un experto</span><strong>+34 650 606 400</strong></a><p class="ab-form-note">Gratis y sin compromiso. Respuesta personal, no automática.</p><p class="ab-form-status" data-form-status aria-live="polite"></p><div class="ab-phone-home" aria-hidden="true"></div>
     </form>
   </div>
 </section>

@@ -1,29 +1,40 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { imagenesParaAmazonData } from '../../data/services/imagenes-para-amazon.js';
+import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
+import GuideLinks from '../../components/GuideLinks.astro';
+import ServiceContact from '../../components/ServiceContact.astro';
+import Icon from '../../components/Icon.astro';
 import '../../styles/subpage-redesign.css';
+import '../../styles/growth-pages.css';
+
+export const prerender = true;
 
 const { metaTitle, metaDescription } = imagenesParaAmazonData;
 const collections = [
   {
     id: 'belleza',
-    category: 'Belleza',
+    category: 'Cosmética',
+    status: 'Muestra conceptual',
     title: 'Un producto premium debe parecerlo antes del primer clic.',
-    copy: 'Construimos el carrusel para explicar beneficios, uso y diferenciación sin perder la claridad que exige Amazon.',
-    source: '/images/1.1.png',
+    copy: 'Un concepto visual para mostrar cómo una foto base puede convertirse en un carrusel coherente, claro y reconocible.',
+    note: 'Concepto visual creado para explicar el proceso. No se atribuye a un cliente ni presenta resultados de una cuenta real.',
+    source: '/images/cosmetica-concepto-base-v2.webp',
     images: [
-      { src: '/images/1.2.png', alt: 'Imagen principal optimizada de un producto de belleza', label: 'Imagen principal' },
-      { src: '/images/1.4.png', alt: 'Infografía de beneficios para un producto de belleza', label: 'Beneficios' },
-      { src: '/images/1.3.png', alt: 'Imagen lifestyle de un producto de belleza', label: 'Lifestyle' },
-      { src: '/images/1.5.png', alt: 'Imagen de ingredientes y modo de uso', label: 'Ingredientes' },
-      { src: '/images/1.6.png', alt: 'Imagen de detalles para un producto de belleza', label: 'Detalles' },
+      { src: '/images/cosmetica-concepto-principal-v2.webp', alt: 'Concepto de imagen principal para una crema facial ficticia', label: 'Imagen principal' },
+      { src: '/images/cosmetica-concepto-lifestyle-v2.webp', alt: 'Concepto lifestyle para una crema facial ficticia', label: 'Lifestyle' },
+      { src: '/images/cosmetica-concepto-ingredientes-v2.webp', alt: 'Concepto visual de textura e ingredientes para una crema facial ficticia', label: 'Textura' },
+      { src: '/images/cosmetica-concepto-uso-v2.webp', alt: 'Concepto de secuencia de uso para una crema facial ficticia', label: 'Uso' },
+      { src: '/images/cosmetica-concepto-detalle-v2.webp', alt: 'Concepto de detalle de packaging para una crema facial ficticia', label: 'Detalles' },
     ],
   },
   {
     id: 'bebe',
     category: 'Bebé y regalo',
+    status: 'Concepto visual',
     title: 'De una foto de producto a una propuesta que se entiende y se recuerda.',
     copy: 'El set visual ordena el contenido del pack, resuelve dudas y sitúa el producto en un contexto de compra real.',
+    note: 'Concepto visual creado para mostrar el enfoque creativo. No se atribuye a un cliente ni presenta resultados de una cuenta real.',
     source: '/images/1.png',
     images: [
       { src: '/images/2.png', alt: 'Imagen principal optimizada de una canastilla de bebé', label: 'Imagen principal' },
@@ -38,6 +49,9 @@ const collections = [
 <Layout
   title={metaTitle}
   description={metaDescription}
+  image="/images/cosmetica-concepto-lifestyle-v2.webp"
+  canonicalPath="/servicios/imagenes-para-amazon/"
+  aiOptimized={false}
   pageType="service"
   contentSummary={metaDescription}
   structuredData={{ type: 'service', data: imagenesParaAmazonData }}
@@ -47,18 +61,19 @@ const collections = [
       <div class="sub-hero-grid" aria-hidden="true"></div>
       <div class="sub-shell visual-hero-layout">
         <div class="visual-hero-copy">
+          <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Servicios', path: '/servicios/' }, { name: 'Imágenes para Amazon', path: '/servicios/imagenes-para-amazon/' }]} />
           <p class="sub-kicker"><i></i> Creatividad orientada a conversión</p>
           <h1>Imágenes para Amazon que hacen visible el valor de tu producto.</h1>
           <p>Creamos sets visuales a medida para marcas privadas que necesitan explicar mejor, diferenciarse y convertir más dentro de Amazon Europa.</p>
           <div class="sub-actions">
-            <a class="sub-button sub-button-primary" href="/#auditoria">Solicitar propuesta <span aria-hidden="true">↗</span></a>
-            <a class="sub-button sub-button-secondary" href="#trabajos">Ver trabajos <span aria-hidden="true">↓</span></a>
+            <a class="sub-button sub-button-primary" href="/#auditoria">Solicitar propuesta <Icon name="arrow-up-right" size={18} /></a>
+            <a class="sub-button sub-button-secondary" href="#trabajos">Ver trabajos <Icon name="arrow-down" size={18} /></a>
           </div>
         </div>
         <div class="visual-hero-media" aria-label="Muestra de imágenes creadas para Amazon">
-          <img class="visual-hero-back" src="/images/1.3.png" alt="Imagen lifestyle para Amazon" />
-          <img class="visual-hero-front" src="/images/2.png" alt="Imagen optimizada de producto para Amazon" />
-          <div class="visual-hero-tag"><span>Set visual</span><strong>Diseñado para vender</strong></div>
+          <img class="visual-hero-back" src="/images/cosmetica-concepto-lifestyle-v2.webp" alt="Concepto lifestyle para un producto de cosmética en Amazon" />
+          <img class="visual-hero-front" src="/images/cosmetica-concepto-principal-v2.webp" alt="Concepto de imagen principal para un producto de cosmética en Amazon" />
+          <div class="visual-hero-tag"><span>Set visual</span><strong>Diseñado para convertir</strong></div>
         </div>
       </div>
       <div class="sub-hero-rail"><span>Estrategia visual</span><i></i><span>Imagen principal</span><i></i><span>Infografías</span><i></i><span>Lifestyle</span></div>
@@ -75,9 +90,9 @@ const collections = [
       <div class="sub-shell visual-intro-layout">
         <div>
           <p class="sub-kicker sub-kicker-dark"><i></i> No decoramos listings</p>
-          <h2>Cada imagen tiene un trabajo.</h2>
+          <h2>Cada imagen tiene una función.</h2>
         </div>
-        <p>La primera consigue el clic. Las siguientes sostienen la decisión: explican el beneficio, resuelven objeciones, muestran el uso y hacen reconocible la marca. Diseñamos el conjunto como una secuencia, no como piezas independientes.</p>
+        <p>La primera busca el clic. Las siguientes explican, resuelven objeciones y hacen reconocible la marca. La secuencia termina vendiendo la propuesta completa, no una colección de piezas independientes.</p>
       </div>
     </section>
 
@@ -87,7 +102,7 @@ const collections = [
           <div class="sub-shell">
             <header class="visual-case-head">
               <div>
-                <p>{collection.category} / Muestra de trabajo</p>
+                <p>{collection.category} / {collection.status}</p>
                 <h2>{collection.title}</h2>
               </div>
               <p>{collection.copy}</p>
@@ -122,7 +137,7 @@ const collections = [
                 </div>
               </div>
             </div>
-            <p class="visual-note">Muestras visuales provisionales. La selección definitiva de trabajos se actualizará con nuevos casos reales.</p>
+            <p class="visual-note">{collection.note}</p>
           </div>
         </article>
       ))}
@@ -135,7 +150,7 @@ const collections = [
           <h2>Del producto al argumento visual.</h2>
         </div>
         <div class="visual-process">
-          <article><span>Entender</span><h3>Producto y cliente</h3><p>Leemos reseñas, competencia, beneficios, objeciones y contexto de compra.</p></article>
+          <article><span>Entender</span><h3>Mercado, marca y cliente</h3><p>Estudiamos mercado, subnicho, cliente, competencia y brandbook antes de definir el argumento visual.</p></article>
           <article><span>Ordenar</span><h3>Guion del carrusel</h3><p>Asignamos una función concreta a cada imagen antes de diseñar.</p></article>
           <article><span>Crear</span><h3>Dirección visual</h3><p>Producimos una estética propia, coherente con la marca y con Amazon.</p></article>
           <article><span>Optimizar</span><h3>Conversión móvil</h3><p>Revisamos lectura, jerarquía y claridad en el espacio más exigente.</p></article>
@@ -143,16 +158,20 @@ const collections = [
       </div>
     </section>
 
-    <section class="sub-final">
-      <div class="sub-shell">
-        <div><p>Tu producto ya tiene algo que decir</p><h2>Hagamos que se entienda en segundos.</h2></div>
-        <a href="/#auditoria">Pedir propuesta <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    <div class="growth-page">
+      <section class="growth-band"><div class="growth-shell growth-faq-grid"><div class="growth-section-head"><p class="growth-eyebrow">Antes de diseñar</p><h2>El producto primero.<br />El alcance, claro.</h2></div><div class="growth-faqs">
+        <details><summary>¿Qué materiales necesitáis para empezar?</summary><p>Fotografías del producto y su envase, medidas, contenido del pack, identidad de marca y beneficios documentados. Revisamos la calidad del material antes de definir las piezas.</p></details>
+        <details><summary>¿Cuántas imágenes incluye el servicio?</summary><p>No hay un número único para todos los productos. Definimos el guion del carrusel y concretamos piezas, formatos y revisiones en la propuesta.</p></details>
+        <details><summary>¿También preparáis contenido A+?</summary><p>Sí. Preparamos contenido A+ y A+ Premium cuando la cuenta sea elegible y lo incluimos en el alcance.</p></details>
+        <details><summary>¿Las imágenes garantizan una subida de ventas?</summary><p>No pueden garantizar ventas por sí solas, pero son una pieza fundamental del mecanismo de conversión: influyen en el clic, la comprensión del producto y la decisión de compra. Las trabajamos junto a oferta, tráfico y disponibilidad para ayudar a escalar la marca.</p></details>
+      </div></div></section>
+      <GuideLinks slugs={['imagenes-cosmetica-amazon', 'imagenes-amazon-requisitos', 'listing-amazon-visitas-sin-ventas', 'contenido-a-plus-amazon']} />
+      <ServiceContact topic="imágenes para Amazon" service="/servicios/imagenes-para-amazon/" preparation={['Fotos actuales y enlace al producto.', 'Ficha técnica y contenido del pack.', 'Países e idiomas que necesita la marca.']} />
+    </div>
   </article>
 
   <dialog class="visual-lightbox" aria-label="Imagen ampliada">
-    <button type="button" class="visual-lightbox-close" aria-label="Cerrar">×</button>
+    <button type="button" class="visual-lightbox-close" aria-label="Cerrar"><Icon name="x" size={21} /></button>
     <img alt="Imagen ampliada" />
   </dialog>
 </Layout>

@@ -1,27 +1,12 @@
 ---
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
-import { caseStudiesBySlug } from '../../data/case-studies/index.js';
+import { allCaseStudies, type CaseStudy } from '../../data/case-studies/catalogue';
 
 export const prerender = true;
-
-export async function getStaticPaths() {
-  const paths = Object.keys(caseStudiesBySlug).map(slug => {
-    return { params: { slug } };
-  });
-  
-  return paths;
+export function getStaticPaths() {
+  return allCaseStudies.map((caseStudy) => ({ params: { slug: caseStudy.slug }, props: { caseStudy } }));
 }
-
-const { slug } = Astro.params;
-const caseStudy = caseStudiesBySlug[slug];
-
-// En caso de que el slug no exista, redirigimos a la página principal
-if (!caseStudy) {
-  return Astro.redirect('/');
-}
-
-const title = caseStudy.metaTitle;
-const description = caseStudy.metaDescription;
+interface Props { caseStudy: CaseStudy }
+const { caseStudy } = Astro.props;
 ---
-
-<CaseStudyLayout title={title} description={description} caseStudy={caseStudy} />
+<CaseStudyLayout caseStudy={caseStudy} />

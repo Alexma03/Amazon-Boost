@@ -8,60 +8,47 @@ import { algoritmoAmazonData } from './algoritmo-amazon.ts';
 import { internacionalizacionData } from './internacionalizacion.ts';
 import { marketingInfluencersData } from './marketing-influencers.ts';
 
-// Definimos la interfaz para las secciones del blog
 export interface BlogSection {
+  id: string;
   title: string;
-  content: string;
-  type?: 'text' | 'list' | 'highlight' | 'image';
+  paragraphs: string[];
   items?: string[];
-  imageUrl?: string;
+  source?: number;
 }
 
-// Definimos la interfaz para los posts del blog
 export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  updatedAt: string;
   image: string;
   category: string;
   excerpt: string;
-  content?: string; // Campo opcional para mantener compatibilidad
-  sections?: BlogSection[]; // Nuevo campo para contenido estructurado
+  takeaway: string;
+  sections: BlogSection[];
   tags: string[];
-  callToAction: {
-    text: string;
-    url: string;
-  };
+  service: string;
+  guides: string[];
   relatedPosts: string[];
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    keywords: string[];
-  };
+  sources: { label: string; url: string; note?: string }[];
+  seo: { metaTitle: string; metaDescription: string };
 }
 
-// Array con todos los posts del blog
 export const allBlogPosts: BlogPost[] = [
-  optimizacionListingsData,
   estrategiasPpcData,
-  tendenciasEcommerceData,
-  herramientasSeoData,
-  tacticasResenasData,
+  optimizacionListingsData,
   aumentarConversionData,
   algoritmoAmazonData,
+  herramientasSeoData,
+  tacticasResenasData,
   internacionalizacionData,
-  marketingInfluencersData
+  marketingInfluencersData,
+  tendenciasEcommerceData,
 ];
 
-// Mapa de posts por slug para búsquedas rápidas
-export const blogPostsBySlug: Record<string, BlogPost> = {
-  [optimizacionListingsData.slug]: optimizacionListingsData,
-  [estrategiasPpcData.slug]: estrategiasPpcData,
-  [tendenciasEcommerceData.slug]: tendenciasEcommerceData,
-  [herramientasSeoData.slug]: herramientasSeoData,
-  [tacticasResenasData.slug]: tacticasResenasData,
-  [aumentarConversionData.slug]: aumentarConversionData,
-  [algoritmoAmazonData.slug]: algoritmoAmazonData,
-  [internacionalizacionData.slug]: internacionalizacionData,
-  [marketingInfluencersData.slug]: marketingInfluencersData
-}; 
+export const blogPostsBySlug: Record<string, BlogPost> = Object.fromEntries(allBlogPosts.map((post) => [post.slug, post]));
+
+export const readingMinutes = (post: BlogPost) => {
+  const text = [post.excerpt, post.takeaway, ...post.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.items ?? [])])].join(' ');
+  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
+};

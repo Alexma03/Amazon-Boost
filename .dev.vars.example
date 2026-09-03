@@ -1,0 +1,4 @@
+BOOST_AI_ENABLED=false
+OPENROUTER_API_KEY=
+BOOST_RATE_SECRET=
+BOOST_ALLOWED_ORIGINS=https://amznboost.es,https://www.amznboost.es

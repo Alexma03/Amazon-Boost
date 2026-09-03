@@ -1,140 +1,32 @@
-import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
-
-// --- Secciones Optimizadas para 'herramientasSeoData' ---
-
-const sections: BlogSection[] = [
-  {
-    title: 'El Arsenal Esencial: Herramientas SEO para Triunfar en Amazon',
-    content: `<p>En el competitivo universo de Amazon, destacar requiere más que intuición. Las <strong>herramientas SEO adecuadas</strong> son cruciales para analizar el mercado, encontrar palabras clave rentables y optimizar tus listings para atraer tráfico orgánico cualificado.</p>`,
-    type: 'text',
-  },
-  {
-    title: '1. Helium 10: La Suite Todo-en-Uno',
-    content: `<p>Popular por su amplitud. Su función <strong>Cerebro</strong> es potente para análisis inverso de ASINs y descubrir keywords de la competencia.</p>`,
-    type: 'text',
-    // No list needed if keeping it super brief
-  },
-  {
-    title: '2. Jungle Scout: Investigación de Keywords y Producto',
-    content: `<p>Fuerte en investigación de productos, pero su <strong>Keyword Scout</strong> ofrece datos de volumen de búsqueda precisos y análisis de dificultad.</p>`,
-    type: 'text',
-  },
-  {
-    title: '3. DataHawk: Análisis Profundo del Rendimiento Orgánico',
-    content: `<p>Destaca por su <strong>seguimiento diario de rankings</strong> y la capacidad de correlacionar cambios en listings con el rendimiento SEO.</p>`,
-    type: 'text',
-  },
-  {
-    title: '4. Sellics: Optimización de Contenido Integrada',
-    content: `<p>Ofrece un <strong>Optimizador de Contenido</strong> con puntuación en tiempo real y sugerencias de mejora, integrando SEO y PPC.</p>`,
-    type: 'text',
-  },
-  {
-    // Sección de imagen para descanso visual
-    title: 'Visualizando el Éxito: Datos en Acción',
-    content: `<p>Estas herramientas transforman datos complejos en insights accionables para tu estrategia SEO.</p>`,
-    type: 'image',
-    imageUrl:
-      'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1080&auto=format&fit=crop', // URL de la imagen principal
-  },
-  {
-    title: '5. AMZScout: Potencia Accesible',
-    content: `<p>Buena opción calidad-precio. Ofrece <strong>Keyword Tracker</strong> diario, análisis de competidores y un generador de listados.</p>`,
-    type: 'text',
-  },
-  {
-    // Highlight para la herramienta gratuita
-    title: '6. Sonar (de Sellics): Investigación de Keywords Gratuita',
-    content: `<p>¡Ideal para empezar o complementar! Acceso gratuito a una gran base de datos de keywords de Amazon y búsqueda inversa por ASIN.</p>`,
-    type: 'highlight',
-  },
-  {
-    title: '7. Merchant Words: Perspectiva Global',
-    content: `<p>Su fortaleza es la <strong>cobertura internacional</strong>, con volúmenes de búsqueda para múltiples marketplaces de Amazon.</p>`,
-    type: 'text',
-  },
-  {
-    title: '8. Viral Launch: Precisión y Oportunidad',
-    content: `<p>Conocido por la <strong>precisión en volúmenes de búsqueda</strong> y su algoritmo para identificar keywords de "baja competencia y alta oportunidad".</p>`,
-    type: 'text',
-  },
-  {
-    title: 'Estrategia de Implementación Inteligente',
-    content: `<p>Tener las herramientas no basta. Úsalas estratégicamente:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Investiga a fondo:</strong> Identifica tu universo de keywords (Helium 10, Jungle Scout).',
-      '<strong>Prioriza con datos:</strong> Enfócate en volumen vs. competencia.',
-      '<strong>Optimiza tu listing:</strong> Aplica los hallazgos (Sellics, DataHawk).',
-      '<strong>Monitoriza sin descanso:</strong> Sigue tus rankings y los de la competencia (AMZScout, DataHawk).',
-      '<strong>Adapta continuamente:</strong> El SEO en Amazon siempre cambia.',
-    ],
-  },
-  {
-    // Highlight sobre la estrategia
-    title: 'Clave del Éxito: La Estrategia, No Solo la Herramienta',
-    content: `<p>La verdadera ventaja competitiva reside en cómo <strong>integras los datos</strong> de estas herramientas en una estrategia SEO coherente y dinámica, adaptada a tus objetivos y presupuesto.</p>`,
-    type: 'highlight',
-  },
-  {
-    title: 'Conclusión: Elige tu Arsenal SEO con Inteligencia',
-    content: `<p>Seleccionar las <strong>herramientas SEO para Amazon</strong> adecuadas puede marcar una gran diferencia en tu visibilidad y ventas orgánicas. No necesitas todas, sino la combinación correcta para tus necesidades.</p>
-    <p>En <strong>Amazon Boost</strong>, te asesoramos para construir tu stack tecnológico SEO ideal, asegurando que cada euro invertido trabaje para impulsar tu crecimiento en Amazon.</p>`, // Ajusta "Amazon Boost" si es necesario
-    type: 'text',
-  },
-];
-
-// --- Objeto BlogPost Actualizado (manteniendo nombre original 'herramientasSeoData' y 'slug') ---
+import type { BlogPost } from './index';
 
 export const herramientasSeoData: BlogPost = {
   slug: 'herramientas-seo-amazon',
-  title: '8 Herramientas Esenciales para Optimizar SEO en Amazon',
+  title: 'Herramientas SEO para Amazon: elige por la pregunta que necesitas resolver',
   date: '2025-03-05',
-  image:
-    'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
-  category: 'SEO',
-  excerpt:
-    'Descubre las 8 mejores herramientas para potenciar tu estrategia de SEO en Amazon. Análisis de competencia, investigación de palabras clave, optimización de listings y más.',
-  sections: sections, // Usamos las nuevas secciones
-  // content: undefined, // Eliminamos el campo content antiguo si ya no lo usas
-  tags: [
-    'herramientas seo amazon',
-    'seo amazon',
-    'keywords amazon',
-    'optimización amazon',
-    'helium 10',
-    'jungle scout',
-    'datahawk',
-    'sellics',
-    'amazon 2025',
-    'mejorar ranking amazon',
-  ], // Tags revisados y con año
-  callToAction: {
-    text: '¿Necesitas ayuda con tu estrategia SEO? Solicita nuestra auditoría gratuita', // CTA mantenido
-    url: '/#solicita-tutoria', // Verificar URL
-  },
-  relatedPosts: [
-    // Manteniendo los slugs originales proporcionados
-    '10-estrategias-de-optimizacion-de-listings-para-aumentar-ventas-amazon',
-    'algoritmo-amazon-a9', // Quizás actualizar a uno sobre A10 si existe?
-    'analisis-competencia-amazon',
+  updatedAt: '2026-08-28',
+  image: 'https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?q=80&w=1080&auto=format&fit=crop&ixlib=rb-4.0.3',
+  category: 'SEO y catálogo',
+  excerpt: 'Datos de Amazon y herramientas externas cumplen funciones distintas. Cómo comparar su utilidad sin confundir una estimación con ventas reales.',
+  takeaway: 'Antes de contratar software, define qué decisión falta por resolver, de dónde sale el dato y si cubre tu mercado. Tener más paneles no significa disponer de mejor evidencia.',
+  sections: [
+    { id: 'necesidad', title: 'Escribe la pregunta antes de comparar planes', paragraphs: ['Puede que necesites descubrir búsquedas, revisar una ficha, seguir una selección de consultas o contrastar la demanda de una categoría. Son trabajos relacionados, pero no equivalentes. Una herramienta muy completa puede no resolver el problema que hoy limita a tu equipo.', 'Define quién utilizará el resultado y con qué frecuencia. Incluye los mercados, las referencias y el formato de exportación necesarios. Esta lista será más útil para comparar opciones que una clasificación genérica de mejores herramientas.'], items: ['Decisión comercial que debe facilitar.', 'Marketplace y catálogo que debe cubrir.', 'Origen, definición y frecuencia de los datos.', 'Accesos, exportación y coste total.'] },
+    { id: 'amazon', title: 'Empieza por saber qué datos ofrece tu cuenta', paragraphs: ['Brand Analytics reúne paneles de datos agregados para marcas elegibles, incluidos informes de búsqueda. Comprueba acceso, alcance y definiciones antes de compararlo con cifras de proveedores externos.', 'Nuestra recomendación es inventariar primero lo que ya tienes. Un dato observado dentro de un informe concreto y una estimación de mercado responden a preguntas distintas. No sustituyas el historial de ventas de la cuenta por una cifra estimada de una herramienta.'], source: 0 },
+    { id: 'helium', title: 'Helium 10: evalúa el análisis por ASIN en tu mercado', paragraphs: ['Cerebro se presenta como una herramienta de investigación de palabras clave mediante búsqueda inversa de ASIN. Puede servir como punto de partida para explorar términos asociados a referencias, según el acceso y la cobertura contratados.', 'En una prueba, utiliza productos que conozcas y comprueba la relevancia de los términos, las definiciones de cada métrica y las posibilidades de exportación. No trates toda sugerencia como una búsqueda que debas incorporar a tu ficha. Este artículo no publica una prueba comparativa de precisión ni recomienda un plan concreto.'], source: 1 },
+    { id: 'jungle', title: 'Jungle Scout: contrasta la investigación de keywords', paragraphs: ['Keyword Scout ofrece investigación de palabras clave y funciones de consulta por ASIN. Antes de contratar, revisa en la documentación del proveedor los países, límites y funciones incluidos en el plan vigente.', 'Prueba el mismo conjunto de referencias que en otras opciones y documenta qué información cambia tu decisión. Una diferencia entre estimaciones no demuestra por sí sola cuál es correcta. Pide claridad sobre metodología, periodos y cobertura, y evita comparar columnas que comparten nombre pero no definición.'], source: 2 },
+    { id: 'decision', title: 'Conserva solo las herramientas que terminan en una acción', paragraphs: ['La evaluación debería acabar con un flujo concreto: investigar, seleccionar, aplicar y revisar. Define qué parte queda en el software y qué parte requiere criterio de producto o aprobación de la marca.', 'Revisa permisos de aplicaciones y exportación de datos antes de integrar una cuenta. No necesitas compartir la contraseña principal con cada proveedor. Valora también el tiempo de aprendizaje y mantenimiento: el coste no es únicamente la cuota mensual.'] },
+  ],
+  tags: ['herramientas SEO', 'Helium 10', 'Jungle Scout', 'Brand Analytics'],
+  service: '/consultoria-amazon/',
+  guides: ['brand-analytics-amazon', 'como-redactar-listings-amazon', 'cambiar-agencia-amazon'],
+  relatedPosts: ['algoritmo-amazon', 'optimizacion-listings-amazon'],
+  sources: [
+    { label: 'Amazon: Brand Analytics', url: 'https://sell.amazon.com/tools/amazon-brand-analytics', note: 'Acceso y alcance de los paneles de Amazon.' },
+    { label: 'Helium 10: Cerebro', url: 'https://www.helium10.com/tools/keyword-research/cerebro/', note: 'Descripción del proveedor. Confirma planes, mercados y límites; no constituye una validación independiente de precisión.' },
+    { label: 'Jungle Scout: Keyword Scout', url: 'https://www.junglescout.com/features/keyword-scout/', note: 'Descripción del proveedor. No se reproducen precios ni se presenta una comparativa de rendimiento no realizada.' },
   ],
   seo: {
-    metaTitle:
-      'Las 8 Mejores Herramientas SEO para Amazon en 2025 | Guía Completa', // Meta título optimizado
-    metaDescription:
-      'Análisis de las 8 herramientas SEO esenciales para vendedores de Amazon en 2025: Helium 10, Jungle Scout, DataHawk, Sellics y más. ¡Optimiza y vende!', // Meta descripción optimizada
-    keywords: [
-      'herramientas seo amazon',
-      'helium 10',
-      'jungle scout',
-      'sellics',
-      'datahawk',
-      'viral launch',
-      'amzscout',
-      'sonar amazon',
-      'keywords amazon',
-      'seo para amazon 2025',
-    ], // Keywords revisadas y con año
+    metaTitle: 'Herramientas SEO Amazon: Brand Analytics, Helium 10 y Jungle Scout',
+    metaDescription: 'Compara herramientas SEO para Amazon según tus datos y objetivos. Qué revisar en Brand Analytics, Helium 10 y Jungle Scout antes de elegir una suscripción.',
   },
 };

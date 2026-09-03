@@ -1,0 +1,28 @@
+---
+import { caseLabel, casePath, type CaseStudy } from '../data/case-studies/catalogue';
+import { pharmaCase } from '../data/home-showcase';
+interface Props { study: CaseStudy }
+const { study } = Astro.props;
+const euro = (amount: number) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', useGrouping: 'always' }).format(amount);
+---
+<article class="case-summary" data-case-summary={study.slug}>
+  <div class="case-summary-visual">
+    {study.image ? <a class="case-product" href={casePath(study)} aria-label={`Leer ${study.title}`}><img src={study.image.src} alt={study.image.alt} width="1536" height="1024" loading="lazy" decoding="async" /></a> : <div class="case-comparison">
+      <p class="growth-eyebrow">La misma marca. Otra dimensión.</p>
+      <strong>27.778,49 €</strong>
+      <p>Ventas en el periodo comparado</p>
+      <dl>
+        <div><dt>Mismo intervalo del año anterior</dt><dd>{euro(pharmaCase.previousSales)}</dd><i style={`--bar-width:${pharmaCase.previousSales / pharmaCase.currentSales * 100}%`} aria-hidden="true"></i></div>
+        <div><dt>Periodo trabajado</dt><dd>{euro(pharmaCase.currentSales)}</dd><i style="--bar-width:100%" aria-hidden="true"></i></div>
+      </dl>
+      <small>Finales de oct. 2025 a finales de jul. 2026 frente al mismo intervalo anterior.</small>
+    </div>}
+  </div>
+  <div class="case-summary-copy">
+    <p class="growth-eyebrow">{caseLabel(study)} / {study.sector}</p>
+    <h2><a href={casePath(study)}>{study.title}</a></h2>
+    <p>{study.summary}</p>
+    <dl class="case-summary-metrics">{study.metrics.slice(0, 2).map((metric) => <div><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>
+    <a class="growth-text-link case-read" href={casePath(study)}>Ver la historia completa <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
+  </div>
+</article>

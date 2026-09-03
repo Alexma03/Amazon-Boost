@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import Icon from "../components/Icon.astro";
 import type { SeoLandingPage } from "../data/seo-pages";
 import { seoLandingPages } from "../data/seo-pages";
 import "../styles/subpage-redesign.css";
@@ -22,8 +23,8 @@ const primaryBullets = page.sections.flatMap((section) => section.bullets).slice
           <h1>{page.hero}</h1>
           <p class="sub-lead">{page.intro}</p>
           <div class="sub-actions">
-            <a class="sub-button sub-button-primary" href="/#auditoria">{page.primaryCta}<span aria-hidden="true">↗</span></a>
-            <a class="sub-button sub-button-secondary" href="#diagnostico">Ver diagnóstico<span aria-hidden="true">↓</span></a>
+            <a class="sub-button sub-button-primary" href="/#auditoria">{page.primaryCta}<Icon name="arrow-up-right" size={18} /></a>
+            <a class="sub-button sub-button-secondary" href="#diagnostico">Ver diagnóstico<Icon name="arrow-down" size={18} /></a>
           </div>
         </div>
 
@@ -58,7 +59,7 @@ const primaryBullets = page.sections.flatMap((section) => section.bullets).slice
       <div class="sub-plan">{page.sections.map((section, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{section.title}</h3><p>{section.text}</p></div><ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul></article>)}</div>
     </div></section>
 
-    <section class="sub-break"><div class="sub-shell"><div><p class="sub-kicker"><i></i> No lo dejes en lectura</p><h2>La página orienta. La auditoría te dice qué ocurre en tu cuenta.</h2></div><a class="sub-button sub-button-primary" href="/#auditoria">Pedir auditoría gratuita<span aria-hidden="true">↗</span></a></div></section>
+    <section class="sub-break"><div class="sub-shell"><div><p class="sub-kicker"><i></i> No lo dejes en lectura</p><h2>La página orienta. La auditoría te dice qué ocurre en tu cuenta.</h2></div><a class="sub-button sub-button-primary" href="/#auditoria">Pedir auditoría gratuita<Icon name="arrow-up-right" size={18} /></a></div></section>
 
     <section id="faq" class="sub-band sub-faq-band"><div class="sub-shell sub-faq-layout">
       <div class="sub-heading"><p class="sub-kicker sub-kicker-dark"><i></i> Preguntas frecuentes</p><h2>Dudas habituales sobre {page.title.toLowerCase()}.</h2></div>
@@ -70,7 +71,7 @@ const primaryBullets = page.sections.flatMap((section) => section.bullets).slice
       <div class="sub-related-grid">{relatedPages.map((related) => <a href={`/${related.slug}`}><span>{related.eyebrow}</span><strong>{related.title}</strong><p>{related.metaDescription}</p></a>)}</div>
     </div></section>
 
-    <section class="sub-final"><div class="sub-shell"><div><p>Auditoría inicial</p><h2>Antes de invertir más, entendamos qué está frenando tu cuenta.</h2></div><a href="/#auditoria">Solicitar auditoría gratuita<span aria-hidden="true">↗</span></a></div></section>
+    <section class="sub-final"><div class="sub-shell"><div><p>Auditoría inicial</p><h2>Antes de invertir más, entendamos qué está frenando tu cuenta.</h2></div><a href="/#auditoria">Solicitar auditoría gratuita<Icon name="arrow-up-right" size={18} /></a></div></section>
   </article>
 </Layout>
 

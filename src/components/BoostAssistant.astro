@@ -1,0 +1,64 @@
+---
+import { boostStarters } from '../data/boost-assistant';
+import { getBoostContact } from '../lib/boost-contact';
+import '../styles/boost-assistant.css';
+const contact = getBoostContact();
+---
+
+<div class="boost-assistant" data-boost-assistant data-boost-mode="generative">
+  <button class="boost-launcher" data-boost-open type="button" aria-label="Pregúntale a Boost, asistente de Amazon Boost" aria-haspopup="dialog" aria-controls="boost-dialog" aria-expanded="false" hidden>
+    <img src="/icons/brands/boost-smile.svg" width="44" height="16" alt="" />
+    <span class="boost-launcher-label" aria-hidden="true">Pregúntale a Boost</span>
+  </button>
+
+  <dialog class="boost-dialog" id="boost-dialog" aria-labelledby="boost-title" aria-describedby="boost-disclosure">
+    <div class="boost-shell">
+      <header class="boost-header">
+        <span class="boost-avatar"><img src="/icons/brands/boost-smile.svg" width="32" height="12" alt="" /></span>
+        <div class="boost-identity"><h2 id="boost-title">Boost<span>.</span></h2><p>El asistente de Amazon Boost</p></div>
+        <button class="boost-tool" type="button" data-boost-reset aria-label="Nueva conversación" title="Nueva conversación"><img src="/icons/lucide/rotate-ccw.svg" width="18" height="18" alt="" /></button>
+        <button class="boost-tool" type="button" data-boost-close aria-label="Cerrar asistente" title="Cerrar asistente" autofocus><img src="/icons/lucide/x.svg" width="20" height="20" alt="" /></button>
+      </header>
+      <p class="boost-disclosure" id="boost-disclosure">IA basada en nuestras guías <span>Puede equivocarse</span></p>
+
+      <div class="boost-scroll" data-boost-scroll>
+        <div class="boost-welcome" data-boost-welcome>
+          <img class="boost-welcome-smile" src="/icons/brands/boost-smile.svg" width="76" height="24" alt="" />
+          <p class="boost-welcome-title">¿Qué quieres mejorar<br />en Amazon?</p>
+          <div class="boost-starters">
+            {boostStarters.map((starter) => <button type="button" data-boost-question={starter.question}>{starter.label}<img src="/icons/lucide/arrow-right.svg" width="16" height="16" alt="" /></button>)}
+          </div>
+          <a class="boost-library-link" href="/guias/#respuestas" data-boost-handoff>Prefiero explorar las respuestas <img src="/icons/lucide/arrow-right.svg" width="16" height="16" alt="" /></a>
+        </div>
+        <div class="boost-messages" data-boost-messages role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversación con Boost"></div>
+      </div>
+
+      <div class="boost-composer">
+        <p class="boost-status" data-boost-status role="status" aria-live="polite"></p>
+        <form data-boost-form>
+          <label class="boost-consent"><input type="checkbox" data-boost-consent /> Permito enviar mis consultas a OpenRouter y al proveedor del modelo.</label>
+          <label class="boost-sr-only" for="boost-question">Tu pregunta sobre Amazon</label>
+          <div class="boost-input-wrap">
+            <textarea id="boost-question" name="question" placeholder="Escribe tu pregunta…" rows="2" maxlength="600" required data-boost-input></textarea>
+            <button class="boost-send" type="submit" aria-label="Enviar pregunta" title="Enviar pregunta" data-boost-send disabled><img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></button>
+          </div>
+        </form>
+        <p class="boost-privacy">Sin acceso a tu cuenta. No envíes datos personales, claves ni documentos.</p>
+      </div>
+      <footer class="boost-handoff">
+        <p class="boost-contact-invitation" data-boost-contact-invitation hidden></p>
+        <a href="/#auditoria" data-boost-handoff data-boost-audit><span data-boost-audit-label>Solicitar auditoría</span><img src="/icons/lucide/arrow-right.svg" width="16" height="16" alt="" /></a>
+        <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" data-boost-handoff data-boost-whatsapp>Hablar con el equipo</a>
+      </footer>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  import { mountBoostAssistant } from '../lib/boost-assistant';
+  const root = document.querySelector<HTMLElement>('[data-boost-assistant]');
+  if (root) {
+    const cleanup = mountBoostAssistant(root);
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  }
+</script>

@@ -1,0 +1,160 @@
+<div class="diagnostic-artwork">
+  <div class="scene ads-scene" data-diagnostic-scene="ads">
+    <div class="ads-chart">
+      <div class="ads-columns">
+        {Array.from({ length: 8 }, (_, index) => <span style={`--column:${index}`}><i data-loop></i></span>)}
+      </div>
+      <div class="ads-investment"></div>
+    </div>
+    <div class="scene-legend"><span class="sales-key">Ventas</span><span class="investment-key">Inversión</span></div>
+  </div>
+
+  <div class="scene conversion-scene" data-diagnostic-scene="listing" hidden>
+    <div class="conversion-columns">
+      {Array.from({ length: 5 }, (_, index) => (
+        <span class="conversion-column" style={`--column:${index}`}>
+          <i class="conversion-fill" data-loop></i>
+          <b class="order-confirmation" data-loop></b>
+        </span>
+      ))}
+    </div>
+    <div class="scene-legend"><span>Conversión</span><span class="orders-key">Pedidos</span></div>
+  </div>
+
+  <div class="scene catalog-scene" data-diagnostic-scene="catalog" hidden>
+    <div class="catalog-products">
+      {Array.from({ length: 9 }, (_, index) => (
+        <div class="catalog-product" data-loop style={`--product:${index}`}>
+          <span class="product-thumbnail"><i data-loop></i></span>
+          <span class="product-lines"><i></i><i></i></span>
+        </div>
+      ))}
+    </div>
+    <div class="scene-legend"><span>Productos</span><span class="rotation-key">Rotación</span></div>
+  </div>
+
+  <div class="scene stock-scene" data-diagnostic-scene="stock" hidden>
+    <div class="stock-lanes">
+      {["FBA", "FBM"].map((label, index) => (
+        <div class="stock-lane" style={`--lane:${index}`}>
+          <div class="stock-delivery"><i data-loop></i></div>
+          <div class="stock-reserve">
+            <div class="stock-fill" data-loop></div>
+            <div class="stock-zone"></div>
+          </div>
+          <span>{label}</span>
+        </div>
+      ))}
+    </div>
+    <div class="scene-legend"><span>Reposición</span><span>Disponibilidad</span></div>
+  </div>
+</div>
+
+<style>
+  .diagnostic-artwork { position: relative; min-width: 0; min-height: 0; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px; }
+  .scene[hidden] { display: none; }
+  .scene-legend { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 20px; color: #b3bbc5; font-size: .65rem; line-height: 1.4; }
+  .scene-legend > span { display: inline-flex; align-items: center; gap: 7px; }
+  .sales-key::before, .orders-key::before { content: ""; width: 7px; height: 7px; background: var(--signal-color); }
+  .investment-key::before { content: ""; width: 14px; border-top: 2px dashed #b3bbc5; }
+
+  .ads-chart { position: relative; flex: 1; min-height: 0; }
+  .ads-columns { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: end; gap: 7px; position: absolute; inset: 0; }
+  .ads-columns > span { height: calc(40% + var(--column) * 8%); }
+  .ads-columns i { display: block; height: 100%; background: var(--signal-color); transform-origin: bottom; animation: ads-profitable-growth 6s ease-in-out infinite; animation-delay: calc(var(--column) * 70ms); }
+  .ads-investment { position: absolute; left: 0; right: 0; bottom: 21%; border-top: 2px dashed #b3bbc5; }
+  @keyframes ads-profitable-growth {
+    0%, 100% { transform: scaleY(.38); opacity: 0; }
+    9%, 18% { transform: scaleY(.38); opacity: 1; }
+    58%, 85% { transform: scaleY(1); opacity: 1; }
+    97% { transform: scaleY(1); opacity: 0; }
+  }
+
+  .conversion-columns { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; gap: 15px; padding: 26px 4px 0; }
+  .conversion-column { position: relative; height: calc(27% + var(--column) * 17%); }
+  .conversion-fill { display: block; height: 100%; border-radius: 2px 2px 0 0; background: var(--signal-color); transform-origin: bottom; animation: conversion-growth 6s ease-in-out infinite; animation-delay: calc(var(--column) * 180ms); }
+  .order-confirmation { position: absolute; top: -25px; left: 50%; width: 19px; height: 19px; margin-left: -9px; border-radius: 4px; background: var(--signal-color); animation: conversion-order 6s ease-in-out infinite; animation-delay: calc(var(--column) * 180ms); }
+  .order-confirmation::after { content: ""; position: absolute; top: 4px; left: 7px; width: 5px; height: 9px; border-right: 2px solid #11151b; border-bottom: 2px solid #11151b; transform: rotate(45deg); }
+  @keyframes conversion-growth {
+    0%, 100% { transform: scaleY(.25); opacity: 0; }
+    10% { transform: scaleY(.25); opacity: 1; }
+    46%, 80% { transform: scaleY(1); opacity: 1; }
+    94% { transform: scaleY(1); opacity: 0; }
+  }
+  @keyframes conversion-order {
+    0%, 36%, 100% { transform: translateY(8px) scale(.8); opacity: 0; }
+    48%, 80% { transform: translateY(0) scale(1); opacity: 1; }
+    94% { transform: translateY(0) scale(1); opacity: 0; }
+  }
+
+  .catalog-products { flex: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 10px; min-height: 0; }
+  .catalog-product { display: flex; align-items: center; gap: 8px; min-width: 0; min-height: 0; padding: 9px; border: 1px solid #78a8ff45; border-radius: 4px; background: #78a8ff0c; }
+  .catalog-product:nth-child(n+4) { animation: catalog-expand 7s ease-in-out infinite; animation-delay: calc((var(--product) - 3) * 220ms); }
+  .product-thumbnail { flex: 0 0 21px; display: grid; place-items: center; height: 30px; max-height: 100%; overflow: hidden; }
+  .product-thumbnail > i { position: relative; display: block; width: 15px; height: 22px; border: 1px solid var(--signal-color); border-radius: 2px; background: #78a8ff28; animation: catalog-rotate 7s ease-in-out infinite; animation-delay: calc(var(--product) * 180ms); }
+  .product-thumbnail > i::before { content: ""; position: absolute; inset: 4px 3px auto; height: 3px; background: var(--signal-color); }
+  .catalog-product:nth-child(3n+2) .product-thumbnail > i { width: 17px; height: 17px; }
+  .catalog-product:nth-child(3n+3) .product-thumbnail > i { width: 12px; border-radius: 4px 4px 2px 2px; }
+  .product-lines { flex: 1; display: grid; gap: 6px; min-width: 0; }
+  .product-lines > i { height: 3px; background: #78a8ff7a; border-radius: 1px; }
+  .product-lines > i:last-child { width: 65%; background: #78a8ff38; }
+  .rotation-key::before { content: ""; width: 9px; height: 9px; border: 1px solid var(--signal-color); }
+  @keyframes catalog-expand {
+    0%, 8%, 100% { opacity: 0; transform: translateY(7px); }
+    24%, 80% { opacity: 1; transform: translateY(0); }
+    95% { opacity: 0; transform: translateY(0); }
+  }
+  @keyframes catalog-rotate {
+    0%, 40%, 100% { opacity: 1; transform: translateX(0); }
+    51% { opacity: 0; transform: translateX(-24px); }
+    53% { opacity: 0; transform: translateX(24px); }
+    66% { opacity: 1; transform: translateX(0); }
+  }
+
+  .stock-lanes { flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; min-height: 0; }
+  .stock-lane { display: flex; flex-direction: column; gap: 7px; min-height: 0; }
+  .stock-delivery { position: relative; flex: 0 0 23px; }
+  .stock-delivery > i { position: absolute; left: calc(50% - 8px); top: 0; width: 16px; height: 16px; border: 1px solid var(--signal-color); border-radius: 2px; opacity: 0; animation: stock-arrival 6s linear infinite; animation-delay: calc(var(--lane) * -3s); }
+  .stock-delivery > i::after { content: ""; position: absolute; left: 6px; top: 0; height: 6px; border-left: 2px solid var(--signal-color); }
+  .stock-reserve { position: relative; flex: 1; min-height: 0; overflow: hidden; border: 1px solid #ffffff21; border-radius: 4px 4px 2px 2px; }
+  .stock-fill { position: absolute; inset: 0; background: var(--signal-color); opacity: .85; transform: scaleY(.76); transform-origin: bottom; animation: stock-replenish 6s linear infinite; animation-delay: calc(var(--lane) * -3s); }
+  .stock-zone { position: absolute; left: 0; right: 0; top: 15%; bottom: 42%; border-top: 1px dashed #ffffff5c; border-bottom: 1px dashed #ffffff5c; background: #ffffff06; }
+  .stock-lane > span { text-align: center; color: #d4d9df; font-size: .68rem; font-weight: 700; }
+  @keyframes stock-replenish {
+    0%, 100% { transform: scaleY(.76); }
+    48% { transform: scaleY(.58); }
+    61% { transform: scaleY(.84); }
+    72% { transform: scaleY(.82); }
+  }
+  @keyframes stock-arrival {
+    0%, 38%, 64%, 100% { opacity: 0; transform: translateY(-5px); }
+    43% { opacity: 1; transform: translateY(-5px); }
+    57% { opacity: 1; transform: translateY(22px); }
+    62% { opacity: 0; transform: translateY(28px); }
+  }
+  [data-loop] { animation-play-state: var(--diagnostic-motion-state, paused); animation-fill-mode: both; }
+  @container diagnostic-visual (max-width: 400px) {
+    .scene { gap: 10px; }
+    .scene-legend { font-size: .62rem; }
+    .catalog-product { gap: 4px; padding: 6px; }
+    .catalog-products { gap: 7px; }
+    .product-thumbnail { flex-basis: 17px; height: 22px; }
+    .product-thumbnail > i { width: 12px; height: 18px; }
+    .catalog-product:nth-child(3n+2) .product-thumbnail > i { width: 14px; height: 14px; }
+    .catalog-product:nth-child(3n+3) .product-thumbnail > i { width: 10px; }
+    .conversion-columns { gap: 10px; }
+    .stock-lanes { gap: 22px; }
+  }
+  @container diagnostic-visual (max-width: 320px) {
+    .catalog-product { padding: 4px; }
+    .catalog-products { gap: 6px; }
+    .product-thumbnail { height: 18px; }
+    .product-thumbnail > i { height: 15px; }
+    .scene-legend { gap: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-loop] { animation: none; }
+    .stock-delivery { visibility: hidden; }
+  }
+</style>

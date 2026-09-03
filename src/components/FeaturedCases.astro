@@ -1,9 +1,10 @@
 ---
 import { homeShowcase, pharmaCase, caseChartSeries } from "../data/home-showcase";
 import "../styles/featured-cases.css";
+import Icon from "./Icon.astro";
 
 const original = homeShowcase.featuredCase;
-const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(amount);
+const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", useGrouping: "always" }).format(amount);
 ---
 
 <section class="ab-case-section ab-case-carousel" id="caso-real" data-case-carousel role="region" aria-roledescription="carrusel" aria-label="Casos de éxito de Amazon Boost">
@@ -20,10 +21,10 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
   </div>
   <div class="ab-case-viewport" data-case-viewport tabindex="0" aria-label="Casos de éxito">
     <article class="ab-case-slide" id="caso-organico" data-case-slide role="group" aria-roledescription="diapositiva" aria-label="1 de 2: Crecimiento orgánico">
-      <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {original.status}</p><h2>{original.title}</h2><p>{original.description}</p></div>
+      <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {original.status}</p><h2>{original.title}</h2><p class="ab-case-description">{original.description}</p></div>
       <div class="ab-case-layout">
         <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={original.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" draggable="false" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
-        <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{original.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart="organic" role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={original.href}>Ampliar el caso <span aria-hidden="true">↗</span></a></div>
+        <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{original.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart="organic" role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={original.href}>Ampliar el caso <Icon name="arrow-up-right" size={18} /></a></div>
       </div>
       <div class="ab-case-client-voice" data-reveal>
         <div>
@@ -33,32 +34,27 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
             <p>{original.reviews[0].title}. {original.reviews[0].quote}</p>
             <span class="ab-client-quote-mark ab-client-quote-close" aria-hidden="true">”</span>
           </blockquote>
-          <p>{original.reviews[1].author} · Cliente de Amazon Boost <a class="ab-case-review-source" href={original.reviews[0].url} target="_blank" rel="noreferrer">Reseña en Trustpilot <span aria-hidden="true">↗</span></a></p>
+          <p>{original.reviews[1].author} · Cliente de Amazon Boost <a class="ab-case-review-source" href={original.reviews[0].url} target="_blank" rel="noreferrer">Reseña en Trustpilot <Icon name="arrow-up-right" size={14} /></a></p>
         </div>
-        <a href={original.reviews[1].url} target="_blank" rel="noreferrer">Leer su experiencia en LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href={original.reviews[1].url} target="_blank" rel="noreferrer">Leer su experiencia en LinkedIn <Icon name="arrow-up-right" size={17} /></a>
       </div>
     </article>
 
     <article class="ab-case-slide ab-case-pharma" id="caso-farmaceutico" data-case-slide role="group" aria-roledescription="diapositiva" aria-label="2 de 2: Marca farmacéutica">
       <div class="ab-case-heading" data-reveal>
         <p class="ab-overline"><span></span> Caso de éxito · Sector farmacéutico</p>
-        <h2>{pharmaCase.title}</h2>
-        <p>{pharmaCase.description}</p>
+        <h2 class="ab-case-sales-headline"><span>De {euro(pharmaCase.previousSales)} a</span><strong>{euro(pharmaCase.currentSales)}</strong></h2>
+        <p class="ab-case-growth-summary">{pharmaCase.growthSummary} <span>Aproximadamente nueve meses de actividad comparados.</span></p>
+        <p class="ab-case-description">{pharmaCase.description}</p>
       </div>
       <div class="ab-case-layout">
         <div class="ab-case-comparison" data-reveal>
           <p class="ab-overline"><span></span> Una marca con más de 100 años</p>
           <h3>La misma autoridad.<br />Una nueva dimensión en Amazon.</h3>
-          <dl>
-            <div><dt>Mismo periodo del año anterior</dt><dd>{euro(pharmaCase.previousSales)}</dd></div>
-            <div><dt>Periodo analizado</dt><dd>{euro(pharmaCase.currentSales)}</dd></div>
-          </dl>
           <p class="ab-case-period">{pharmaCase.period}.</p>
-          <p class="ab-case-comparison-note">{pharmaCase.comparisonNote}</p>
           <span class="ab-case-confidential">Identidad de la marca reservada por confidencialidad</span>
         </div>
         <div class="ab-case-evidence" data-reveal>
-          <div class="ab-case-numbers">{pharmaCase.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <figure>
             <figcaption><span>Facturación mensual</span><small>Sep 2025 a jul 2026 · Datos aportados de Seller Central</small></figcaption>
             <div class="ab-case-chart"><canvas data-case-chart="pharma" role="img" aria-label="Facturación mensual: de 1.116,15 euros en septiembre de 2025 a 5.044,01 euros en julio de 2026, con un mínimo de 788,60 euros en febrero de 2026"></canvas><span>Julio 2026 <strong>5.044,01 €</strong></span></div>
@@ -67,7 +63,7 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
             <summary>Ver datos mensuales</summary>
             <table><caption>Ventas de productos encargados</caption><thead><tr><th scope="col">Mes</th><th scope="col">Ventas</th></tr></thead><tbody>{caseChartSeries.pharma.labels.map((label, i) => <tr><th scope="row">{label}</th><td>{euro(caseChartSeries.pharma.values[i])}</td></tr>)}</tbody></table>
           </details>
-          <p class="ab-case-unit-note">De <strong>{pharmaCase.previousUnits}</strong> a <strong>{pharmaCase.currentUnits.toLocaleString("es-ES")}</strong> unidades frente al mismo intervalo del año anterior.</p>
+          <p class="ab-case-unit-note">De <strong>{pharmaCase.previousUnits}</strong> a <strong>{pharmaCase.currentUnits.toLocaleString("es-ES")}</strong> unidades en el periodo comparado.</p>
         </div>
       </div>
       <div class="ab-case-decisions" data-reveal>
@@ -77,7 +73,7 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
     </article>
   </div>
   <div class="ab-case-bottom-navigation">
-    <a href="/casos-de-exito">Ver más casos de éxito <span aria-hidden="true">↗</span></a>
+    <a href="/casos-de-exito/">Ver más casos de éxito <Icon name="arrow-up-right" size={19} /></a>
     <div class="ab-case-controls">
       <button type="button" data-case-step="-1" aria-label="Caso anterior" title="Caso anterior" disabled><img src="/icons/lucide/arrow-left.svg" width="22" height="22" alt="" /></button>
       <button type="button" data-case-step="1" aria-label="Siguiente caso" title="Siguiente caso"><img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></button>

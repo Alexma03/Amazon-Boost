@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
 import '../styles/subpage-redesign.css';
 
 const trustpilotUrl = 'https://es.trustpilot.com/review/amznboost.es';
@@ -27,14 +28,14 @@ const linkedInUrl = 'https://www.linkedin.com/in/sergio-deroman-amazon/';
         <header><p>Elige dónde compartirla</p><h2>Una opinión real vale más cuando puede verificarse.</h2></header>
         <div class="review-platform-grid">
           <a class="review-platform is-trustpilot" href={trustpilotUrl} target="_blank" rel="noopener noreferrer">
-            <div><span>★★★★★</span><strong>Trustpilot</strong></div>
+            <div><span class="review-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={17} filled />)}</span><strong>Trustpilot</strong></div>
             <p>Publica una reseña sobre tu experiencia con la agencia o consulta las opiniones disponibles.</p>
-            <b>Abrir Trustpilot <i aria-hidden="true">↗</i></b>
+            <b>Abrir Trustpilot <Icon name="arrow-up-right" size={18} /></b>
           </a>
           <a class="review-platform is-linkedin" href={linkedInUrl} target="_blank" rel="noopener noreferrer">
             <div><span>in</span><strong>LinkedIn</strong></div>
             <p>Comparte una recomendación profesional o conecta directamente con Sergio.</p>
-            <b>Abrir LinkedIn <i aria-hidden="true">↗</i></b>
+            <b>Abrir LinkedIn <Icon name="arrow-up-right" size={18} /></b>
           </a>
         </div>
       </div>
@@ -44,20 +45,20 @@ const linkedInUrl = 'https://www.linkedin.com/in/sergio-deroman-amazon/';
       <div class="sub-shell review-proof-layout">
         <div><p>Opinión verificada / Cliente</p><h2>El resultado importa. El camino hasta él también.</h2></div>
         <blockquote>
-          <span>★★★★★</span>
+          <span class="review-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={18} filled />)}</span>
           <p>“Una empresa muy recomendable si vendes en Amazon. Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.”</p>
           <footer><strong>Alberto</strong><small>Opinión publicada en Trustpilot</small></footer>
-          <a href={trustpilotUrl} target="_blank" rel="noopener noreferrer">Ver opiniones <i aria-hidden="true">↗</i></a>
+          <a href={trustpilotUrl} target="_blank" rel="noopener noreferrer">Ver opiniones <Icon name="arrow-up-right" size={18} /></a>
         </blockquote>
       </div>
     </section>
 
-    <section class="sub-final"><div class="sub-shell"><div><p>¿Todavía no eres cliente?</p><h2>Empecemos por entender tu cuenta.</h2></div><a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a></div></section>
+    <section class="sub-final"><div class="sub-shell"><div><p>¿Todavía no eres cliente?</p><h2>Empecemos por entender tu cuenta.</h2></div><a href="/#auditoria">Solicitar auditoría <Icon name="arrow-up-right" size={18} /></a></div></section>
   </article>
 </Layout>
 
 <style>
-  .review-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.review-hero-layout{position:relative;z-index:1;min-height:620px;display:grid;grid-template-columns:1.1fr .6fr;gap:100px;align-items:center;padding:70px 0}.review-hero h1{max-width:900px;margin:0;font-size:clamp(4rem,7.3vw,8rem);line-height:.87;font-weight:850}.review-hero-layout>div:last-child>p{margin:0;color:#b2b4ae;font-size:1.05rem;line-height:1.75}.review-hero-layout>div:last-child>span{display:block;margin-top:28px;padding-top:16px;border-top:1px solid #393939;color:#777973;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-platforms{padding:110px 0;background:#f4f4ef;color:#111}.review-platforms header{display:grid;grid-template-columns:.55fr 1.25fr;gap:80px;align-items:start;margin-bottom:55px}.review-platforms header p{margin:9px 0 0;color:#a46100;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-platforms h2{max-width:900px;margin:0;font-size:clamp(3rem,5.2vw,5.7rem);line-height:.94}.review-platform-grid{display:grid;grid-template-columns:1fr 1fr}.review-platform{min-height:430px;display:flex;flex-direction:column;padding:34px;color:#fff}.review-platform.is-trustpilot{background:#007f5f}.review-platform.is-linkedin{background:#0a66c2}.review-platform>div{display:flex;align-items:center;justify-content:space-between;gap:30px}.review-platform>div span{font-size:1rem;font-weight:900}.review-platform.is-linkedin>div span{width:42px;height:42px;display:grid;place-items:center;background:#fff;color:#0a66c2;font-size:1.3rem}.review-platform>div strong{font-size:1.2rem}.review-platform>p{max-width:470px;margin:120px 0 30px;font-size:1.2rem;line-height:1.5}.review-platform>b{display:flex;justify-content:space-between;gap:30px;margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.35);font-size:.68rem}.review-proof{padding:110px 0;background:#0d0d0d;color:#fff}.review-proof-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}.review-proof-layout>div>p{margin:0 0 20px;color:#ff9900;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-proof h2{margin:0;font-size:clamp(3rem,5vw,5.5rem);line-height:.94}.review-proof blockquote{margin:0;padding:42px;border:1px solid #343434;background:#151515}.review-proof blockquote>span{color:#00b67a;letter-spacing:4px}.review-proof blockquote>p{margin:70px 0 38px;font-size:clamp(1.7rem,2.6vw,2.8rem);line-height:1.15}.review-proof footer strong,.review-proof footer small{display:block}.review-proof footer small{margin-top:5px;color:#8c8e88}.review-proof blockquote>a{display:flex;justify-content:space-between;margin-top:35px;padding-top:15px;border-top:1px solid #373737;color:#fff;font-size:.68rem;font-weight:850}
+  .review-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.review-hero-layout{position:relative;z-index:1;min-height:620px;display:grid;grid-template-columns:1.1fr .6fr;gap:100px;align-items:center;padding:70px 0}.review-hero h1{max-width:900px;margin:0;font-size:clamp(4rem,7.3vw,8rem);line-height:.87;font-weight:850}.review-hero-layout>div:last-child>p{margin:0;color:#b2b4ae;font-size:1.05rem;line-height:1.75}.review-hero-layout>div:last-child>span{display:block;margin-top:28px;padding-top:16px;border-top:1px solid #393939;color:#777973;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-platforms{padding:110px 0;background:#f4f4ef;color:#111}.review-platforms header{display:grid;grid-template-columns:.55fr 1.25fr;gap:80px;align-items:start;margin-bottom:55px}.review-platforms header p{margin:9px 0 0;color:#a46100;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-platforms h2{max-width:900px;margin:0;font-size:clamp(3rem,5.2vw,5.7rem);line-height:.94}.review-platform-grid{display:grid;grid-template-columns:1fr 1fr}.review-platform{min-height:430px;display:flex;flex-direction:column;padding:34px;color:#fff}.review-platform.is-trustpilot{background:#007f5f}.review-platform.is-linkedin{background:#0a66c2}.review-platform>div{display:flex;align-items:center;justify-content:space-between;gap:30px}.review-platform>div span{font-size:1rem;font-weight:900}.review-stars{display:inline-flex!important;align-items:center;gap:3px;color:currentColor;letter-spacing:0!important}.review-platform.is-linkedin>div span{width:42px;height:42px;display:grid;place-items:center;background:#fff;color:#0a66c2;font-size:1.3rem}.review-platform>div strong{font-size:1.2rem}.review-platform>p{max-width:470px;margin:120px 0 30px;font-size:1.2rem;line-height:1.5}.review-platform>b{display:flex;justify-content:space-between;gap:30px;margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.35);font-size:.68rem}.review-proof{padding:110px 0;background:#0d0d0d;color:#fff}.review-proof-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}.review-proof-layout>div>p{margin:0 0 20px;color:#ff9900;font-size:.61rem;font-weight:850;text-transform:uppercase}.review-proof h2{margin:0;font-size:clamp(3rem,5vw,5.5rem);line-height:.94}.review-proof blockquote{margin:0;padding:42px;border:1px solid #343434;background:#151515}.review-proof blockquote>span{color:#00b67a;letter-spacing:0}.review-proof blockquote>p{margin:70px 0 38px;font-size:clamp(1.7rem,2.6vw,2.8rem);line-height:1.15}.review-proof footer strong,.review-proof footer small{display:block}.review-proof footer small{margin-top:5px;color:#8c8e88}.review-proof blockquote>a{display:flex;justify-content:space-between;margin-top:35px;padding-top:15px;border-top:1px solid #373737;color:#fff;font-size:.68rem;font-weight:850}
   @media(max-width:900px){.review-hero-layout,.review-platforms header,.review-proof-layout{grid-template-columns:1fr;gap:45px}.review-platform-grid{grid-template-columns:1fr}}
   @media(max-width:700px){.review-hero-layout{min-height:auto;padding:75px 0 60px}.review-hero h1{font-size:clamp(3.2rem,14vw,4.7rem)}.review-platforms,.review-proof{padding:72px 0}.review-platforms h2,.review-proof h2{font-size:clamp(2.7rem,11.5vw,3.8rem)}.review-platform{min-height:350px;padding:25px}.review-platform>p{margin-top:80px}.review-proof blockquote{padding:28px 22px}.review-proof blockquote>p{margin-top:50px}}
 </style>

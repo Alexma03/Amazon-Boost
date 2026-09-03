@@ -1,0 +1,29 @@
+---
+import { caseChartSeries } from '../data/home-showcase';
+import type { CaseChartKey } from '../lib/case-sales-chart';
+interface Props { kind: CaseChartKey }
+const { kind } = Astro.props;
+const series = caseChartSeries[kind];
+const euro = (amount: number) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', useGrouping: 'always' }).format(amount);
+const caption = kind === 'organic' ? 'Reconstrucción de la evolución mensual · Puntos aproximados' : 'Ventas mensuales · Septiembre 2025 a julio 2026';
+---
+<figure class="case-chart-figure">
+  <figcaption id={`chart-caption-${kind}`}><strong>La evolución de la cuenta</strong><span>{caption}</span></figcaption>
+  <div class="case-chart-frame"><canvas data-detail-chart={kind} role="img" aria-labelledby={`chart-caption-${kind}`} aria-describedby={`chart-note-${kind}`}>Los valores del gráfico están disponibles en la tabla de datos.</canvas></div>
+  <p class="case-chart-note" id={`chart-note-${kind}`}>{series.approximate ? 'El pico de 5.904,74 € coincide con la captura original. El resto de puntos son aproximaciones visuales, no una exportación de datos.' : 'Serie mensual aportada de Seller Central. Su intervalo no coincide con el de la comparación interanual del titular.'}</p>
+  <details class="case-source-table"><summary>Consultar los datos del gráfico</summary><table><caption>{caption}</caption><thead><tr><th scope="col">Periodo</th><th scope="col">{series.approximate ? 'Facturación aproximada' : 'Ventas'}</th></tr></thead><tbody>{series.labels.map((label, index) => <tr><th scope="row">{label}</th><td>{euro(series.values[index])}</td></tr>)}</tbody></table></details>
+</figure>
+<script>
+  import { Chart } from 'chart.js/auto';
+  import { createCaseChartConfig, type CaseChartKey } from '../lib/case-sales-chart';
+  const charts: Chart<'line'>[] = [];
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll<HTMLCanvasElement>('[data-detail-chart]').forEach((canvas) => {
+    const key = canvas.dataset.detailChart as CaseChartKey;
+    if (!['organic', 'pharma'].includes(key) || Chart.getChart(canvas)) return;
+    charts.push(new Chart(canvas, createCaseChartConfig(key, motion.matches)));
+  });
+  const updateMotion = () => charts.forEach((chart) => { chart.stop(); chart.options.animation = motion.matches ? false : { duration: 700 }; chart.update('none'); });
+  motion.addEventListener('change', updateMotion);
+  document.addEventListener('astro:before-swap', () => { motion.removeEventListener('change', updateMotion); charts.forEach((chart) => chart.destroy()); }, { once: true });
+</script>

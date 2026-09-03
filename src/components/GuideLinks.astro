@@ -1,0 +1,20 @@
+---
+import { guideBySlug } from '../data/guides';
+interface Props { slugs: string[]; title?: string }
+const { slugs, title = 'Entiende el problema. Decide el siguiente paso.' } = Astro.props;
+const entries = slugs.map((slug) => guideBySlug.get(slug)).filter(Boolean);
+---
+<section class="growth-band growth-resources">
+  <div class="growth-shell">
+    <div class="growth-section-head"><p class="growth-eyebrow">Para profundizar</p><h2>{title}</h2></div>
+    <div class="growth-link-grid">
+      {entries.map((entry) => entry && <a href={entry.path}>
+        <span class="growth-eyebrow">{entry.category}</span>
+        <h3>{entry.title}</h3>
+        <p>{entry.description}</p>
+        <span class="growth-link-label">Leer guía <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></span>
+      </a>)}
+    </div>
+    <a class="growth-text-link" href="/guias/">Todas las guías de Amazon</a>
+  </div>
+</section>

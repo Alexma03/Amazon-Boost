@@ -1,157 +1,28 @@
-import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
-
-// --- Secciones Optimizadas para 'internacionalizacionData' ---
-
-const sections: BlogSection[] = [
-  {
-    title: 'Amazon Global: Tu Pasaporte al Crecimiento Exponencial',
-    content: `<p>Expandir tu negocio a los <strong>marketplaces internacionales de Amazon</strong> es una de las mayores palancas de crecimiento. Accede a millones de nuevos clientes y diversifica tus fuentes de ingresos, pero hazlo estratégicamente para evitar errores costosos.</p>`,
-    type: 'text',
-  },
-  {
-    // Highlight para enfatizar el potencial
-    title: '¿Por Qué Internacionalizar? El Potencial en Números',
-    content: `<p>Los vendedores que se expanden estratégicamente pueden experimentar crecimientos de ingresos totales <strong>superiores al 90%</strong> en el primer año. ¡Es una oportunidad masiva si se aborda correctamente!</p>`,
-    type: 'highlight',
-  },
-  {
-    title: '1. Selección Inteligente de Mercados',
-    content: `<p>No todos los mercados son iguales para tu producto. Prioriza basándote en datos:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Demanda Real:</strong> Investiga volúmenes de búsqueda y tendencias en cada país.',
-      '<strong>Competencia Local:</strong> Analiza la saturación de tu nicho.',
-      '<strong>Costos y Logística:</strong> Considera tarifas, impuestos, aranceles y envío.',
-      '<strong>Barreras de Entrada:</strong> Evalúa requisitos regulatorios y de idioma.',
-      '<strong>Consejo Pro:</strong> Crea una matriz de puntuación para tomar decisiones objetivas.',
-    ],
-  },
-  {
-    title: '2. Estructura de Cuenta y Logística Óptima',
-    content: `<p>Define tu arquitectura operativa internacional:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Cuenta Unificada vs. Separadas:</strong> La Cuenta Global Unificada suele ser más eficiente para empezar.',
-      '<strong>FBA vs. FBM:</strong> Evalúa márgenes vs. complejidad. FBA ofrece Prime y simplifica devoluciones.',
-      '<strong>Programas Clave:</strong> Considera el Programa Paneuropeo (reduce costes en UE) o el Programa Remoto de FBA Norteamérica (EEUU, CA, MX).',
-      '<strong>Almacenamiento:</strong> Decide dónde almacenar inventario (impacta en VAT/impuestos).',
-    ],
-  },
-  {
-    // Sección de imagen para ilustrar el alcance global
-    title: 'Conectando con el Mundo',
-    content: `<p>La infraestructura de Amazon te permite llegar a clientes en múltiples continentes.</p>`,
-    type: 'image',
-    imageUrl:
-      'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1080&auto=format&fit=crop', // URL de la imagen principal
-  },
-  {
-    // Highlight crucial
-    title: '3. Localización Profunda: Más Allá de la Traducción Automática',
-    content: `<p><strong>¡Este es el error más común!</strong> No basta con traducir. Debes adaptar culturalmente:</p>`,
-    type: 'highlight',
-  },
-  {
-    // Lista de elementos a localizar
-    title: 'Elementos Clave a Adaptar',
-    content: `<p>Adapta estos elementos clave para cada mercado:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Listings:</strong> Títulos, bullets, descripciones (longitud, keywords locales, beneficios culturales).',
-      '<strong>Visuales:</strong> Imágenes, A+ Content (unidades de medida, modelos, contexto de uso).',
-      '<strong>Precio:</strong> Puntos psicológicos, percepción de valor local.',
-      '<strong>Keywords:</strong> Investigar términos de búsqueda específicos de cada idioma/país.',
-    ],
-  },
-  {
-    // Highlight para la complejidad fiscal
-    title: '4. Cumplimiento Fiscal y Regulatorio: No lo Subestimes',
-    content: `<p>Cada país tiene sus reglas. Ignorarlas puede llevar a suspensiones y multas. <strong>Busca asesoramiento experto</strong>.</p>`,
-    type: 'highlight',
-  },
-  {
-    // Lista de áreas clave de cumplimiento
-    title: 'Áreas Críticas de Cumplimiento',
-    content: `<p>Estas son las áreas críticas que debes considerar:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Impuestos (VAT/GST/Sales Tax):</strong> Obligatorio registrarse y declarar donde corresponda (almacenamiento, umbrales de venta).',
-      '<strong>Regulaciones de Producto:</strong> Etiquetado, certificaciones (CE en Europa, etc.), normativas locales.',
-      '<strong>Requisitos Legales:</strong> Representantes fiscales, normativas ambientales (WEEE).',
-    ],
-  },
-  {
-    title: '5. Adaptación de Operaciones: PPC y Atención al Cliente',
-    content: `<p>Tu estrategia publicitaria (PPC) y tu servicio al cliente deben hablar el idioma local, literal y culturalmente:</p>
-    <ul>
-        <li><strong>PPC Localizado:</strong> Usa keywords, pujas y presupuestos adaptados a cada mercado. No traduzcas campañas sin más.</li>
-        <li><strong>Servicio al Cliente Cultural:</strong> Adapta tiempos de respuesta, tono y políticas a las expectativas locales.</li>
-    </ul>`,
-    type: 'text',
-  },
-  {
-    title: '6. Medición y Optimización Constante',
-    content: `<p>Analiza el rendimiento (CVR, rentabilidad, crecimiento) de cada marketplace por separado y ajusta tu estrategia continuamente. Lo que funciona en un país puede no funcionar en otro.</p>`,
-    type: 'text',
-  },
-  {
-    title: 'Conclusión: Construye tu Imperio Global en Amazon',
-    content: `<p>La <strong>internacionalización en Amazon</strong> es un viaje estratégico complejo pero inmensamente gratificante. El éxito reside en la investigación, la priorización basada en datos, la adaptación cultural profunda y una ejecución operativa impecable.</p>
-    <p>En <strong>Amazon Boost</strong>, somos especialistas en guiar a marcas como la tuya a través de cada paso de la expansión internacional, maximizando oportunidades y minimizando riesgos.</p>`, // Ajusta "Amazon Boost" si es necesario
-    type: 'text',
-  },
-];
-
-// --- Objeto BlogPost Actualizado (manteniendo nombre original 'internacionalizacionData' y 'slug') ---
+import type { BlogPost } from './index';
 
 export const internacionalizacionData: BlogPost = {
-  slug: 'internacionalizacion', // Slug mantenido como solicitado
-  title: 'Guía Completa para Internacionalizar tu Negocio en Amazon',
+  slug: 'internacionalizacion',
+  title: 'Internacionalizar en Amazon: decide el siguiente mercado con criterio',
   date: '2025-03-15',
-  image:
-    'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1080&auto=format&fit=crop',
-  category: 'Expansión Internacional',
-  excerpt:
-    'Estrategia paso a paso para expandir tu negocio a los marketplaces internacionales de Amazon. Desde la selección de mercados hasta la adaptación cultural y logística.',
-  sections: sections, // Usamos las nuevas secciones
-  // content: undefined, // El content original ya no es necesario
-  tags: [
-    'internacionalización amazon',
-    'amazon global selling',
-    'expansión internacional',
-    'vender en amazon europa',
-    'vender en amazon japon',
-    'vat amazon',
-    'logística internacional',
-    'localización amazon',
-    'amazon 2025',
-  ], // Tags revisados y con año
-  callToAction: {
-    text: '¿Listo para expandir tu negocio globalmente? Solicita una consulta estratégica', // CTA mantenido
-    url: '/#solicita-tutoria', // Verificar URL
-  },
-  relatedPosts: [
-    // Manteniendo los slugs originales o puedes actualizarlos si tienes posts más relevantes
-    'optimizacion-listings',
-    'estrategias-ppc',
-    'herramientas-seo',
+  updatedAt: '2026-08-28',
+  image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1080&auto=format&fit=crop',
+  category: 'Crecimiento',
+  excerpt: 'Abrir otro país no es replicar una cuenta. Cómo valorar demanda, producto, recursos y operativa antes de ampliar tu presencia en Amazon.',
+  takeaway: 'La expansión necesita una hipótesis por producto y mercado, una operativa viable y criterios para continuar o detenerse. El tamaño del país no basta para decidir dónde entrar.',
+  sections: [
+    { id: 'mercado', title: 'Compara oportunidades que tu negocio pueda atender', paragraphs: ['Empieza con una lista de productos y mercados candidatos. Contrasta búsquedas relevantes, oferta competidora, precios y condiciones de entrega. Distingue datos observados de estimaciones y deja identificada la información que todavía falta.', 'Nuestra recomendación es valorar también los recursos internos. Una oportunidad comercial puede no ser prioritaria si la marca no dispone de reposición, documentación o capacidad de atención. No confíes el orden de expansión únicamente al volumen estimado de un mercado.'] },
+    { id: 'viabilidad', title: 'Resuelve la operativa antes de activar el catálogo', paragraphs: ['La guía de venta global de Amazon recoge decisiones sobre mercados, registro, publicación y gestión de pedidos. Consulta las condiciones del destino y las opciones disponibles en tu cuenta; no traslades automáticamente reglas de un país a otro.', 'Coordina con especialistas los requisitos fiscales, regulatorios y de producto que puedan corresponder. Este análisis no determina dónde debes registrarte a efectos de IVA ni sustituye una revisión legal. El plan comercial debe recoger qué validaciones faltan y quién es responsable de ellas.'], source: 0 },
+    { id: 'adaptacion', title: 'Adapta la propuesta, no solo las palabras', paragraphs: ['Una traducción literal puede conservar el idioma y perder la intención. Revisa cómo se busca el producto, qué atributos importan y qué información necesita el comprador para distinguir formatos.', 'Prepara un catálogo piloto con datos e imágenes coherentes. Comprueba la oferta desde el país de destino y documenta las diferencias frente al mercado de origen. El detalle de preparación del catálogo y la comparación logística tienen sus propias guías enlazadas al final.'] },
+    { id: 'prueba', title: 'Define una entrada que puedas evaluar', paragraphs: ['Acuerda referencias, presupuesto, responsables y condiciones de salida. Separa las tareas necesarias para vender de las destinadas a mejorar el rendimiento después. Evita activar campañas cuando la ficha o la oferta todavía no están preparadas.', 'La primera evaluación debería incluir disponibilidad, incidencias y resultado por producto, no solo facturación total. Un mercado puede generar pedidos y exigir una operativa que aún no puedes sostener. La expansión por etapas permite revisar esa hipótesis antes de comprometer más recursos.'], items: ['Catálogo y mercado piloto.', 'Costes y validaciones pendientes.', 'Plan de contenido, captación y reposición.', 'Criterios para continuar, corregir o pausar.'] },
+    { id: 'gestion', title: 'Protege también los mercados que ya funcionan', paragraphs: ['Compartir recursos entre países puede crear tensiones de inventario, presupuesto y tiempo del equipo. Mantén responsables y una lectura separada de cada mercado para no ocultar problemas en un total agregado.', 'Antes de abrir el siguiente país, documenta lo aprendido y qué cambios exige el nuevo contexto. No extrapoles una subida porcentual ni los resultados de otra marca como previsión. La decisión debe responder al catálogo y a la capacidad real de tu negocio.'] },
   ],
+  tags: ['Amazon Europa', 'internacionalización', 'expansión', 'Global Selling'],
+  service: '/servicios/expansion-amazon-europa/',
+  guides: ['preparar-catalogo-amazon-europa', 'amazon-paneuropeo-o-efn', 'amazon-fba-fbm'],
+  relatedPosts: ['estrategias-ppc', 'tendencias-ecommerce'],
+  sources: [{ label: 'Amazon España: guía de venta global', url: 'https://sell.amazon.es/venta-global/guia', note: 'Orientación general. La configuración del mercado y las obligaciones concretas deben validarse con los responsables correspondientes.' }],
   seo: {
-    metaTitle:
-      'Internacionalización Amazon 2025: Guía para Vender Globalmente', // Meta título optimizado
-    metaDescription:
-      'Aprende a expandir tu negocio con Amazon Global Selling. Guía completa 2025 sobre mercados, logística FBA, VAT, localización y estrategias de éxito.', // Meta descripción optimizada
-    keywords: [
-      'internacionalización amazon',
-      'amazon global selling',
-      'expansión global amazon',
-      'vender internacional amazon',
-      'marketplaces amazon',
-      'amazon europa',
-      'amazon japon',
-      'vat amazon',
-      'logística internacional amazon',
-      'amazon 2025',
-    ], // Keywords revisadas y con año
+    metaTitle: 'Internacionalización Amazon: cómo elegir mercados y preparar la expansión',
+    metaDescription: 'Valora la expansión internacional en Amazon con criterios de demanda, catálogo, operativa y recursos. Diseña una entrada por etapas antes de abrir más países.',
   },
 };

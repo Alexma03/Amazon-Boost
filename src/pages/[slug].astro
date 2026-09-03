@@ -1,26 +1,14 @@
 ---
-import SeoLandingLayout from "../layouts/SeoLandingLayout.astro";
-import { seoLandingPages, seoPagesBySlug } from "../data/seo-pages";
+import CommercialLayout from '../layouts/CommercialLayout.astro';
+import GuideLayout from '../layouts/GuideLayout.astro';
+import NotFound from '../components/NotFound.astro';
+import { serviceByPath, serviceAliases } from '../data/service-pages';
+import { guideBySlug } from '../data/guides';
 
-export const prerender = true;
-
-export function getStaticPaths() {
-  return seoLandingPages.map((page) => ({
-    params: { slug: page.slug },
-  }));
-}
-
-const { slug } = Astro.params;
-
-if (!slug || typeof slug !== "string") {
-  return Astro.redirect("/404");
-}
-
-const page = seoPagesBySlug[slug];
-
-if (!page) {
-  return Astro.redirect("/404");
-}
+const path = `/${Astro.params.slug}/`;
+if (serviceAliases[path]) return Astro.redirect(serviceAliases[path], 301);
+const page = serviceByPath.get(path);
+const guide = Astro.params.slug === 'amazon-fba-fbm' ? guideBySlug.get('amazon-fba-fbm') : undefined;
+if (!page && !guide) Astro.response.status = 404;
 ---
-
-<SeoLandingLayout page={page} />
+{page ? <CommercialLayout page={page} /> : guide ? <GuideLayout guide={guide} /> : <NotFound />}

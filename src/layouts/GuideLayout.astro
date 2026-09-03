@@ -1,0 +1,42 @@
+---
+import Layout from './Layout.astro';
+import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
+import GuideLinks from '../components/GuideLinks.astro';
+import ServiceContact from '../components/ServiceContact.astro';
+import { serviceDirectory } from '../data/service-pages';
+import type { Guide } from '../data/guides';
+import '../styles/growth-pages.css';
+interface Props { guide: Guide }
+const { guide } = Astro.props;
+const service = serviceDirectory.find((item) => item.path === guide.service)!;
+const words = [guide.answer, ...guide.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.bullets ?? [])]), ...guide.faqs.map((faq) => faq.answer)].join(' ').split(/\s+/).length;
+const minutes = Math.max(3, Math.ceil(words / 200));
+---
+<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description, dateModified: '2026-08-29' } }}>
+  <article class="growth-page guide-page">
+    <header class="growth-hero guide-hero"><div class="growth-shell">
+      <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Guías Amazon', path: '/guias/' }, { name: guide.title, path: guide.path }]} />
+      <p class="growth-eyebrow">{guide.category} / Guía práctica</p>
+      <h1>{guide.title}</h1>
+      <div class="guide-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{minutes} min de lectura</span><span>Actualizado <time datetime="2026-08-29">29 agosto 2026</time></span></div>
+    </div></header>
+    <div class="growth-shell guide-layout">
+      <aside class="guide-sidebar">
+        <nav class="guide-desktop-index" aria-label="Índice de la guía"><p class="growth-eyebrow">En esta guía</p><a href="#respuesta">Respuesta breve</a>{guide.sections.map((section) => <a href={`#apartado-${section.id}`}>{section.title}</a>)}<a href="#comprobacion">Lista de comprobación</a></nav>
+        <details class="guide-mobile-index"><summary>Ver índice de la guía</summary><nav aria-label="Índice de la guía en móvil"><a href="#respuesta">Respuesta breve</a>{guide.sections.map((section) => <a href={`#apartado-${section.id}`}>{section.title}</a>)}<a href="#comprobacion">Lista de comprobación</a></nav></details>
+        <a class="guide-service-link" href={service.path}><span>¿Necesitas ayuda?</span><strong>{service.title}</strong><span>Conocer el servicio</span></a>
+      </aside>
+      <div class="guide-content">
+        <section class="guide-answer" id="respuesta"><p class="growth-eyebrow">La respuesta breve</p><p>{guide.answer}</p></section>
+        <aside class="guide-early-cta" aria-label="Solicitar una auditoría"><div><span>¿Quieres aplicarlo a tu cuenta?</span><strong>Te indicamos qué priorizar.</strong></div><a href="/#auditoria">Solicitar auditoría <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></aside>
+        {guide.table && <div class="guide-table-scroll" role="region" aria-label={guide.table.caption} tabindex="0"><table><caption>{guide.table.caption}</caption><thead><tr>{guide.table.headings.map((heading) => <th scope="col">{heading}</th>)}</tr></thead><tbody>{guide.table.rows.map((row) => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
+        {guide.sections.map((section) => <section class="guide-section" id={`apartado-${section.id}`}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}{section.source !== undefined && <p class="guide-citation">Referencia: <a href={guide.sources[section.source].url} target="_blank" rel="noopener noreferrer">{guide.sources[section.source].label}</a></p>}</section>)}
+        <section class="guide-checklist" id="comprobacion"><h2>Antes de dar el siguiente paso</h2><fieldset><legend class="sr-only">Lista de comprobación</legend>{guide.checklist.map((item) => <label><input type="checkbox" /><span>{item}</span></label>)}</fieldset></section>
+        <section class="guide-section"><h2>Preguntas frecuentes</h2><div class="growth-faqs">{guide.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div></section>
+        <details class="guide-sources"><summary>Fuentes y contexto</summary><div><ul>{guide.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>{source.note && <p>{source.note}</p>}</li>)}</ul><p>Comprueba siempre las políticas y condiciones vigentes en la documentación de Amazon y en tu cuenta.</p></div></details>
+      </div>
+    </div>
+    <GuideLinks slugs={guide.related} title="Otras preguntas que conviene resolver." />
+    <ServiceContact topic={guide.title} service={guide.service} />
+  </article>
+</Layout>

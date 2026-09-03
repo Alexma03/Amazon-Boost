@@ -1,18 +1,22 @@
 ---
+import Icon from "./Icon.astro";
+
 const currentYear = new Date().getFullYear();
 
 const serviceLinks = [
-  ["Auditoría de cuenta", "/auditoria-cuenta-amazon"],
-  ["Gestión PPC", "/agencia-ppc-amazon"],
-  ["Optimización de listings", "/optimizacion-listings-amazon"],
-  ["Gestión Seller Central", "/gestion-cuenta-amazon-seller-central"],
+  ["Auditoría de cuenta", "/servicios/auditoria-de-cuenta/"],
+  ["Gestión PPC", "/servicios/gestion-de-ppc/"],
+  ["Optimización de listings", "/servicios/optimizacion-de-listados/"],
+  ["Gestión Seller Central", "/servicios/gestion-de-cuenta/"],
 ];
 
 const strategicLinks = [
-  ["Agencia Amazon", "/agencia-amazon"],
-  ["Consultoría Amazon", "/consultoria-amazon"],
-  ["Amazon FBA / FBM", "/amazon-fba-fbm"],
-  ["Blog", "/blog"],
+  ["Agencia Amazon", "/agencia-amazon/"],
+  ["Consultoría Amazon", "/consultoria-amazon/"],
+  ["Amazon FBA / FBM", "/amazon-fba-fbm/"],
+  ["Guías Amazon", "/guias/"],
+  ["Casos de éxito", "/casos-de-exito/"],
+  ["Blog", "/blog/"],
 ];
 ---
 
@@ -20,7 +24,7 @@ const strategicLinks = [
   <div class="ab-footer-top">
     <a class="ab-footer-brand" href="/">Amazon Boost<span>.</span></a>
     <p>Cuenta, publicidad, catálogo y operativa trabajando en la misma dirección.</p>
-    <a class="ab-footer-audit" href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+    <a class="ab-footer-audit" href="/#auditoria">Solicitar auditoría <Icon name="arrow-up-right" size={17} /></a>
   </div>
 
   <div class="ab-footer-grid">

@@ -1,138 +1,56 @@
 ---
 import Layout from './Layout.astro';
-import '../styles/subpage-redesign.css';
+import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
+import CaseSalesChart from '../components/CaseSalesChart.astro';
+import GuideLinks from '../components/GuideLinks.astro';
+import ServiceContact from '../components/ServiceContact.astro';
+import { caseLabel, casePath, caseStudiesBySlug, type CaseStudy } from '../data/case-studies/catalogue';
+import { serviceDirectory } from '../data/service-pages';
+import '../styles/growth-pages.css';
+import '../styles/case-studies.css';
 
-interface Props {
-  title: string;
-  description: string;
-  caseStudy: any;
-}
-
-const { title, description, caseStudy } = Astro.props;
-const paragraphs = (value: string) => value.split('\n\n').filter(Boolean);
+interface Props { caseStudy: CaseStudy }
+const { caseStudy: study } = Astro.props;
+const service = serviceDirectory.find((entry) => entry.path === study.service)!;
+const related = study.related.map((slug) => caseStudiesBySlug[slug]);
+const indexable = study.kind === 'documented';
 ---
-
-<Layout title={title} description={description} pageType="case-study" contentSummary={description}>
-  <article class="sub-page case-detail">
-    <section class="case-detail-hero">
-      <div class="sub-hero-grid" aria-hidden="true"></div>
-      <div class="sub-shell case-detail-hero-layout">
-        <div>
-          <a class="case-back" href="/casos-de-exito/">← Todos los casos</a>
-          <p class="sub-kicker"><i></i> {caseStudy.industry} / Caso de éxito</p>
-          <h1>{caseStudy.title}</h1>
-          <p>{description}</p>
-        </div>
-        <figure>
-          <img src={caseStudy.image} alt={caseStudy.title} />
-          <figcaption><span>Cliente</span><strong>{caseStudy.client || 'Marca en Amazon'}</strong></figcaption>
-        </figure>
+<Layout title={study.metaTitle} description={study.metaDescription} image={study.image?.src ?? null} canonicalPath={casePath(study)} type={indexable ? 'article' : 'website'} pageType="case-study" aiOptimized={false} noindex={!indexable} structuredData={indexable ? { type: 'article', data: { title: study.title, description: study.metaDescription, image: study.image?.src, dateModified: '2026-08-28' } } : undefined}>
+  <article class="growth-page case-page" data-case-status={study.kind}>
+    <header class="growth-hero case-detail-hero"><div class="growth-shell">
+      <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Casos de éxito', path: '/casos-de-exito/' }, { name: study.sector, path: casePath(study) }]} />
+      <p class="growth-eyebrow">{caseLabel(study)} / {study.sector}</p>
+      {study.headline ? <h1 class="case-sales-title"><span>{study.headline.lead}</span>{' '}<strong>{study.headline.value}</strong>{' '}<span>{study.headline.tail}</span></h1> : <h1>{study.title}</h1>}
+      <p class="case-hero-lead">{study.summary}</p>
+      {!indexable && <p class="case-status">{study.kind === 'draft' ? 'Historia en preparación. El punto de partida es un testimonio facilitado; falta incorporar documentación antes de publicar un caso completo.' : 'Esta página pertenece a la colección anterior. Sus resultados están en revisión y no se presentan como evidencia actual.'}</p>}
+      <dl class="case-context">{study.context.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
+    </div></header>
+    {study.metrics.length > 0 && <section class="case-detail-metrics" aria-label="Resultados y contexto"><div class="growth-shell"><dl>{study.metrics.map((metric) => <div><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl></div></section>}
+    <div class="growth-shell case-reading">
+      <aside class="case-toc"><p class="growth-eyebrow">Detrás del resultado</p><nav aria-label="Índice del caso">{study.sections.map((section) => <a href={'#' + section.id}>{section.label}</a>)}<a href="#fuentes">Datos y contexto</a>{study.testimonial && <a href="#experiencia">La voz del cliente</a>}{study.pending && <a href="#documentacion">Por documentar</a>}</nav><a class="case-toc-service" href={service.path}><span>Trabajarlo en tu cuenta</span><strong>{service.title}</strong></a></aside>
+      <div class="case-story-body">
+        {study.image && <figure class="case-detail-product"><div class="case-product"><img src={study.image.src} alt={study.image.alt} width="1536" height="1024" loading="lazy" decoding="async" /></div><figcaption>{study.image.caption}</figcaption></figure>}
+        {study.sections.map((section) => <section class="case-story-section" id={section.id}>
+          <p class="growth-eyebrow">{section.label}</p><h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.decisions && <div class="case-decisions">{section.decisions.map((decision) => <div><h3>{decision.title}</h3><p>{decision.text}</p></div>)}</div>}
+        </section>)}
+        <section class="case-story-section" id="fuentes"><p class="growth-eyebrow">Datos y contexto</p><h2>{study.chart ? 'Las cifras, con su contexto.' : 'Qué sabemos de esta historia.'}</h2>
+          {study.chart && <CaseSalesChart kind={study.chart} />}
+          <p class="case-disclosure">{study.evidence}</p>
+          {study.proofImage && <figure class="case-evidence-image"><a href={study.proofImage.src} target="_blank" rel="noopener noreferrer" aria-label="Abrir captura original de Seller Central"><img src={study.proofImage.src} alt={study.proofImage.alt} width="868" height="482" loading="lazy" decoding="async" /></a><figcaption>{study.proofImage.caption} <a class="growth-text-link" href={study.proofImage.src} target="_blank" rel="noopener noreferrer">Ver captura original</a></figcaption></figure>}
+          {indexable && <p>Estos resultados describen un proyecto concreto. No son una previsión ni una garantía para otras cuentas.</p>}
+        </section>
+        {study.pending && <section class="case-story-section" id="documentacion"><p class="growth-eyebrow">Para completar la historia</p><h2>La documentación que falta.</h2><ul class="case-pending-list">{study.pending.map((item) => <li>{item}</li>)}</ul></section>}
       </div>
-    </section>
-
-    <section class="case-metrics" aria-label="Resultados principales">
-      <div class="sub-shell">
-        <div><strong>{caseStudy.results.revenue}</strong><span>Incremento de ingresos</span></div>
-        <div><strong>{caseStudy.results.ranking}</strong><span>Posicionamiento</span></div>
-        <div><strong>{caseStudy.results.conversion}</strong><span>Conversión / publicidad</span></div>
-        <p>Datos del caso actual. La colección se actualizará con la nueva selección verificada de Amazon Boost.</p>
-      </div>
-    </section>
-
-    <section class="case-story">
-      <div class="sub-shell case-story-layout">
-        <aside>
-          <span>La lectura</span>
-          <strong>Reto, estrategia y resultado.</strong>
-          <nav><a href="#reto">El reto</a><a href="#estrategia">La estrategia</a><a href="#resultado">El resultado</a></nav>
-        </aside>
-        <div class="case-story-content">
-          <section id="reto">
-            <p class="case-section-label">El punto de partida</p>
-            <h2>El reto</h2>
-            {paragraphs(caseStudy.challenge).map((paragraph) => <p>{paragraph}</p>)}
-          </section>
-
-          <section id="estrategia">
-            <p class="case-section-label">La intervención</p>
-            <h2>La estrategia</h2>
-            <p>{caseStudy.solution}</p>
-            <ul>{caseStudy.approach.map((step: string) => <li>{step}</li>)}</ul>
-          </section>
-
-          <section id="resultado">
-            <p class="case-section-label">La consecuencia</p>
-            <h2>El resultado</h2>
-            <p>{caseStudy.conclusion}</p>
-            {caseStudy.results.additional && (
-              <div class="case-additional">
-                {caseStudy.results.additional.map((item: any) => <div><span>{item.label}</span><strong>{item.value}</strong></div>)}
-              </div>
-            )}
-            {caseStudy.results.proofImage && (
-              <figure class="case-proof">
-                <button type="button" data-case-proof={caseStudy.results.proofImage.url} aria-label="Ampliar prueba del resultado">
-                  <img src={caseStudy.results.proofImage.url} alt={caseStudy.results.proofImage.alt} loading="lazy" />
-                </button>
-                <figcaption>{caseStudy.results.proofImage.caption} <small>{caseStudy.results.proofImage.source}</small></figcaption>
-              </figure>
-            )}
-          </section>
-
-          {caseStudy.fullContent && (
-            <section class="case-deep-dive">
-              <p class="case-section-label">Análisis completo</p>
-              <h2>Detrás del resultado</h2>
-              <p>{caseStudy.fullContent.introduction}</p>
-              {caseStudy.fullContent.sections.map((section: any) => (
-                <div>
-                  <h3>{section.title}</h3>
-                  <p>{section.content}</p>
-                  {section.bulletPoints && <ul>{section.bulletPoints.map((point: string) => <li>{point}</li>)}</ul>}
-                  {section.imageNote && <small>{section.imageNote}</small>}
-                </div>
-              ))}
-            </section>
-          )}
-        </div>
-      </div>
-    </section>
-
-    {caseStudy.testimonial && (
-      <section class="case-testimonial">
-        <div class="sub-shell">
-          <p>“{caseStudy.testimonial.quote}”</p>
-          <div><strong>{caseStudy.testimonial.author}</strong><span>{caseStudy.testimonial.position}</span></div>
-        </div>
-      </section>
-    )}
-
-    <section class="sub-final">
-      <div class="sub-shell">
-        <div><p>Resultados distintos empiezan con decisiones distintas</p><h2>Veamos qué oportunidad esconde tu cuenta.</h2></div>
-        <a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    </div>
+    {study.testimonial && <section class="case-client-voice" id="experiencia"><div class="growth-shell">
+      <p class="growth-eyebrow">La voz detrás del resultado</p>
+      <blockquote><span aria-hidden="true">“</span><p>{study.testimonial.quote}</p></blockquote>
+      <div class="case-client-byline"><p><strong>{study.testimonial.author}</strong><span>{study.testimonial.role}</span><span>{study.testimonial.source}</span></p>{study.testimonial.url && <a href={study.testimonial.url} target="_blank" rel="noopener noreferrer">{study.testimonial.source === 'Trustpilot' && <img src="/icons/brands/trustpilot-logo.svg" width="105" height="26" alt="Trustpilot" />}<span>Leer en la plataforma</span></a>}</div>
+    </div></section>}
+    <GuideLinks slugs={study.guides} title="Entiende las decisiones detrás del caso." />
+    <section class="case-next"><div class="growth-shell"><p class="growth-eyebrow">Otra forma de crecer en Amazon</p><nav class="case-next-list" aria-label="Otros casos de éxito">{related.map((entry) => <a href={casePath(entry)}>{entry.title}<img src="/icons/lucide/arrow-right.svg" width="24" height="24" alt="" /></a>)}</nav><a class="growth-text-link" href="/casos-de-exito/">Todos los casos de éxito</a></div></section>
+    <ServiceContact topic={service.title} service={service.path} preparation={['Tu catálogo y marketplace.', 'El reto que quieres resolver.', 'El periodo que quieres analizar.']} />
   </article>
-
-  <dialog class="case-proof-dialog" aria-label="Prueba ampliada"><button type="button" aria-label="Cerrar">×</button><img alt="Prueba ampliada" /></dialog>
 </Layout>
-
-<script>
-  const proofButton = document.querySelector<HTMLButtonElement>('[data-case-proof]');
-  const proofDialog = document.querySelector<HTMLDialogElement>('.case-proof-dialog');
-  const proofImage = proofDialog?.querySelector<HTMLImageElement>('img');
-  proofButton?.addEventListener('click', () => {
-    if (!proofDialog || !proofImage || !proofButton.dataset.caseProof) return;
-    proofImage.src = proofButton.dataset.caseProof;
-    proofImage.alt = proofButton.querySelector('img')?.alt || 'Prueba ampliada';
-    proofDialog.showModal();
-  });
-  proofDialog?.querySelector('button')?.addEventListener('click', () => proofDialog.close());
-</script>
-
-<style>
-  .case-detail-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.case-detail-hero-layout{position:relative;z-index:1;min-height:710px;display:grid;grid-template-columns:1.05fr .72fr;gap:85px;align-items:center;padding:74px 0}.case-back{display:inline-block;margin-bottom:50px;color:#aaa;font-size:.7rem;font-weight:800}.case-detail-hero h1{max-width:880px;margin:0;font-size:clamp(3.5rem,6.2vw,7rem);line-height:.89;font-weight:850}.case-detail-hero-layout>div>p:last-child{max-width:720px;margin:25px 0 0;color:#aaa;line-height:1.65}.case-detail-hero figure{position:relative;margin:0;aspect-ratio:4/5;background:#151515}.case-detail-hero figure img{width:100%;height:100%;object-fit:cover}.case-detail-hero figcaption{position:absolute;right:0;bottom:0;min-width:210px;padding:17px;background:#ff9900;color:#111}.case-detail-hero figcaption span,.case-detail-hero figcaption strong{display:block}.case-detail-hero figcaption span{font-size:.55rem;font-weight:850;text-transform:uppercase}.case-detail-hero figcaption strong{margin-top:6px;font-size:.75rem}.case-metrics{background:#ff9900;color:#111}.case-metrics .sub-shell{display:grid;grid-template-columns:repeat(3,.7fr) 1.2fr}.case-metrics .sub-shell>div,.case-metrics .sub-shell>p{min-height:160px;margin:0;padding:28px;border-left:1px solid rgba(0,0,0,.22)}.case-metrics .sub-shell>*:last-child{border-right:1px solid rgba(0,0,0,.22)}.case-metrics strong,.case-metrics span{display:block}.case-metrics strong{font-size:2.25rem}.case-metrics span{margin-top:45px;font-size:.57rem;font-weight:850;text-transform:uppercase}.case-metrics p{display:flex;align-items:flex-end;font-size:.72rem;line-height:1.6}.case-story{padding:115px 0;background:#f4f4ef;color:#111}.case-story-layout{display:grid;grid-template-columns:270px minmax(0,820px);gap:110px;justify-content:center}.case-story aside{position:sticky;top:145px;align-self:start;padding-top:7px}.case-story aside>span,.case-story aside>strong{display:block}.case-story aside>span{color:#a46100;font-size:.58rem;font-weight:850;text-transform:uppercase}.case-story aside>strong{margin-top:12px;font-size:1.25rem}.case-story aside nav{display:grid;margin-top:40px;border-top:1px solid #d0d0ca}.case-story aside a{padding:13px 0;border-bottom:1px solid #d0d0ca;color:#555750;font-size:.72rem}.case-story-content>section{padding:0 0 80px;margin-bottom:80px;border-bottom:1px solid #cecec8}.case-section-label{margin:0 0 18px!important;color:#a46100!important;font-size:.6rem!important;font-weight:850;text-transform:uppercase}.case-story-content h2{margin:0 0 30px;font-size:clamp(3rem,5vw,5.2rem);line-height:.94}.case-story-content h3{margin:38px 0 12px;font-size:1.55rem}.case-story-content p{color:#4f514b;font-size:1rem;line-height:1.78}.case-story-content ul{display:grid;gap:12px;margin:28px 0 0;padding:0;list-style:none}.case-story-content li{position:relative;padding:15px 0 15px 24px;border-top:1px solid #d0d0ca;color:#353732;line-height:1.55}.case-story-content li:before{content:"";position:absolute;left:2px;top:23px;width:7px;height:7px;background:#ff9900}.case-additional{margin-top:35px;border-top:1px solid #d0d0ca}.case-additional div{display:flex;justify-content:space-between;gap:30px;padding:16px 3px;border-bottom:1px solid #d0d0ca}.case-proof{margin:42px 0 0}.case-proof button{width:100%;padding:0;border:0;background:#111;cursor:zoom-in}.case-proof img{display:block;width:100%;height:auto}.case-proof figcaption{margin-top:12px;color:#555750;font-size:.68rem}.case-proof figcaption small{display:block;margin-top:5px}.case-deep-dive>div{padding:30px 0;border-top:1px solid #d0d0ca}.case-deep-dive small{display:block;margin-top:15px;color:#777970;line-height:1.5}.case-testimonial{padding:105px 0;background:#101010;color:#fff}.case-testimonial .sub-shell{display:grid;grid-template-columns:1fr auto;gap:70px;align-items:end}.case-testimonial p{max-width:1050px;margin:0;font-size:clamp(2.5rem,4.6vw,5rem);line-height:1}.case-testimonial strong,.case-testimonial span{display:block}.case-testimonial span{margin-top:6px;color:#92948e;font-size:.67rem}.case-proof-dialog{width:min(1100px,calc(100% - 32px));height:min(90vh,900px);padding:0;border:1px solid #333;background:#0a0a0a}.case-proof-dialog::backdrop{background:rgba(0,0,0,.88)}.case-proof-dialog img{width:100%;height:100%;object-fit:contain}.case-proof-dialog button{position:absolute;top:12px;right:12px;width:42px;height:42px;border:1px solid #555;background:#111;color:#fff;font-size:1.7rem}
-  @media(max-width:900px){.case-detail-hero-layout{grid-template-columns:1fr}.case-detail-hero figure{max-width:650px;aspect-ratio:4/3}.case-metrics .sub-shell{grid-template-columns:1fr 1fr}.case-metrics .sub-shell>*:nth-child(3){border-top:1px solid rgba(0,0,0,.22)}.case-story-layout{grid-template-columns:1fr;gap:60px}.case-story aside{position:static}.case-story aside nav{grid-template-columns:repeat(3,1fr)}.case-story aside a{border-right:1px solid #d0d0ca}.case-testimonial .sub-shell{grid-template-columns:1fr}}
-  @media(max-width:700px){.case-detail-hero-layout{min-height:auto;padding:72px 0 55px;gap:42px}.case-back{margin-bottom:35px}.case-detail-hero h1{font-size:clamp(2.9rem,12vw,4rem)}.case-metrics .sub-shell{grid-template-columns:1fr}.case-metrics .sub-shell>div,.case-metrics .sub-shell>p{min-height:115px;border-right:1px solid rgba(0,0,0,.22);border-bottom:1px solid rgba(0,0,0,.22)}.case-metrics span{margin-top:20px}.case-story{padding:75px 0}.case-story aside nav{grid-template-columns:1fr}.case-story-content>section{padding-bottom:55px;margin-bottom:55px}.case-story-content h2{font-size:clamp(2.7rem,12vw,3.8rem)}.case-testimonial{padding:75px 0}}
-</style>

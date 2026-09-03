@@ -9,9 +9,16 @@ export function mountCaseCarousel(root: HTMLElement) {
   root.dataset.carouselReady = "true";
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let active = 0;
+  let width = viewport.clientWidth;
+  const initialHeight = viewport.style.height;
   let destination: number | null = null;
   let drag: { id: number; x: number; left: number; index: number; moved: boolean } | null = null;
   const bounded = (index: number) => Math.max(0, Math.min(slides.length - 1, index));
+
+  const fitHeight = () => {
+    const height = slides[active].offsetHeight;
+    if (height > 0 && viewport.style.height !== `${height}px`) viewport.style.height = `${height}px`;
+  };
 
   const update = (index: number) => {
     active = bounded(index);
@@ -24,6 +31,7 @@ export function mountCaseCarousel(root: HTMLElement) {
       button.disabled = Number(button.dataset.caseStep) < 0 ? active === 0 : active === slides.length - 1;
     });
     if (status) status.textContent = `${active + 1} / ${slides.length}`;
+    fitHeight();
   };
   const go = (index: number, animate = true) => {
     const next = bounded(index);
@@ -79,7 +87,13 @@ export function mountCaseCarousel(root: HTMLElement) {
   };
   const onDragStart = (event: Event) => event.preventDefault();
   const onWheel = () => { destination = null; };
-  const resize = new ResizeObserver(() => go(active, false));
+  const resize = new ResizeObserver(() => {
+    // Content height changes must not interrupt horizontal smooth scrolling.
+    if (viewport.clientWidth !== width) {
+      width = viewport.clientWidth;
+      go(active, false);
+    } else fitHeight();
+  });
   root.addEventListener("click", onClick);
   viewport.addEventListener("scroll", onScroll, { passive: true });
   viewport.addEventListener("keydown", onKey);
@@ -90,6 +104,7 @@ export function mountCaseCarousel(root: HTMLElement) {
   viewport.addEventListener("dragstart", onDragStart);
   viewport.addEventListener("wheel", onWheel, { passive: true });
   resize.observe(viewport);
+  slides.forEach((slide) => resize.observe(slide));
   update(0);
 
   return () => {
@@ -104,6 +119,7 @@ export function mountCaseCarousel(root: HTMLElement) {
     viewport.removeEventListener("dragstart", onDragStart);
     viewport.removeEventListener("wheel", onWheel);
     slides.forEach((slide) => { slide.inert = false; slide.removeAttribute("aria-hidden"); });
+    viewport.style.height = initialHeight;
     delete root.dataset.carouselReady;
   };
 }

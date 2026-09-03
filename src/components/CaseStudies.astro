@@ -1,79 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import { allCaseStudies } from '../data/case-studies/index.js';
-
-// Función para normalizar el texto para URLs (quitar acentos y caracteres especiales)
-function normalizeForUrl(text: string) {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // Eliminar acentos
-    .replace(/\s+/g, '-')            // Espacios a guiones
-    .replace(/[^\w\-]+/g, '');       // Eliminar caracteres especiales excepto guiones
-}
-
-// Crear un overview breve para cada caso de estudio si no existe
-function createOverview(caseStudy: any) {
-  if (caseStudy.overview) return caseStudy.overview;
-  
-  // Generar un overview a partir del challenge/solution
-  const overview = caseStudy.solution || caseStudy.challenge || "Descubre cómo ayudamos a este cliente a alcanzar resultados extraordinarios en Amazon.";
-  return overview.length > 150 ? overview.substring(0, 150) + "..." : overview;
-}
+import { featuredCaseStudies } from '../data/case-studies/catalogue';
+import CaseSummary from './CaseSummary.astro';
+import '../styles/growth-pages.css';
+import '../styles/case-studies.css';
 ---
-
-<section id="case-studies" class="py-20 bg-amazon-lightgray">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Casos de Éxito</h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Descubre cómo hemos ayudado a vendedores de Amazon a alcanzar resultados excepcionales y transformar sus negocios.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {allCaseStudies.slice(0, 3).map(study => (
-        <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl hover:border-amazon-orange/30 hover:-translate-y-2 transition-all duration-300 group h-[550px] flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <Image 
-              src={study.image} 
-              alt={study.title} 
-              loading={"lazy"}
-              width={600} 
-              height={400} 
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between">
-            <div class="absolute top-0 left-0 w-1 h-0 bg-amazon-orange group-hover:h-full transition-all duration-300 -mt-1"></div>
-            <a href={`/casos-de-exito/${study.slug}`} class="block">
-              <h3 class="text-xl font-bold mb-3 group-hover:text-amazon-orange transition-colors">{study.title}</h3>
-            </a>
-            <p class="text-gray-600 mb-4 line-clamp-3">{createOverview(study)}</p>
-            <div class={`grid gap-4 my-4 ${study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-3'}`}>
-              <div class="text-center p-2 bg-amazon-lightgray rounded-lg transform transition-transform group-hover:scale-105 group-hover:bg-amazon-orange/10">
-                <div class="text-lg font-bold text-amazon-orange">{study.results.revenue}</div>
-                <div class="text-xs text-gray-600 font-medium">{study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'Ingresos' : 'Ingresos'}</div>
-              </div>
-              <div class={`text-center p-2 bg-amazon-lightgray rounded-lg transform transition-transform group-hover:scale-105 group-hover:bg-amazon-orange/10 ${study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'min-h-[70px] flex flex-col justify-center' : ''}`}>
-                <div class={`font-bold text-amazon-orange ${study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'text-sm leading-tight' : 'text-lg whitespace-nowrap'}`}>{study.results.ranking}</div>
-                <div class="text-xs text-gray-600 font-medium mt-1">{study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'Reconocimiento' : 'Posición'}</div>
-              </div>
-              <div class={`text-center p-2 bg-amazon-lightgray rounded-lg transform transition-transform group-hover:scale-105 group-hover:bg-amazon-orange/10 ${study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'col-span-2 sm:col-span-1' : ''}`}>
-                <div class="text-lg font-bold text-amazon-orange">{study.results.conversion}</div>
-                <div class="text-xs text-gray-600 font-medium">{study.slug === 'estrategia-precios-logistica-categoria-bebes' || study.slug === 'bebes-estrategia-precios-logistica' ? 'Inversión' : 'Conversión'}</div>
-              </div>
-            </div>
-            <a href={`/casos-de-exito/${study.slug}`} class="text-amazon-orange font-medium group-hover:text-amazon-orange/90 inline-flex items-center relative overflow-hidden group-hover:pl-1 mt-2">
-              <span class="relative z-10">Ver Caso Completo</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      ))}
-    </div>
+<section id="case-studies" class="growth-page case-page case-featured-list">
+  <div class="growth-shell">
+    <div class="growth-section-head"><p class="growth-eyebrow">Casos de éxito</p><h2>La estrategia se demuestra en la cuenta.</h2></div>
+    {featuredCaseStudies.map((study) => <CaseSummary study={study} />)}
+    <a class="growth-text-link" href="/casos-de-exito/">Todos los casos de éxito</a>
   </div>
 </section>

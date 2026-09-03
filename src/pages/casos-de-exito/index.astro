@@ -1,70 +1,34 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { allCaseStudies } from '../../data/case-studies/index.js';
-import '../../styles/subpage-redesign.css';
+import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
+import CaseSummary from '../../components/CaseSummary.astro';
+import ServiceContact from '../../components/ServiceContact.astro';
+import { featuredCaseStudies } from '../../data/case-studies/catalogue';
+import '../../styles/growth-pages.css';
+import '../../styles/case-studies.css';
 
+export const prerender = true;
 const title = 'Casos de éxito en Amazon | Amazon Boost';
-const description = 'Estrategias de Amazon aplicadas a retos reales de posicionamiento, conversión, logística y crecimiento.';
+const description = 'Marcas distintas, retos concretos y decisiones conectadas. Conoce el trabajo detrás del crecimiento orgánico y la gestión integral de Amazon Boost.';
 ---
-
-<Layout title={title} description={description} pageType="case-study" contentSummary={description}>
-  <article class="sub-page cases-page">
-    <section class="cases-hero">
-      <div class="sub-hero-grid" aria-hidden="true"></div>
-      <div class="sub-shell cases-hero-layout">
-        <div>
-          <p class="sub-kicker"><i></i> Casos de éxito / Amazon Boost</p>
-          <h1>La estrategia se demuestra en la cuenta.</h1>
-        </div>
-        <div class="cases-hero-copy">
-          <p>Una selección de retos, decisiones y resultados dentro de Amazon. Esta colección utiliza por ahora los casos existentes y está preparada para incorporar las nuevas historias verificadas de la agencia.</p>
-          <a class="sub-button sub-button-primary" href="#casos">Explorar casos <span aria-hidden="true">↓</span></a>
-        </div>
+<Layout title={title} description={description} canonicalPath="/casos-de-exito/" pageType="case-study" aiOptimized={false}>
+  <article class="growth-page case-page">
+    <header class="growth-hero case-index-hero">
+      <div class="growth-shell">
+        <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Casos de éxito', path: '/casos-de-exito/' }]} />
+        <p class="growth-eyebrow">Casos de éxito / Amazon Boost</p>
+        <h1>La estrategia se demuestra en la cuenta.</h1>
+        <p class="case-hero-lead">Marcas distintas. Retos concretos. Descubre cómo conectamos contenido, publicidad y operativa para convertir decisiones en crecimiento dentro de Amazon.</p>
+        <div class="growth-actions"><a class="growth-button" href="#casos">Explorar los casos <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a></div>
       </div>
-      <div class="sub-hero-rail"><span>Posicionamiento</span><i></i><span>Conversión</span><i></i><span>Rentabilidad</span><i></i><span>Escala</span></div>
-    </section>
-
-    <section class="cases-manifesto">
-      <div class="sub-shell">
-        <p>Lo importante no es una métrica aislada.</p>
-        <h2>Es entender qué decisiones hicieron posible moverla.</h2>
-      </div>
-    </section>
-
-    <section id="casos" class="cases-list">
-      <div class="sub-shell">
-        {allCaseStudies.map((caseStudy, index) => (
-          <article class="cases-row">
-            <a class="cases-image" href={`/casos-de-exito/${caseStudy.slug}/`} aria-label={`Ver ${caseStudy.title}`}>
-              <img src={caseStudy.image} alt={caseStudy.title} loading={index < 2 ? 'eager' : 'lazy'} />
-              <span>Ver caso <b aria-hidden="true">↗</b></span>
-            </a>
-            <div class="cases-content">
-              <div class="cases-meta"><span>{caseStudy.industry}</span><small>Base provisional</small></div>
-              <h2><a href={`/casos-de-exito/${caseStudy.slug}/`}>{caseStudy.title}</a></h2>
-              <p>{caseStudy.challenge}</p>
-              <div class="cases-results">
-                <div><strong>{caseStudy.results.revenue}</strong><span>Ingresos</span></div>
-                <div><strong>{caseStudy.results.ranking}</strong><span>Posicionamiento</span></div>
-                <div><strong>{caseStudy.results.conversion}</strong><span>Conversión / Ads</span></div>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="sub-final">
-      <div class="sub-shell">
-        <div><p>El próximo caso puede empezar aquí</p><h2>Leamos tu cuenta antes de decidir.</h2></div>
-        <a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    </header>
+    <section class="case-manifesto"><div class="growth-shell">
+      <p>Lo importante no es una métrica aislada.</p>
+      <h2>Es entender qué decisiones hicieron posible moverla.</h2>
+    </div></section>
+    <section class="case-featured-list" id="casos" aria-label="Casos destacados"><div class="growth-shell">
+      {featuredCaseStudies.map((study) => <CaseSummary study={study} />)}
+    </div></section>
+    <ServiceContact topic="la estrategia de mi cuenta Amazon" preparation={['Tu marca y el catálogo con el que trabajas.', 'El principal reto que necesitas resolver.', 'Qué parte del canal te gustaría delegar.']} />
   </article>
 </Layout>
-
-<style>
-  .cases-hero{position:relative;overflow:hidden;background:#090909;color:#fff}.cases-hero-layout{position:relative;z-index:1;min-height:680px;display:grid;grid-template-columns:1.15fr .6fr;gap:100px;align-items:center;padding:72px 0}.cases-hero h1{max-width:900px;margin:0;font-size:clamp(4rem,7.4vw,8rem);line-height:.86;font-weight:850}.cases-hero-copy{padding-top:90px}.cases-hero-copy>p{margin:0;color:#b2b4ae;line-height:1.75}.cases-hero-copy .sub-button{margin-top:30px}.cases-manifesto{padding:100px 0;background:#ff9900;color:#111}.cases-manifesto p{margin:0 0 24px;font-size:.65rem;font-weight:850;text-transform:uppercase}.cases-manifesto h2{max-width:1130px;margin:0;font-size:clamp(3rem,5.4vw,6rem);line-height:.94}.cases-list{padding:110px 0;background:#f4f4ef}.cases-row{display:grid;grid-template-columns:.78fr 1.22fr;gap:60px;padding:56px 0;border-top:1px solid #d0d0ca}.cases-row:last-child{border-bottom:1px solid #d0d0ca}.cases-image{position:relative;display:block;align-self:start;overflow:hidden;background:#111;aspect-ratio:4/3}.cases-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}.cases-image:hover img{transform:scale(1.025)}.cases-image>span{position:absolute;right:0;bottom:0;display:flex;align-items:center;gap:24px;padding:14px 17px;background:#ff9900;color:#111;font-size:.68rem;font-weight:850}.cases-meta{display:flex;justify-content:space-between;gap:20px;color:#a46100;font-size:.61rem;font-weight:850;text-transform:uppercase}.cases-meta small{color:#7d7f79}.cases-content h2{max-width:780px;margin:25px 0 18px;font-size:clamp(2.2rem,3.7vw,4.2rem);line-height:.97}.cases-content h2 a{color:#111}.cases-content>p{display:-webkit-box;max-width:760px;margin:0;color:#5c5e58;line-height:1.7;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}.cases-results{display:grid;grid-template-columns:repeat(3,1fr);margin-top:38px;border-top:1px solid #d0d0ca;border-left:1px solid #d0d0ca}.cases-results div{min-height:110px;padding:17px;border-right:1px solid #d0d0ca;border-bottom:1px solid #d0d0ca}.cases-results strong,.cases-results span{display:block}.cases-results strong{font-size:1.45rem}.cases-results span{margin-top:18px;color:#6f716b;font-size:.57rem;font-weight:800;text-transform:uppercase}
-  @media(max-width:900px){.cases-hero-layout{grid-template-columns:1fr;gap:20px}.cases-hero-copy{max-width:700px;padding-top:0}.cases-row{grid-template-columns:1fr;gap:30px}.cases-image{max-width:700px}}
-  @media(max-width:700px){.cases-hero-layout{min-height:auto;padding:75px 0 60px}.cases-hero h1{font-size:clamp(3.2rem,14vw,4.7rem)}.cases-manifesto{padding:72px 0}.cases-list{padding:66px 0}.cases-row{padding:40px 0}.cases-content h2{font-size:clamp(2.2rem,10.5vw,3.35rem)}.cases-results{grid-template-columns:1fr}.cases-results div{min-height:88px}.cases-results span{margin-top:9px}}
-</style>

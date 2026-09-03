@@ -1,0 +1,16 @@
+---
+import { readingMinutes, type BlogPost } from '../data/blog';
+interface Props { post: BlogPost; filterable?: boolean }
+const { post, filterable = false } = Astro.props;
+---
+<article class="blog-card" data-blog-card={filterable ? '' : undefined} data-search-text={filterable ? [post.title, post.excerpt, ...post.tags].join(' ') : undefined} data-category={filterable ? post.category : undefined}>
+  <a class="blog-card-link" href={`/blog/${post.slug}/`}>
+    <img class="blog-card-cover" src={post.image} alt="" width="1080" height="675" loading="lazy" decoding="async" />
+    <div class="blog-card-copy">
+      <div class="blog-card-meta"><span>{post.category}</span><span>{readingMinutes(post)} min</span></div>
+      <h3>{post.title}</h3>
+      <p>{post.excerpt}</p>
+      <span class="growth-link-label">Leer análisis <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></span>
+    </div>
+  </a>
+</article>

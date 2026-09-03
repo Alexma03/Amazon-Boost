@@ -7,6 +7,8 @@ interface BreadcrumbItem {
   url: string;
 }
 
+import { canonicalPageUrl } from '../data/site-index';
+
 interface Props {
   type?: 'organization' | 'article' | 'service' | 'breadcrumb';
   data?: {
@@ -17,15 +19,18 @@ interface Props {
 
 const { type = 'organization', data } = Astro.props;
 const site = Astro.site;
+const absoluteURL = (path: string) => new URL(path, site || 'https://amznboost.es').href;
+const logoURL = absoluteURL('/android-chrome-512x512.png');
 
 // Schema para Organization (usado en homepage)
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": absoluteURL('/#organization'),
   "name": "Amazon Boost",
   "url": site?.toString() || "https://amznboost.es",
-  "logo": `${site}/images/logo.png`,
-  "description": "Agencia de Amazon España FBA/FMB - AmazonBoost expertos en Seller/Vendor",
+  "logo": logoURL,
+  "description": "Agencia Amazon para marcas privadas en España y Europa",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "ES"
@@ -33,11 +38,12 @@ const organizationSchema = {
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
+    "telephone": "+34650606400",
+    "email": "info@amznboost.es",
     "availableLanguage": ["Spanish"]
   },
   "sameAs": [
-    "https://www.linkedin.com/in/sergioderomán",
-    "https://x.com/SergioRomanAB"
+    "https://es.trustpilot.com/review/amznboost.es"
   ]
 };
 
@@ -47,7 +53,8 @@ const articleSchema = data && type === 'article' ? {
   "@type": "Article",
   "headline": data.title,
   "description": data.description,
-  "image": data.image ? `${site}${data.image}` : undefined,
+  "image": data.image ? absoluteURL(data.image) : undefined,
+  "mainEntityOfPage": canonicalPageUrl(Astro.url.pathname),
   "datePublished": data.date,
   "dateModified": data.dateModified || data.date,
   "author": {
@@ -59,7 +66,7 @@ const articleSchema = data && type === 'article' ? {
     "name": "Amazon Boost",
     "logo": {
       "@type": "ImageObject",
-      "url": `${site}/images/logo.png`
+      "url": logoURL
     }
   }
 } : null;
@@ -70,9 +77,11 @@ const serviceSchema = data && type === 'service' ? {
   "@type": "Service",
   "name": data.title,
   "description": data.description,
+  "url": canonicalPageUrl(Astro.url.pathname),
   "provider": {
     "@type": "Organization",
-    "name": "Amazon Boost"
+    "name": "Amazon Boost",
+    "url": absoluteURL('/')
   },
   "serviceType": "Agencia de Amazon"
 } : null;
@@ -85,7 +94,7 @@ const breadcrumbSchema = data && type === 'breadcrumb' ? {
     "@type": "ListItem",
     "position": index + 1,
     "name": item.name,
-    "item": `${site}${item.url}`
+    "item": absoluteURL(item.url)
   }))
 } : null;
 
@@ -107,5 +116,5 @@ switch(type) {
 ---
 
 {schema && (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
 )}

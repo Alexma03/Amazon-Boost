@@ -1,0 +1,18 @@
+/* An open, usable screen is the fallback when motion or JavaScript is absent. */
+.ab-hero [data-hero-macbook] {
+  --lid-angle: 0deg;
+  --screen-opacity: 1;
+  --open-progress: 1;
+}
+
+.ab-hero.is-scroll-opening .ab-macbook-lid,
+.ab-hero.is-scroll-opening .ab-seller-window {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-hero [data-hero-macbook] .ab-macbook-lid {
+    transform: none;
+    transition: none;
+  }
+}

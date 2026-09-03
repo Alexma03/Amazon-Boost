@@ -1,0 +1,40 @@
+---
+import { boostStarters } from '../data/boost-assistant';
+import { guides } from '../data/guides';
+const answers = boostStarters.map((starter) => ({ ...starter, content: guides.find((guide) => guide.slug === starter.guide)! }));
+---
+
+<section class="growth-band guide-quick-answers" id="respuestas" aria-labelledby="guide-answers-title">
+  <div class="growth-shell">
+    <div class="growth-section-head">
+      <p class="growth-eyebrow">Primeras respuestas</p>
+      <h2 id="guide-answers-title">Antes de mover tu cuenta,<br />entiende el punto de partida.</h2>
+    </div>
+    <div class="guide-answer-grid">
+      {answers.map(({ question, content }) => (
+        <article>
+          <h3>{question}</h3>
+          <p>{content.answer}</p>
+          <a href={content.path}>{content.title}<img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a>
+        </article>
+      ))}
+    </div>
+    <p class="guide-answer-contact">¿Necesitas llevarlo a tu cuenta? <a href="/#auditoria">Solicita una auditoría inicial.</a></p>
+  </div>
+</section>
+
+<style>
+  .guide-quick-answers { scroll-margin-top: 145px; background: #fff; }
+  .guide-answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px 64px; }
+  .guide-answer-grid article { border-top: 2px solid #ff9900; padding-top: 24px; min-width: 0; }
+  .guide-answer-grid h3 { margin: 0 0 16px; max-width: 520px; font-size: 1.4rem; line-height: 1.35; font-weight: 600; }
+  .guide-answer-grid p { margin: 0; color: #56585b; font-size: .95rem; line-height: 1.8; }
+  .guide-answer-grid a { display: flex; align-items: center; gap: 12px; margin-top: 20px; color: #865000; font-size: .85rem; line-height: 1.6; text-decoration: underline; text-underline-offset: 4px; }
+  .guide-answer-grid a img { flex: 0 0 18px; }
+  .guide-answer-contact { margin-top: 42px; font-size: .9rem; line-height: 1.8; }
+  .guide-answer-contact a { color: #865000; text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 740px) {
+    .guide-answer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .guide-answer-grid h3 { font-size: 1.22rem; }
+  }
+</style>

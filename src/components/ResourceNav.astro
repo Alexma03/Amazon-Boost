@@ -1,0 +1,14 @@
+---
+interface Props { current: 'blog' | 'guides' }
+const { current } = Astro.props;
+---
+<nav class="resource-nav" aria-label="Recursos de Amazon Boost">
+  <a href="/blog/" aria-current={current === 'blog' ? 'page' : undefined}>Análisis del blog</a>
+  <a href="/guias/" aria-current={current === 'guides' ? 'page' : undefined}>Guías prácticas</a>
+</nav>
+<style>
+  .resource-nav{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:30px}
+  .resource-nav a{padding:12px 0;color:#bfc0c4;border-bottom:2px solid transparent;font-size:.9rem;font-weight:600;line-height:1.5}
+  .resource-nav a[aria-current="page"]{color:#fff;border-color:#ff9900}
+  .resource-nav a:hover{color:#ffb544}
+</style>

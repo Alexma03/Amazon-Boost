@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
 ---
 
 <section class="relative bg-amazon-black text-white py-20">
@@ -20,7 +21,7 @@ import { Image } from "astro:assets";
             href="#solicita-tutoria"
             class="cta-button"
           >
-            <span>Obtén una Auditoría Gratuita</span>
+            <span>Obtén una Auditoría Gratuita <Icon name="arrow-right" size={18} /></span>
           </a>
           <a
             href="#services"
@@ -232,19 +233,7 @@ import { Image } from "astro:assets";
     z-index: 1;
   }
 
-  .cta-button span::after {
-    content: "→";
-    opacity: 0;
-    margin-left: 0;
-    transition: all 0.4s ease;
-    transform: translateX(-8px);
-  }
-
-  .cta-button:hover span::after {
-    opacity: 1;
-    margin-left: 8px;
-    transform: translateX(0);
-  }
+  .cta-button span { gap: 8px; }
 
   .cta-button:hover {
     transform: translateY(-3px);

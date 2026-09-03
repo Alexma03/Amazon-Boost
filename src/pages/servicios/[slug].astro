@@ -1,26 +1,13 @@
 ---
-import ServiceLayout from '../../layouts/ServiceLayout.astro';
-import { servicesBySlug } from '../../data/services/index.js';
+import CommercialLayout from '../../layouts/CommercialLayout.astro';
+import { servicePages } from '../../data/service-pages';
 
-// Get the current slug from the URL
-const { slug } = Astro.params;
-
-// Ensure slug exists before using it as an index
-if (!slug || typeof slug !== 'string') {
-  return Astro.redirect('/404');
+export const prerender = true;
+export function getStaticPaths() {
+  return servicePages.filter((page) => page.path.startsWith('/servicios/')).map((page) => ({
+    params: { slug: page.path.split('/')[2] }, props: { page },
+  }));
 }
-
-// Get service data for the current slug or return 404 if not found
-const service = servicesBySlug[slug as keyof typeof servicesBySlug];
-if (!service) {
-  return Astro.redirect('/404');
-}
-
-const { metaTitle, metaDescription } = service;
+const { page } = Astro.props;
 ---
-
-<ServiceLayout
-  title={metaTitle}
-  description={metaDescription}
-  service={service}
-/>
+<CommercialLayout page={page} />

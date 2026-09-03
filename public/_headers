@@ -40,6 +40,10 @@
   Content-Type: text/plain
   Cache-Control: public, max-age=3600
 
+/asistente/conocimiento.json
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+
 # Manifest
 /manifest.json
   Content-Type: application/manifest+json

@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import Icon from '../components/Icon.astro';
 import { allServices } from '../data/services/index.js';
 import '../styles/subpage-redesign.css';
 
@@ -60,10 +61,10 @@ const relatedServices = allServices
           <p class="sub-lead">{service.description}</p>
           <div class="sub-actions">
             <a class="sub-button sub-button-primary" href="/#auditoria">
-              Solicitar auditoría <span aria-hidden="true">↗</span>
+              Solicitar auditoría <Icon name="arrow-up-right" size={18} />
             </a>
             <a class="sub-button sub-button-secondary" href="#alcance">
-              Ver alcance <span aria-hidden="true">↓</span>
+              Ver alcance <Icon name="arrow-down" size={18} />
             </a>
           </div>
         </div>
@@ -189,7 +190,7 @@ const relatedServices = allServices
           <p>Tu siguiente decisión empieza con una lectura clara</p>
           <h2>Veamos qué está frenando tu cuenta de Amazon.</h2>
         </div>
-        <a href="/#auditoria">Solicitar auditoría <span aria-hidden="true">↗</span></a>
+        <a href="/#auditoria">Solicitar auditoría <Icon name="arrow-up-right" size={18} /></a>
       </div>
     </section>
   </article>

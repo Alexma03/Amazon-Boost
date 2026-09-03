@@ -1,0 +1,24 @@
+---
+import { getAuditContact } from '../data/audit-contact';
+interface Props { topic: string; service?: string; preparation?: string[] }
+const { topic, service, preparation } = Astro.props;
+const contact = getAuditContact(service);
+const items = preparation?.length ? preparation : contact.preparation;
+const whatsapp = `https://wa.me/34650606400?text=${encodeURIComponent(`Hola, quiero solicitar una auditoría inicial. Me interesa revisar: ${topic}.`)}`;
+---
+<section class="growth-contact growth-band" id="contacto" aria-labelledby="audit-contact-title" data-audit-contact>
+  <div class="growth-shell growth-contact-grid">
+    <div>
+      <p class="growth-eyebrow">Auditoría inicial de Amazon</p>
+      <h2 id="audit-contact-title">{contact.title}</h2>
+      <p>{contact.description}</p>
+      <div class="growth-actions">
+        <a class="growth-button" href="/#auditoria" data-audit-primary>Solicitar auditoría inicial <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
+        <a class="growth-text-link" href={whatsapp} target="_blank" rel="noopener noreferrer">Prefiero hablar por WhatsApp</a>
+      </div>
+      <p class="growth-contact-note">Sin compromiso. Respuesta personal, no automática.</p>
+      <a class="growth-contact-phone" href="tel:+34650606400">También puedes llamarnos: 650 606 400</a>
+    </div>
+    <div class="growth-prepare"><h3>Hablemos de lo que te importa.</h3><ul>{items.map((item) => <li>{item}</li>)}</ul><p>No compartas contraseñas ni códigos de acceso.</p></div>
+  </div>
+</section>

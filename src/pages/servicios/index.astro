@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
+import ServiceContact from '../../components/ServiceContact.astro';
+import { serviceDirectory } from '../../data/service-pages';
+import '../../styles/growth-pages.css';
+export const prerender = true;
+
+const services = new Map(serviceDirectory.map((service) => [service.path, service]));
+const serviceGroups = [
+  {
+    eyebrow: 'Dirección y cuenta',
+    title: 'Ordenar antes de acelerar.',
+    copy: 'Prioridades, gestión e incidencias con una lectura completa de la cuenta.',
+    paths: ['/servicios/gestion-de-cuenta/', '/servicios/auditoria-de-cuenta/', '/servicios/desbloqueos-amazon/'],
+  },
+  {
+    eyebrow: 'Captación y conversión',
+    title: 'Convertir atención en pedidos.',
+    copy: 'Publicidad, listings y contenido visual trabajando sobre la misma propuesta.',
+    paths: ['/servicios/gestion-de-ppc/', '/servicios/optimizacion-de-listados/', '/servicios/imagenes-para-amazon/'],
+  },
+  {
+    eyebrow: 'Lanzamiento y expansión',
+    title: 'Crecer con una base preparada.',
+    copy: 'Una salida al mercado coordinada y un plan específico para cada país.',
+    paths: ['/servicios/lanzamiento-marca-privada-amazon/', '/servicios/expansion-amazon-europa/'],
+  },
+].map((group) => ({ ...group, services: group.paths.map((path) => services.get(path)).filter(Boolean) }));
+---
+<Layout title="Servicios Amazon para marcas privadas | Amazon Boost" description="Gestión de cuentas, Amazon Ads, auditorías, listings, imágenes y desbloqueos. Encuentra el servicio que necesita tu marca en Amazon España y Europa." canonicalPath="/servicios/" aiOptimized={false}>
+  <div class="growth-page">
+    <header class="growth-hero growth-services-hero"><div class="growth-shell"><SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Servicios Amazon', path: '/servicios/' }]} /><p class="growth-eyebrow">Amazon Boost / España y Europa</p><h1>Servicios Amazon<br />para marcas privadas.</h1><p class="growth-promise">No gestionamos piezas sueltas.<br />Gestionamos el mecanismo completo.</p><p class="growth-lead">Empieza por lo que hoy frena la cuenta. Conectamos el siguiente paso para crecer con más control, margen y continuidad.</p><div class="growth-actions"><a class="growth-button" href="#servicios">Encontrar mi punto de partida <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a><a class="growth-text-link" href="#contacto">Hablar con el equipo</a></div></div></header>
+    <section class="growth-band growth-services-directory-band" id="servicios"><div class="growth-shell"><div class="growth-services-directory-intro"><div><p class="growth-eyebrow">Qué necesita tu cuenta</p><h2>Comienza a escalar<br />de verdad.</h2></div><p>No necesitas saber qué servicio contratar. Cuéntanos dónde estás y definiremos el primer alcance que tenga sentido para tu marca.</p></div><div class="growth-services-groups">{serviceGroups.map((group, groupIndex) => <section class="growth-services-group"><header><span>0{groupIndex + 1}</span><div><p>{group.eyebrow}</p><h2>{group.title}</h2></div><p>{group.copy}</p></header><div class="growth-services-list">{group.services.map((service, serviceIndex) => <a href={service.path}><span class="growth-services-list-index">{String(serviceIndex + 1).padStart(2, '0')}</span><div><p>{service.category}</p><h3>{service.title}</h3><span>{service.description}</span></div><img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></a>)}</div></section>)}</div><div class="growth-services-consulting"><div><p class="growth-eyebrow">Dirección estratégica</p><h2>¿Tu equipo ejecuta, pero necesita una segunda lectura?</h2></div><div><p>La consultoría convierte una decisión concreta en prioridades, responsables y criterios de seguimiento.</p><a class="growth-text-link" href="/consultoria-amazon/">Explorar consultoría Amazon</a></div></div></div></section>
+    <section class="growth-band growth-resources"><div class="growth-shell growth-intro-grid"><div class="growth-section-head"><p class="growth-eyebrow">Antes de decidir</p><h2>Entender también<br />es avanzar.</h2></div><div><p>ACOS y TACOS, fichas que no convierten, variantes, fondos retenidos o planificación de stock. Respuestas para preparar mejor la siguiente decisión.</p><a class="growth-text-link" href="/guias/">Explorar las guías de Amazon</a></div></div></section>
+    <ServiceContact topic="los servicios de Amazon Boost" />
+  </div>
+</Layout>

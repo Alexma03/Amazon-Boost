@@ -1,5 +1,6 @@
 ---
 import ControlLayout from '../layouts/ControlLayout.astro';
+import Icon from '../components/Icon.astro';
 ---
 
 <ControlLayout
@@ -15,20 +16,20 @@ import ControlLayout from '../layouts/ControlLayout.astro';
 
       <nav aria-label="Navegación principal">
         <span class="nav-label">OPERACIONES</span>
-        <a class="nav-item active" href="#resumen" data-nav="Resumen"><span class="nav-icon">⌂</span>Resumen</a>
-        <a class="nav-item" href="#cuentas" data-nav="Cuentas"><span class="nav-icon">◫</span>Cuentas <em>8</em></a>
-        <a class="nav-item" href="#buybox" data-nav="Buy Box"><span class="nav-icon">◇</span>Buy Box <em class="danger">3</em></a>
-        <a class="nav-item" href="#publicidad" data-nav="Publicidad"><span class="nav-icon">↗</span>Publicidad</a>
-        <a class="nav-item" href="#inventario" data-nav="Inventario"><span class="nav-icon">□</span>Inventario <em>6</em></a>
+        <a class="nav-item active" href="#resumen" data-nav="Resumen"><span class="nav-icon"><Icon name="house" size={17} /></span>Resumen</a>
+        <a class="nav-item" href="#cuentas" data-nav="Cuentas"><span class="nav-icon"><Icon name="users-round" size={17} /></span>Cuentas <em>8</em></a>
+        <a class="nav-item" href="#buybox" data-nav="Buy Box"><span class="nav-icon"><Icon name="badge-dollar-sign" size={17} /></span>Buy Box <em class="danger">3</em></a>
+        <a class="nav-item" href="#publicidad" data-nav="Publicidad"><span class="nav-icon"><Icon name="megaphone" size={17} /></span>Publicidad</a>
+        <a class="nav-item" href="#inventario" data-nav="Inventario"><span class="nav-icon"><Icon name="package" size={17} /></span>Inventario <em>6</em></a>
         <span class="nav-label secondary">GESTIÓN</span>
-        <a class="nav-item" href="#acciones" data-nav="Acciones"><span class="nav-icon">✓</span>Acciones <em>12</em></a>
-        <a class="nav-item" href="#informes" data-nav="Informes"><span class="nav-icon">≡</span>Informes</a>
+        <a class="nav-item" href="#acciones" data-nav="Acciones"><span class="nav-icon"><Icon name="list-checks" size={17} /></span>Acciones <em>12</em></a>
+        <a class="nav-item" href="#informes" data-nav="Informes"><span class="nav-icon"><Icon name="file-text" size={17} /></span>Informes</a>
       </nav>
 
       <div class="sidebar-foot">
         <div class="avatar">SP</div>
         <span><b>Sergio Porras</b><small>Administrador</small></span>
-        <button aria-label="Abrir opciones">···</button>
+        <button aria-label="Abrir opciones"><Icon name="ellipsis" size={17} /></button>
       </div>
     </aside>
 
@@ -38,8 +39,8 @@ import ControlLayout from '../layouts/ControlLayout.astro';
         <div class="top-actions">
           <span class="demo-pill">ENTORNO DEMO</span>
           <button class="sync"><span></span> Datos actualizados hace 4 min</button>
-          <button class="icon-btn" id="search-button" aria-label="Buscar">⌕</button>
-          <button class="icon-btn notification" id="notification-button" aria-label="Notificaciones">♢<i></i></button>
+          <button class="icon-btn" id="search-button" aria-label="Buscar"><Icon name="search" size={17} /></button>
+          <button class="icon-btn notification" id="notification-button" aria-label="Notificaciones"><Icon name="bell" size={17} /><i></i></button>
         </div>
       </header>
 
@@ -59,9 +60,9 @@ import ControlLayout from '../layouts/ControlLayout.astro';
                 <option value="de">Amazon.de</option>
                 <option value="it">Amazon.it</option>
               </select>
-              <span>⌄</span>
+              <span><Icon name="chevron-down" size={15} /></span>
             </label>
-            <button class="primary" id="connect-account">＋ Conectar cuenta</button>
+            <button class="primary" id="connect-account"><Icon name="plus" size={15} /> Conectar cuenta</button>
           </div>
         </section>
 
@@ -70,33 +71,33 @@ import ControlLayout from '../layouts/ControlLayout.astro';
           <div class="health-stat"><i class="green"></i><span><b>5</b><small>Cuentas saludables</small></span></div>
           <div class="health-stat"><i class="amber"></i><span><b>2</b><small>Necesitan atención</small></span></div>
           <div class="health-stat"><i class="red"></i><span><b>1</b><small>En riesgo</small></span></div>
-          <button>Ver todas las cuentas <span>→</span></button>
+          <button>Ver todas las cuentas <Icon name="arrow-right" size={15} /></button>
         </section>
 
         <section class="metrics" aria-label="Métricas principales">
           <article>
             <div class="metric-head"><span>VENTAS 30 DÍAS</span><i>€</i></div>
             <strong>482.640 €</strong>
-            <p class="positive">↗ 12,4% <span>vs. periodo anterior</span></p>
+            <p class="positive"><Icon name="trending-up" size={14} /> 12,4% <span>vs. periodo anterior</span></p>
             <div class="sparkline bars" aria-hidden="true">
               <i style="height:35%"></i><i style="height:47%"></i><i style="height:43%"></i><i style="height:59%"></i><i style="height:54%"></i><i style="height:71%"></i><i style="height:65%"></i><i style="height:84%"></i><i style="height:76%"></i><i style="height:92%"></i><i style="height:82%"></i><i style="height:100%"></i>
             </div>
           </article>
           <article>
-            <div class="metric-head"><span>INVERSIÓN PUBLICITARIA</span><i>↗</i></div>
+            <div class="metric-head"><span>INVERSIÓN PUBLICITARIA</span><i><Icon name="trending-up" size={15} /></i></div>
             <strong>78.320 €</strong>
-            <p class="positive">↗ 4,8% <span>con TACoS del 16,2%</span></p>
+            <p class="positive"><Icon name="trending-up" size={14} /> 4,8% <span>con TACoS del 16,2%</span></p>
             <div class="progress"><span style="width:68%"></span></div>
             <small>68% del presupuesto mensual</small>
           </article>
           <article>
-            <div class="metric-head"><span>BUY BOX GLOBAL</span><i>◇</i></div>
+            <div class="metric-head"><span>BUY BOX GLOBAL</span><i><Icon name="badge-dollar-sign" size={15} /></i></div>
             <strong>91,4%</strong>
-            <p class="negative">↘ 2,1% <span>desde ayer</span></p>
+            <p class="negative"><Icon name="trending-down" size={14} /> 2,1% <span>desde ayer</span></p>
             <div class="mini-donut"><span></span><b>3 ASIN<br><small>en riesgo</small></b></div>
           </article>
           <article>
-            <div class="metric-head"><span>STOCK EN RIESGO</span><i>□</i></div>
+            <div class="metric-head"><span>STOCK EN RIESGO</span><i><Icon name="package" size={15} /></i></div>
             <strong>6 SKU</strong>
             <p class="negative">2 críticos <span>con menos de 7 días</span></p>
             <div class="stock-tags"><span class="critical">2 críticos</span><span>4 próximos</span></div>
@@ -107,7 +108,7 @@ import ControlLayout from '../layouts/ControlLayout.astro';
           <article class="attention-card" id="acciones">
             <div class="section-head">
               <div><span class="pulse"></span><h2>Requiere tu atención</h2><small>Ordenado por impacto estimado</small></div>
-              <button>Ver las 12 acciones →</button>
+              <button>Ver las 12 acciones <Icon name="arrow-right" size={14} /></button>
             </div>
 
             <div class="alert-row critical-alert">
@@ -118,46 +119,46 @@ import ControlLayout from '../layouts/ControlLayout.astro';
                 <p>B0C8N4K2PL · El precio está un 4,8% por encima de la oferta ganadora.</p>
                 <div class="impact"><b>−93 €/día</b><span>Pérdida estimada</span><i></i><b>22%</b><span>Margen protegido</span></div>
               </div>
-              <button class="review" data-action="buybox">Revisar recomendación <span>→</span></button>
+              <button class="review" data-action="buybox">Revisar recomendación <Icon name="arrow-right" size={14} /></button>
             </div>
 
             <div class="alert-row warning-alert">
-              <div class="alert-symbol">□</div>
+              <div class="alert-symbol"><Icon name="package" size={18} /></div>
               <div class="alert-copy">
                 <div class="alert-meta"><span>INVENTARIO</span><small>Hace 1 h</small></div>
                 <h3>Casa Moderna agotará existencias en 6 días</h3>
                 <p>SKU CM-LAMP-02 · 84 unidades disponibles · Velocidad: 14 uds/día.</p>
               </div>
-              <button class="review" data-action="stock">Calcular reposición <span>→</span></button>
+              <button class="review" data-action="stock">Calcular reposición <Icon name="arrow-right" size={14} /></button>
             </div>
 
             <div class="alert-row info-alert">
-              <div class="alert-symbol">↗</div>
+              <div class="alert-symbol"><Icon name="trending-up" size={18} /></div>
               <div class="alert-copy">
                 <div class="alert-meta"><span>PUBLICIDAD</span><small>Hace 3 h</small></div>
                 <h3>Una campaña rentable agota presupuesto antes de las 14:00</h3>
                 <p>Ganhu · SP | Exact | Top sellers · ROAS 5,8 durante los últimos 14 días.</p>
               </div>
-              <button class="review" data-action="ads">Ver oportunidad <span>→</span></button>
+              <button class="review" data-action="ads">Ver oportunidad <Icon name="arrow-right" size={14} /></button>
             </div>
           </article>
 
           <aside class="accounts-card" id="cuentas">
-            <div class="section-head"><div><h2>Cuentas</h2><small>Rendimiento de hoy</small></div><button>Ver todas →</button></div>
+            <div class="section-head"><div><h2>Cuentas</h2><small>Rendimiento de hoy</small></div><button>Ver todas <Icon name="arrow-right" size={14} /></button></div>
             <div class="account-row">
-              <span class="account-logo pet">P</span><div><b>Pet & Joy</b><small>Amazon.es</small></div><span class="account-sales"><b>8.420 €</b><small class="positive">↗ 18,2%</small></span><i class="status warn"></i>
+              <span class="account-logo pet">P</span><div><b>Pet & Joy</b><small>Amazon.es</small></div><span class="account-sales"><b>8.420 €</b><small class="positive"><Icon name="trending-up" size={12} /> 18,2%</small></span><i class="status warn"></i>
             </div>
             <div class="account-row">
-              <span class="account-logo casa">CM</span><div><b>Casa Moderna</b><small>Amazon.es · .fr</small></div><span class="account-sales"><b>6.185 €</b><small class="positive">↗ 7,4%</small></span><i class="status warn"></i>
+              <span class="account-logo casa">CM</span><div><b>Casa Moderna</b><small>Amazon.es · .fr</small></div><span class="account-sales"><b>6.185 €</b><small class="positive"><Icon name="trending-up" size={12} /> 7,4%</small></span><i class="status warn"></i>
             </div>
             <div class="account-row">
-              <span class="account-logo ganhu">G</span><div><b>Ganhu</b><small>Amazon.es · .it</small></div><span class="account-sales"><b>5.740 €</b><small class="positive">↗ 12,1%</small></span><i class="status good"></i>
+              <span class="account-logo ganhu">G</span><div><b>Ganhu</b><small>Amazon.es · .it</small></div><span class="account-sales"><b>5.740 €</b><small class="positive"><Icon name="trending-up" size={12} /> 12,1%</small></span><i class="status good"></i>
             </div>
             <div class="account-row">
-              <span class="account-logo tech">TL</span><div><b>Tech Life</b><small>Amazon.es · .de</small></div><span class="account-sales"><b>4.290 €</b><small class="negative">↘ 3,8%</small></span><i class="status bad"></i>
+              <span class="account-logo tech">TL</span><div><b>Tech Life</b><small>Amazon.es · .de</small></div><span class="account-sales"><b>4.290 €</b><small class="negative"><Icon name="trending-down" size={12} /> 3,8%</small></span><i class="status bad"></i>
             </div>
             <div class="account-row">
-              <span class="account-logo bebe">BB</span><div><b>Bebé Bonito</b><small>Amazon.es</small></div><span class="account-sales"><b>3.890 €</b><small class="positive">↗ 5,6%</small></span><i class="status good"></i>
+              <span class="account-logo bebe">BB</span><div><b>Bebé Bonito</b><small>Amazon.es</small></div><span class="account-sales"><b>3.890 €</b><small class="positive"><Icon name="trending-up" size={12} /> 5,6%</small></span><i class="status good"></i>
             </div>
             <div class="legend"><span><i class="good"></i>Saludable</span><span><i class="warn"></i>Atención</span><span><i class="bad"></i>En riesgo</span></div>
           </aside>
@@ -169,7 +170,7 @@ import ControlLayout from '../layouts/ControlLayout.astro';
   <div class="modal-layer" id="connect-modal" hidden>
     <button class="modal-backdrop" data-close-modal aria-label="Cerrar ventana"></button>
     <section class="connect-dialog" role="dialog" aria-modal="true" aria-labelledby="connect-title">
-      <button class="dialog-close" data-close-modal aria-label="Cerrar">×</button>
+      <button class="dialog-close" data-close-modal aria-label="Cerrar"><Icon name="x" size={18} /></button>
       <span class="dialog-logo">ab</span>
       <p class="eyebrow">NUEVA INTEGRACIÓN</p>
       <h2 id="connect-title">Conecta una cuenta de cliente</h2>
@@ -187,7 +188,7 @@ import ControlLayout from '../layouts/ControlLayout.astro';
         <option>Norteamérica — EE. UU., Canadá y México</option>
         <option>Lejano Oriente — Japón, Australia y Singapur</option>
       </select>
-      <button class="amazon-connect" id="start-connection">Continuar con Amazon <span>→</span></button>
+      <button class="amazon-connect" id="start-connection">Continuar con Amazon <Icon name="arrow-right" size={15} /></button>
       <small class="dialog-note">Prototipo: esta acción simula el inicio del flujo OAuth de Amazon.</small>
     </section>
   </div>
@@ -195,7 +196,7 @@ import ControlLayout from '../layouts/ControlLayout.astro';
   <aside class="action-drawer" id="action-drawer" aria-hidden="true" aria-labelledby="drawer-title">
     <div class="drawer-top">
       <div><span id="drawer-category">BUY BOX</span><small id="drawer-time">Detectado hace 18 min</small></div>
-      <button id="close-drawer" aria-label="Cerrar detalle">×</button>
+      <button id="close-drawer" aria-label="Cerrar detalle"><Icon name="x" size={18} /></button>
     </div>
     <div class="drawer-content">
       <span class="priority" id="drawer-priority">PRIORIDAD CRÍTICA</span>
@@ -229,12 +230,12 @@ import ControlLayout from '../layouts/ControlLayout.astro';
   <div class="search-layer" id="search-layer" hidden>
     <button class="search-backdrop" data-close-search aria-label="Cerrar búsqueda"></button>
     <section class="search-box" role="search">
-      <span>⌕</span><input id="global-search" type="search" placeholder="Buscar cuenta, ASIN, SKU o campaña…" autocomplete="off" /><kbd>ESC</kbd>
+      <span><Icon name="search" size={18} /></span><input id="global-search" type="search" placeholder="Buscar cuenta, ASIN, SKU o campaña…" autocomplete="off" /><kbd>ESC</kbd>
       <div id="search-results"><p>Prueba con “Pet & Joy”, “B0C8N4K2PL” o “Ganhu”.</p></div>
     </section>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"><span>✓</span><p><b>Acción actualizada</b><small>El cambio se ha guardado correctamente.</small></p></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"><span><Icon name="check" size={16} /></span><p><b>Acción actualizada</b><small>El cambio se ha guardado correctamente.</small></p></div>
 </ControlLayout>
 
 <style>
@@ -319,6 +320,9 @@ import ControlLayout from '../layouts/ControlLayout.astro';
   @media (max-width:1180px){.metrics{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}.accounts-card{order:-1}.health-strip{grid-template-columns:1.5fr repeat(3,1fr)}.health-strip>button{display:none}}
   @media (max-width:760px){.shell{display:block}.sidebar{display:none}main{display:block}.topbar{height:62px;padding:0 16px;justify-content:space-between}.mobile-brand{display:flex}.mobile-brand .brand-mark{width:31px;height:31px}.sync,.demo-pill{display:none}.workspace{padding:23px 15px 40px}.intro{align-items:flex-start;flex-direction:column}.intro-actions{width:100%}.market-select{flex:1;min-width:0}.health-strip{grid-template-columns:1fr 1fr;gap:0;padding:8px 0}.score{grid-column:1/-1;padding:10px 20px 16px}.health-stat{padding-left:20px;margin:7px 0}.health-stat:nth-of-type(3){display:none}.metrics{grid-template-columns:1fr 1fr}.content-grid{display:block}.accounts-card{margin-bottom:14px}.alert-row{grid-template-columns:34px 1fr;padding:15px}.review{grid-column:2;width:max-content}.intro h1{font-size:25px}}
   @media (max-width:480px){.metrics{grid-template-columns:1fr}.intro-actions{flex-direction:column}.market-select,.primary{width:100%}.content-grid{margin-top:0}.account-row{grid-template-columns:32px 1fr auto 7px}.alert-copy h3{font-size:11px}.impact{flex-wrap:wrap}}
+  .nav-icon,.icon-btn,.primary,.health-strip button,.metrics p,.section-head button,.review,.amazon-connect,.account-sales small{display:flex;align-items:center}
+  .nav-icon,.icon-btn{justify-content:center}
+  .primary,.health-strip button,.section-head button,.review,.amazon-connect{gap:6px}
 </style>
 
 <script>
@@ -415,7 +419,7 @@ import ControlLayout from '../layouts/ControlLayout.astro';
       { title: 'Ganhu', meta: 'Cuenta · Amazon.es y Amazon.it · Saludable' },
       { title: 'CM-LAMP-02', meta: 'SKU · Casa Moderna · Stock crítico' }
     ].filter(item => `${item.title} ${item.meta}`.toLowerCase().includes(query));
-    results.innerHTML = records.length ? records.map(item => `<a class="search-result" href="#acciones"><span>⌕</span><span><b>${item.title}</b><small>${item.meta}</small></span></a>`).join('') : '<p>No hemos encontrado coincidencias en las cuentas conectadas.</p>';
+    results.innerHTML = records.length ? records.map(item => `<a class="search-result" href="#acciones"><span><b>${item.title}</b><small>${item.meta}</small></span></a>`).join('') : '<p>No hemos encontrado coincidencias en las cuentas conectadas.</p>';
   });
 
   document.addEventListener('keydown', (event) => {

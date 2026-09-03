@@ -1,0 +1,128 @@
+---
+import { diagnosticSignals } from "../data/home-signals";
+import DiagnosticArtwork from "./DiagnosticArtwork.astro";
+
+const initial = diagnosticSignals.ads;
+const areas = Object.entries(diagnosticSignals);
+---
+
+<div class="diagnostic-experience" data-diagnostic data-tone="orange" data-motion="paused" data-reveal>
+  <div class="diagnostic-tabs" role="group" aria-label="Áreas de diagnóstico">
+    {areas.map(([id, signal], index) => (
+      <button type="button" data-signal={id} aria-pressed={index === 0} aria-controls="diagnostic-panel" disabled>
+        {signal.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="diagnostic-panel" id="diagnostic-panel" role="region" aria-labelledby="diagnostic-title">
+    <div class="diagnostic-copy" data-diagnostic-copy-group>
+      <span class="diagnostic-label" data-diagnostic-label>{initial.label}</span>
+      <h3 id="diagnostic-title" data-diagnostic-title aria-live="polite">{initial.title}</h3>
+      <p data-diagnostic-copy>{initial.text}</p>
+      <a href="#auditoria">Analizar mi cuenta</a>
+    </div>
+
+    <div class="diagnostic-art">
+      <div class="diagnostic-illustration" data-diagnostic-illustration aria-hidden="true">
+        <div class="diagnostic-art-heading">
+          <strong data-diagnostic-metric>{initial.metric}</strong>
+          <span data-diagnostic-detail>{initial.detail}</span>
+        </div>
+        <DiagnosticArtwork />
+        <div class="diagnostic-keywords">
+          {initial.checks.map(check => <span data-diagnostic-keyword>{check.label}</span>)}
+        </div>
+      </div>
+      <button class="diagnostic-motion" type="button" data-motion-toggle aria-label="Pausar animación" title="Pausar animación" aria-pressed="false" disabled>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { mountDiagnosticExperience } from "../lib/diagnostic-experience";
+
+  const cleanups = new Map<HTMLElement, () => void>();
+  function init() {
+    document.querySelectorAll<HTMLElement>("[data-diagnostic]").forEach(root => {
+      if (!cleanups.has(root)) cleanups.set(root, mountDiagnosticExperience(root));
+    });
+  }
+  init();
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => { cleanups.forEach(cleanup => cleanup()); cleanups.clear(); });
+</script>
+
+<style>
+  .diagnostic-experience { --signal-color: #ff9900; --diagnostic-motion-state: paused; width: min(1280px, 100%); margin: 0 auto; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 40px; align-items: stretch; }
+  .diagnostic-experience[data-motion="running"] { --diagnostic-motion-state: running; }
+  .diagnostic-experience[data-tone="lime"] { --signal-color: #c9ff4a; }
+  .diagnostic-experience[data-tone="blue"] { --signal-color: #78a8ff; }
+  .diagnostic-experience[data-tone="red"] { --signal-color: #ff6f61; }
+  .diagnostic-tabs { display: grid; grid-template-rows: repeat(4, 1fr); gap: 10px; align-content: start; }
+  .diagnostic-tabs button { min-height: 80px; padding: 20px 24px; border: 0; border-radius: 6px; background: #f4f5f3; color: #6a6e69; font-size: .95rem; font-weight: 750; text-align: left; cursor: pointer; transition: background .25s ease, color .25s ease; }
+  .diagnostic-tabs button[data-signal="ads"] { --tab-color: #ff9900; }
+  .diagnostic-tabs button[data-signal="listing"] { --tab-color: #c9ff4a; }
+  .diagnostic-tabs button[data-signal="catalog"] { --tab-color: #78a8ff; }
+  .diagnostic-tabs button[data-signal="stock"] { --tab-color: #ff6f61; }
+  .diagnostic-tabs button:hover { background: color-mix(in srgb, var(--tab-color) 24%, white); color: #161816; }
+  .diagnostic-tabs button[aria-pressed="true"] { background: var(--tab-color); color: #161816; }
+  .diagnostic-panel { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; min-width: 0; }
+  .diagnostic-copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; padding: 10px 0; }
+  .diagnostic-label { padding: 7px 10px; border-radius: 3px; background: var(--signal-color); color: #131513; font-size: .67rem; font-weight: 800; text-transform: uppercase; transition: background .25s ease; }
+  .diagnostic-copy h3 { margin: 25px 0 18px; font-size: 2.65rem; line-height: 1.08; font-weight: 700; text-wrap: balance; }
+  .diagnostic-copy p { margin: 0 0 24px; color: #62675f; font-size: .98rem; line-height: 1.7; }
+  .diagnostic-copy a { display: inline-flex; margin-top: auto; padding: 10px 0 5px; border-bottom: 2px solid var(--signal-color); color: #171917; font-size: .88rem; font-weight: 750; }
+  .diagnostic-art { position: relative; width: 100%; max-width: 480px; min-width: 0; min-height: 0; aspect-ratio: 1 / 1; align-self: start; justify-self: center; container: diagnostic-visual / inline-size; overflow: hidden; border-radius: 6px; background: #11151b; }
+  .diagnostic-illustration { position: absolute; inset: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 18px; min-height: 0; padding: 26px; }
+  .diagnostic-art-heading strong { display: block; padding-right: 24px; color: var(--signal-color); font-size: 4.9rem; line-height: 1; font-weight: 800; transition: color .3s ease; }
+  .diagnostic-art-heading > span { display: block; margin-top: 12px; color: #a7adb4; font-size: .7rem; line-height: 1.5; text-transform: uppercase; }
+  .diagnostic-keywords { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; min-height: 0; color: #929aa3; font-size: .6rem; line-height: 1.5; text-transform: uppercase; }
+  .diagnostic-keywords > span:nth-child(2) { text-align: center; }
+  .diagnostic-keywords > span:last-child { text-align: right; }
+  .diagnostic-motion { position: absolute; top: 14px; right: 12px; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #a7adb4; cursor: pointer; }
+  .diagnostic-motion:hover { color: #fff; background: #ffffff12; }
+  .diagnostic-motion > span { width: 3px; height: 12px; margin-right: 6px; background: currentColor; box-shadow: 6px 0 0 currentColor; }
+  .diagnostic-motion[aria-pressed="true"] > span { width: 0; height: 0; margin-right: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 9px solid currentColor; background: none; box-shadow: none; }
+  .diagnostic-experience :is(button, a):focus-visible { outline: 2px solid #3473b5; outline-offset: 4px; }
+  .diagnostic-motion:focus-visible { outline-color: #fff; outline-offset: -3px; }
+  @media (max-width: 1150px) {
+    .diagnostic-experience { grid-template-columns: 190px minmax(0, 1fr); gap: 28px; }
+    .diagnostic-panel { gap: 28px; }
+    .diagnostic-tabs button { padding: 18px; }
+    .diagnostic-copy h3 { font-size: 2.2rem; }
+  }
+  @media (max-width: 1000px) {
+    .diagnostic-experience { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .diagnostic-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto; }
+    .diagnostic-tabs button { min-height: 64px; font-size: .88rem; }
+    .diagnostic-panel { gap: 38px; }
+    .diagnostic-copy h3 { font-size: 2.5rem; }
+  }
+  @media (max-width: 650px) {
+    .diagnostic-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .diagnostic-tabs button { min-height: 62px; padding: 16px; }
+    .diagnostic-panel { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+    .diagnostic-copy { min-height: 300px; padding: 0; }
+    .diagnostic-copy h3 { margin-top: 20px; font-size: 2.2rem; }
+    .diagnostic-copy p { font-size: 1rem; }
+  }
+  @container diagnostic-visual (max-width: 400px) {
+    .diagnostic-illustration { padding: 20px; gap: 12px; }
+    .diagnostic-art-heading strong { font-size: 3.6rem; }
+    .diagnostic-art-heading > span { margin-top: 8px; font-size: .65rem; }
+    .diagnostic-keywords { gap: 8px; font-size: .58rem; }
+    .diagnostic-motion { top: 8px; right: 8px; }
+  }
+  @container diagnostic-visual (max-width: 350px) {
+    .diagnostic-illustration { grid-template-rows: auto minmax(0, 1fr); padding: 16px; }
+    .diagnostic-art-heading strong { font-size: 3rem; }
+    .diagnostic-keywords { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .diagnostic-motion { display: none; }
+    .diagnostic-experience * { transition: none; }
+  }
+</style>

@@ -1,139 +1,28 @@
-import type { BlogPost, BlogSection } from './index'; // Asegúrate que la ruta es correcta
-
-// --- Secciones Optimizadas para 'estrategiasPpcData' (Estructura Estándar) ---
-
-const sections: BlogSection[] = [
-  {
-    title: 'PPC en Amazon: De Gasto a Inversión Estratégica',
-    content: `<p>La publicidad PPC (Pay-Per-Click) en Amazon es esencial, pero el éxito no está garantizado. Requiere una <strong>estrategia inteligente y basada en datos</strong> para convertir clics en ventas rentables y superar a la competencia.</p>`,
-    type: 'text',
-  },
-  {
-    title: '1. Estructura de Campañas en Tres Niveles',
-    content: `<p>Una base sólida para gestionar y optimizar tus campañas:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Nivel 1 (Marca):</strong> Protege tu marca con keywords exactas y pujas altas. Defiende tu espacio.',
-      '<strong>Nivel 2 (Categoría/Manual):</strong> Ataca términos relevantes de tu nicho. Segmenta por grupos de keywords y optimiza el balance impresiones/conversión.',
-      '<strong>Nivel 3 (Descubrimiento/Auto):</strong> Usa targeting automático con presupuesto controlado para encontrar nuevas keywords rentables. Analiza y traslada éxitos a campañas manuales.',
-    ],
-  },
-  {
-    title: '2. Pujas Dinámicas Basadas en Datos',
-    content: `<p>Ajusta tus pujas constantemente según el rendimiento real:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Automatiza (con Lógica):</strong> Usa reglas de ajuste basadas en tu ACoS objetivo.',
-      '<strong>Potencia Ganadores:</strong> Aumenta pujas para keywords de alta conversión.',
-      '<strong>Poda Ineficientes:</strong> Reduce o pausa keywords con alto gasto y bajas ventas.',
-      '<strong>Considera el Tiempo:</strong> Ajusta pujas según hora del día, día de la semana o estacionalidad si es relevante.',
-    ],
-  },
-  {
-    // Highlight para el impacto del bidding dinámico
-    title: 'Impacto del Bidding Dinámico',
-    content: `<p>Implementar ajustes de puja basados en datos puede mejorar tu <strong>ACoS (Advertising Cost of Sale) entre un 25% y 40%</strong>.</p>`,
-    type: 'highlight',
-  },
-  {
-    title: '3. Uso Estratégico de Tipos de Concordancia',
-    content: `<p>Cada tipo de concordancia tiene un rol específico:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Amplia (Broad):</strong> Para descubrimiento inicial de términos.',
-      '<strong>De Frase (Phrase):</strong> Para capturar variaciones relevantes y controlar más.',
-      '<strong>Exacta (Exact):</strong> Para keywords con rendimiento probado y máximo control.',
-    ],
-  },
-  {
-    // Highlight para el flujo recomendado
-    title: 'Flujo Recomendado de Concordancias',
-    content: `<p>Descubre con <strong>Amplia</strong>, valida con <strong>Frase</strong>, y escala con <strong>Exacta</strong>. Mueve keywords rentables progresivamente hacia concordancias más restrictivas.</p>`,
-    type: 'highlight',
-  },
-  {
-    // Sección de imagen
-    title: 'Visualizando el Retorno',
-    content: `<p>Una estrategia PPC bien afinada convierte la inversión publicitaria en crecimiento tangible.</p>`,
-    type: 'image',
-    imageUrl:
-      'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1080&auto=format&fit=crop', // URL de la imagen principal
-  },
-  {
-    title: '4. Segmentación por Rendimiento de Producto',
-    content: `<p>Asigna tu presupuesto de forma inteligente según el rol de cada producto:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Alto Margen:</strong> Permite un ACoS más flexible para ganar cuota.',
-      '<strong>Bestsellers:</strong> Invierte para defender tu posición.',
-      '<strong>Nuevos Lanzamientos:</strong> Asigna presupuesto para generar visibilidad inicial.',
-      '<strong>Estacionales:</strong> Incrementa inversión durante picos de demanda.',
-    ],
-  },
-  {
-    title: '5. Optimización Continua del Embudo Completo',
-    content: `<p>Analiza y ajusta en cada etapa del viaje del cliente:</p>`,
-    type: 'list',
-    items: [
-      '<strong>Impresiones/CTR:</strong> Optimiza título, imagen principal y puja inicial para atraer clics relevantes.',
-      '<strong>Clics:</strong> Analiza el CTR por keyword. Pausa términos con muchos clics pero sin ventas.',
-      '<strong>Conversión/ACoS:</strong> Enfócate en la rentabilidad. Reinvierte en las keywords que generan ventas a un ACoS objetivo.',
-      '<strong>Palabras Clave Negativas:</strong> Úsalas activamente para evitar gasto irrelevante.',
-    ],
-  },
-  {
-    title: 'Conclusión: PPC Inteligente para Crecimiento Rentable',
-    content: `<p>Una estrategia <strong>PPC en Amazon</strong> bien ejecutada es una inversión poderosa. Aplicando estos enfoques basados en estructura, datos y optimización continua, transformarás tus campañas en un motor de ventas rentable y predecible para <strong>2025</strong>.</p>
-    <p>En <strong>Amazon Boost</strong>, somos expertos en implementar y gestionar estrategias PPC avanzadas que reducen el ACoS y maximizan el ROI real de tu inversión publicitaria.</p>`, // Ajusta "Amazon Boost" si es necesario
-    type: 'text',
-  },
-];
-
-// --- Objeto BlogPost Actualizado (manteniendo nombre original 'estrategiasPpcData' y 'slug') ---
+import type { BlogPost } from './index';
 
 export const estrategiasPpcData: BlogPost = {
-  slug: 'estrategias-ppc', // Slug mantenido como solicitado
-  title: '5 Estrategias PPC Amazon para Maximizar tu ROI en 2025', // Título actualizado a 2025
-  date: '2025-04-01', // Fecha actualizada
-  image:
-    'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1080&auto=format&fit=crop', // Asegúrate de actualizar la imagen
-  category: 'PPC Amazon',
-  excerpt:
-    'Descubre 5 estrategias PPC probadas para Amazon en 2025. Optimiza estructura, pujas, concordancias y más para maximizar ROI y reducir ACoS.', // Excerpt actualizado a 2025
-  sections: sections, // Usamos las nuevas secciones
-  // content: undefined, // El content HTML original ya no es necesario
-  tags: [
-    'amazon ppc',
-    'estrategias ppc amazon',
-    'publicidad amazon',
-    'acos amazon',
-    'roi amazon ads',
-    'sponsored products',
-    'optimizar ppc amazon',
-    'amazon 2025',
-  ], // Tags actualizados a 2025
-  callToAction: {
-    text: '¿Quieres optimizar tus campañas PPC? Solicita nuestro análisis gratuito', // CTA mantenido
-    url: '/#solicita-tutoria', // Verificar URL
-  },
-  relatedPosts: [
-    // Manteniendo los slugs originales. Considera si 'algoritmo-amazon-a9' debería actualizarse.
-    'algoritmo-amazon-a9',
-    'tacticas-avanzadas-sponsored-products',
-    'optimizacion-acos-amazon',
+  slug: 'estrategias-ppc',
+  title: 'Estrategia PPC en Amazon: cada campaña necesita un propósito',
+  date: '2025-04-01',
+  updatedAt: '2026-08-28',
+  image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1080&auto=format&fit=crop',
+  category: 'Publicidad',
+  excerpt: 'Una estructura de campañas útil conecta inversión, catálogo y objetivos. Qué decidir antes de aumentar presupuesto o automatizar las pujas.',
+  takeaway: 'No hay una arquitectura de PPC válida para todas las cuentas. El papel del producto, la intención de búsqueda y los costes deben orientar la inversión; un ACOS aislado no cuenta toda la historia.',
+  sections: [
+    { id: 'objetivo', title: 'Asigna un objetivo antes de asignar presupuesto', paragraphs: ['Distingue qué campañas buscan descubrir demanda, cuáles trabajan búsquedas conocidas y cuáles apoyan referencias prioritarias. Es una propuesta de organización, no una obligación de crear tres campañas por producto.', 'Define qué aprendizaje o resultado esperas y qué señales justificarían ampliar, corregir o limitar la inversión. La decisión debe incorporar el papel del producto en la gama y su disponibilidad. No tiene sentido evaluar igual una referencia recién lanzada y otra con un historial estable.'] },
+    { id: 'segmentacion', title: 'Usa la segmentación para responder a una pregunta', paragraphs: ['Sponsored Products dispone de mecanismos de segmentación automática y manual, incluidas opciones por palabras clave y productos. Amazon documenta también concordancias y segmentación negativa. Comprueba las opciones del tipo de campaña que estás gestionando.', 'Una campaña automática puede aportar información, pero no garantiza que todo el tráfico sea útil. Tampoco existe una escalera obligatoria de amplia a frase y exacta. Elige el alcance según lo que quieres investigar y revisa las búsquedas reales antes de mover o excluir términos.'], source: 0 },
+    { id: 'economia', title: 'Decide con el producto, no solo con el anuncio', paragraphs: ['Relaciona la inversión con ingresos y costes del mismo alcance. Un indicador publicitario puede mejorar mientras la cuenta pierde margen por descuentos, logística o devoluciones. Conserva una lectura por producto y otra del canal completo.', 'No adoptes un porcentaje objetivo porque aparezca en otra cuenta. Define el criterio con el negocio y separa ventas atribuidas, ventas totales y beneficio. Las ventanas de atribución y los periodos comparados deben quedar claros en el informe.'] },
+    { id: 'revision', title: 'Convierte el informe en una lista de decisiones', paragraphs: ['Cada revisión debería terminar con acciones justificadas, no con cambios por costumbre. Si faltan impresiones, investiga entrega y elegibilidad. Si hay clics sin compras, contrasta intención, ficha y oferta antes de aumentar la puja.', 'Cuando excluyas una búsqueda, registra el motivo y el alcance. Una consulta irrelevante para un ASIN puede encajar con otro. Las reglas automáticas deben tener responsables y revisión; no sustituyen entender qué está pasando.'], items: ['Observación y periodo analizado.', 'Hipótesis y datos que la respaldan.', 'Acción, alcance y responsable.', 'Fecha y criterio de revisión.'] },
+    { id: 'escala', title: 'Escala cuando puedas sostener el siguiente pedido', paragraphs: ['Antes de ampliar presupuesto, comprueba reposición, capacidad operativa y coherencia del catálogo. Si se acerca una rotura de stock, coordina las decisiones de inversión y compra de inventario.', 'Una mejora puntual no demuestra que el siguiente tramo de gasto vaya a rendir igual. Avanza con seguimiento y conserva el contexto de promociones o cambios de precio. Escalar es una decisión de cuenta, no simplemente subir un límite diario.'] },
   ],
+  tags: ['PPC', 'Amazon Ads', 'campañas', 'publicidad'],
+  service: '/servicios/gestion-de-ppc/',
+  guides: ['acos-tacos-amazon', 'amazon-ads-sin-impresiones', 'palabras-clave-negativas-amazon'],
+  relatedPosts: ['optimizacion-listings-amazon', 'aumentar-conversion-amazon'],
+  sources: [{ label: 'Amazon Ads: segmentación con Sponsored Products', url: 'https://advertising.amazon.com/es-es/library/guides/targeting-with-sponsored-products', note: 'Mecanismos de segmentación. La estructura, los objetivos y los límites de inversión deben adaptarse a tu cuenta.' }],
   seo: {
-    metaTitle: 'Estrategias PPC Amazon 2025: Maximiza tu ROI [Guía]', // Meta título optimizado
-    metaDescription:
-      'Implementa 5 estrategias PPC avanzadas en Amazon para 2025. Mejora tu ROI, reduce ACoS y optimiza Sponsored Products con esta guía experta.', // Meta descripción optimizada
-    keywords: [
-      'estrategias ppc amazon',
-      'amazon ppc 2025',
-      'reducir acos amazon',
-      'optimizar publicidad amazon',
-      'roi amazon ads',
-      'sponsored products',
-      'gestión ppc amazon',
-    ], // Keywords actualizadas a 2025
+    metaTitle: 'Estrategia PPC Amazon: campañas, presupuesto y rentabilidad',
+    metaDescription: 'Prepara una estrategia PPC en Amazon con objetivos por producto, segmentación, revisión y stock. Qué comprobar antes de automatizar pujas o aumentar inversión.',
   },
 };
