@@ -2,7 +2,9 @@ import type { APIRoute } from 'astro';
 import { buildBoostKnowledge } from '../../lib/boost-knowledge.ts';
 import { handleBoostRequest, type BoostEnvironment } from '../../lib/boost-api.ts';
 
-export const prerender = false;
+// The assistant is disabled for the public launch. Keep a static endpoint
+// placeholder so the retained implementation cannot force an SSR deployment.
+export const prerender = true;
 const knowledge = buildBoostKnowledge();
 
 export const ALL: APIRoute = async context => {

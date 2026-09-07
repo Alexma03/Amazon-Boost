@@ -17,7 +17,7 @@ export default defineConfig({
       return lastmod ? { ...item, lastmod } : item;
     },
   })],
-  output: 'server',
+  output: 'static',
   vite: {
     server: {
       fs: {

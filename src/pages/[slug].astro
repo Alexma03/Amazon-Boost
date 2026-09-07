@@ -5,6 +5,16 @@ import NotFound from '../components/NotFound.astro';
 import { serviceByPath, serviceAliases } from '../data/service-pages';
 import { guideBySlug } from '../data/guides';
 
+export const prerender = true;
+export function getStaticPaths() {
+  const aliasPaths = Object.keys(serviceAliases)
+    .filter((path) => path.replace(/^\//, '').replace(/\/$/, '').includes('/') === false)
+    .map((path) => ({
+    params: { slug: path.replace(/^\//, '').replace(/\/$/, '') },
+    }));
+  return [...aliasPaths, { params: { slug: 'amazon-fba-fbm' } }];
+}
+
 const path = `/${Astro.params.slug}/`;
 if (serviceAliases[path]) return Astro.redirect(serviceAliases[path], 301);
 const page = serviceByPath.get(path);
