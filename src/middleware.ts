@@ -2,7 +2,11 @@ import { defineMiddleware } from 'astro:middleware';
 import { isInternalPath, isPrivateToolPath, pageRedirect, shouldNoindex } from './data/site-index';
 
 export const onRequest = defineMiddleware(async ({ url, request }, next) => {
-  if (import.meta.env.PROD && import.meta.env.PUBLIC_INTERNAL_TOOLS_ENABLED !== 'true' && isPrivateToolPath(url.pathname)) {
+  const isMessagesPanel = /^\/admin\/mensajes(\/|$)/.test(url.pathname);
+  const internalToolsEnabled = import.meta.env.PUBLIC_INTERNAL_TOOLS_ENABLED === 'true';
+  const messagesPanelEnabled = import.meta.env.PUBLIC_ADMIN_MESSAGES_ENABLED !== 'false';
+  const isOtherPrivateTool = !isMessagesPanel;
+  if (import.meta.env.PROD && isPrivateToolPath(url.pathname) && ((isOtherPrivateTool && !internalToolsEnabled) || (isMessagesPanel && !messagesPanelEnabled))) {
     return new Response('Not Found', { status: 404, headers: { 'X-Robots-Tag': 'noindex, nofollow', 'Cache-Control': 'private, no-store' } });
   }
 
