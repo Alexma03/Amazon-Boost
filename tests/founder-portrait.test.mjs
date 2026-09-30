@@ -27,7 +27,7 @@ test('new portrait assets retain square proportions with responsive home markup'
   assert.equal(attr(image, 'srcset'), `${portrait(800)} 800w, ${portrait(1440)} 1440w`);
   assert.equal(attr(image, 'width'), attr(image, 'height'));
   assert.equal(attr(image, 'loading'), 'lazy');
-  assert.match(attr(image, 'alt'), /Sergio Porras/);
+  assert.match(attr(image, 'alt'), /Sergio Porras de Román/);
   assert.deepEqual(founder.childNodes.filter(node => node.tagName).map(node => attr(node, 'class')), [
     'ab-founder-copy ab-founder-heading', 'ab-founder-portrait', 'ab-founder-copy ab-founder-details',
   ]);

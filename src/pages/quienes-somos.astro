@@ -42,7 +42,7 @@ const serviceLinks = [
 
 <Layout
   title="Quiénes somos | Agencia Amazon Boost para marcas privadas"
-  description="Conoce Amazon Boost, agencia Amazon boutique para marcas privadas. Sergio Porras dirige la estrategia junto a un equipo especializado en gestión integral."
+  description="Conoce Amazon Boost, agencia Amazon boutique para marcas privadas. Sergio Porras de Román dirige la estrategia junto a un equipo especializado en gestión integral."
   canonicalPath="/quienes-somos/"
   image="/images/sergio-porras-amazon-boost-v2-1440.webp"
   structuredData={{ type: 'organization' }}
@@ -52,7 +52,7 @@ const serviceLinks = [
       <picture class="about-hero-media">
         <!-- Sustituir estas fuentes por la futura fotografía de oficina aprobada. -->
         <source media="(max-width: 760px)" srcset="/images/sergio-porras-amazon-boost-v2-800.webp" />
-        <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" alt="Sergio Porras, fundador de la agencia Amazon Boost" width="1440" height="1440" fetchpriority="high" decoding="async" />
+        <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" alt="Sergio Porras de Román, fundador de la agencia Amazon Boost" width="1440" height="1440" fetchpriority="high" decoding="async" />
       </picture>
       <div class="about-hero-shade" aria-hidden="true"></div>
       <div class="about-shell about-hero-content">
@@ -79,11 +79,10 @@ const serviceLinks = [
 
     <section class="about-proof-strip" aria-label="Datos de Amazon Boost">
       <div class="about-shell about-proof-grid">
-        {proof.map((item, index) => (
+        {proof.map((item) => (
           <div class="about-proof-item">
             <strong>{item.value}</strong>
             <span>{item.label}</span>
-            {index === 0 && <span class="about-stars" aria-label="Cinco estrellas"><Icon name="star" size={14} filled /><Icon name="star" size={14} filled /><Icon name="star" size={14} filled /><Icon name="star" size={14} filled /><Icon name="star" size={14} filled /></span>}
           </div>
         ))}
       </div>
@@ -125,7 +124,7 @@ const serviceLinks = [
       <div class="about-shell about-direction-grid">
         <div>
           <p class="about-eyebrow">Dirección de Amazon Boost</p>
-          <h2>Sergio Porras,<br />fundador de Amazon Boost.</h2>
+          <h2>Sergio Porras de Román,<br />fundador de Amazon Boost.</h2>
         </div>
         <div>
           <p class="about-direction-lead">Amazon Boost se construye con una idea sencilla: una marca debe poder delegar su cuenta sin perder visibilidad sobre las decisiones que afectan a su negocio.</p>

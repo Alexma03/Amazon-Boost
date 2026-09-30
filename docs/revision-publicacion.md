@@ -1,5 +1,7 @@
 # Revision previa a publicacion
 
+> Registro historico de la candidatura de 69 URL. La preparacion local actual contiene 72 URL publicas y un borrador noindex; consultar `docs/seo-geo-next-steps.md` y la comprobacion tecnica antes de publicar. No representa un nuevo despliegue.
+
 ## Cerrado
 
 - La portada, servicios, casos documentados, guias y blog tienen una sola URL canonica y un solo H1.

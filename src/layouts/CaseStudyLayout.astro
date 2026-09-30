@@ -38,7 +38,8 @@ const indexable = study.kind === 'documented';
         <section class="case-story-section" id="fuentes"><p class="growth-eyebrow">Datos y contexto</p><h2>{study.chart ? 'Las cifras, con su contexto.' : 'Qué sabemos de esta historia.'}</h2>
           {study.chart && <CaseSalesChart kind={study.chart} />}
           <p class="case-disclosure">{study.evidence}</p>
-          {study.proofImage && <figure class="case-evidence-image"><a href={study.proofImage.src} target="_blank" rel="noopener noreferrer" aria-label="Abrir captura original de Seller Central"><img src={study.proofImage.src} alt={study.proofImage.alt} width="868" height="482" loading="lazy" decoding="async" /></a><figcaption>{study.proofImage.caption} <a class="growth-text-link" href={study.proofImage.src} target="_blank" rel="noopener noreferrer">Ver captura original</a></figcaption></figure>}
+          {study.evidenceDetails && <dl class="case-evidence-details">{study.evidenceDetails.map((detail) => <div><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}</dl>}
+          {study.proofImage && <figure class="case-evidence-image"><a href={study.proofImage.src} target="_blank" rel="noopener noreferrer" aria-label="Abrir imagen aportada del caso"><img src={study.proofImage.src} alt={study.proofImage.alt} width="868" height="482" loading="lazy" decoding="async" /></a><figcaption>{study.proofImage.caption} <a class="growth-text-link" href={study.proofImage.src} target="_blank" rel="noopener noreferrer">Ver imagen aportada</a></figcaption></figure>}
           {indexable && <p>Estos resultados describen un proyecto concreto. No son una previsión ni una garantía para otras cuentas.</p>}
         </section>
         {study.pending && <section class="case-story-section" id="documentacion"><p class="growth-eyebrow">Para completar la historia</p><h2>La documentación que falta.</h2><ul class="case-pending-list">{study.pending.map((item) => <li>{item}</li>)}</ul></section>}

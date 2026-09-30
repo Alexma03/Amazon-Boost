@@ -1,5 +1,7 @@
 # Preparación técnica para indexación
 
+> Archivo histórico de la preparación anterior al lanzamiento. La web ya está publicada; este texto no describe por sí solo su estado actual. Para los pasos posteriores consultar `docs/seo-geo-next-steps.md` y verificar el dominio público.
+
 Revisión del 28 de agosto de 2026. Cambios aplicados en la copia de trabajo y la preview privada, no en el dominio de producción. No se ha enviado ninguna solicitud de indexación.
 
 ## Base preparada

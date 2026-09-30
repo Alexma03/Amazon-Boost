@@ -6,7 +6,7 @@ import { allCaseStudies, featuredCaseStudies, draftCaseStudies, archivedCaseStud
 import { homeShowcase, pharmaCase, caseChartSeries, websiteReviews } from '../src/data/home-showcase.ts';
 import { guideBySlug } from '../src/data/guides.ts';
 import { serviceDirectory } from '../src/data/service-pages.ts';
-import { createCaseChartConfig } from '../src/lib/case-sales-chart.ts';
+import { createCaseChartConfig, formatCaseValue } from '../src/lib/case-sales-chart.ts';
 
 const require = createRequire(import.meta.resolve('astro'));
 const { parse } = require('parse5');
@@ -48,9 +48,12 @@ test('case content keeps real periods, approximate organic values and supplied t
   assert.equal(organic.testimonial.url, homeShowcase.featuredCase.reviews[0].url);
   assert.match(organic.evidence, /aproximados/);
   assert.match(organic.evidence, /5.904,74/);
+  assert.match(organic.proofImage.caption, /No se dispone/);
+  assert.match(organic.evidenceDetails.map((item) => item.value).join(' '), /no comparación interanual|no beneficio neto/i);
   assert.doesNotMatch(JSON.stringify(organic), /\+1000%|Amazon's Choice/);
   assert.equal(((pharmaCase.currentSales / pharmaCase.previousSales - 1) * 100).toFixed(2), '994.63');
   assert.match(pharma.evidence, /intervalos distintos/);
+  assert.match(pharma.evidenceDetails.map((item) => item.value).join(' '), /octubre de 2025/);
   assert.match(pharma.sections[2].paragraphs.join(' '), /788,60/);
   assert.ok(!pharma.testimonial);
   for (const study of draftCaseStudies) {
@@ -104,6 +107,11 @@ test('built details expose coherent metadata, navigation and indexability', () =
     assert.ok(links.some((href) => href?.startsWith('https://wa.me/34650606400')));
     assert.ok(links.includes('tel:+34650606400'));
     assert.ok(links.includes('/#auditoria'));
+    if (study.kind === 'documented') {
+      const details = all(tree, (node) => attr(node, 'class') === 'case-evidence-details');
+      assert.equal(details.length, 1);
+      assert.equal(tag(details[0], 'dt').length, study.evidenceDetails.length);
+    }
     if (study.kind === 'archive') assert.doesNotMatch(content(tree), /245%|320%|250%|Miguel Torres|PetJoy|Ganhu|Carlos Velázquez/);
   }
 });
@@ -121,6 +129,9 @@ test('directory preserves approved headline and publishes only documented cases'
 });
 
 test('detail charts reuse existing values and retain an accessible data table', () => {
+  assert.match(formatCaseValue('organic', 600), /^≈ 600/);
+  assert.equal(formatCaseValue('organic', 5904.74), '5904,74\u00a0€');
+  assert.equal(formatCaseValue('pharma', 1116.15), '1116,15\u00a0€');
   for (const key of ['organic', 'pharma']) {
     const config = createCaseChartConfig(key, false);
     assert.deepEqual(config.data.labels, caseChartSeries[key].labels);
@@ -130,7 +141,8 @@ test('detail charts reuse existing values and retain an accessible data table', 
     assert.equal(config.options.animation.duration, 700);
     assert.equal(createCaseChartConfig(key, true).options.animation, false);
     const tooltip = config.options.plugins.tooltip.callbacks.label({ parsed: { y: 5904.74 } });
-    assert.equal(tooltip.startsWith('Aprox.'), key === 'organic');
+    assert.equal(tooltip.startsWith('≈'), false);
+    if (key === 'organic') assert.match(config.options.plugins.tooltip.callbacks.label({ parsed: { y: 820 } }), /^≈ 820/);
     const tree = built(featuredCaseStudies.find((study) => study.chart === key));
     const canvas = tag(tree, 'canvas')[0];
     assert.equal(attr(canvas, 'data-detail-chart'), key);

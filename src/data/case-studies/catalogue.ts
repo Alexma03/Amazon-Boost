@@ -17,6 +17,7 @@ export interface CaseStudy {
   proofImage?: { src: string; alt: string; caption: string };
   testimonial?: { quote: string; author: string; role: string; source: string; url?: string };
   evidence: string;
+  evidenceDetails?: { label: string; value: string }[];
   pending?: string[];
   service: string;
   guides: string[];
@@ -36,7 +37,7 @@ export const featuredCaseStudies: CaseStudy[] = [
     metaTitle: 'Caso Amazon: de 600 € a casi 6.000 € sin publicidad | Amazon Boost',
     metaDescription: 'Cómo conectamos SEO, imágenes y logística FBA + FBM para llevar un producto de Bebés de 600 € a casi 6.000 € mensuales sin invertir en publicidad.',
     image: { src: original.lifestyleImage, alt: 'Composición del pack de productos del caso de Bebés sobre fondo negro', caption: 'Recreación visual del producto. No es una captura de resultados.' },
-    metrics: [{ value: '5.904,74 €', label: 'Pico mensual en la captura' }, { value: '0 €', label: 'Inversión publicitaria' }, { value: 'FBA + FBM', label: 'Operativa coordinada' }],
+    metrics: [{ value: '5.904,74 €', label: 'Pico mensual en la imagen aportada' }, { value: '0 €', label: 'Inversión publicitaria declarada' }, { value: 'FBA + FBM', label: 'Operativa coordinada' }],
     context: [{ label: 'Mercado', value: 'Amazon España' }, { label: 'Punto de partida', value: 'Alrededor de 600 € al mes' }, { label: 'Enfoque', value: 'SEO, imágenes y disponibilidad' }],
     sections: [
       { id: 'reto', label: 'El punto de partida', title: 'Un producto con recorrido. Una operativa que exigía adaptarse.', paragraphs: ['El producto generaba alrededor de 600 € mensuales. Sus requisitos obligaban a alternar entre FBA y FBM: el trabajo comercial tenía que acompañar esos cambios de logística.', 'El objetivo no era comprar más tráfico con campañas. Había que mejorar cómo se encontraba y se entendía el producto, y mantener una oferta coherente con la forma de entrega disponible.'] },
@@ -48,9 +49,14 @@ export const featuredCaseStudies: CaseStudy[] = [
       { id: 'resultado', label: 'Qué cambió', title: 'Más facturación, sin añadir gasto publicitario.', paragraphs: ['La evolución aportada pasa de unos 600 € mensuales a un pico de 5.904,74 €. Es la cifra que resumimos como casi 6.000 € al mes, alcanzada en menos de cinco meses según el relato del proyecto.', 'La inversión publicitaria del caso fue de 0 €. El resultado muestra la evolución conjunta del proyecto; no permite atribuir una cantidad exacta de ventas a cada cambio de SEO, imagen o logística. Tampoco equivale a beneficio neto.'] },
     ],
     chart: 'organic',
-    proofImage: { src: original.chartImage, alt: 'Captura de Seller Central con un pico de ventas de productos encargados de 5.904,74 euros', caption: 'Captura original aportada de Seller Central, con datos parcialmente anonimizados.' },
+    proofImage: { src: original.chartImage, alt: 'Imagen aportada de la evolución de ventas con un pico de 5.904,74 euros', caption: 'Imagen de evolución aportada para el caso, con datos parcialmente anonimizados. No se dispone aquí de una exportación para verificar cada punto.' },
     testimonial: { quote: original.reviews[0].fullQuote, author: original.reviews[0].author, role: 'Cliente de Amazon Boost', source: 'Trustpilot', url: original.reviews[0].url },
-    evidence: 'La captura muestra ventas de productos encargados. La curva interactiva reconstruye visualmente su evolución: los puntos intermedios son aproximados; el pico de 5.904,74 € procede de la captura. La imagen del producto es una recreación, no evidencia de ventas.',
+    evidence: 'La imagen aportada muestra ventas de productos encargados. La curva interactiva reconstruye visualmente su evolución: los puntos intermedios son aproximados; el pico de 5.904,74 € aparece en la imagen. La imagen del producto es una recreación, no evidencia de ventas.',
+    evidenceDetails: [
+      { label: 'Medida', value: 'Ventas de productos encargados; no beneficio neto.' },
+      { label: 'Comparación', value: 'Punto de partida aproximado frente a un pico mensual, no comparación interanual.' },
+      { label: 'Límite', value: 'Sin exportación publicada de la serie ni desglose que atribuya ventas a cada acción.' },
+    ],
     service: '/servicios/optimizacion-de-listados/', guides: ['como-redactar-listings-amazon', 'imagenes-amazon-requisitos', 'evitar-roturas-stock-amazon'], related: ['crecimiento-marca-farmaceutica-amazon'],
   },
   {
@@ -63,12 +69,17 @@ export const featuredCaseStudies: CaseStudy[] = [
     metrics: [{ value: '+994,63%', label: 'Ventas frente al mismo periodo anterior' }, { value: '2.169', label: 'Unidades en el periodo comparado' }, { value: '9 meses', label: 'Intervalo comparado, aproximadamente' }],
     context: [{ label: 'Marca', value: 'Institución española con más de 100 años' }, { label: 'Comparación', value: pharmaCase.period }, { label: 'Identidad', value: 'Reservada por confidencialidad' }],
     sections: [
-      { id: 'reto', label: 'El punto de partida', title: 'La autoridad fuera de Amazon no bastaba dentro.', paragraphs: ['Una marca española con más de un siglo de historia necesitaba trasladar su trayectoria a un canal con reglas comerciales propias. El comprador tenía que entender su propuesta desde la ficha, mientras la cuenta organizaba inversión y disponibilidad.', 'El reto era coordinar esas decisiones en un mercado competido. La identidad de la marca se mantiene reservada; los datos publicados corresponden al material aportado para este proyecto.'] },
+      { id: 'reto', label: 'El punto de partida', title: 'La autoridad fuera de Amazon no bastaba dentro.', paragraphs: ['Una marca española con más de un siglo de historia necesitaba trasladar su trayectoria a un canal con reglas comerciales propias. El comprador tenía que entender su propuesta desde la ficha, mientras la cuenta organizaba inversión y disponibilidad.', 'Según el dossier del proyecto, la gestión comenzó entre septiembre y octubre de 2025. La identidad de la marca se mantiene reservada por confidencialidad.'] },
       { id: 'decisiones', label: 'Qué conectamos', title: 'Diseño, inversión y stock. Una misma dirección.', paragraphs: ['El trabajo se centró en tres frentes complementarios. Presentar mejor el producto, concentrar la inversión y anticipar disponibilidad formaban parte de la misma estrategia.'], decisions: [...pharmaCase.decisions] },
       { id: 'resultado', label: 'Qué cambió', title: 'Una nueva dimensión para el canal.', paragraphs: ['Las ventas del intervalo comparado pasaron de 2.537,70 € a 27.778,49 €, un incremento del 994,63%. Las unidades pasaron de 190 a 2.169. El periodo va de finales de octubre de 2025 a finales de julio de 2026 frente al mismo intervalo del año anterior.', 'La serie mensual aporta otra lectura: desde 1.116,15 € en septiembre de 2025 hasta 5.044,01 € en julio de 2026, con un mínimo de 788,60 € en febrero. Mostrar ese recorrido evita convertir un resultado acumulado en una historia de crecimiento lineal.', 'No se publica un porcentaje de rentabilidad ni un TACOS concreto de este caso. Ventas, beneficio y eficiencia publicitaria son medidas distintas.'] },
     ],
     chart: 'pharma',
     evidence: 'Datos aportados en el dossier del proyecto a partir de Seller Central. La comparación interanual cubre aproximadamente nueve meses; la serie mensual comprende septiembre de 2025 a julio de 2026. Son intervalos distintos y no deben sumarse o compararse como si fueran equivalentes. Identidad reservada por confidencialidad.',
+    evidenceDetails: [
+      { label: 'Medidas', value: 'Ventas de productos encargados y unidades pedidas; no beneficio neto.' },
+      { label: 'Comparación', value: 'Finales de octubre de 2025 a finales de julio de 2026 frente al mismo intervalo del año anterior.' },
+      { label: 'Límite', value: 'La serie mensual tiene otro intervalo. No se publica rentabilidad, TACoS ni una atribución causal de la subida.' },
+    ],
     service: '/servicios/gestion-de-cuenta/', guides: ['brand-analytics-amazon', 'acos-tacos-amazon', 'evitar-roturas-stock-amazon'], related: ['bebes-estrategia-precios-logistica'],
   },
 ];

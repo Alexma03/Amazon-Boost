@@ -36,5 +36,8 @@ export function pageRedirect(url: URL, method: string): string | undefined {
   if (indexable.has(path) && path !== url.pathname) return path + url.search;
 }
 
-const modified = new Map(allBlogPosts.map((post) => [`/blog/${post.slug}/`, post.updatedAt]));
+const modified = new Map([
+  ...allBlogPosts.map((post) => [`/blog/${post.slug}/`, post.updatedAt] as const),
+  ...guides.filter((guide) => guide.updatedAt).map((guide) => [guide.path, guide.updatedAt!] as const),
+]);
 export const sitemapLastModified = (path: string) => modified.get(normalizePagePath(path));

@@ -1,5 +1,6 @@
 export type Guide = {
   slug: string;
+  updatedAt?: string;
   path: string;
   title: string;
   metaTitle: string;
@@ -7,6 +8,7 @@ export type Guide = {
   category: string;
   answer: string;
   service: string;
+  relatedServices?: string[];
   sections: { id: string; title: string; paragraphs: string[]; bullets?: string[]; source?: number }[];
   table?: { caption: string; headings: string[]; rows: string[][] };
   checklist: string[];
@@ -263,7 +265,7 @@ export const guides: Guide[] = [
       { question: '¿Cuánto tarda un lanzamiento?', answer: 'Depende de verificaciones, preparación del producto, contenido y logística. Distingue el trabajo que controla tu equipo de las revisiones que dependen de Amazon.' },
       { question: '¿La publicidad debe empezar el primer día?', answer: 'Solo cuando la oferta esté preparada y el presupuesto tenga un objetivo claro. Activar campañas para una ficha incompleta dificulta interpretar el resultado.' },
     ],
-    related: ['brand-registry-amazon-requisitos', 'imagenes-amazon-requisitos', 'acos-tacos-amazon'],
+    related: ['brand-registry-amazon-requisitos', 'cuando-no-lanzar-en-amazon', 'cuanto-cuesta-lanzar-en-amazon', 'imagenes-amazon-requisitos', 'acos-tacos-amazon'],
     sources: [{ label: 'Amazon España: registro, publicación y gestión de pedidos', url: 'https://sell.amazon.es/vender-online/' }],
   },
   {
@@ -412,7 +414,7 @@ export const guides: Guide[] = [
       { question: '¿Una agencia más cara garantiza más ventas?', answer: 'No. Compara recursos, alcance, ejecución y seguimiento. La tarifa no elimina los límites de demanda, disponibilidad, producto o competencia.' },
       { question: '¿Puedo contratar solo PPC o imágenes?', answer: 'Sí. Es posible definir una intervención concreta sin delegar toda la cuenta. Conviene aclarar quién atenderá las dependencias, como cambios de ficha, precios o reposición.' },
     ],
-    related: ['cambiar-agencia-amazon', 'acos-tacos-amazon', 'lanzar-producto-amazon-checklist'],
+    related: ['cambiar-agencia-amazon', 'agencia-amazon-vs-consultor', 'acos-tacos-amazon', 'lanzar-producto-amazon-checklist'],
     sources: [{ label: 'Amazon España: costes de vender en Amazon', url: 'https://sell.amazon.es/precios', note: 'Esta referencia describe cargos de Amazon, no tarifas de agencias. Los criterios de comparación de propuestas son recomendaciones de Amazon Boost.' }],
   },
   {
@@ -931,7 +933,7 @@ export const guides: Guide[] = [
       { question: '¿Puedo usar el mismo margen para todo el catálogo?', answer: 'No es recomendable. Peso, dimensiones, precio, devolución, rotación y publicidad pueden cambiar mucho entre SKU.' },
       { question: '¿Esta guía incluye las tarifas actuales?', answer: 'No reproduce una tabla que pueda quedar obsoleta. Consulta la página de precios y las herramientas de Amazon en la fecha de tu decisión.' },
     ],
-    related: ['amazon-fba-fbm', 'indice-rendimiento-inventario-ipi-amazon', 'evitar-roturas-stock-amazon', 'inventario-varado-amazon'],
+    related: ['amazon-fba-fbm', 'cuanto-cuesta-lanzar-en-amazon', 'indice-rendimiento-inventario-ipi-amazon', 'evitar-roturas-stock-amazon', 'inventario-varado-amazon'],
     sources: [
       { label: 'Amazon España: precios y tarifas de venta', url: 'https://sell.amazon.es/precios', note: 'Consulta las tarjetas y recargos vigentes en la fecha del cálculo.' },
       { label: 'Amazon España: Logística de Amazon y calculadora de ingresos', url: 'https://sell.amazon.es/logistica-de-amazon' },
@@ -1171,6 +1173,100 @@ export const guides: Guide[] = [
     sources: [
       { label: 'Amazon España: precios y tarifas para vendedores', url: 'https://sell.amazon.es/precios' },
       { label: 'Amazon España: Logística de Amazon', url: 'https://sell.amazon.es/logistica-de-amazon', note: 'Confirma siempre los importes, condiciones y fechas vigentes para tu marketplace.' },
+    ],
+  },
+  {
+    slug: 'agencia-amazon-vs-consultor', path: '/guias/agencia-amazon-vs-consultor/',
+    updatedAt: '2026-09-30',
+    title: 'Agencia Amazon o consultor: qué necesita tu marca',
+    metaTitle: 'Agencia Amazon vs. consultor: diferencias y cómo elegir',
+    description: 'Compara agencia Amazon y consultoría según quién ejecuta, qué accesos se necesitan, cómo se informa y qué equipo tienes. Decide el alcance antes de contratar.',
+    category: 'Contratar una agencia', service: '/agencia-amazon/', relatedServices: ['/consultoria-amazon/'],
+    answer: 'La diferencia decisiva es quién realiza el trabajo cotidiano. Si tu equipo puede ejecutar y necesita criterio externo, una consultoría puede encajar. Si quieres delegar también tareas operativas, valora una agencia y exige que la propuesta concrete qué asumirá. Los nombres comerciales no sustituyen el alcance firmado.',
+    table: { caption: 'Comparación orientativa de alcances', headings: ['Decisión', 'Consultoría', 'Gestión de agencia'], rows: [
+      ['Ejecución', 'Tu equipo lleva a cabo las tareas acordadas.', 'La agencia asume las tareas pactadas; tu empresa aprueba decisiones clave.'],
+      ['Entregable', 'Diagnóstico, prioridades y criterios de seguimiento.', 'Plan y ejecución con informes y responsables definidos.'],
+      ['Accesos', 'Los necesarios para analizar la cuenta, según el proyecto.', 'Permisos delegados adecuados para las tareas contratadas.'],
+      ['Encaje', 'Hay equipo interno y falta dirección o una decisión puntual.', 'Falta capacidad para ejecutar o coordinar el canal.'],
+    ] },
+    sections: [
+      { id: 'responsabilidad', title: 'Empieza por las tareas que nadie está haciendo', paragraphs: ['Escribe quién analiza, quién decide y quién ejecuta en publicidad, catálogo, contenido, incidencias y stock. Una auditoría puede detectar el problema, pero no lo resuelve si después nadie puede aplicar los cambios.', 'En Amazon Boost la página de consultoría describe un trabajo de análisis y dirección con ejecución interna; la de agencia contempla ejecución especializada según el alcance pactado. Es el modelo descrito en esta web, no una definición universal de toda consultoría o agencia.'], bullets: ['Responsable de decidir prioridades.', 'Persona que puede cambiar campañas y listings.', 'Responsable de stock, precio y aprobaciones.', 'Frecuencia y formato de las revisiones.'] },
+      { id: 'accesos', title: 'Aclara permisos y propiedad antes de comenzar', paragraphs: ['La cuenta de vendedor, los activos de marca y el histórico deben seguir bajo control de la empresa titular. Pregunta qué nivel de acceso necesita cada proveedor, durante cuánto tiempo y quién lo retirará al terminar.', 'Amazon Ads permite adaptar el nivel de acceso de cada usuario a sus tareas. Comprueba también por separado los permisos vigentes en Seller Central y evita compartir contraseñas o códigos de verificación.'], source: 0 },
+      { id: 'informes', title: 'Pide decisiones explicadas, no solo reuniones', paragraphs: ['La propuesta debe indicar qué informes recibirás, con qué periodicidad y quién responde a las incidencias. Una consultoría útil deja prioridades que tu equipo pueda ejecutar; una gestión útil deja constancia de qué cambió, por qué y con qué resultado.', 'Compara propuestas sobre el mismo catálogo, mercados y responsabilidad. Un presupuesto de diagnóstico no equivale a una gestión recurrente, aunque ambos lleven el nombre de agencia.'] },
+      { id: 'elegir', title: 'Elige el formato que tu organización puede sostener', paragraphs: ['Si tienes especialistas internos con tiempo para actuar, empieza por una pregunta concreta y un plan de seguimiento. Si la cuenta acumula tareas sin dueño, busca una propuesta que incluya ejecución y coordinación explícitas.', 'Puedes empezar por un alcance puntual y ampliar después. Antes de contratar, pide por escrito entregables, accesos, tareas excluidas, inversión en Ads separada y condiciones de salida. El servicio adecuado es el que cierra las responsabilidades reales, no el que promete más ventas.'] },
+    ],
+    checklist: ['Sé qué tareas puede ejecutar mi equipo.', 'La propuesta identifica quién decide y quién actúa.', 'Los permisos solicitados corresponden al trabajo.', 'Informes y reuniones tienen responsables.', 'Honorarios y publicidad están separados.', 'Las exclusiones y la salida están por escrito.'],
+    faqs: [
+      { question: '¿Una consultoría incluye ejecutar campañas?', answer: 'Depende del contrato. En el modelo descrito por Amazon Boost, la consultoría aporta análisis y dirección mientras tu equipo mantiene la ejecución; la gestión de agencia puede incluir tareas operativas pactadas.' },
+      { question: '¿Puedo contratar primero un diagnóstico?', answer: 'Sí. Un alcance puntual puede ayudar a decidir qué priorizar. Debe quedar claro quién aplicará después las recomendaciones y qué seguimiento se acuerda.' },
+      { question: '¿Pierdo el control de Seller Central al contratar agencia?', answer: 'No debería ser una condición del servicio. La empresa titular conserva el control de la cuenta y concede solo los permisos necesarios según el procedimiento vigente de Amazon.' },
+    ],
+    related: ['cuanto-cuesta-agencia-amazon', 'cambiar-agencia-amazon', 'lanzar-producto-amazon-checklist'],
+    sources: [{ label: 'Amazon Ads: controles de acceso personalizados', url: 'https://advertising.amazon.com/es-es/resources/whats-new/custom-access-controls', note: 'Los alcances comparados reflejan la oferta descrita en Amazon Boost; esta fuente solo fundamenta la comprobación de accesos publicitarios.' }],
+  },
+  {
+    slug: 'cuando-no-lanzar-en-amazon', path: '/guias/cuando-no-lanzar-en-amazon/',
+    updatedAt: '2026-09-30',
+    title: 'Cuándo no merece la pena lanzar un producto en Amazon',
+    metaTitle: 'Cuándo no lanzar en Amazon: margen, stock y requisitos',
+    description: 'Un método para decidir cuándo aplazar o descartar un lanzamiento en Amazon: margen por unidad, demanda, reposición y restricciones. Sin umbrales universales.',
+    category: 'Lanzamiento', service: '/servicios/lanzamiento-marca-privada-amazon/',
+    answer: 'No conviene lanzar todavía cuando no puedes verificar que el producto es vendible, el margen depende de supuestos optimistas, falta capacidad de reposición o no existe una diferencia clara para el comprador. Aplazar no es renunciar: define qué evidencia o cambio haría viable la decisión.',
+    table: { caption: 'Señales para detener o replantear la salida', headings: ['Señal', 'Qué comprobar', 'Decisión posible'], rows: [
+      ['Requisitos', 'Categoría, documentación y elegibilidad del producto.', 'No publicar hasta resolver el bloqueo.'],
+      ['Margen', 'Contribución por unidad tras costes y publicidad prevista.', 'Cambiar producto, precio u operativa.'],
+      ['Demanda', 'Búsquedas relevantes y ofertas competidoras comparables.', 'Validar un nicho o argumento distinto.'],
+      ['Reposición', 'Plazo real desde pedido a unidad disponible.', 'Reducir alcance o preparar inventario.'],
+    ] },
+    sections: [
+      { id: 'requisitos', title: 'Detén el lanzamiento si falta autorización o documentación', paragraphs: ['Amazon indica que algunas categorías, marcas o productos requieren aprobación y que los requisitos concretos se comprueban en Seller Central. Antes de producir el listing o enviar unidades, revisa el producto, la categoría, el marketplace y la documentación exigible.', 'Una ficha bonita no resuelve un requisito de seguridad o conformidad. Si hay dudas regulatorias, consulta al especialista competente; esta guía no sustituye asesoramiento legal ni la validación de Amazon.'], source: 0 },
+      { id: 'margen', title: 'No bases la decisión en un precio y un TACoS ideales', paragraphs: ['Calcula precio neto, producto, comisiones, preparación, transporte, FBA o FBM, almacenamiento, devoluciones y una hipótesis publicitaria. Haz un escenario conservador de precio, conversión y reposición, y deja visible qué supuesto sostiene el beneficio.', 'Si solo funciona con el mejor escenario o sin asignar coste a las devoluciones y a la publicidad, todavía no hay base para invertir en escala. No existe un porcentaje de margen válido para todas las categorías.'], source: 1 },
+      { id: 'demanda', title: 'Pregunta por qué te comprarían a ti', paragraphs: ['Identifica búsquedas relacionadas con el producto y compara oferta, precio, contenido y experiencia de entrega de alternativas reales. Una categoría con ventas no implica que tu referencia tenga demanda suficiente a tu precio.', 'Si el argumento diferencial no se puede demostrar o la competencia obliga a un precio incompatible con el margen, prueba otra propuesta de valor antes de abrir más campañas. Documenta qué señal concreta cambiaría la decisión.'] },
+      { id: 'stock', title: 'Un piloto solo sirve si puedes reponerlo', paragraphs: ['Calcula el plazo completo de fabricación, preparación, transporte, recepción y puesta a la venta. Define quién vigila la cobertura y qué harás si la demanda supera o no alcanza la hipótesis.', 'Si no puedes atender un pedido inicial ni sostener una reposición razonable, reduce referencias o retrasa la activación. FBA y FBM tienen costes y responsabilidades distintos; compáralos con tu operativa real.'], source: 2 },
+    ],
+    checklist: ['Producto y categoría revisados en Seller Central.', 'Documentación y autorizaciones pendientes identificadas.', 'Margen calculado en escenario conservador.', 'Demanda y alternativas comparadas por producto.', 'Motivo de compra diferenciador comprobable.', 'Reposición y fecha de nueva decisión definidas.'],
+    faqs: [
+      { question: '¿Existe un margen mínimo universal para lanzar?', answer: 'No. Depende del producto, del capital comprometido, del coste de captación y de los objetivos de la empresa. El cálculo debe hacerse por SKU y con escenarios.' },
+      { question: '¿Mucha competencia significa que no debo entrar?', answer: 'No por sí sola. La pregunta es si puedes ofrecer una razón de compra diferenciada y sostener precio, disponibilidad y captación sin destruir el margen.' },
+      { question: '¿Puedo probar con un solo producto?', answer: 'Sí, si el producto cumple los requisitos y el piloto permite aprender. Define presupuesto, stock, duración y criterio para continuar o parar antes de activarlo.' },
+    ],
+    related: ['lanzar-producto-amazon-checklist', 'cuanto-cuesta-lanzar-en-amazon', 'tarifas-fba-calcular-rentabilidad'],
+    sources: [
+      { label: 'Amazon España: categorías y productos que requieren aprobación', url: 'https://sell.amazon.es/vender-online' },
+      { label: 'Amazon España: precios, tarifas y calculadora de ingresos', url: 'https://sell.amazon.es/precios' },
+      { label: 'Amazon España: Logística de Amazon', url: 'https://sell.amazon.es/logistica-de-amazon' },
+    ],
+  },
+  {
+    slug: 'cuanto-cuesta-lanzar-en-amazon', path: '/guias/cuanto-cuesta-lanzar-en-amazon/',
+    updatedAt: '2026-09-30',
+    title: 'Cuánto cuesta lanzar una marca en Amazon: partidas reales',
+    metaTitle: 'Cuánto cuesta lanzar en Amazon: presupuesto por partidas',
+    description: 'Desglosa el presupuesto de un lanzamiento en Amazon: producto, inventario, contenido, tarifas, logística, publicidad y gestión. Sin cifras universales inventadas.',
+    category: 'Lanzamiento', service: '/servicios/lanzamiento-marca-privada-amazon/',
+    answer: 'No hay una inversión inicial única. Separa el dinero inmovilizado en producto y stock, la preparación de cuenta y contenido, las tarifas de venta y logística, la publicidad de prueba y los honorarios profesionales si contratas ayuda. Presupuesta también una reserva para corregir y reponer; no confundas gasto inicial con coste por unidad.',
+    table: { caption: 'Presupuesto de lanzamiento por tipo de coste', headings: ['Partida', 'Qué anotar', 'Cómo se comporta'], rows: [
+      ['Producto y stock', 'Fabricación, muestras, embalaje, primer pedido y reposición.', 'Capital inicial y coste por unidad.'],
+      ['Contenido y cuenta', 'Registro, fotografía, textos, diseño, traducciones y validaciones.', 'Trabajo de preparación según alcance.'],
+      ['Amazon y logística', 'Plan, comisión, FBA o FBM, transporte y almacenamiento.', 'Costes de venta y operativa variables.'],
+      ['Publicidad y servicios', 'Presupuesto de Ads y honorarios de gestión por separado.', 'Inversión de prueba y servicio contratado.'],
+    ] },
+    sections: [
+      { id: 'partidas', title: 'Distingue inversión de arranque y coste de cada venta', paragraphs: ['El primer pedido de producto, las fotografías y la preparación de fichas se pagan antes de conocer el resultado comercial. Las comisiones, el envío, algunas devoluciones y la captación afectan a cada venta o periodo. Mezclarlos en una sola cifra oculta cuánto capital necesitas y cuándo lo recuperarías.', 'Haz un presupuesto por SKU y un calendario de caja: pago a proveedor, llegada de stock, activación de campañas y reposición. Registra qué costes son compartidos y con qué criterio los repartes.'] },
+      { id: 'amazon', title: 'Consulta las tarifas vigentes de Amazon para tu producto', paragraphs: ['Amazon publica costes distintos según plan, categoría y método logístico. Sus herramientas de estimación ayudan a comparar opciones, pero debes introducir datos correctos de precio, peso, dimensiones y marketplace.', 'No copies un importe fijo de otra categoría ni de una captura antigua. Además de la comisión y la preparación logística, contempla almacenamiento u otros cargos que correspondan a tu caso. Revisa la cifra en Seller Central antes de comprometer el presupuesto.'], source: 0 },
+      { id: 'marketing', title: 'Reserva publicidad de prueba sin prometer un CPC', paragraphs: ['Sponsored Products funciona por coste por clic: tú eliges presupuesto y pujas, pero los clics y pedidos no se garantizan. Define qué quieres aprender de la primera inversión y cuándo revisarás términos, conversiones y margen.', 'Si una agencia prepara o gestiona el lanzamiento, sus honorarios no son el presupuesto publicitario ni las tarifas de Amazon. Pide una propuesta con entregables, responsables y posibles trabajos adicionales por escrito.'], source: 1 },
+      { id: 'escenarios', title: 'Calcula cuánto puedes perder antes de escalar', paragraphs: ['Prepara un escenario base y otro conservador con menos pedidos, más coste de captación, devoluciones o reposición más lenta. No conviertas el mejor caso en una previsión comercial.', 'Si el escenario conservador supera el capital disponible, reduce el alcance, cambia el formato o aplaza el lanzamiento. La cifra que importa no es solo cuánto cuesta publicar la ficha, sino cuánto puede sostener la empresa hasta tomar una decisión informada.'] },
+    ],
+    checklist: ['Capital de inventario separado del gasto operativo.', 'Coste unitario y calendario de caja preparados.', 'Tarifas de Amazon verificadas para cada SKU.', 'FBA y FBM comparados con datos propios.', 'Ads y honorarios de agencia separados.', 'Escenario conservador y reserva definidos.'],
+    faqs: [
+      { question: '¿Cuánto dinero necesito para empezar?', answer: 'Depende del producto, pedido mínimo, contenido, logística y prueba comercial. Esta guía organiza las partidas; no sustituye un presupuesto por producto y marketplace.' },
+      { question: '¿El presupuesto de anuncios está incluido en la tarifa de Amazon?', answer: 'No. Las campañas son una inversión distinta de las tarifas de venta y logística. También deben separarse de los honorarios de una agencia si la contratas.' },
+      { question: '¿Y si fabrico el producto yo mismo?', answer: 'Registra igualmente materiales, mano de obra, controles, embalaje y capital inmovilizado. Que no haya una factura de proveedor no convierte el producto en gratuito.' },
+    ],
+    related: ['tarifas-fba-calcular-rentabilidad', 'cuando-no-lanzar-en-amazon', 'cuanto-cuesta-agencia-amazon'],
+    sources: [
+      { label: 'Amazon España: precios y tarifas de venta', url: 'https://sell.amazon.es/precios' },
+      { label: 'Amazon Ads: funcionamiento de Sponsored Products', url: 'https://advertising.amazon.com/es-es/solutions/products/sponsored-products' },
     ],
   },
   {

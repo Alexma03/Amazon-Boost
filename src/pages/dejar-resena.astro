@@ -28,7 +28,7 @@ const linkedInUrl = 'https://www.linkedin.com/in/sergio-deroman-amazon/';
         <header><p>Elige dónde compartirla</p><h2>Una opinión real vale más cuando puede verificarse.</h2></header>
         <div class="review-platform-grid">
           <a class="review-platform is-trustpilot" href={trustpilotUrl} target="_blank" rel="noopener noreferrer">
-            <div><span class="review-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={17} filled />)}</span><strong>Trustpilot</strong></div>
+            <div><span class="review-stars" aria-hidden="true"><Icon name="star" size={17} filled /></span><strong>Trustpilot</strong></div>
             <p>Publica una reseña sobre tu experiencia con la agencia o consulta las opiniones disponibles.</p>
             <b>Abrir Trustpilot <Icon name="arrow-up-right" size={18} /></b>
           </a>
@@ -43,7 +43,7 @@ const linkedInUrl = 'https://www.linkedin.com/in/sergio-deroman-amazon/';
 
     <section class="review-proof">
       <div class="sub-shell review-proof-layout">
-        <div><p>Opinión verificada / Cliente</p><h2>El resultado importa. El camino hasta él también.</h2></div>
+        <div><p>Opinión pública / Cliente</p><h2>El resultado importa. El camino hasta él también.</h2></div>
         <blockquote>
           <span class="review-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={18} filled />)}</span>
           <p>“Una empresa muy recomendable si vendes en Amazon. Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.”</p>

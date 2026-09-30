@@ -6,6 +6,7 @@ import { siteUrl, indexablePaths, pendingReleasePaths, normalizePagePath, canoni
 import { serviceAliases } from '../src/data/service-pages.ts';
 import { excludedCasePaths } from '../src/data/case-studies/catalogue.ts';
 import { allBlogPosts } from '../src/data/blog/index.ts';
+import { guides } from '../src/data/guides.ts';
 
 const require = createRequire(import.meta.resolve('astro'));
 const { parse } = require('parse5');
@@ -90,6 +91,11 @@ test('sitemap matches the intended public collection exactly and uses real blog 
     assert.equal(sitemapLastModified(path), post.updatedAt);
     const entry = entries.find((node) => content(tag(node, 'loc')[0]) === siteUrl + path);
     assert.ok(content(tag(entry, 'lastmod')[0]).startsWith(post.updatedAt));
+  }
+  for (const guide of guides.filter((guide) => guide.updatedAt)) {
+    assert.equal(sitemapLastModified(guide.path), guide.updatedAt);
+    const entry = entries.find((node) => content(tag(node, 'loc')[0]) === siteUrl + guide.path);
+    assert.ok(content(tag(entry, 'lastmod')[0]).startsWith(guide.updatedAt));
   }
   assert.equal(sitemapLastModified('/'), undefined);
   assert.equal(sitemapLastModified('/guias/'), undefined);

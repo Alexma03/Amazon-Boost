@@ -236,9 +236,9 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         <strong>{item.value}</strong>
         <span>{item.label}</span>
         {index === 0 && (
-          <a class="ab-proof-rating" href="#resenas" aria-label="Ver opiniones de clientes de Amazon Boost">
-            <span class="ab-proof-stars" aria-label="Cinco estrellas">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={12} strokeWidth={1.8} filled />)}</span>
-            <small>5/5 en reseñas</small>
+          <a class="ab-proof-rating" href={homeShowcase.featuredCase.reviews[0].url} target="_blank" rel="noopener noreferrer" aria-label="Ver la reseña de Alberto en Trustpilot, valorada con cinco estrellas">
+            <span class="ab-proof-stars" aria-label="Cinco estrellas en la reseña de Alberto">{[0, 1, 2, 3, 4].map(() => <Icon name="star" size={12} strokeWidth={1.8} filled />)}</span>
+            <small>Reseña de Alberto</small>
             <Icon name="arrow-up-right" size={13} />
           </a>
         )}
@@ -327,10 +327,10 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <h2 id="ab-founder-heading">Tu cuenta, dirigida como una parte más de tu negocio.</h2>
   </header>
   <div class="ab-founder-portrait" data-reveal>
-    <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" srcset="/images/sergio-porras-amazon-boost-v2-800.webp 800w, /images/sergio-porras-amazon-boost-v2-1440.webp 1440w" sizes="(max-width: 1100px) 100vw, 41vw" width="1440" height="1440" alt="Sergio Porras, fundador de Amazon Boost" loading="lazy" decoding="async" />
+    <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" srcset="/images/sergio-porras-amazon-boost-v2-800.webp 800w, /images/sergio-porras-amazon-boost-v2-1440.webp 1440w" sizes="(max-width: 1100px) 100vw, 41vw" width="1440" height="1440" alt="Sergio Porras de Román, fundador de Amazon Boost" loading="lazy" decoding="async" />
     <div class="ab-portrait-label">
-      <div class="ab-portrait-identity"><strong>Sergio Porras</strong><span>Fundador / Amazon Boost</span></div>
-      <a class="ab-founder-linkedin" href="https://www.linkedin.com/in/sergio-deroman-amazon/" target="_blank" rel="noopener noreferrer" aria-label="Ver el perfil de Sergio Porras en LinkedIn (se abre en una pestaña nueva)" title="Ver perfil en LinkedIn"><span aria-hidden="true">in</span></a>
+      <div class="ab-portrait-identity"><strong>Sergio Porras de Román</strong><span>Fundador / Amazon Boost</span></div>
+      <a class="ab-founder-linkedin" href="https://www.linkedin.com/in/sergio-deroman-amazon/" target="_blank" rel="noopener noreferrer" aria-label="Ver el perfil de Sergio Porras de Román en LinkedIn (se abre en una pestaña nueva)" title="Ver perfil en LinkedIn"><span aria-hidden="true">in</span></a>
     </div>
   </div>
   <div class="ab-founder-copy ab-founder-details" data-reveal><p>Creé Amazon Boost como agencia Amazon boutique para marcas privadas. Dirijo la estrategia de cada cuenta junto al equipo, cerca de las decisiones que afectan a las ventas y al margen.</p><blockquote>“Primero entendemos el negocio. Después construimos cómo hacerlo crecer.”</blockquote><a href="#auditoria">Hablar con Sergio <Icon name="arrow-up-right" size={17} /></a></div>

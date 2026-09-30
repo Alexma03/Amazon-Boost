@@ -21,6 +21,8 @@ test('about page remains a complete but non-indexable release draft', () => {
   assert.equal(attr(tag(tree, 'meta').find((node) => attr(node, 'name') === 'robots'), 'content'), 'noindex, nofollow');
   assert.match(text(tree), /Delegar la cuenta no debería significar dejar de entenderla/);
   assert.match(text(tree), /No vendemos atajos/);
+  assert.match(text(tree), /Sergio Porras de Román/);
+  assert.equal(withClass('about-stars').length, 0);
   assert.doesNotMatch(text(tree), /garantizamos|resultados garantizados|agencia n[úu]mero 1/i);
 });
 

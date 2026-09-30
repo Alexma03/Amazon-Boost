@@ -76,7 +76,7 @@ export function buildPageSchema({ url, title, description, type, pageType, image
     graph.push({
       '@type': 'Person',
       '@id': schemaIds.founder,
-      name: 'Sergio Porras',
+      name: 'Sergio Porras de Román',
       url: schemaIds.founder,
       jobTitle: 'Fundador de Amazon Boost',
       worksFor: ref(schemaIds.organization),

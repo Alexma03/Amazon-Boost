@@ -2,6 +2,12 @@ import type { ChartConfiguration } from 'chart.js';
 import { caseChartSeries } from '../data/home-showcase.ts';
 
 export type CaseChartKey = keyof typeof caseChartSeries;
+export function formatCaseValue(key: CaseChartKey, amount: number): string {
+  const exactOrganicPeak = key === 'organic' && amount === 5904.74;
+  const approximate = key === 'organic' && !exactOrganicPeak;
+  const euro = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: approximate ? 0 : 2 });
+  return `${approximate ? '≈ ' : ''}${euro.format(amount)}`;
+}
 export function createCaseChartConfig(key: CaseChartKey, reducedMotion: boolean): ChartConfiguration<'line'> {
   const series = caseChartSeries[key];
   const euro = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
@@ -12,7 +18,7 @@ export function createCaseChartConfig(key: CaseChartKey, reducedMotion: boolean)
       responsive: true, maintainAspectRatio: false,
       animation: reducedMotion ? false : { duration: 700 },
       interaction: { mode: 'nearest', axis: 'x', intersect: false },
-      plugins: { legend: { display: false }, tooltip: { displayColors: false, backgroundColor: '#101010', titleColor: '#ffb240', bodyColor: '#fff', padding: 12, callbacks: { label: (context) => `${series.approximate ? 'Aprox. ' : ''}${euro.format(context.parsed.y ?? 0)}` } } },
+      plugins: { legend: { display: false }, tooltip: { displayColors: false, backgroundColor: '#101010', titleColor: '#ffb240', bodyColor: '#fff', padding: 12, callbacks: { label: (context) => formatCaseValue(key, context.parsed.y ?? 0) } } },
       scales: {
         x: { grid: { display: false }, border: { display: false }, ticks: { color: '#5f6266', maxRotation: 0, maxTicksLimit: 6, font: { size: 11 } } },
         y: { beginAtZero: true, border: { display: false }, grid: { color: '#ececee' }, ticks: { color: '#5f6266', maxTicksLimit: 6, callback: (value) => euro.format(Number(value)) } },

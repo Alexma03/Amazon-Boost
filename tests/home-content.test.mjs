@@ -20,16 +20,29 @@ test('social proof is integrated into the first metric without a floating hero c
   const proof = all(home, node => hasClass(node, 'ab-proof-rail'))[0];
   const reviewMetric = all(proof, node => hasClass(node, 'ab-proof-reviews'))[0];
   assert.match(text(reviewMetric), /\+20/);
-  assert.match(text(reviewMetric), /5\/5 en reseñas/);
+  assert.match(text(reviewMetric), /Reseña de Alberto/);
+  assert.doesNotMatch(text(reviewMetric), /5\/5 en reseñas/);
   const rating = all(reviewMetric, node => hasClass(node, 'ab-proof-rating'))[0];
-  assert.equal(attr(rating, 'href'), '#resenas');
+  assert.equal(attr(rating, 'href'), homeShowcase.featuredCase.reviews[0].url);
   const stars = all(reviewMetric, node => hasClass(node, 'ab-proof-stars'));
   assert.equal(stars.length, 1);
-  assert.equal(attr(stars[0], 'aria-label'), 'Cinco estrellas');
+  assert.equal(attr(stars[0], 'aria-label'), 'Cinco estrellas en la reseña de Alberto');
   assert.equal(all(stars[0], node => node.tagName === 'svg').length, 5);
 
   assert.equal(proof.childNodes.filter(node => node.tagName === 'div').length, homeShowcase.proof.length);
   for (const item of homeShowcase.proof) assert.ok(text(proof).includes(item.value));
+});
+
+test('review invitation distinguishes an individual five-star opinion from the platform score', () => {
+  const page = parse(readFileSync(new URL('../dist/dejar-resena/index.html', import.meta.url), 'utf8'));
+  const proof = all(page, node => hasClass(node, 'review-proof'))[0];
+  assert.match(text(proof), /Opinión pública \/ Cliente/);
+  assert.doesNotMatch(text(proof), /Opinión verificada/);
+  const stars = all(proof, node => hasClass(node, 'review-stars'))[0];
+  assert.equal(all(stars, node => node.tagName === 'svg').length, 5);
+  const platform = all(page, node => hasClass(node, 'is-trustpilot'))[0];
+  const platformMark = all(platform, node => hasClass(node, 'review-stars'))[0];
+  assert.equal(all(platformMark, node => node.tagName === 'svg').length, 1);
 });
 
 test('homepage labels the Seller Central screen as a simulation and keeps case metrics defensible', () => {

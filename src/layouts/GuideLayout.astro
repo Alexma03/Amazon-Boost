@@ -11,14 +11,16 @@ const { guide } = Astro.props;
 const service = serviceDirectory.find((item) => item.path === guide.service)!;
 const words = [guide.answer, ...guide.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.bullets ?? [])]), ...guide.faqs.map((faq) => faq.answer)].join(' ').split(/\s+/).length;
 const minutes = Math.max(3, Math.ceil(words / 200));
+const updatedAt = guide.updatedAt ?? '2026-08-29';
+const updatedLabel = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${updatedAt}T00:00:00Z`));
 ---
-<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description } }}>
+<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description, ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {}) } }}>
   <article class="growth-page guide-page">
     <header class="growth-hero guide-hero"><div class="growth-shell">
       <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Guías Amazon', path: '/guias/' }, { name: guide.title, path: guide.path }]} />
       <p class="growth-eyebrow">{guide.category} / Guía práctica</p>
       <h1>{guide.title}</h1>
-      <div class="guide-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{minutes} min de lectura</span><span>Actualizado <time datetime="2026-08-29">29 agosto 2026</time></span></div>
+      <div class="guide-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{minutes} min de lectura</span><span>Actualizado <time datetime={updatedAt}>{updatedLabel}</time></span></div>
     </div></header>
     <div class="growth-shell guide-layout">
       <aside class="guide-sidebar">
@@ -27,7 +29,7 @@ const minutes = Math.max(3, Math.ceil(words / 200));
         <a class="guide-service-link" href={service.path}><span>¿Necesitas ayuda?</span><strong>{service.title}</strong><span>Conocer el servicio</span></a>
       </aside>
       <div class="guide-content">
-        <section class="guide-answer" id="respuesta"><p class="growth-eyebrow">La respuesta breve</p><p>{guide.answer}</p></section>
+        <section class="guide-answer" id="respuesta"><p class="growth-eyebrow">La respuesta breve</p><p>{guide.answer}</p>{guide.relatedServices?.map((path) => <a href={path}>Ver {serviceDirectory.find((item) => item.path === path)?.title}</a>)}</section>
         <aside class="guide-early-cta" aria-label="Solicitar una auditoría"><div><span>¿Quieres aplicarlo a tu cuenta?</span><strong>Te indicamos qué priorizar.</strong></div><a href="/#auditoria">Solicitar auditoría <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></aside>
         {guide.table && <div class="guide-table-scroll" role="region" aria-label={guide.table.caption} tabindex="0"><table><caption>{guide.table.caption}</caption><thead><tr>{guide.table.headings.map((heading) => <th scope="col">{heading}</th>)}</tr></thead><tbody>{guide.table.rows.map((row) => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
         {guide.sections.map((section) => <section class="guide-section" id={`apartado-${section.id}`}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}{section.source !== undefined && <p class="guide-citation">Referencia: <a href={guide.sources[section.source].url} target="_blank" rel="noopener noreferrer">{guide.sources[section.source].label}</a></p>}</section>)}
