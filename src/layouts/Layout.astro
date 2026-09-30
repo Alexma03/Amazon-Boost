@@ -113,11 +113,15 @@ const boostAssistantEnabled = import.meta.env.PUBLIC_BOOST_ASSISTANT_ENABLED ===
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Structured Data (Schema.org) -->
-    {structuredData ? (
-      <StructuredData type={structuredData.type} data={structuredData.data} />
-    ) : (
-      <StructuredData type="organization" />
-    )}
+    {!excludeFromIndex && <StructuredData
+      type={structuredData?.type ?? 'organization'}
+      data={structuredData?.data}
+      url={canonicalURL.href}
+      title={title}
+      description={description}
+      image={image}
+      pageType={pageType}
+    />}
     
   </head>
   <body class="font-sans bg-white">

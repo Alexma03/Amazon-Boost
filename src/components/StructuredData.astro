@@ -1,120 +1,23 @@
 ---
-// Componente para agregar Structured Data (Schema.org) a las páginas
-// Mejora cómo Google entiende y muestra tu contenido
-
-interface BreadcrumbItem {
-  name: string;
-  url: string;
-}
-
-import { canonicalPageUrl } from '../data/site-index';
+import { buildPageSchema } from '../lib/structured-data';
 
 interface Props {
   type?: 'organization' | 'article' | 'service' | 'breadcrumb';
   data?: {
-    items?: BreadcrumbItem[];
-    [key: string]: any;
+    title?: string;
+    description?: string;
+    image?: string | null;
+    date?: string;
+    dateModified?: string;
   };
+  url: string;
+  title: string;
+  description: string;
+  image?: string | null;
+  pageType?: string;
 }
 
-const { type = 'organization', data } = Astro.props;
-const site = Astro.site;
-const absoluteURL = (path: string) => new URL(path, site || 'https://amznboost.es').href;
-const logoURL = absoluteURL('/android-chrome-512x512.png');
-
-// Schema para Organization (usado en homepage)
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": absoluteURL('/#organization'),
-  "name": "Amazon Boost",
-  "url": site?.toString() || "https://amznboost.es",
-  "logo": logoURL,
-  "description": "Agencia Amazon para marcas privadas en España y Europa",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "ES"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer service",
-    "telephone": "+34650606400",
-    "email": "info@amznboost.es",
-    "availableLanguage": ["Spanish"]
-  },
-  "sameAs": [
-    "https://es.trustpilot.com/review/amznboost.es"
-  ]
-};
-
-// Schema para Article (usado en blog posts)
-const articleSchema = data && type === 'article' ? {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": data.title,
-  "description": data.description,
-  "image": data.image ? absoluteURL(data.image) : undefined,
-  "mainEntityOfPage": canonicalPageUrl(Astro.url.pathname),
-  "datePublished": data.date,
-  "dateModified": data.dateModified || data.date,
-  "author": {
-    "@type": "Organization",
-    "name": "Amazon Boost"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Amazon Boost",
-    "logo": {
-      "@type": "ImageObject",
-      "url": logoURL
-    }
-  }
-} : null;
-
-// Schema para Service (usado en páginas de servicios)
-const serviceSchema = data && type === 'service' ? {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": data.title,
-  "description": data.description,
-  "url": canonicalPageUrl(Astro.url.pathname),
-  "provider": {
-    "@type": "Organization",
-    "name": "Amazon Boost",
-    "url": absoluteURL('/')
-  },
-  "serviceType": "Agencia de Amazon"
-} : null;
-
-// Schema para Breadcrumbs
-const breadcrumbSchema = data && type === 'breadcrumb' ? {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": (data.items as BreadcrumbItem[]).map((item, index) => ({
-    "@type": "ListItem",
-    "position": index + 1,
-    "name": item.name,
-    "item": absoluteURL(item.url)
-  }))
-} : null;
-
-// Seleccionar el schema apropiado
-let schema;
-switch(type) {
-  case 'article':
-    schema = articleSchema;
-    break;
-  case 'service':
-    schema = serviceSchema;
-    break;
-  case 'breadcrumb':
-    schema = breadcrumbSchema;
-    break;
-  default:
-    schema = organizationSchema;
-}
+const { type = 'organization', data, url, title, description, image, pageType } = Astro.props;
+const schema = buildPageSchema({ type, data, url, title, description, image, pageType });
 ---
-
-{schema && (
-  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
-)}
+<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />

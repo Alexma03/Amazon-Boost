@@ -15,7 +15,7 @@ const service = serviceDirectory.find((entry) => entry.path === study.service)!;
 const related = study.related.map((slug) => caseStudiesBySlug[slug]);
 const indexable = study.kind === 'documented';
 ---
-<Layout title={study.metaTitle} description={study.metaDescription} image={study.image?.src ?? null} canonicalPath={casePath(study)} type={indexable ? 'article' : 'website'} pageType="case-study" aiOptimized={false} noindex={!indexable} structuredData={indexable ? { type: 'article', data: { title: study.title, description: study.metaDescription, image: study.image?.src, dateModified: '2026-08-28' } } : undefined}>
+<Layout title={study.metaTitle} description={study.metaDescription} image={study.image?.src ?? null} canonicalPath={casePath(study)} type={indexable ? 'article' : 'website'} pageType="case-study" aiOptimized={false} noindex={!indexable} structuredData={indexable ? { type: 'article', data: { title: study.title, description: study.metaDescription, image: study.image?.src } } : undefined}>
   <article class="growth-page case-page" data-case-status={study.kind}>
     <header class="growth-hero case-detail-hero"><div class="growth-shell">
       <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Casos de éxito', path: '/casos-de-exito/' }, { name: study.sector, path: casePath(study) }]} />

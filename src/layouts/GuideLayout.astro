@@ -12,7 +12,7 @@ const service = serviceDirectory.find((item) => item.path === guide.service)!;
 const words = [guide.answer, ...guide.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.bullets ?? [])]), ...guide.faqs.map((faq) => faq.answer)].join(' ').split(/\s+/).length;
 const minutes = Math.max(3, Math.ceil(words / 200));
 ---
-<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description, dateModified: '2026-08-29' } }}>
+<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description } }}>
   <article class="growth-page guide-page">
     <header class="growth-hero guide-hero"><div class="growth-shell">
       <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Guías Amazon', path: '/guias/' }, { name: guide.title, path: guide.path }]} />

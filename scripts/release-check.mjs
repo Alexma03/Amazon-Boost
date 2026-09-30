@@ -11,12 +11,11 @@ const failures = [];
 
 const read = (path) => readFileSync(join(root, path), 'utf8');
 const outputFile = (path) => path === '/' ? join(dist, 'index.html') : join(dist, path.slice(1), 'index.html');
-const isKnownServerPage = (path) => path.split('/').filter(Boolean).length === 1 && existsSync(join(root, 'src', 'pages', '[slug].astro'));
 
 if (!existsSync(dist)) failures.push('No existe dist/. Ejecuta primero la compilación.');
 
 for (const path of indexablePaths) {
-  if (!existsSync(outputFile(path)) && !isKnownServerPage(path)) failures.push(`Falta la página pública compilada: ${path}`);
+  if (!existsSync(outputFile(path))) failures.push(`Falta la página pública compilada: ${path}`);
 }
 
 const sitemap = existsSync(join(dist, 'sitemap-0.xml')) ? read('dist/sitemap-0.xml') : '';

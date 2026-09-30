@@ -89,12 +89,13 @@ test('article metadata, dates, content and contextual links match the record', (
     assert.equal(attr(tag(tree, 'link').find((node) => attr(node, 'rel') === 'canonical'), 'href'), 'https://amznboost.es' + path);
     const schemas = tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(content(node)));
     assert.equal(schemas.length, 2);
-    const article = schemas.find((schema) => schema['@type'] === 'Article');
+    const entities = schemas.flatMap((schema) => schema['@graph'] ?? [schema]);
+    const article = entities.find((schema) => schema['@type'] === 'BlogPosting');
     assert.equal(article.headline, post.title);
     assert.equal(article.datePublished, post.date);
     assert.equal(article.dateModified, post.updatedAt);
-    assert.equal(article.mainEntityOfPage, 'https://amznboost.es' + path);
-    assert.equal(schemas.find((schema) => schema['@type'] === 'BreadcrumbList').itemListElement.at(-1).item, 'https://amznboost.es' + path);
+    assert.equal(article.mainEntityOfPage['@id'], 'https://amznboost.es' + path + '#webpage');
+    assert.equal(entities.find((schema) => schema['@type'] === 'BreadcrumbList').itemListElement.at(-1).item, 'https://amznboost.es' + path);
     assert.ok(tag(tree, 'time').some((node) => attr(node, 'datetime') === post.date));
     assert.ok(tag(tree, 'time').some((node) => attr(node, 'datetime') === post.updatedAt));
     assert.ok(links.includes(post.service));

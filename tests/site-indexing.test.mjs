@@ -18,6 +18,15 @@ const tag = (node, name) => all(node, (item) => item.tagName === name);
 const metadata = (tree, name) => attr(tag(tree, 'meta').find((node) => attr(node, 'name') === name || attr(node, 'property') === name), 'content');
 const builtPages = new Map(indexablePaths.filter((path) => existsSync(file('dist' + path + 'index.html'))).map((path) => [path, parse(source('dist' + path + 'index.html'))]));
 
+test('every sitemap URL has a generated, indexable page', () => {
+  for (const path of indexablePaths) {
+    assert.ok(existsSync(file('dist' + path + 'index.html')), `Sitemap URL has no page: ${path}`);
+    const tree = builtPages.get(path);
+    assert.equal(tag(tree, 'h1').length, 1, path);
+    assert.equal(metadata(tree, 'robots'), undefined, path);
+  }
+});
+
 test('indexing policy lists only public canonical content and excludes drafts and utility routes', () => {
   assert.equal(indexablePaths.length, new Set(indexablePaths).size);
   for (const path of indexablePaths) {
@@ -55,6 +64,20 @@ test('public redirects preserve queries, avoid chains and do not intercept mutat
   assert.equal(pageRedirect(new URL(siteUrl + '/agencia-amazon?utm_source=seo'), 'GET'), '/agencia-amazon/?utm_source=seo');
   for (const path of ['/no-existe', '/api/submit', '/admin/mensajes', '/robots.txt']) assert.equal(pageRedirect(new URL(siteUrl + path), 'GET'), undefined);
   assert.match(source('src/middleware.ts'), /pageRedirect\(new URL\(request\.url\), request\.method\)/);
+});
+
+test('Cloudflare redirects old addresses with HTTP 301 on both slash variants', () => {
+  const rules = new Map(source('public/_redirects').trim().split(/\r?\n/).map((line) => {
+    const [from, to, status] = line.trim().split(/\s+/);
+    assert.equal(status, '301', line);
+    return [from, to];
+  }));
+  assert.equal(rules.size, Object.keys(serviceAliases).length * 2);
+  for (const [from, to] of Object.entries(serviceAliases)) {
+    assert.equal(rules.get(from), to);
+    assert.equal(rules.get(from.slice(0, -1)), to);
+    assert.ok(isIndexablePath(to), to);
+  }
 });
 
 test('sitemap matches the intended public collection exactly and uses real blog modification dates', () => {
@@ -106,11 +129,20 @@ test('all generated public pages expose one matching canonical, title, main head
     assert.equal(metadata(tree, 'robots'), undefined);
     assert.equal(metadata(tree, 'ai-summary'), undefined);
     const scripts = tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json');
+    const entities = scripts.flatMap((script) => {
+      const schema = JSON.parse(content(script));
+      return schema['@graph'] ?? [schema];
+    });
     for (const script of scripts) {
       const schema = JSON.parse(content(script));
       assert.doesNotMatch(JSON.stringify(schema), /images\/logo.png|images\/og-image.jpg|latitude|longitude|hoursAvailable|SergioRomanAB|SearchAction|aggregateRating/);
-      if (schema['@type'] === 'Article') assert.equal(schema.mainEntityOfPage, siteUrl + path);
-      if (schema['@type'] === 'Service') assert.equal(schema.url, siteUrl + path);
+    }
+    const webpage = entities.find((schema) => schema['@type'] === 'WebPage');
+    assert.equal(webpage.url, siteUrl + path);
+    assert.equal(webpage.isPartOf['@id'], siteUrl + '/#website');
+    for (const entity of entities) {
+      if (['Article', 'BlogPosting'].includes(entity['@type'])) assert.equal(entity.mainEntityOfPage['@id'], webpage['@id']);
+      if (entity['@type'] === 'Service') assert.equal(entity.url, siteUrl + path);
     }
     for (const metaName of ['og:image', 'twitter:image']) {
       const image = metadata(tree, metaName);
@@ -118,9 +150,9 @@ test('all generated public pages expose one matching canonical, title, main head
     }
   }
   const home = builtPages.get('/');
-  const schemas = tag(home, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(content(node)));
+  const schemas = tag(home, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').flatMap((node) => JSON.parse(content(node))['@graph']);
   assert.equal(schemas.filter((schema) => schema['@type'] === 'Organization').length, 1);
-  assert.equal(schemas[0].contactPoint.telephone, '+34650606400');
+  assert.equal(schemas.find((schema) => schema['@type'] === 'Organization').contactPoint.telephone, '+34650606400');
 });
 
 test('public content can be discovered from home using HTML links without alias detours or broken fragments', () => {

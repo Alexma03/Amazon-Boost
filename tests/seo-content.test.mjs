@@ -267,15 +267,16 @@ test('built static pages have matching metadata, one H1 and structured breadcrum
     assert.equal(attr(tag(tree, 'link').find((node) => attr(node, 'rel') === 'canonical'), 'href'), site + record.path);
     assert.ok(!metadata(tree, 'robots'), record.path);
     const schemas = tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(content(node)));
-    const breadcrumbs = schemas.find((schema) => schema['@type'] === 'BreadcrumbList');
+    const entities = schemas.flatMap((schema) => schema['@graph'] ?? [schema]);
+    const breadcrumbs = entities.find((schema) => schema['@type'] === 'BreadcrumbList');
     assert.equal(breadcrumbs.itemListElement.at(-1).item, site + record.path);
     assert.equal(schemas.length, 2, record.path);
     if ('slug' in record) {
-      assert.equal(schemas.find((schema) => schema['@type'] === 'Article').headline, record.title);
+      assert.equal(entities.find((schema) => schema['@type'] === 'BlogPosting').headline, record.title);
       assert.ok(!metadata(tree, 'og:image'), record.path);
       assert.ok(!metadata(tree, 'twitter:image'), record.path);
     } else {
-      assert.equal(schemas.find((schema) => schema['@type'] === 'Service').name, record.title);
+      assert.equal(entities.find((schema) => schema['@type'] === 'Service').name, record.title);
       const image = new URL(attr(metadata(tree, 'og:image'), 'content'));
       assert.ok(existsSync(new URL(`../public${image.pathname}`, import.meta.url)), image.href);
     }

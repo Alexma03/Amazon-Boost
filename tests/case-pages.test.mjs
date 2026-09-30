@@ -18,7 +18,10 @@ const tag = (node, name) => all(node, (item) => item.tagName === name);
 const content = (node) => node.nodeName === '#text' ? node.value : (node.childNodes ?? []).map(content).join('');
 const meta = (tree, name) => attr(tag(tree, 'meta').find((node) => attr(node, 'name') === name || attr(node, 'property') === name), 'content');
 const built = (study) => parse(source('dist' + casePath(study) + 'index.html'));
-const schemas = (tree) => tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(content(node)));
+const schemas = (tree) => tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').flatMap((node) => {
+  const schema = JSON.parse(content(node));
+  return schema['@graph'] ?? [schema];
+});
 
 test('case collection preserves old addresses and separates documented projects from drafts and archive', () => {
   assert.equal(featuredCaseStudies.length, 2);
@@ -87,7 +90,7 @@ test('built details expose coherent metadata, navigation and indexability', () =
     assert.equal(meta(tree, 'og:image'), study.image ? 'https://amznboost.es' + study.image.src : undefined);
     assert.equal(meta(tree, 'twitter:image'), meta(tree, 'og:image'));
     const schema = schemas(tree);
-    assert.equal(schema.filter((item) => item['@type'] === 'BreadcrumbList').length, 1);
+    assert.equal(schema.filter((item) => item['@type'] === 'BreadcrumbList').length, study.kind === 'documented' ? 1 : 0);
     assert.equal(schema.filter((item) => item['@type'] === 'Article').length, study.kind === 'documented' ? 1 : 0);
     assert.doesNotMatch(JSON.stringify(schema), /aggregateRating|reviewRating/);
     const ids = new Set(all(tree, (node) => attr(node, 'id')).map((node) => attr(node, 'id')));
