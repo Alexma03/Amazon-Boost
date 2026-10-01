@@ -1,3 +1,5 @@
+import { legalReady } from './legal-status.ts';
+
 export const releasePendingPages = [
   {
     path: '/quienes-somos/',
@@ -9,9 +11,9 @@ export const releasePendingPages = [
 export const releaseApprovals = [
   {
     id: 'legal',
-    ready: false,
+    ready: legalReady,
     label: 'Textos legales y datos del titular',
-    detail: 'Faltan titular o razón social, NIF/CIF, dirección profesional, privacidad, conservación de formularios y validación del asesor.',
+    detail: 'Faltan titular o razón social, NIF/CIF, dirección profesional, plazo de conservación, revisión jurídica y auditoría de cookies en producción.',
   },
   {
     id: 'proof',

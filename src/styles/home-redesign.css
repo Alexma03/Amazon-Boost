@@ -351,3 +351,5 @@
   .ab-audit-copy>p:not(.ab-overline){font-size:.94rem;line-height:1.55}
   .ab-phone-form{min-height:730px;padding:52px 14px 34px}
 }
+.ab-consent a{color:#ffb640;text-decoration:underline;text-underline-offset:2px}
+.ab-consent a:hover{color:#ffd38a}

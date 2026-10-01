@@ -1,0 +1,39 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legalDetails } from '../data/legal-status';
+export const prerender = true;
+const pending = 'Pendiente de confirmar';
+---
+
+<LegalLayout title="Aviso legal" description="Información sobre la titularidad, el uso y los contenidos de amznboost.es." path="/aviso-legal/" lead="Quién está detrás de esta web y bajo qué condiciones se ofrece su contenido.">
+  <section>
+    <h2>Identificación del titular</h2>
+    <dl>
+      <dt>Nombre o razón social</dt><dd class:list={{ 'legal-pending': !legalDetails.ownerName }}>{legalDetails.ownerName || pending}</dd>
+      <dt>NIF o CIF</dt><dd class:list={{ 'legal-pending': !legalDetails.taxId }}>{legalDetails.taxId || pending}</dd>
+      <dt>Dirección profesional</dt><dd class:list={{ 'legal-pending': !legalDetails.professionalAddress }}>{legalDetails.professionalAddress || pending}</dd>
+      <dt>Correo de contacto</dt><dd><a href="mailto:info@amznboost.es">info@amznboost.es</a></dd>
+      <dt>Sitio web</dt><dd>https://amznboost.es/</dd>
+    </dl>
+    <p>Si corresponde, deberán añadirse los datos de inscripción registral y cualquier información profesional exigible antes de publicar esta página.</p>
+  </section>
+  <section>
+    <h2>Objeto de la web</h2>
+    <p>Este sitio presenta los servicios, guías y casos de Amazon Boost y permite solicitar una auditoría inicial o contactar con el equipo. El contenido tiene carácter informativo. La navegación o el envío de una consulta no formalizan por sí mismos un contrato de servicios.</p>
+    <p>Las condiciones de un encargo profesional, su alcance y precio se concretarán en una propuesta o acuerdo separado.</p>
+  </section>
+  <section>
+    <h2>Uso del contenido</h2>
+    <p>Los textos, imágenes, marcas y demás contenidos de la web pertenecen a sus respectivos titulares o se utilizan con las autorizaciones correspondientes. No se autoriza su reproducción o explotación fuera de los usos permitidos por la ley sin consentimiento del titular aplicable.</p>
+    <p>Las guías y ejemplos no sustituyen el análisis de una cuenta concreta. La información de Amazon y de terceros puede cambiar; conviene contrastar los requisitos vigentes antes de tomar decisiones comerciales.</p>
+  </section>
+  <section>
+    <h2>Enlaces y relación con Amazon</h2>
+    <p>Los enlaces a páginas externas se ofrecen para ampliar información o facilitar el contacto. Cada tercero establece sus propias condiciones y políticas.</p>
+    <p>Amazon Boost es una agencia independiente. Esta web no pertenece a Amazon ni implica una certificación o relación oficial con la plataforma.</p>
+  </section>
+  <section>
+    <h2>Privacidad y cookies</h2>
+    <p>Consulta la <a href="/politica-de-privacidad/">Política de Privacidad</a> para conocer el tratamiento de los datos que facilitas y la <a href="/politica-de-cookies/">Política de Cookies</a> para información sobre tecnologías de almacenamiento y navegación.</p>
+  </section>
+</LegalLayout>

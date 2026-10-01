@@ -1,0 +1,48 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legalDetails } from '../data/legal-status';
+export const prerender = true;
+const pending = 'Pendiente de confirmar';
+---
+
+<LegalLayout title="Política de Privacidad" description="Cómo se tratan los datos enviados a Amazon Boost desde amznboost.es y cómo ejercer tus derechos." path="/politica-de-privacidad/" lead="Información clara sobre los datos que nos envías al solicitar una auditoría o escribirnos.">
+  <section>
+    <h2>Responsable del tratamiento</h2>
+    <dl>
+      <dt>Titular</dt><dd class:list={{ 'legal-pending': !legalDetails.ownerName }}>{legalDetails.ownerName || pending}</dd>
+      <dt>NIF o CIF</dt><dd class:list={{ 'legal-pending': !legalDetails.taxId }}>{legalDetails.taxId || pending}</dd>
+      <dt>Dirección profesional</dt><dd class:list={{ 'legal-pending': !legalDetails.professionalAddress }}>{legalDetails.professionalAddress || pending}</dd>
+      <dt>Contacto de privacidad</dt><dd><a href="mailto:info@amznboost.es">info@amznboost.es</a></dd>
+    </dl>
+  </section>
+  <section>
+    <h2>Qué datos recibimos y para qué</h2>
+    <p>El formulario de auditoría solicita nombre y correo electrónico. Puedes añadir teléfono, un rango de ventas mensuales y un mensaje sobre tu cuenta o marca. Usamos estos datos para responder a tu solicitud, valorar el problema que nos planteas y, si lo pides, preparar una propuesta de servicios.</p>
+    <p>No necesitamos contraseñas, códigos de acceso, documentos de identidad ni información sensible en este primer contacto. No los incluyas en el mensaje.</p>
+    <p>El formulario no te suscribe automáticamente a comunicaciones promocionales. Si en el futuro se ofreciera una suscripción, se presentaría por separado.</p>
+  </section>
+  <section>
+    <h2>Base jurídica</h2>
+    <p>El envío del formulario requiere una casilla de aceptación para tratar los datos de la consulta y responderte. Puedes retirar ese consentimiento escribiendo a <a href="mailto:info@amznboost.es">info@amznboost.es</a>; ello no afecta a los tratamientos realizados antes de la retirada. Si después solicitas una propuesta o contratas un servicio, podrían aplicarse además las bases necesarias para las gestiones precontractuales o contractuales, que deberán detallarse en el acuerdo correspondiente.</p>
+  </section>
+  <section>
+    <h2>Con quién se comparten</h2>
+    <p>Las solicitudes de la web se almacenan en Firebase/Firestore, infraestructura de Google utilizada por el equipo para gestionar los mensajes. Cloudflare interviene en el alojamiento, entrega y seguridad del sitio. El equipo autorizado de Amazon Boost puede acceder a las consultas para atenderlas. Los mensajes enviados por correo o WhatsApp dependen también de los servicios que elijas utilizar.</p>
+    <p class="legal-pending">Antes de publicar la política definitiva hay que revisar la configuración y los acuerdos de estos proveedores, así como los posibles tratamientos o transferencias internacionales aplicables.</p>
+    <p>El asistente generativo no está activo en la versión prevista para publicar. Si se activa posteriormente, se actualizará esta política antes de enviar preguntas a un proveedor externo de IA.</p>
+  </section>
+  <section>
+    <h2>Durante cuánto tiempo</h2>
+    <p class="legal-pending">{legalDetails.contactRetention || 'El plazo o criterio concreto de conservación de las solicitudes está pendiente de confirmar.'}</p>
+    <p>Una vez definido, deberá distinguir las consultas que no terminan en contratación de la documentación vinculada a un servicio contratado y de los periodos exigidos por obligaciones legales.</p>
+  </section>
+  <section>
+    <h2>Tus derechos</h2>
+    <p>Puedes solicitar acceso, rectificación, supresión, oposición, limitación o portabilidad cuando proceda, así como retirar el consentimiento, escribiendo a <a href="mailto:info@amznboost.es">info@amznboost.es</a>. Podremos pedir información razonable para verificar que la solicitud corresponde a la persona interesada.</p>
+    <p>Si consideras que el tratamiento de tus datos no es correcto, puedes presentar una reclamación ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos</a>.</p>
+  </section>
+  <section>
+    <h2>Cookies y enlaces externos</h2>
+    <p>La <a href="/politica-de-cookies/">Política de Cookies</a> explica las tecnologías técnicas observadas en el sitio. Al seguir un enlace a Amazon, LinkedIn, Trustpilot o WhatsApp, se aplican también las políticas del servicio de destino.</p>
+  </section>
+</LegalLayout>

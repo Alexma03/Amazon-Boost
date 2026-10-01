@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { indexablePaths, pendingReleasePaths, siteUrl } from '../src/data/site-index.ts';
 import { releaseApprovals } from '../src/data/release-status.ts';
+import { legalPagePaths, legalReady } from '../src/data/legal-status.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = join(root, 'dist');
@@ -34,6 +35,17 @@ for (const path of pendingReleasePaths) {
   if (sitemap.includes(`<loc>${siteUrl}${path}</loc>`)) failures.push(`El borrador aparece en el sitemap: ${path}`);
 }
 
+for (const path of legalPagePaths) {
+  const file = outputFile(path);
+  if (!existsSync(file)) {
+    failures.push(`Falta la página legal compilada: ${path}`);
+    continue;
+  }
+  const html = readFileSync(file, 'utf8');
+  if (!legalReady && !/<meta[^>]+name="robots"[^>]+content="noindex, nofollow"/.test(html)) failures.push(`El borrador legal no lleva noindex: ${path}`);
+  if (!legalReady && sitemap.includes(`<loc>${siteUrl}${path}</loc>`)) failures.push(`El borrador legal aparece en el sitemap: ${path}`);
+}
+
 if (existsSync(join(dist, 'index.html'))) {
   const home = read('dist/index.html');
   for (const path of pendingReleasePaths) {
@@ -63,7 +75,8 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Candidatura técnica válida: ${indexablePaths.length} URLs públicas y ${pendingReleasePaths.length} borrador fuera de indexación.`);
+const drafts = pendingReleasePaths.length + (legalReady ? 0 : legalPagePaths.length);
+console.log(`Candidatura técnica válida: ${indexablePaths.length} URLs públicas y ${drafts} borrador${drafts === 1 ? '' : 'es'} fuera de indexación.`);
 
 if (!technicalOnly) {
   const blockers = releaseApprovals.filter((approval) => !approval.ready);

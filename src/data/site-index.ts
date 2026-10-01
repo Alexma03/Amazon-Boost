@@ -3,11 +3,13 @@ import { guides } from './guides.ts';
 import { allBlogPosts } from './blog/index.ts';
 import { featuredCaseStudies, excludedCasePaths, casePath } from './case-studies/catalogue.ts';
 import { releasePendingPages } from './release-status.ts';
+import { legalPagePaths, legalReady } from './legal-status.ts';
 
 export const siteUrl = 'https://amznboost.es';
 export const pendingReleasePaths = releasePendingPages.map((page) => page.path);
 export const indexablePaths = [...new Set([
   '/', '/servicios/', '/guias/', '/blog/', '/casos-de-exito/',
+  ...(legalReady ? legalPagePaths : []),
   ...serviceDirectory.map((page) => page.path),
   ...guides.map((guide) => guide.path),
   ...allBlogPosts.map((post) => `/blog/${post.slug}/`),
@@ -24,7 +26,7 @@ export const canonicalPageUrl = (path: string) => new URL(normalizePagePath(path
 export const isIndexablePath = (path: string) => indexable.has(normalizePagePath(path));
 export const isInternalPath = (path: string) => /^\/(admin|api|control|mensajes)(\/|$)/.test(path);
 export const isPrivateToolPath = (path: string) => /^\/(admin|control|mensajes)(\/|$)/.test(path);
-export const shouldNoindex = (path: string) => isInternalPath(path) || pendingReleasePaths.includes(normalizePagePath(path)) || excludedCasePaths.includes(normalizePagePath(path)) || ['/dejar-resena/', '/404/', '/404.html', '/asistente/conocimiento.json'].includes(normalizePagePath(path));
+export const shouldNoindex = (path: string) => isInternalPath(path) || (!legalReady && legalPagePaths.includes(normalizePagePath(path) as typeof legalPagePaths[number])) || pendingReleasePaths.includes(normalizePagePath(path)) || excludedCasePaths.includes(normalizePagePath(path)) || ['/dejar-resena/', '/404/', '/404.html', '/asistente/conocimiento.json'].includes(normalizePagePath(path));
 
 // Redirect only known page addresses. Keep queries, and never redirect a POST
 // or convert an unknown URL into a successful page.
