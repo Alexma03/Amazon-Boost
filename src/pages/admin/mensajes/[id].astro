@@ -2,11 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import MessageDetail from '../../../components/MessageDetail.jsx';
 
-// Message detail is a client-side admin view; public launch is static.
-export const prerender = true;
-export function getStaticPaths() {
-  return [];
-}
+// Message IDs are created after build, so the client-side detail shell must
+// be served for any ID instead of relying on a static path list.
+export const prerender = false;
 
 const { id } = Astro.params;
 ---

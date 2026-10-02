@@ -98,6 +98,7 @@ test('sitemap matches the intended public collection exactly and uses real blog 
 test('hosting serves generated sitemap files directly without the page fallback swallowing them', () => {
   const routes = JSON.parse(source('dist/_routes.json'));
   assert.ok(routes.exclude.includes('/sitemap-*'));
+  assert.ok(routes.include.includes('/admin/mensajes/*'), 'New message detail URLs must reach the server-rendered admin shell');
   assert.ok(routes.include.length + routes.exclude.length <= 100);
   const tree = parse(source('dist/sitemap-index.xml'));
   const locations = tag(tree, 'loc').map(content);
