@@ -1,0 +1,43 @@
+---
+import Layout from './Layout.astro';
+import { legalPagePaths, legalReady, legalPublicationApproved } from '../data/legal-status';
+import '../styles/legal-pages.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: typeof legalPagePaths[number];
+  lead: string;
+}
+
+const { title, description, path, lead } = Astro.props;
+const pages = [
+  { path: '/aviso-legal/', label: 'Aviso legal' },
+  { path: '/politica-de-privacidad/', label: 'Privacidad' },
+  { path: '/politica-de-cookies/', label: 'Cookies' },
+];
+---
+
+<Layout title={`${title} | Amazon Boost`} description={description} canonicalPath={path} image={null} noindex={!legalReady}>
+  <article class="legal-page">
+    <header class="legal-hero">
+      <div class="legal-shell">
+        <a class="legal-back" href="/">Amazon Boost / Inicio</a>
+        <p class="legal-kicker">Información del sitio</p>
+        <h1>{title}</h1>
+        <p class="legal-lead">{lead}</p>
+      </div>
+    </header>
+
+    <nav class="legal-nav" aria-label="Documentación legal">
+      <div class="legal-shell">
+        {pages.map((page) => <a href={page.path} aria-current={path === page.path ? 'page' : undefined}>{page.label}</a>)}
+      </div>
+    </nav>
+
+    <div class="legal-shell legal-body">
+      {!legalPublicationApproved && <p class="legal-draft"><strong>Borrador pendiente de publicación.</strong> La identificación del titular, los periodos de conservación y la revisión jurídica deben completarse antes de presentar estos textos como definitivos.</p>}
+      <div class="legal-copy"><slot /></div>
+    </div>
+  </article>
+</Layout>

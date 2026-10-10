@@ -1,0 +1,30 @@
+.legal-page{background:#fff;color:#171717}
+.legal-shell{width:min(980px,calc(100% - 48px));margin-inline:auto}
+.legal-hero{padding:78px 0 64px;background:#0b0b0b;color:#fff}
+.legal-back{color:#bbb;text-decoration:none;font-size:.82rem}
+.legal-back:hover{color:#fff}
+.legal-kicker{margin:68px 0 18px;color:#ff9900;font-size:.72rem;font-weight:800;text-transform:uppercase}
+.legal-hero h1{max-width:800px;margin:0;font-size:4rem;line-height:1.08;font-weight:800}
+.legal-lead{max-width:690px;margin:24px 0 0;color:#c1c1c1;font-size:1.18rem;line-height:1.6}
+.legal-nav{background:#f5f5f3;border-bottom:1px solid #dfdfdc}
+.legal-nav .legal-shell{display:flex;gap:34px;overflow-x:auto}
+.legal-nav a{flex:none;padding:20px 0;color:#515151;text-decoration:none;font-size:.85rem;font-weight:650;border-bottom:2px solid transparent}
+.legal-nav a:hover,.legal-nav a[aria-current="page"]{color:#111;border-bottom-color:#ff9900}
+.legal-body{padding-block:62px 100px}
+.legal-draft{margin:0 0 44px;padding:20px 0 20px 20px;border-left:3px solid #ff9900;background:#fff9ef;line-height:1.6}
+.legal-copy{max-width:790px}
+.legal-copy section{padding:29px 0;border-top:1px solid #e7e7e5}
+.legal-copy section:first-child{border-top:0;padding-top:0}
+.legal-copy h2{margin:0 0 17px;font-size:1.5rem;line-height:1.3}
+.legal-copy h3{margin:24px 0 8px;font-size:1.05rem;line-height:1.4}
+.legal-copy p,.legal-copy li,.legal-copy dd{color:#484848;font-size:.98rem;line-height:1.75}
+.legal-copy p{margin:0 0 15px}
+.legal-copy ul{margin:0 0 16px;padding-left:22px}
+.legal-copy li{padding-left:3px;margin-bottom:7px}
+.legal-copy dl{display:grid;grid-template-columns:minmax(145px,1fr) 2fr;gap:12px 22px;margin:0}
+.legal-copy dt{font-weight:750}
+.legal-copy dd{margin:0}
+.legal-copy a{color:#a45b00;text-decoration:underline;text-underline-offset:3px}
+.legal-copy a:hover{color:#6b3b00}
+.legal-pending{color:#8a4f00;font-weight:700}
+@media(max-width:640px){.legal-shell{width:min(100% - 32px,980px)}.legal-hero{padding:52px 0 48px}.legal-kicker{margin-top:48px}.legal-hero h1{font-size:2.5rem}.legal-lead{font-size:1rem}.legal-nav .legal-shell{gap:24px}.legal-body{padding-block:42px 70px}.legal-copy dl{grid-template-columns:1fr;gap:3px}.legal-copy dd{margin-bottom:14px}}

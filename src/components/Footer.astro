@@ -33,7 +33,7 @@ const strategicLinks = [
     <div><span class="ab-footer-label">Contacto</span><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a><span>España / Amazon Europa</span></div>
   </div>
 
-  <div class="ab-footer-bottom"><span>© {currentYear} Amazon Boost</span><span>Especialistas en Amazon FBA / FBM</span></div>
+  <div class="ab-footer-bottom"><span>© {currentYear} Amazon Boost</span><nav aria-label="Información legal"><a href="/aviso-legal/">Aviso legal</a><a href="/politica-de-privacidad/">Privacidad</a><a href="/politica-de-cookies/">Cookies</a></nav></div>
 </footer>
 
 <style>
@@ -52,5 +52,8 @@ const strategicLinks = [
   .ab-footer-grid a, .ab-footer-grid span { color: #b8bab5; font-size: .82rem; }
   .ab-footer-grid a:hover { color: #fff; }
   .ab-footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; color: #777a75; font-size: .62rem; text-transform: uppercase; }
+  .ab-footer-bottom nav { display:flex; flex-wrap:wrap; gap:12px 22px; }
+  .ab-footer-bottom nav a { color:#aeb0ad; text-decoration:none; }
+  .ab-footer-bottom nav a:hover { color:#fff; }
   @media (max-width:800px) { .ab-footer-top { grid-template-columns: 1fr; align-items: start; }.ab-footer-audit { width: 100%; }.ab-footer-grid { grid-template-columns: 1fr; }.ab-footer-grid > div { min-height: auto; padding: 25px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.13); }.ab-footer-grid > div:last-child { border-bottom: 0; }.ab-footer-bottom { flex-direction: column; } }
 </style>

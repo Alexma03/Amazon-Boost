@@ -1,0 +1,47 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legalDetails } from '../data/legal-status';
+export const prerender = true;
+---
+
+<LegalLayout title="Política de Privacidad" description="Qué datos recibe Amazon Boost al solicitar una auditoría, para qué se utilizan y cómo ejercer tus derechos." path="/politica-de-privacidad/" lead="Qué ocurre con tus datos cuando nos consultas sobre tu marca o solicitas una auditoría gratuita.">
+  <section>
+    <h2>Quién atiende tus datos</h2>
+    <p>El responsable del tratamiento de los datos recibidos en amznboost.es es <strong>{legalDetails.ownerName}</strong>, que desarrolla su actividad bajo la marca Amazon Boost. Puedes consultar el <a href="/aviso-legal/">Aviso legal</a>. Para cualquier cuestión de privacidad, escribe a <a href="mailto:info@amznboost.es">info@amznboost.es</a>.</p>
+  </section>
+  <section>
+    <h2>Datos que nos facilitas</h2>
+    <p>Al solicitar una auditoría o un análisis inicial pedimos tu nombre y correo electrónico. En el formulario para marcas también solicitamos el nombre de la empresa, si ya vende en Amazon y el tipo de ayuda que necesita. Puedes añadir voluntariamente un teléfono, el rango de ventas mensuales y una explicación de vuestra situación. También podemos recibir los datos que decidas enviarnos por correo electrónico, teléfono o WhatsApp.</p>
+    <p>Los campos marcados como obligatorios en cada formulario son necesarios para identificar la solicitud y responderla; los demás son opcionales. Si no nos facilitas los datos necesarios, no podremos contestarte por esa vía.</p>
+    <p>En este primer contacto no necesitamos contraseñas de Seller Central, códigos de acceso, documentos de identidad ni datos especialmente sensibles. No los incluyas en el mensaje.</p>
+  </section>
+  <section>
+    <h2>Para qué los usamos y con qué base</h2>
+    <p>Utilizamos los datos para responder a tu consulta, revisar la información que nos compartas sobre tu cuenta de Amazon y, si lo solicitas, preparar una propuesta. En el formulario nos autorizas expresamente a tratar tus datos para responderte. Si nos pides una propuesta o contratas un servicio, las gestiones necesarias para ello pueden basarse también en la solicitud precontractual o en el contrato correspondiente.</p>
+    <p>Enviar el formulario no te suscribe a una newsletter ni autoriza comunicaciones comerciales ajenas a tu solicitud. No vendemos los datos de contacto. Una eventual suscripción promocional requeriría su propia información y elección.</p>
+  </section>
+  <section>
+    <h2>Quién puede recibirlos</h2>
+    <p>El personal autorizado de Amazon Boost accede a las solicitudes para atenderlas. Las consultas enviadas mediante el formulario se guardan en Firebase/Firestore, un servicio de Google. Cloudflare interviene en la entrega, protección y medición del rendimiento de la web. Estos proveedores prestan servicios técnicos; no reciben tus datos para comercializarlos por cuenta de Amazon Boost.</p>
+    <p>Si eliges escribir por WhatsApp o a través de un servicio externo enlazado, también se aplicará la política de ese servicio. El formulario público no envía tu mensaje al asistente de IA.</p>
+    <p>Google y Cloudflare son proveedores internacionales. Sus servicios pueden implicar tratamiento de datos fuera del Espacio Económico Europeo. Puedes consultar sus condiciones y garantías de protección de datos en la <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">información de privacidad de Firebase</a> y en el <a href="https://www.cloudflare.com/cloudflare-customer-dpa/" target="_blank" rel="noopener noreferrer">acuerdo de tratamiento de datos de Cloudflare</a>. Para información sobre el tratamiento de tu solicitud, puedes escribirnos al correo de privacidad indicado.</p>
+  </section>
+  <section>
+    <h2>Navegación y decisiones automatizadas</h2>
+    <p>La entrega y seguridad de la web pueden generar datos técnicos de navegación, como la dirección IP y registros de acceso, tratados por Cloudflare para prestar y proteger el servicio. Cloudflare Web Analytics utiliza un script para medir visitas y rendimiento sin cookies de seguimiento, según su documentación. El formulario de auditoría no toma decisiones automatizadas ni elabora perfiles para decidir si atendemos tu solicitud.</p>
+  </section>
+  <section>
+    <h2>Cuánto tiempo se conservan</h2>
+    <p>Las consultas recibidas quedan guardadas en nuestra base de datos para atenderlas y conservar el historial de la conversación. Actualmente no hay un borrado automático de esos mensajes.</p>
+    <p>Si llegas a contratar un servicio, los datos relacionados con ese encargo podrán conservarse durante los plazos derivados del contrato y de las obligaciones legales que correspondan.</p>
+  </section>
+  <section>
+    <h2>Tus derechos y cómo ejercerlos</h2>
+    <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación o portabilidad cuando proceda, y retirar el consentimiento en cualquier momento. Escribe a <a href="mailto:info@amznboost.es">info@amznboost.es</a> indicando qué solicitas. Podremos pedirte información razonable para comprobar tu identidad antes de responder.</p>
+    <p>Retirar el consentimiento no invalida el tratamiento realizado antes de retirarlo. Si crees que tus datos no se han tratado correctamente, puedes reclamar ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos</a>.</p>
+  </section>
+  <section>
+    <h2>Cookies y otros sitios</h2>
+    <p>La <a href="/politica-de-cookies/">Política de Cookies</a> explica las tecnologías de navegación del sitio. Si abres un enlace a Amazon, LinkedIn, Trustpilot o WhatsApp, consulta también la información de privacidad del destino.</p>
+  </section>
+</LegalLayout>

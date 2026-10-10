@@ -6,6 +6,7 @@ import { siteUrl, indexablePaths, pendingReleasePaths, normalizePagePath, canoni
 import { serviceAliases } from '../src/data/service-pages.ts';
 import { excludedCasePaths } from '../src/data/case-studies/catalogue.ts';
 import { allBlogPosts } from '../src/data/blog/index.ts';
+import { legalPagePaths } from '../src/data/legal-status.ts';
 
 const require = createRequire(import.meta.resolve('astro'));
 const { parse } = require('parse5');
@@ -157,7 +158,7 @@ test('all generated public pages expose one matching canonical, title, main head
 });
 
 test('public content can be discovered from home using HTML links without alias detours or broken fragments', () => {
-  const known = new Set([...indexablePaths, ...excludedCasePaths, '/dejar-resena/']);
+  const known = new Set([...indexablePaths, ...excludedCasePaths, ...legalPagePaths, '/dejar-resena/']);
   const graph = new Map();
   for (const [path, tree] of builtPages) {
     const links = [];

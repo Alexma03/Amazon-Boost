@@ -1,0 +1,35 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legalDetails } from '../data/legal-status';
+export const prerender = true;
+---
+
+<LegalLayout title="Aviso legal" description="Titularidad, contacto y condiciones de uso del sitio amznboost.es." path="/aviso-legal/" lead="Información sobre el sitio, sus contenidos y las condiciones de uso.">
+  <section>
+    <h2>Titular y contacto</h2>
+    <p>Amazon Boost es la marca con la que se presenta este sitio. Puedes contactar con el equipo en <a href="mailto:info@amznboost.es">info@amznboost.es</a> o en el <a href="tel:+34650606400">+34 650 606 400</a>.</p>
+    <p>El titular de este sitio es <strong>{legalDetails.ownerName}</strong>, que desarrolla su actividad bajo la marca Amazon Boost.</p>
+  </section>
+  <section>
+    <h2>Objeto y uso del sitio</h2>
+    <p>amznboost.es presenta los servicios de Amazon Boost, publica guías y casos de éxito y permite solicitar una auditoría gratuita o contactar con el equipo. Puedes consultar y compartir sus páginas para fines lícitos, respetando los derechos sobre sus contenidos y el funcionamiento del sitio.</p>
+    <p>Las guías y ejemplos son información general, no un diagnóstico de tu cuenta ni una garantía de resultados. Enviar una consulta no supone contratar un servicio. El alcance, el precio y las condiciones de cualquier encargo se comunicarán en una propuesta o acuerdo separado.</p>
+  </section>
+  <section>
+    <h2>Propiedad intelectual y marcas</h2>
+    <p>Los textos, diseños, fotografías, gráficos y demás elementos del sitio corresponden a sus respectivos titulares o se utilizan con la autorización que proceda. Su presencia en la web no cede derechos de explotación. No se permite copiarlos o reutilizarlos con fines comerciales fuera de los supuestos autorizados por la ley o por sus titulares.</p>
+    <p>Los nombres y marcas de terceros se mencionan para identificar servicios, herramientas o plataformas. Amazon Boost es independiente de Amazon: este sitio no pertenece a Amazon ni implica una certificación o vínculo oficial con dicha empresa.</p>
+  </section>
+  <section>
+    <h2>Enlaces externos y disponibilidad</h2>
+    <p>Algunas páginas enlazan a Amazon, LinkedIn, Trustpilot, WhatsApp u otras fuentes. Cada sitio de destino dispone de sus propias condiciones y puede modificar sus contenidos sin intervención de Amazon Boost. Revisamos el contenido de esta web, pero no garantizamos la disponibilidad permanente de cada página o enlace externo.</p>
+  </section>
+  <section>
+    <h2>Normativa aplicable</h2>
+    <p>El uso de este sitio se rige por la normativa española que resulte aplicable. Las controversias se someterán a los órganos competentes conforme a la ley, sin alterar los derechos que correspondan a las personas consumidoras.</p>
+  </section>
+  <section>
+    <h2>Datos personales y cookies</h2>
+    <p>La <a href="/politica-de-privacidad/">Política de Privacidad</a> explica el tratamiento de los datos que nos envías. La <a href="/politica-de-cookies/">Política de Cookies</a> recoge la información sobre las tecnologías de almacenamiento y navegación del sitio.</p>
+  </section>
+</LegalLayout>
