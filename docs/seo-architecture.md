@@ -1,5 +1,7 @@
 # Servicios y guías: arquitectura editorial
 
+> Archivo histórico de agosto de 2026. Algunas URLs y el estado de publicación descritos aquí ya cambiaron. Para la arquitectura activa consultar `src/data/site-index.ts`, `src/data/service-pages.ts` y `docs/seo-geo-next-steps.md`.
+
 Estado: preparación en preview, 28 de agosto de 2026. No se ha publicado en el dominio de producción ni enviado el sitemap a Google. La main conserva su diseño y contenido aprobados; la navegación global da acceso directo a Guías y Blog.
 
 ## Tres niveles

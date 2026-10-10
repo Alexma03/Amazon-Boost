@@ -24,7 +24,7 @@ export const boostEssentials: BoostEntry[] = [
   },
   {
     id: 'equipo', question: '¿Quién está detrás de Amazon Boost?',
-    answer: 'Sergio Porras es el fundador de Amazon Boost. Creó la agencia para que marcas y vendedores puedan delegar la operativa y la estrategia de su cuenta en un equipo, sin perder visibilidad sobre lo que ocurre. Trabajamos con prioridades claras, decisiones explicadas e informes que dan contexto al crecimiento.',
+    answer: 'Sergio Porras de Román es el fundador de Amazon Boost. Creó la agencia para que marcas y vendedores puedan delegar la operativa y la estrategia de su cuenta en un equipo, sin perder visibilidad sobre lo que ocurre. Trabajamos con prioridades claras, decisiones explicadas e informes que dan contexto al crecimiento.',
     keywords: 'equipo fundador sergio porras quien fundo creo dirige detras nosotros',
     source: { label: 'Conocer al fundador', href: '/#fundador' },
     related: { label: 'Hablar con el equipo', href: '/#auditoria' },

@@ -15,9 +15,9 @@ export const releaseApprovals = [
   },
   {
     id: 'proof',
-    ready: false,
+    ready: true,
     label: 'Cifras y testimonios',
-    detail: 'Confirmar la vigencia y fuente de +20, +3 años y +50k €/año, y la autorización o fuente pública de cada testimonio.',
+    detail: 'El titular ha confirmado las tres cifras públicas y el permiso para publicar los testimonios mostrados en la web.',
   },
   {
     id: 'production-services',
@@ -27,8 +27,8 @@ export const releaseApprovals = [
   },
   {
     id: 'visual-signoff',
-    ready: false,
+    ready: true,
     label: 'Aprobación visual final',
-    detail: 'Pendiente de la revisión visual y confirmación expresa de Amazon Boost antes de desplegar.',
+    detail: 'Amazon Boost ha solicitado expresamente publicar todos los cambios preparados.',
   },
 ] as const;

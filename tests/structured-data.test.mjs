@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { indexablePaths, siteUrl } from '../src/data/site-index.ts';
+import { guides } from '../src/data/guides.ts';
 
 const require = createRequire(import.meta.resolve('astro'));
 const { parse } = require('parse5');
@@ -31,6 +32,7 @@ test('home identifies the agency, its own logo, founder and website consistently
   assert.equal(organization.founder['@id'], founder['@id']);
   assert.equal(founder.worksFor['@id'], organization['@id']);
   assert.equal(founder.url, `${siteUrl}/#fundador`);
+  assert.equal(founder.name, 'Sergio Porras de Román');
   assert.deepEqual(organization.sameAs, ['https://www.linkedin.com/company/amznboost/', 'https://es.trustpilot.com/review/amznboost.es']);
   assert.deepEqual(founder.sameAs, ['https://www.linkedin.com/in/sergio-deroman-amazon/']);
   assert.equal(website.url, `${siteUrl}/`);
@@ -57,7 +59,8 @@ test('indexable content connects to the same provider and only real blog dates a
       assert.equal(article.author['@id'], `${siteUrl}/#organization`);
       assert.equal(page.mainEntity['@id'], article['@id']);
       if (path.startsWith('/guias/') || path.startsWith('/casos-de-exito/')) {
-        assert.equal(article.dateModified, undefined, path);
+        const guide = guides.find((entry) => entry.path === path);
+        assert.equal(article.dateModified, guide?.updatedAt, path);
         assert.equal(article.datePublished, undefined, path);
       }
     }

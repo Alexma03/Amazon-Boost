@@ -1,5 +1,7 @@
 # Candidata de publicación
 
+> Registro histórico de la candidatura de 69 URL. La preparación local actual contiene 72 URL públicas y un borrador noindex; ver `docs/seo-geo-next-steps.md` y la salida de `scripts/release-check.mjs --technical`. No representa un nuevo despliegue.
+
 Estado preparado para revisión visual. Esta fase no publica ni modifica el dominio de producción.
 
 ## Superficie pública preparada

@@ -32,6 +32,7 @@ test('every guide has a relevant service and reciprocal discovery links', () => 
   const servicePaths = new Set(serviceDirectory.map((item) => item.path));
   for (const guide of guides) {
     assert.ok(servicePaths.has(guide.service), guide.service);
+    for (const path of guide.relatedServices ?? []) assert.ok(servicePaths.has(path), path);
     assert.ok(servicePages.some((page) => page.guides.includes(guide.slug)), guide.slug);
     assert.ok(guide.sections.length >= 4);
     assert.ok(guide.checklist.length >= 4);
@@ -94,6 +95,20 @@ test('launch and expansion pages connect the second batch to relevant services',
   }
 });
 
+test('launch service has one canonical destination and covers the full decision path', () => {
+  const path = '/servicios/lanzamiento-marca-privada-amazon/';
+  const page = servicePages.find((item) => item.path === path);
+  assert.ok(page);
+  assert.equal(servicePages.filter((item) => item.path.includes('lanzamiento')).length, 1);
+  assert.equal(page.scope.length, 4);
+  const copy = [page.intro, page.deliverable, ...page.scope.flatMap((part) => [part.title, part.text, ...part.items])].join(' ');
+  for (const topic of ['demanda', 'competencia', 'margen', 'Seller Central', 'Brand Registry', 'FBA', 'FBM', 'listing', 'Amazon Ads', 'TACoS', 'Vine', 'stock']) {
+    assert.ok(copy.toLowerCase().includes(topic.toLowerCase()), topic);
+  }
+  assert.match(page.deliverable, /no presupone una fecha de ventas ni un resultado garantizado/);
+  assert.ok(page.guides.includes('tarifas-fba-calcular-rentabilidad'));
+});
+
 test('guide comparison tables and source references are well formed', () => {
   for (const guide of guides) {
     assert.equal(new Set(guide.related).size, guide.related.length, guide.slug);
@@ -128,6 +143,30 @@ test('third-batch guides have direct service discovery and contextual links', ()
     assert.ok(guides.some((other) => other.slug !== slug && other.related.includes(slug)), slug);
     assert.ok(guide.table, `${slug}: missing decision table`);
   }
+});
+
+test('decision guides own distinct intents and have service plus guide entry points', () => {
+  const destinations = {
+    'agencia-amazon-vs-consultor': '/agencia-amazon/',
+    'cuando-no-lanzar-en-amazon': '/servicios/lanzamiento-marca-privada-amazon/',
+    'cuanto-cuesta-lanzar-en-amazon': '/servicios/lanzamiento-marca-privada-amazon/',
+  };
+  for (const [slug, path] of Object.entries(destinations)) {
+    const guide = guideBySlug.get(slug);
+    assert.equal(guide?.service, path);
+    assert.equal(guide.updatedAt, '2026-09-30');
+    assert.ok(guide.table);
+    assert.ok(servicePages.find((page) => page.path === path)?.guides.includes(slug), slug);
+    assert.ok(guides.some((other) => other.slug !== slug && other.related.includes(slug)), slug);
+    const tree = parse(source(`dist${guide.path}index.html`));
+    const links = new Set(tag(tree, 'a').map((node) => attr(node, 'href')));
+    assert.ok(links.has(path), slug);
+    assert.ok(tag(tree, 'time').some((node) => attr(node, 'datetime') === guide.updatedAt), slug);
+  }
+  assert.deepEqual(guideBySlug.get('agencia-amazon-vs-consultor').relatedServices, ['/consultoria-amazon/']);
+  const comparison = parse(source('dist/guias/agencia-amazon-vs-consultor/index.html'));
+  assert.ok(tag(comparison, 'a').some((node) => attr(node, 'href') === '/consultoria-amazon/'));
+  assert.equal(servicePages.filter((page) => page.path.includes('lanzamiento')).length, 1);
 });
 
 test('guide hub and rendered articles expose their navigation and checklists', () => {
