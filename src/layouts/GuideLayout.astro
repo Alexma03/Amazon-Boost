@@ -4,11 +4,13 @@ import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
 import GuideLinks from '../components/GuideLinks.astro';
 import ServiceContact from '../components/ServiceContact.astro';
 import { serviceDirectory } from '../data/service-pages';
+import { getAuditContact } from '../data/audit-contact';
 import type { Guide } from '../data/guides';
 import '../styles/growth-pages.css';
 interface Props { guide: Guide }
 const { guide } = Astro.props;
 const service = serviceDirectory.find((item) => item.path === guide.service)!;
+const contact = getAuditContact(guide.service);
 const words = [guide.answer, ...guide.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.bullets ?? [])]), ...guide.faqs.map((faq) => faq.answer)].join(' ').split(/\s+/).length;
 const minutes = Math.max(3, Math.ceil(words / 200));
 const updatedAt = guide.updatedAt ?? '2026-08-29';
@@ -30,15 +32,16 @@ const updatedLabel = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: '
       </aside>
       <div class="guide-content">
         <section class="guide-answer" id="respuesta"><p class="growth-eyebrow">La respuesta breve</p><p>{guide.answer}</p>{guide.relatedServices?.map((path) => <a href={path}>Ver {serviceDirectory.find((item) => item.path === path)?.title}</a>)}</section>
-        <aside class="guide-early-cta" aria-label="Solicitar una auditoría"><div><span>¿Quieres aplicarlo a tu cuenta?</span><strong>Te indicamos qué priorizar.</strong></div><a href="/#auditoria">Solicitar auditoría <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></aside>
+        <aside class="guide-early-cta" aria-label="Auditoría gratuita de Amazon"><div><span>Auditoría gratuita, sin compromiso</span><strong>{contact.title}</strong></div><a href="/#auditoria" data-guide-audit>Solicitar auditoría gratuita <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></aside>
         {guide.table && <div class="guide-table-scroll" role="region" aria-label={guide.table.caption} tabindex="0"><table><caption>{guide.table.caption}</caption><thead><tr>{guide.table.headings.map((heading) => <th scope="col">{heading}</th>)}</tr></thead><tbody>{guide.table.rows.map((row) => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
         {guide.sections.map((section) => <section class="guide-section" id={`apartado-${section.id}`}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}{section.source !== undefined && <p class="guide-citation">Referencia: <a href={guide.sources[section.source].url} target="_blank" rel="noopener noreferrer">{guide.sources[section.source].label}</a></p>}</section>)}
         <section class="guide-checklist" id="comprobacion"><h2>Antes de dar el siguiente paso</h2><fieldset><legend class="sr-only">Lista de comprobación</legend>{guide.checklist.map((item) => <label><input type="checkbox" /><span>{item}</span></label>)}</fieldset></section>
         <section class="guide-section"><h2>Preguntas frecuentes</h2><div class="growth-faqs">{guide.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div></section>
         <details class="guide-sources"><summary>Fuentes y contexto</summary><div><ul>{guide.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>{source.note && <p>{source.note}</p>}</li>)}</ul><p>Comprueba siempre las políticas y condiciones vigentes en la documentación de Amazon y en tu cuenta.</p></div></details>
+        <nav class="guide-business-links" aria-label="Ayuda profesional para tu marca"><p>¿Prefieres que lo revisemos contigo?</p><a href={service.path}>Ver {service.title} <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a><a href="/">Conocer Amazon Boost <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></nav>
       </div>
     </div>
     <GuideLinks slugs={guide.related} title="Otras preguntas que conviene resolver." />
-    <ServiceContact topic={guide.title} service={guide.service} />
+    <ServiceContact topic={guide.title} service={guide.service} freeAudit />
   </article>
 </Layout>

@@ -142,6 +142,12 @@
 .guide-early-cta strong{font-size:.94rem}
 .guide-early-cta a{display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;font-size:.82rem;font-weight:700;color:#7c4800}
 .guide-early-cta a:hover{text-decoration:underline;text-underline-offset:4px}
+.guide-early-cta a img,.guide-business-links img{flex-shrink:0}
+.guide-business-links{margin-top:32px;padding-top:24px;border-top:1px solid #ddd;display:flex;flex-wrap:wrap;gap:14px 24px}
+.guide-business-links p{flex-basis:100%;margin:0;font-weight:700}
+.guide-business-links a{display:inline-flex;align-items:center;gap:9px;color:#7c4800;font-size:.92rem}
+.guide-business-links a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:740px){.guide-page .guide-early-cta{flex-direction:column;gap:14px}.guide-page .guide-early-cta a{width:auto;height:auto;min-height:44px;padding:10px 14px;max-width:100%;font-size:.84rem;border-radius:4px;color:#111}.guide-business-links{flex-direction:column;align-items:flex-start}.guide-business-links p{flex-basis:auto}}
 .guide-section{margin-top:39px}
 .guide-content h2{font-size:1.72rem;line-height:1.28;margin-bottom:16px;text-wrap:pretty}
 .guide-content p{margin-top:13px;color:#4d4f52}

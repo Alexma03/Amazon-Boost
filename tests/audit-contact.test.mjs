@@ -25,7 +25,8 @@ const checkContact = (path, service, topic) => {
   const primary = all(contact, (node) => attr(node, 'data-audit-primary') !== undefined)[0];
   assert.equal(primary.tagName, 'a');
   assert.equal(attr(primary, 'href'), '/#auditoria');
-  assert.equal(content(primary).trim(), 'Solicitar auditoría inicial');
+  const isGuide = guides.some((guide) => guide.path === path);
+  assert.equal(content(primary).trim(), isGuide ? 'Solicitar auditoría gratuita' : 'Solicitar auditoría inicial');
   assert.match(attr(primary, 'class'), /growth-button/);
   assert.equal(content(tag(contact, 'h2')[0]), getAuditContact(service).title);
   assert.equal(attr(contact, 'aria-labelledby'), attr(tag(contact, 'h2')[0], 'id'));
@@ -38,7 +39,7 @@ const checkContact = (path, service, topic) => {
   assert.ok(!attr(whatsapp, 'class')?.includes('growth-button'));
   assert.ok(tag(contact, 'a').some((node) => attr(node, 'href') === 'tel:+34650606400'));
   assert.equal(tag(contact, 'li').length, 3);
-  assert.match(content(contact), /Sin compromiso/);
+  assert.match(content(contact), /sin compromiso/i);
   assert.match(content(contact), /No compartas contraseñas/);
   const sections = tag(main, 'section');
   assert.equal(sections.at(-1), contact, path + ' final section');
