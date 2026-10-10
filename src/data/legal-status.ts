@@ -8,7 +8,7 @@ export const legalDetails = {
   ownerName: 'Sergio Porras de Román',
   taxId: '',
   professionalAddress: '',
-  contactRetention: '',
+  contactRetention: 'Las consultas y solicitudes de auditoría que no den lugar a una contratación se conservarán durante un máximo de 12 meses desde el último contacto relacionado con la solicitud, para atenderla y realizar el seguimiento solicitado. Después se suprimirán o anonimizarán, salvo que sea necesario conservar información concreta para cumplir una obligación legal o atender una reclamación, durante el plazo aplicable a esa finalidad.',
   reviewedByAdvisor: false,
   productionCookieAuditComplete: false,
 } as const;
