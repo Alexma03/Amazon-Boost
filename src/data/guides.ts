@@ -1,3 +1,5 @@
+import { reviewedGuides } from './guides-reviewed-2026-10-11.ts';
+
 export type Guide = {
   slug: string;
   updatedAt?: string;
@@ -1529,5 +1531,7 @@ export const guides: Guide[] = [
     ],
   },
 ];
+
+guides.push(...reviewedGuides);
 
 export const guideBySlug = new Map(guides.map((guide) => [guide.slug, guide]));

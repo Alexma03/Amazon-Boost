@@ -133,6 +133,6 @@ export function validBoostEntries(payload: unknown): BoostEntry[] {
   const safeLink = (value: any) => value && typeof value.label === 'string' && typeof value.href === 'string' && /^\/(?!\/)[a-z0-9/#-]*$/.test(value.href);
   if (!payload || typeof payload !== 'object' || (payload as any).version !== 1 || !Array.isArray((payload as any).entries)) throw new Error('Invalid knowledge');
   const entries = (payload as any).entries;
-  if (!entries.length || entries.length > 300 || !entries.every((entry: any) => entry && ['id', 'question', 'answer', 'keywords'].every(key => typeof entry[key] === 'string' && entry[key].length < 3000) && safeLink(entry.source) && (!entry.related || safeLink(entry.related)))) throw new Error('Invalid entries');
+  if (!entries.length || entries.length > 400 || !entries.every((entry: any) => entry && ['id', 'question', 'answer', 'keywords'].every(key => typeof entry[key] === 'string' && entry[key].length < 3000) && safeLink(entry.source) && (!entry.related || safeLink(entry.related)))) throw new Error('Invalid entries');
   return entries;
 }

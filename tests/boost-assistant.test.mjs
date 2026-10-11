@@ -74,6 +74,13 @@ test('knowledge validation rejects unexpected payloads and external or executabl
   }
 });
 
+test('knowledge accommodates the reviewed catalogue while retaining a bounded size', () => {
+  assert.ok(entries.length <= 400);
+  const bounded = Array.from({ length: 400 }, (_, i) => ({ ...entries[0], id: `capacity-${i}` }));
+  assert.equal(validBoostEntries({ version: 1, entries: bounded }).length, 400);
+  assert.throws(() => validBoostEntries({ version: 1, entries: [...bounded, entries[0]] }));
+});
+
 class NodeStub {
   dataset = {}; attributes = {}; listeners = new Map(); children = []; value = ''; textContent = ''; hidden = false; disabled = false; open = false;
   style = { setProperty() {} }; scrollHeight = 1000; scrollTop = 0;
