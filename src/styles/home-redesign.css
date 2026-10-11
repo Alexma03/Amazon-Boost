@@ -351,3 +351,18 @@
   .ab-audit-copy>p:not(.ab-overline){font-size:.94rem;line-height:1.55}
   .ab-phone-form{min-height:730px;padding:52px 14px 34px}
 }
+/* Keep the audit reachable below the fixed header and comfortable on touch screens. */
+.audit-form{scroll-margin-top:84px}
+.ab-button-whatsapp{background:#25d366;color:#080808}
+.ab-button-whatsapp:hover{background:#43df7d}
+.ab-audit-whatsapp{margin-top:24px;max-width:100%;gap:12px}
+.ab-button-whatsapp .ab-icon{flex:none}
+.ab-phone-form.is-audit-target{transform:none;transition:none;opacity:1}
+@media(max-width:760px){
+  .ab-phone-form input:not([type=checkbox]),.ab-phone-form select,.ab-phone-form textarea{font-size:16px;min-height:44px}
+  .ab-phone-form .ab-consent{font-size:14px;line-height:1.5}
+  .ab-phone-form .ab-consent input{flex:none;width:20px;height:20px;min-height:20px}
+  .ab-phone-form .ab-call-expert{flex-wrap:wrap;gap:6px;padding:10px 12px}
+  .ab-phone-form .ab-call-expert strong{font-size:14px}
+  .ab-phone-form .ab-form-note{font-size:12px}
+}

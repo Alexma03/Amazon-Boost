@@ -4,6 +4,7 @@ import "../styles/featured-cases.css";
 import Icon from "./Icon.astro";
 
 const original = homeShowcase.featuredCase;
+const productImage = original.lifestyleImage === '/images/caso-exito-bebe-producto-negro-v2.png' ? '/images/caso-exito-bebe-producto-negro-v2-lossless.webp' : original.lifestyleImage;
 const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", useGrouping: "always" }).format(amount);
 ---
 
@@ -23,7 +24,7 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
     <article class="ab-case-slide" id="caso-organico" data-case-slide role="group" aria-roledescription="diapositiva" aria-label="1 de 2: Crecimiento orgánico">
       <div class="ab-case-heading" data-reveal><p class="ab-overline"><span></span> {original.status}</p><h2>{original.title}</h2><p class="ab-case-description">{original.description}</p></div>
       <div class="ab-case-layout">
-        <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={original.lifestyleImage} alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" draggable="false" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
+        <div class="ab-case-visual ab-case-product-stage" data-reveal><img class="ab-case-lifestyle" src={productImage} width="1672" height="941" alt="Composición del producto del caso de éxito sobre fondo negro" loading="lazy" draggable="false" /><div class="ab-case-badge"><span>Caso de éxito</span><strong>Crecimiento orgánico</strong></div></div>
         <div class="ab-case-evidence" data-reveal><div class="ab-case-numbers">{original.metrics.map((metric) => <div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div><figure><figcaption><span>Facturación mensual</span><small>Reconstrucción a partir de Seller Central · valores aproximados</small></figcaption><div class="ab-case-chart"><canvas data-case-chart="organic" role="img" aria-label="Evolución aproximada de la facturación mensual desde 600 euros hasta un máximo de 5.904,74 euros"></canvas><span>Pico máximo <strong>5.904,74 €</strong></span></div></figure><a class="ab-case-link" href={original.href}>Ampliar el caso <Icon name="arrow-up-right" size={18} /></a></div>
       </div>
       <div class="ab-case-client-voice" data-reveal>
@@ -82,7 +83,7 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
 </section>
 
 <script>
-  import { Chart } from "chart.js/auto";
+  import type { Chart } from "chart.js/auto";
   import { caseChartSeries } from "../data/home-showcase";
   import { mountCaseCarousel } from "../lib/case-carousel";
 
@@ -90,6 +91,8 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
     const cleanup = mountCaseCarousel(root);
     const euro = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
     const charts: Chart<"line">[] = [];
+    const initializeCharts = async () => {
+    const { Chart } = await import('chart.js/auto');
     root.querySelectorAll<HTMLCanvasElement>("[data-case-chart]").forEach((canvas) => {
       const key = canvas.dataset.caseChart as keyof typeof caseChartSeries;
       const series = caseChartSeries[key];
@@ -116,6 +119,13 @@ const euro = (amount: number) => new Intl.NumberFormat("es-ES", { style: "curren
         },
       }));
     });
-    document.addEventListener("astro:before-swap", () => { cleanup?.(); charts.forEach((chart) => chart.destroy()); }, { once: true });
+    };
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      void initializeCharts().catch(error => console.warn('Case charts unavailable', error));
+    }, { rootMargin: '400px' });
+    observer.observe(root);
+    document.addEventListener("astro:before-swap", () => { observer.disconnect(); cleanup?.(); charts.forEach((chart) => chart.destroy()); }, { once: true });
   });
 </script>

@@ -3,6 +3,7 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
+import interBold from '@fontsource/inter/files/inter-latin-700-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StructuredData from '../components/StructuredData.astro';
@@ -108,9 +109,7 @@ const boostAssistantEnabled = import.meta.env.PUBLIC_BOOST_ASSISTANT_ENABLED ===
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
     
-    <!-- Preconnect para mejorar rendimiento -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href={interBold} as="font" type="font/woff2" crossorigin />
     
     <!-- Structured Data (Schema.org) -->
     {!excludeFromIndex && <StructuredData

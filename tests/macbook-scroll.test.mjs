@@ -203,7 +203,7 @@ test('keeps frame geometry, removes competing scroll animation and never traps n
   const home = readFileSync(new URL('../src/components/HomeRedesign.astro', import.meta.url), 'utf8');
   const controller = readFileSync(new URL('../src/lib/macbook-scroll.ts', import.meta.url), 'utf8');
   const css = readFileSync(new URL('../src/styles/macbook-scroll.css', import.meta.url), 'utf8');
-  assert.equal((home.match(/src="\/images\/macbook-graphite-frame.png"/g) ?? []).length, 2);
+  assert.equal((home.match(/src="\/images\/macbook-graphite-frame-lossless.webp"/g) ?? []).length, 2);
   assert.match(home, /class="ab-account-stage" data-macbook-stage/);
   assert.doesNotMatch(home, /mobileTrigger|--lid-angle|--screen-opacity|--open-progress/);
   assert.doesNotMatch(controller, /preventDefault|overflow|wheel|touchmove|keydown|scrollTo\(/);

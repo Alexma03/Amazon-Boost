@@ -7,6 +7,8 @@ import ReviewCard from "./ReviewCard.astro";
 import DiagnosticExperience from "./DiagnosticExperience.astro";
 import Icon from "./Icon.astro";
 
+const whatsappUrl = "https://wa.me/34650606400?text=Hola%20Sergio%2C%20quiero%20hablar%20sobre%20mi%20cuenta%20de%20Amazon.";
+
 const tickerItems = [
   "Seller Central", "Amazon Ads", "SEO Amazon", "FBA", "FBM", "Buy Box",
   "Conversión", "Catálogo", "Stock", "Escalado", "Paneuropeo", "Amazon Europa",
@@ -69,14 +71,16 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 ---
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { mountMacbookScroll } from "../lib/macbook-scroll";
 
   const initHomeExperience = async () => {
     const heroAxis = document.querySelector<HTMLElement>("[data-hero-axis]");
     const hero = document.querySelector<HTMLElement>(".ab-hero");
-    if (hero) mountMacbookScroll(hero, { gsap, ScrollTrigger });
+    if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      void Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
+        mountMacbookScroll(hero, { gsap, ScrollTrigger });
+      }).catch(() => {});
+    }
     let axisFrame = 0;
     const updateHeroAxis = () => {
       axisFrame = 0;
@@ -151,6 +155,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         const status = form.querySelector<HTMLElement>("[data-form-status]");
         const submit = form.querySelector<HTMLButtonElement>("button[type='submit']");
         if (!status || !submit) return;
+        if (submit.disabled || !form.reportValidity()) return;
         const values = Object.fromEntries(new FormData(form).entries());
         status.textContent = "Enviando solicitud..."; status.dataset.state = "sending"; submit.disabled = true;
         try {
@@ -164,7 +169,25 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
           console.error("Error al enviar la solicitud:", error); status.textContent = "No se ha podido enviar. Escríbenos a info@amznboost.es."; status.dataset.state = "error";
         } finally { submit.disabled = false; }
       });
+      form.querySelectorAll<HTMLInputElement | HTMLButtonElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea, button[type="submit"]').forEach(control => { control.disabled = false; });
     });
+
+    const auditForm = document.querySelector<HTMLElement>('.audit-form');
+    const reachAudit = () => {
+      if (!auditForm) return;
+      auditForm.classList.add('is-visible', 'is-audit-target');
+      window.requestAnimationFrame(() => {
+        const header = document.querySelector<HTMLElement>('[data-site-header]');
+        window.scrollTo({ top: auditForm.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight ?? 64) - 20, behavior: 'instant' });
+      });
+    };
+    if (window.location.hash === '#auditoria') reachAudit();
+    document.querySelectorAll<HTMLAnchorElement>('a[href="#auditoria"], a[href="/#auditoria"]').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      if (window.location.hash !== '#auditoria') window.history.pushState(null, '', '#auditoria');
+      reachAudit();
+    }));
+    window.addEventListener('hashchange', () => { if (window.location.hash === '#auditoria') reachAudit(); });
   };
 
   if (document.readyState === "loading") {
@@ -182,7 +205,8 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
       <p class="ab-hero-statement">Convertimos Amazon en un canal rentable.</p>
       <p class="ab-hero-description">Hacemos que publicidad, catálogo y stock trabajen juntos para vender más sin perder rentabilidad.</p>
       <div class="ab-hero-actions">
-        <a class="ab-button ab-button-primary" href="#auditoria">Solicitar auditoría <Icon name="arrow-up-right" size={18} /></a>
+        <a class="ab-button ab-button-primary ab-button-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">Hablemos por WhatsApp <Icon name="arrow-up-right" size={18} /></a>
+        <a class="ab-button ab-button-ghost" href="#auditoria">Solicitar auditoría <Icon name="arrow-down" size={18} /></a>
         <a class="ab-button ab-button-ghost" href="#caso-real">Ver un caso real <Icon name="arrow-down" size={18} /></a>
       </div>
     </div>
@@ -190,7 +214,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <div class="ab-account-stage" data-macbook-stage>
       <div class="ab-macbook" data-hero-macbook>
         <div class="ab-macbook-lid">
-          <img class="ab-macbook-device ab-macbook-device-lid" src="/images/macbook-graphite-frame.png" alt="" aria-hidden="true" />
+          <img class="ab-macbook-device ab-macbook-device-lid" src="/images/macbook-graphite-frame-lossless.webp" width="1635" height="962" fetchpriority="high" alt="" aria-hidden="true" />
           <div class="ab-macbook-screen">
           <div class="ab-macbook-camera" aria-hidden="true"><i></i></div>
           <div class="ab-seller-window" aria-label="Vista de ejemplo de una cuenta de Seller Central">
@@ -225,7 +249,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
             <span class="ab-macbook-label">MacBook Pro</span>
           </div>
         </div>
-        <img class="ab-macbook-device ab-macbook-device-base" src="/images/macbook-graphite-frame.png" alt="" aria-hidden="true" />
+        <img class="ab-macbook-device ab-macbook-device-base" src="/images/macbook-graphite-frame-lossless.webp" width="1635" height="962" alt="" aria-hidden="true" />
       </div>
     </div>
 
@@ -338,16 +362,16 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 
 <section class="ab-audit-section" id="auditoria">
   <div class="ab-audit-shell">
-    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría gratuita</p><h2>Tu marca ya tiene la respuesta. Vamos a encontrarla.</h2><p>Cuéntanos el punto de partida. Revisaremos dónde está la oportunidad y qué mover primero.</p><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
-    <form class="audit-form ab-phone-form" data-phone-rise>
+    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría gratuita</p><h2>Tu marca ya tiene la respuesta. Vamos a encontrarla.</h2><p>Hablemos por WhatsApp sobre tu marca o solicita tu auditoría gratuita con el formulario.</p><a class="ab-button ab-button-primary ab-button-whatsapp ab-audit-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">Habla con Amazon Boost <Icon name="arrow-up-right" size={18} /></a><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
+    <form class="audit-form ab-phone-form" method="post" data-phone-rise>
       <div class="ab-phone-speaker" aria-hidden="true"><i></i></div>
       <div class="ab-phone-side ab-phone-action" aria-hidden="true"></div><div class="ab-phone-side ab-phone-volume" aria-hidden="true"></div>
       <div class="ab-phone-title"><span>Amazon Boost</span><small>Auditoría gratuita</small></div>
-      <div class="ab-field-pair"><label>Nombre<input type="text" name="name" autocomplete="name" placeholder="Tu nombre" required /></label><label>Email<input type="email" name="email" autocomplete="email" placeholder="tu@empresa.com" required /></label></div>
-      <div class="ab-field-pair"><label>Teléfono<input type="tel" name="phone" autocomplete="tel" placeholder="+34 600 000 000" /></label><label>Ventas mensuales<select name="monthly_sales"><option value="">Selecciona un rango</option><option value="0-5k">0 – 5.000 €</option><option value="5k-25k">5.000 – 25.000 €</option><option value="25k-100k">25.000 – 100.000 €</option><option value="100k+">Más de 100.000 €</option></select></label></div>
-      <label>¿Qué te preocupa ahora?<textarea name="message" rows="3" placeholder="PPC, listings, stock, catálogo, lanzamiento..."></textarea></label>
-      <label class="ab-consent"><input type="checkbox" name="consent" required /><span>Acepto que Amazon Boost contacte conmigo sobre esta solicitud. <a href="/politica-de-privacidad/">Política de Privacidad</a>.</span></label>
-      <button type="submit">Solicitar auditoría gratuita <Icon name="arrow-up-right" size={18} /></button><a class="ab-call-expert" href="tel:+34650606400"><span>Hablar con un experto</span><strong>+34 650 606 400</strong></a><p class="ab-form-note">Gratis y sin compromiso. Respuesta personal, no automática.</p><p class="ab-form-status" data-form-status aria-live="polite"></p><div class="ab-phone-home" aria-hidden="true"></div>
+      <div class="ab-field-pair"><label>Nombre<input type="text" name="name" autocomplete="name" placeholder="Tu nombre" required disabled /></label><label>Email<input type="email" name="email" autocomplete="email" placeholder="tu@empresa.com" required disabled /></label></div>
+      <div class="ab-field-pair"><label>Teléfono<input type="tel" name="phone" autocomplete="tel" placeholder="+34 600 000 000" disabled /></label><label>Ventas mensuales<select name="monthly_sales" disabled><option value="">Selecciona un rango</option><option value="0-5k">0 – 5.000 €</option><option value="5k-25k">5.000 – 25.000 €</option><option value="25k-100k">25.000 – 100.000 €</option><option value="100k+">Más de 100.000 €</option></select></label></div>
+      <label>¿Qué te preocupa ahora?<textarea name="message" rows="3" placeholder="PPC, listings, stock, catálogo, lanzamiento..." disabled></textarea></label>
+      <label class="ab-consent"><input type="checkbox" name="consent" required disabled /><span>Acepto que Amazon Boost contacte conmigo sobre esta solicitud. <a href="/politica-de-privacidad/">Política de Privacidad</a>.</span></label>
+      <button type="submit" disabled>Solicitar auditoría gratuita <Icon name="arrow-up-right" size={18} /></button><a class="ab-call-expert" href="tel:+34650606400"><span>Hablar con un experto</span><strong>+34 650 606 400</strong></a><p class="ab-form-note">Gratis y sin compromiso. Respuesta personal, no automática.</p><p class="ab-form-status" data-form-status aria-live="polite"></p><noscript><p class="ab-form-note">Activa JavaScript para enviar el formulario, o <a href="mailto:info@amznboost.es">escríbenos por correo</a> o <a href="tel:+34650606400">llámanos</a>.</p></noscript><div class="ab-phone-home" aria-hidden="true"></div>
     </form>
   </div>
 </section>
