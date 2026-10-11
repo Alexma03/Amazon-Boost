@@ -12,9 +12,9 @@ const { parse } = createRequire(import.meta.resolve('astro'))('parse5');
 const all = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap((child) => all(child, predicate))];
 const attr = (node, name) => node.attrs?.find((item) => item.name === name)?.value;
 
-test('only the ten reviewed guides are added to the public collection', () => {
-  assert.equal(reviewedGuides.length, 10);
-  assert.equal(guides.length, 64);
+test('only the thirteen approved reviewed guides are added to the public collection', () => {
+  assert.equal(reviewedGuides.length, 13);
+  assert.equal(guides.length, 67);
   assert.equal(new Set(guides.map((guide) => guide.slug)).size, guides.length);
   assert.doesNotMatch(read('src/data/guides-reviewed-2026-10-11.ts'), /from\s+['"][^'"]*guide-drafts/);
   assert.doesNotMatch(read('src/data/guides.ts'), /from\s+['"][^'"]*guide-drafts/);
@@ -32,8 +32,8 @@ test('only the ten reviewed guides are added to the public collection', () => {
 test('reviewed guides are canonical, indexable, discoverable and absent from draft routes', () => {
   const sitemap = read('dist/sitemap-0.xml');
   const directory = read('dist/guias/index.html');
-  assert.equal(indexablePaths.length, 90);
-  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 90);
+  assert.equal(indexablePaths.length, 93);
+  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 93);
   for (const guide of reviewedGuides) {
     const html = read('dist' + guide.path + 'index.html');
     const tree = parse(html);

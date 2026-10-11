@@ -1162,5 +1162,362 @@ export const reviewedGuides: Guide[] = [
         "note": "Verifica categoría, precio total, tarifas y recargos vigentes para tu producto."
       }
     ]
+  },
+  {
+    "slug": "caida-ventas-amazon",
+    "path": "/guias/caida-ventas-amazon/",
+    "updatedAt": "2026-10-11",
+    "title": "Han bajado mis ventas en Amazon: cómo identificar el problema",
+    "metaTitle": "Caída de ventas en Amazon: causas y diagnóstico por ASIN",
+    "description": "Diagnostica una caída de ventas en Amazon separando tráfico, conversión, disponibilidad y precio. Localiza el ASIN afectado antes de cambiar toda la cuenta.",
+    "category": "Rentabilidad",
+    "service": "/servicios/gestion-de-cuenta/",
+    "relatedServices": [
+      "/servicios/gestion-de-ppc/"
+    ],
+    "answer": "Si bajan las ventas, identifica primero qué referencias y fechas explican la caída. Después separa menos visitas, menor conversión y periodos sin oferta disponible. Compara también precio, promociones y estacionalidad: un cambio de facturación no demuestra por sí solo que el posicionamiento haya empeorado.",
+    "table": {
+      "caption": "Cuatro lecturas de una caída de ventas",
+      "headings": [
+        "Señal",
+        "Qué contrastar",
+        "Siguiente comprobación"
+      ],
+      "rows": [
+        [
+          "Bajan visitas y pedidos",
+          "Disponibilidad, publicidad y demanda comparable.",
+          "Localizar qué fuente o referencia pierde exposición."
+        ],
+        [
+          "Visitas similares, menos pedidos",
+          "Oferta, contenido, entrega y precio final.",
+          "Revisar la decisión de compra del producto afectado."
+        ],
+        [
+          "Pedidos similares, menos facturación",
+          "Precio efectivo y mezcla de referencias.",
+          "Separar volumen de unidades y valor por pedido."
+        ],
+        [
+          "Solo cae una variante",
+          "Stock, relación de variantes y oferta seleccionada.",
+          "Corregir el problema local antes de tocar toda la familia."
+        ]
+      ]
+    },
+    "sections": [
+      {
+        "id": "comparacion",
+        "title": "Compara periodos que representen situaciones similares",
+        "paragraphs": [
+          "Anota marketplace, intervalo, referencias y definición de ventas utilizada. No mezcles pedidos, unidades, ingreso neto y desembolsos como si fueran la misma cifra. Revisa también el grado de actualización de cada informe.",
+          "Compara días equivalentes cuando sea posible y registra campañas promocionales, cambios de precio, temporada y falta de stock. Un periodo excepcionalmente alto no es siempre una base razonable para medir la caída siguiente. La comparación necesita contexto, no solo una flecha roja."
+        ]
+      },
+      {
+        "id": "referencias",
+        "title": "Encuentra qué ASIN explica la mayor parte del cambio",
+        "paragraphs": [
+          "Usa los informes de ventas y tráfico disponibles en Seller Central para bajar del total de cuenta a los productos. Amazon ofrece vistas por fecha y por ASIN; confirma qué columnas y alcance estás utilizando.",
+          "Nuestra propuesta es ordenar la pérdida absoluta y después su proporción. Una referencia pequeña puede caer mucho en porcentaje sin explicar el problema de la cuenta. Separa variantes y comprueba si la sustitución entre ellas mantiene las unidades de la familia."
+        ],
+        "source": 0
+      },
+      {
+        "id": "causa",
+        "title": "Distingue exposición, compra y disponibilidad",
+        "paragraphs": [
+          "Si faltan visitas, revisa anuncios, oferta activa y contexto de demanda. Si las visitas se mantienen, contrasta precio final, entrega, contenido y dudas del comprador. Una captura aislada de una búsqueda no demuestra un cambio permanente de posición.",
+          "Abre la oferta correcta con un contexto de entrega pertinente y comprueba variantes y stock. Registra también si dejaron de funcionar campañas, cupones o elementos del listing. Evita culpar a una actualización de algoritmo antes de comprobar los cambios que sí puedes observar."
+        ]
+      },
+      {
+        "id": "plan",
+        "title": "Actúa sobre una causa comprobable y mide después",
+        "paragraphs": [
+          "Corrige primero incidencias que impiden comprar. Para otras hipótesis, decide una acción, su alcance y la fecha de revisión. Cambiar precios, imágenes y campañas a la vez puede dificultar saber qué resolvió el problema.",
+          "En una auditoría gratuita, Amazon Boost revisa los datos de la marca junto con publicidad, catálogo y stock. Si la causa sigue abierta, lo indicamos como pendiente: no prometemos recuperar posiciones o ventas en un plazo fijo."
+        ],
+        "bullets": [
+          "ASIN prioritario y cambio identificado.",
+          "Hipótesis vinculada a una señal concreta.",
+          "Acción y variable que debe mejorar.",
+          "Periodo de seguimiento sin nuevas alteraciones innecesarias."
+        ]
+      }
+    ],
+    "checklist": [
+      "Métricas y periodos equivalentes.",
+      "Promociones y estacionalidad anotadas.",
+      "ASIN que explica la caída localizado.",
+      "Oferta y disponibilidad comprobadas.",
+      "Tráfico y conversión separados.",
+      "Primera acción y revisión definidas."
+    ],
+    "faqs": [
+      {
+        "question": "¿Una bajada de ventas significa que he perdido SEO en Amazon?",
+        "answer": "No necesariamente. Puede cambiar la demanda, la publicidad, el precio o la disponibilidad. Necesitas contrastar exposición y pedidos antes de atribuirlo a posicionamiento."
+      },
+      {
+        "question": "¿Debo aumentar publicidad para recuperar las ventas?",
+        "answer": "Solo si el diagnóstico lo justifica y la oferta puede convertir con margen. Un problema de stock o de entrega no se resuelve con más presupuesto."
+      },
+      {
+        "question": "¿Qué datos necesito para una primera revisión?",
+        "answer": "Fechas, referencias afectadas y un resumen de cambios y métricas comparables. No hacen falta contraseñas ni datos personales de compradores para explicar la situación inicial."
+      }
+    ],
+    "related": [
+      "ventas-beneficio-amazon",
+      "listing-amazon-visitas-sin-ventas",
+      "buy-box-amazon-oferta-destacada",
+      "amazon-ads-clics-sin-ventas"
+    ],
+    "sources": [
+      {
+        "label": "Amazon: informes de ventas y tráfico por fecha y ASIN",
+        "url": "https://sell.amazon.com/blog/amazon-business-reports",
+        "note": "La referencia explica vistas B2B y totales. Selecciona el alcance adecuado y confirma definiciones en tu marketplace."
+      }
+    ]
+  },
+  {
+    "slug": "plan-reposicion-fba-amazon",
+    "path": "/guias/plan-reposicion-fba-amazon/",
+    "updatedAt": "2026-10-11",
+    "title": "Cómo preparar un plan de reposición FBA por producto",
+    "metaTitle": "Plan de reposición FBA: cuándo pedir y cuánto enviar a Amazon",
+    "description": "Calcula una reposición FBA con demanda, plazos, unidades vendibles y stock en tránsito. Decide cuándo pedir y qué lote enviar sin acumular exceso de inventario.",
+    "category": "Operativa",
+    "service": "/servicios/gestion-de-cuenta/",
+    "answer": "Un plan de reposición FBA combina demanda prevista, plazo completo de suministro y unidades que estarán disponibles a tiempo. Calcula cuándo pedir y cuánto enviar por SKU, incluyendo producción, transporte y recepción. No repongas solo porque aparece una recomendación ni restes stock en tránsito como si ya pudiera venderse.",
+    "table": {
+      "caption": "Información mínima para una decisión de reposición",
+      "headings": [
+        "Dato",
+        "Qué registrar",
+        "Por qué importa"
+      ],
+      "rows": [
+        [
+          "Demanda",
+          "Unidades por día y cambios previstos.",
+          "Permite estimar consumo durante el plazo."
+        ],
+        [
+          "Plazo completo",
+          "Producción, preparación, transporte y recepción.",
+          "Determina cuándo debe iniciarse la reposición."
+        ],
+        [
+          "Stock",
+          "Disponible, reservado, externo y en tránsito.",
+          "Evita contar las mismas unidades dos veces."
+        ],
+        [
+          "Restricciones",
+          "Lote mínimo, caducidad y capacidad aplicable.",
+          "Puede hacer inviable el lote teórico."
+        ]
+      ]
+    },
+    "sections": [
+      {
+        "id": "demanda",
+        "title": "Prepara una previsión por referencia, no un promedio de marca",
+        "paragraphs": [
+          "Elige un periodo representativo de ventas y registra promociones, días sin disponibilidad y cambios de temporada. Si el producto estuvo agotado, sus ventas observadas no reflejan toda la demanda que podría haber tenido.",
+          "Nuestra propuesta es trabajar con un escenario base y otro de tensión, explicando qué cambia en cada uno. Un lanzamiento sin histórico necesita lotes de prueba y revisión frecuente; no convierte la demanda de un competidor en una previsión propia."
+        ]
+      },
+      {
+        "id": "plazo",
+        "title": "Cuenta el tiempo hasta que la unidad pueda venderse",
+        "paragraphs": [
+          "Suma las fases que correspondan: producción, preparación, salida, transporte y recepción. Una fecha de entrega al almacén no implica necesariamente disponibilidad inmediata para el comprador. Usa tus tiempos reales y sus variaciones, no un plazo universal.",
+          "Como orientación operativa, el punto de pedido se relaciona con la demanda durante ese plazo más un colchón de seguridad. Ese colchón depende del riesgo de retraso, coste de stock y nivel de servicio que necesitas; no se obtiene copiando un número fijo de días."
+        ]
+      },
+      {
+        "id": "cantidad",
+        "title": "Decide el lote contando inventario y restricciones",
+        "paragraphs": [
+          "Separa unidades vendibles, reservadas, pendientes y externas. Asigna una fecha estimada de disponibilidad a las reposiciones en curso antes de descontarlas de la necesidad. No cuentes el mismo stock en el proveedor y en tránsito como dos lotes.",
+          "Amazon ofrece herramientas de gestión de inventario para revisar exceso, disponibilidad y rendimiento. Contrasta sus recomendaciones con capacidad vigente, lote mínimo del proveedor, caducidad y caja de tu empresa antes de confirmar el pedido."
+        ],
+        "source": 0
+      },
+      {
+        "id": "revision",
+        "title": "Revisa el plan cuando cambie la demanda o el suministro",
+        "paragraphs": [
+          "Actualiza el calendario si cambia precio, publicidad, promoción o plazo de entrega. Si vendes más rápido de lo previsto, no basta con repetir el último pedido; comprueba cuándo se agotaría el disponible y qué alternativas viables existen.",
+          "Amazon Boost revisa reposición junto con publicidad y margen en la auditoría gratuita. Podemos ayudarte a priorizar referencias y evitar decisiones de stock desconectadas de la demanda; no garantizamos que desaparezca todo riesgo de retraso o rotura."
+        ],
+        "bullets": [
+          "Pedido propuesto, unidades y fecha objetivo.",
+          "Responsable de confirmar cada fase.",
+          "Señales que obligan a recalcular.",
+          "Seguimiento de disponible y exceso por SKU."
+        ]
+      }
+    ],
+    "checklist": [
+      "Demanda con estacionalidad y promociones contrastadas.",
+      "Plazo hasta disponibilidad registrado.",
+      "Stock vendible y en tránsito separado.",
+      "Colchón de seguridad justificado.",
+      "Lote, caducidad, capacidad y caja revisados.",
+      "Calendario y siguiente revisión definidos."
+    ],
+    "faqs": [
+      {
+        "question": "¿Cuántos días de inventario debo enviar a FBA?",
+        "answer": "Depende de rotación, plazos, variabilidad y costes. No existe una cifra universal que proteja a la vez de roturas y exceso en todas las referencias."
+      },
+      {
+        "question": "¿Debo seguir siempre la recomendación de reposición de Amazon?",
+        "answer": "Úsala como información de partida y comprueba los datos y restricciones de tu negocio. La recomendación no sustituye tu planificación de suministro o caja."
+      },
+      {
+        "question": "¿Puedo contar como disponible todo el stock en tránsito?",
+        "answer": "No. Tiene una fecha y un riesgo de recepción. Incorpóralo a la previsión cuando razonablemente pueda venderse, manteniendo separados los estados de inventario."
+      }
+    ],
+    "related": [
+      "evitar-roturas-stock-amazon",
+      "inventario-fba-baja-rotacion",
+      "indice-rendimiento-inventario-ipi-amazon",
+      "presupuesto-amazon-ads"
+    ],
+    "sources": [
+      {
+        "label": "Amazon España: herramientas y gestión del inventario",
+        "url": "https://sell.amazon.es/aprender/gestion-inventario",
+        "note": "Contexto de inventario; la planificación debe incorporar tus tiempos y restricciones reales."
+      }
+    ]
+  },
+  {
+    "slug": "error-8541-amazon",
+    "path": "/guias/error-8541-amazon/",
+    "updatedAt": "2026-10-11",
+    "title": "Error 8541 en Amazon: cómo revisar un conflicto de catálogo",
+    "metaTitle": "Error 8541 Amazon: conflicto de atributos, EAN y ASIN",
+    "description": "Qué comprobar ante el error 8541 de Amazon: identificador, ASIN encontrado y atributos contradictorios. Prepara la corrección sin cambiar datos reales ni crear duplicados.",
+    "category": "Catálogo",
+    "service": "/servicios/gestion-de-cuenta/",
+    "relatedServices": [
+      "/servicios/desbloqueos-amazon/"
+    ],
+    "answer": "El error 8541 señala un conflicto entre los datos enviados y una referencia que Amazon identifica en su catálogo. Comprueba el identificador y decide si el ASIN encontrado es realmente tu producto. Corrige tu envío si está equivocado o solicita una revisión con pruebas si el dato incorrecto está en el catálogo.",
+    "table": {
+      "caption": "Cómo separar las posibles causas del conflicto",
+      "headings": [
+        "Comprobación",
+        "Qué observar",
+        "Decisión"
+      ],
+      "rows": [
+        [
+          "Identificador",
+          "EAN u otro GTIN del producto real.",
+          "Corregir un código equivocado antes de reenviar."
+        ],
+        [
+          "Identidad",
+          "Marca, modelo, tamaño y contenido del ASIN sugerido.",
+          "Confirmar coincidencia solo si es la misma referencia."
+        ],
+        [
+          "Atributo",
+          "Valor enviado y valor del catálogo.",
+          "Determinar dónde está la discrepancia real."
+        ],
+        [
+          "Evidencia",
+          "Envase, documentación y datos consistentes.",
+          "Preparar la corrección o solicitud de revisión adecuada."
+        ]
+      ]
+    },
+    "sections": [
+      {
+        "id": "aviso",
+        "title": "Guarda el mensaje completo y el ASIN que señala",
+        "paragraphs": [
+          "Registra SKU, mercado, identificador, ASIN sugerido y atributo conflictivo. La explicación del equipo de Amazon relaciona el 8541 con una coincidencia de identificador y datos que no concuerdan; no lo interpretes como un bloqueo genérico de la cuenta.",
+          "Conserva también el envío que generó el error y su fecha. Si usas un archivo de catálogo, comprueba la fila y el informe de procesamiento correspondientes. Así puedes identificar qué valor se envió realmente, no solo lo que aparece en una captura del editor."
+        ],
+        "source": 0
+      },
+      {
+        "id": "identidad",
+        "title": "¿La ficha encontrada representa el mismo producto?",
+        "paragraphs": [
+          "Compara identificador, marca, modelo, presentación y unidades. Si el producto es distinto, no adaptes sus atributos para forzar la coincidencia. Revisa primero la autenticidad y asignación del identificador y reúne evidencia de la referencia correcta.",
+          "Si sí representa el mismo producto, contrasta el atributo señalado con envase y documentación. Un error en tu archivo y un dato incorrecto del catálogo requieren actuaciones diferentes. No copies un valor falso solo para que el sistema acepte el alta."
+        ]
+      },
+      {
+        "id": "corregir",
+        "title": "Corrige el origen del conflicto o prepara la revisión",
+        "paragraphs": [
+          "Si tu envío contiene el error, utiliza el procedimiento aplicable para corregirlo de forma coherente con el producto. Si el conflicto está en el catálogo, prepara fotografías legibles y documentación auténtica que permitan identificar la discrepancia.",
+          "Consulta las opciones de conciliación disponibles en la cuenta o el canal de soporte correspondiente. Los nombres de las herramientas pueden cambiar. La solicitud debe explicar un atributo concreto y su evidencia; repetir altas o crear un duplicado no garantiza resolverlo."
+        ]
+      },
+      {
+        "id": "seguimiento",
+        "title": "Comprueba el resultado en catálogo y operativa",
+        "paragraphs": [
+          "Guarda el expediente y cada respuesta. Después de una corrección, verifica la ficha, las variantes, la oferta y el stock afectados. Confirma que el producto publicado sigue describiendo la referencia real y no una adaptación hecha solo para superar el mensaje.",
+          "Amazon Boost puede revisar este diagnóstico en una auditoría gratuita. No garantizamos aprobación ni plazo de soporte; sí podemos ayudarte a ordenar la evidencia y separar el conflicto de identidad de una incidencia distinta."
+        ],
+        "bullets": [
+          "Versión enviada e informe de error conservados.",
+          "Pruebas vinculadas al atributo conflictivo.",
+          "Corrección y respuesta documentadas.",
+          "Oferta e inventario revisados tras el cambio."
+        ]
+      }
+    ],
+    "checklist": [
+      "Aviso completo y envío original guardados.",
+      "Identificador y ASIN sugerido contrastados.",
+      "Producto exacto comparado por atributos.",
+      "Origen de la discrepancia identificado.",
+      "Pruebas auténticas preparadas.",
+      "Ficha y operativa comprobadas después de corregir."
+    ],
+    "faqs": [
+      {
+        "question": "¿Borrar el listing y volver a crearlo soluciona el 8541?",
+        "answer": "No es una solución universal. Si persiste el conflicto de identidad o atributo, puede reaparecer. Revisa además las consecuencias para ofertas e inventario antes de borrar nada."
+      },
+      {
+        "question": "¿Puedo cambiar la marca para que coincida con el ASIN sugerido?",
+        "answer": "No si deja de describir tu producto real. Determina si el identificador y el ASIN son correctos y solicita revisión cuando corresponda."
+      },
+      {
+        "question": "¿8541 y ASIN duplicado significan lo mismo?",
+        "answer": "No. El 8541 señala un conflicto de coincidencia y atributos. Puede estar relacionado con problemas de catálogo, pero necesita su propio diagnóstico."
+      }
+    ],
+    "related": [
+      "asin-duplicados-amazon",
+      "exencion-gtin-amazon",
+      "variantes-amazon-parent-child",
+      "listing-suprimido-amazon"
+    ],
+    "sources": [
+      {
+        "label": "Equipo de Amazon España: explicación del código 8541",
+        "url": "https://sellercentral.amazon.es/seller-forums/discussions/t/ea957e7c-3401-47a6-bba4-e3dc8b91166b",
+        "note": "Explicación publicada por el equipo de Amazon. Confirma la herramienta y el procedimiento vigentes en tu cuenta; no implica un plazo de resolución."
+      }
+    ]
   }
 ];
