@@ -38,4 +38,25 @@ No se vincularon propiedades GA4 ni otras cuentas ajenas.
 - Las pruebas de Tag Assistant documentadas en `medicion-google-ads-2026-10-12.md` corresponden a la cuenta anterior. No son evidencia de una prueba interactiva nueva.
 - Google Ads puede mostrar Inactivo mientras no haya recibido eventos o mientras se actualiza el diagnostico. No equivale a una atribucion verificada de trafico publicitario real.
 
-Pendiente de completar: comprobacion de la version publicada y prueba interactiva con la etiqueta nueva.
+## Comprobacion en produccion
+
+Publicacion de la migracion: commit `1978af4`, enviado a `main`. La homepage responde HTTP 200 y su modulo `google-ads.DXaM4t47.js` contiene la etiqueta y los tres destinos nuevos, sin el ID de la cuenta anterior.
+
+Tag Assistant conectado a `amznboost.es` detecto un unico destino Google Ads: `AW-18508657011`. Se comprobaron las siguientes acciones reales en la web publicada:
+
+| Prueba | Resultado |
+| --- | --- |
+| Rechazar y recargar | Ningun script gtag de Google Ads en el DOM; preferencias reabiertas sin permisos seleccionados |
+| Aceptar solo medicion | ad_storage y ad_user_data concedidos; analytics_storage y ad_personalization denegados; todos denegados por defecto |
+| Formulario vacio | Ningun evento de conversion |
+| Envio correcto | Confirmacion Solicitud recibida; evento 31 con destino de auditoria y transaction_id del documento creado |
+| WhatsApp flotante | Evento 32, destino de WhatsApp, sin enviar una conversacion |
+| Enlace de telefono | Evento 33, destino de telefono, sin realizar una llamada |
+| Duplicados | Tres llamadas personalizadas en total para tres acciones; una auditoria y un clic de cada canal |
+| Datos personales | Payloads observados sin nombre, email, telefono ni consulta; page_location sin query y page_referrer vacio |
+
+La solicitud real se identifica como PRUEBA MEDICION CUENTA NUEVA - NO CONTACTAR. No contiene un telefono de cliente. Se conserva en la base de datos; no se borro ningun mensaje.
+
+La prueba de error Firebase sigue siendo una simulacion automatizada, no un fallo forzado en produccion. Tag Assistant puede insertar un script extra de depuracion: no representa una segunda instalacion normal. Se recargo la pagina durante la prueba de consentimiento, por lo que dos Config en el historial corresponden a dos cargas, no a duplicacion en una pagina.
+
+Evidencias privadas: `artifacts/private/ads-new-account-conversions.png` y `artifacts/private/ads-new-account-tag-assistant.png`. No se incluyen en el repositorio publico. Pendiente solo la atribucion y calidad de oportunidades con una campana real; no se han activado anuncios ni realizado clics sobre anuncios propios.
