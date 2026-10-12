@@ -180,7 +180,9 @@ test('guide hub and rendered articles expose their navigation and checklists', (
     assert.ok(links.has(guide.service), guide.path);
     for (const slug of guide.related) assert.ok(links.has(guideBySlug.get(slug).path), `${guide.slug}: ${slug}`);
     for (const item of guide.sources) assert.ok(links.has(item.url), item.url);
-    assert.equal(tag(tree, 'input').filter((node) => attr(node, 'type') === 'checkbox' && attr(node, 'data-boost-consent') === undefined).length, guide.checklist.length, guide.slug);
+    const checklist = all(tree, (node) => (attr(node, 'class') ?? '').split(/\s+/).includes('guide-checklist'))[0];
+    assert.ok(checklist, `${guide.slug}: missing checklist`);
+    assert.equal(tag(checklist, 'input').filter((node) => attr(node, 'type') === 'checkbox').length, guide.checklist.length, guide.slug);
     const faqGroup = all(tree, (node) => (attr(node, 'class') ?? '').split(/\s+/).includes('growth-faqs'))[0];
     assert.equal(tag(faqGroup, 'details').length, guide.faqs.length, guide.slug);
     assert.ok(links.has('/#auditoria'), `${guide.slug}: missing early audit link`);

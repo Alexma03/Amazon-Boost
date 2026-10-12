@@ -57,7 +57,9 @@ Google puede generar mas de un hit de transporte por una llamada de conversion (
 
 Evidencias privadas: artifacts/private/ads-cookie-mobile.png, ads-consent-tag-assistant.png y ads-conversion-actions.png. No se suben capturas de la cuenta ni leads de prueba al repositorio publico.
 
-La bateria completa se valida sobre una exportacion limpia del commit de entrega, sin las modificaciones independientes de guias. El primer pase sobre el arbol de trabajo encontro una discrepancia de un test SEO relacionada con los borradores de guias/salida compilada; no se incluyo ni se altero ese trabajo en esta entrega.
+La bateria completa se valida sobre una exportacion limpia del commit de entrega, sin las modificaciones independientes de guias. El primer pase encontro un test SEO que contaba todas las casillas de la pagina, incluyendo las dos nuevas de cookies. Se limito ese test a la lista de comprobacion de cada guia, manteniendo la comprobacion de su contenido. No se incluyo ni se altero el trabajo pendiente de guias.
+
+Resultado final de la candidatura aislada: compilacion correcta, 158/158 pruebas aprobadas y release-check --technical correcto (93 URLs publicas y un borrador fuera de indexacion). Los cambios en el test y esta documentacion son los unicos ajustes posteriores a la compilacion comprobada.
 
 ## Fuentes oficiales de referencia
 
