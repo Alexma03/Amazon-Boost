@@ -10,8 +10,18 @@ export const prerender = true;
   </section>
   <section>
     <h2>Lo que utiliza esta versión de la web</h2>
-    <p>Cloudflare entrega y protege la web e inserta un script de Cloudflare Web Analytics para medir visitas y rendimiento. Según la documentación de Cloudflare, esta medición funciona sin cookies de seguimiento. No hemos detectado en el código de las páginas públicas píxeles publicitarios ni Google Analytics. La autenticación de Firebase se reserva al área de administración, no al formulario público de auditoría.</p>
+    <p>Cloudflare entrega y protege la web e inserta un script de Cloudflare Web Analytics para medir visitas y rendimiento. Según la documentación de Cloudflare, esta medición funciona sin cookies de seguimiento. Google Analytics no está instalado. La autenticación de Firebase se reserva al área de administración, no al formulario público de auditoría.</p>
     <p>La medición de Cloudflare Web Analytics no requiere activar cookies de analítica. Puedes consultar la <a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noopener noreferrer">documentación del proveedor</a>. Cloudflare también puede utilizar cookies técnicas cuando activa medidas de seguridad o comprobaciones frente a tráfico automatizado.</p>
+  </section>
+  <section>
+    <h2>Medición publicitaria opcional</h2>
+    <p>Con tu consentimiento cargamos la etiqueta de Google Ads para medir solicitudes de auditoría guardadas correctamente y clics en WhatsApp o teléfono. Aplicamos Consent Mode v2 en modo básico: la etiqueta de Google no se carga hasta que aceptes la medición. Rechazarla no impide navegar, enviar el formulario ni contactar.</p>
+    <p>Google recibe el tipo de interacción, la dirección de la página sin sus parámetros de consulta y datos técnicos necesarios para prestar la medición. En la auditoría usamos un identificador aleatorio de solicitud para evitar duplicados. No enviamos a Google Ads tu nombre, correo, teléfono ni mensaje, ni utilizamos conversiones mejoradas. Puedes permitir o rechazar por separado la personalización publicitaria; el permiso de Google Analytics permanece denegado.</p>
+    <p>La etiqueta puede utilizar cookies propias de la familia <code>_gcl_</code> para relacionar un anuncio con una conversión; configuramos una duración de hasta 90 días, sujeta a las restricciones del navegador y a tu retirada del consentimiento. Consulta <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">la información de privacidad de los servicios publicitarios de Google</a>.</p>
+  </section>
+  <section>
+    <h2>Almacenamiento de preferencias y procedencia</h2>
+    <p>Guardamos tu elección en el almacenamiento local del navegador (<code>ab-consent-v1</code>) durante 180 días para no preguntarte en cada página. Es una preferencia necesaria para respetar tu decisión. Si aceptas la medición, podemos guardar temporalmente parámetros de campaña UTM e identificadores gclid, gbraid o wbraid en el almacenamiento de sesión (<code>ab-attribution-v1</code>), con una caducidad de 30 minutos. Si envías una solicitud, esa procedencia puede guardarse junto a ella en nuestra base de datos, según la Política de Privacidad.</p>
   </section>
   <section>
     <h2>Servicios externos</h2>
@@ -19,10 +29,15 @@ export const prerender = true;
   </section>
   <section>
     <h2>Tu control</h2>
-    <p>Puedes revisar y eliminar cookies desde las opciones de tu navegador. Bloquear las estrictamente necesarias puede impedir funciones de seguridad o acceso al área privada. Si se incorporan cookies de medición o publicidad no exentas, deberán informarse y solicitarse las opciones de consentimiento correspondientes antes de activarlas.</p>
+    <p>Puedes aceptar, rechazar o configurar la medición en el aviso, sin bloquear la navegación. También puedes <button type="button" data-cookie-settings>cambiar tus preferencias de cookies</button> en cualquier momento desde esta página o el pie de la web. Retirar el permiso detiene nuevos eventos de conversión y elimina la procedencia de campaña almacenada en sesión; también intentamos eliminar las cookies publicitarias propias accesibles al sitio. No elimina datos ya enviados ni cookies de otros dominios.</p>
+    <p>Puedes revisar y eliminar cookies desde las opciones de tu navegador. Bloquear las estrictamente necesarias puede impedir funciones de seguridad o acceso al área privada. Aceptar el contacto en el formulario no activa el consentimiento publicitario.</p>
   </section>
   <section>
     <h2>Contacto</h2>
     <p>Si tienes preguntas sobre las tecnologías del sitio, escribe a <a href="mailto:info@amznboost.es">info@amznboost.es</a>. Para el tratamiento de los datos que envías, consulta también la <a href="/politica-de-privacidad/">Política de Privacidad</a>.</p>
   </section>
 </LegalLayout>
+
+<style>
+  button[data-cookie-settings] { padding: 0; border: 0; background: transparent; color: #754600; text-decoration: underline; font: inherit; cursor: pointer; }
+</style>

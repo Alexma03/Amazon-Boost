@@ -1,0 +1,79 @@
+<aside class="ab-cookie-notice" data-ab-consent aria-label="Preferencias de privacidad" hidden>
+  <div class="ab-consent-summary">
+    <p>¿Nos ayudas a medir los anuncios? Con tu permiso usamos cookies de Google Ads. Puedes seguir navegando sin aceptarlas. <a href="/politica-de-cookies/">Más información</a></p>
+    <div class="ab-consent-actions">
+      <button type="button" data-consent-reject>Rechazar</button>
+      <button type="button" data-consent-accept>Aceptar</button>
+      <button type="button" class="ab-consent-link" data-consent-config aria-expanded="false" aria-controls="ab-consent-options">Configurar</button>
+    </div>
+  </div>
+  <form id="ab-consent-options" hidden>
+    <label><input type="checkbox" name="measurement" /> Medición de anuncios con Google Ads</label>
+    <label><input type="checkbox" name="personalization" /> Personalización publicitaria de Google</label>
+    <p>La personalización requiere aceptar la medición. Google Analytics no está instalado y su permiso permanece desactivado. No enviamos tus datos de contacto ni tu consulta a Google Ads.</p>
+    <button type="submit">Guardar preferencias</button>
+    <button type="button" class="ab-consent-link" data-consent-close>Cerrar</button>
+  </form>
+</aside>
+
+<script>
+  import { getAdsRuntime, readConsent } from '../lib/google-ads.mjs';
+  const notice = document.querySelector<HTMLElement>('[data-ab-consent]');
+  const options = document.querySelector<HTMLFormElement>('#ab-consent-options');
+  const ads = getAdsRuntime();
+  if (notice && options && ads) {
+    let previousFocus: HTMLElement | null = null;
+    const measurement = options.elements.namedItem('measurement') as HTMLInputElement;
+    const personalization = options.elements.namedItem('personalization') as HTMLInputElement;
+    const configure = notice.querySelector<HTMLButtonElement>('[data-consent-config]');
+    const showOptions = () => {
+      const choice = ads.getChoice();
+      measurement.checked = choice.measurement;
+      personalization.checked = choice.personalization;
+      options.hidden = false;
+      configure?.setAttribute('aria-expanded', 'true');
+    };
+    const close = () => {
+      notice.hidden = true;
+      options.hidden = true;
+      configure?.setAttribute('aria-expanded', 'false');
+      previousFocus?.focus({ preventScroll: true });
+    };
+    const save = (choice: { measurement: boolean; personalization: boolean }) => { ads.update(choice); close(); };
+    let saved = null;
+    try { saved = readConsent(window.localStorage); } catch { /* Blocked storage keeps the default denial. */ }
+    notice.hidden = !!saved;
+    notice.querySelector('[data-consent-reject]')?.addEventListener('click', () => save({ measurement: false, personalization: false }));
+    notice.querySelector('[data-consent-accept]')?.addEventListener('click', () => save({ measurement: true, personalization: true }));
+    configure?.addEventListener('click', showOptions);
+    notice.querySelector('[data-consent-close]')?.addEventListener('click', close);
+    options.addEventListener('submit', (event) => { event.preventDefault(); save({ measurement: measurement.checked, personalization: personalization.checked }); });
+    document.addEventListener('click', (event) => {
+      const button = (event.target as Element)?.closest('[data-cookie-settings]');
+      if (!button) return;
+      previousFocus = button as HTMLElement;
+      notice.hidden = false;
+      showOptions();
+      measurement.focus({ preventScroll: true });
+    });
+  }
+</script>
+
+<style>
+  .ab-cookie-notice[hidden], .ab-cookie-notice form[hidden] { display: none; }
+  .ab-cookie-notice { position: fixed; bottom: 14px; left: 16px; width: min(760px, calc(100% - 300px)); z-index: 90; padding: 14px 18px; color: #161616; background: #fff; border: 1px solid #d5d5d5; border-radius: 4px; box-shadow: 0 3px 16px #0002; font-size: 12px; line-height: 1.5; }
+  .ab-consent-summary { display: flex; align-items: center; gap: 18px; }
+  .ab-cookie-notice p { margin: 0; }
+  .ab-cookie-notice a { color: #754600; text-decoration: underline; }
+  .ab-consent-actions { display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0; max-width: 190px; }
+  .ab-cookie-notice button { min-height: 36px; padding: 6px 12px; border: 1px solid #b66d00; border-radius: 3px; background: #fff; color: #161616; font: inherit; font-weight: 600; cursor: pointer; }
+  .ab-cookie-notice [data-consent-accept] { background: #ff9900; }
+  .ab-cookie-notice .ab-consent-link { border: 0; text-decoration: underline; background: transparent; }
+  .ab-cookie-notice form { margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd; max-height: 45vh; overflow-y: auto; }
+  .ab-cookie-notice label { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+  .ab-cookie-notice input { width: 16px; height: 16px; accent-color: #9b5c00; }
+  .ab-cookie-notice form p { margin: 6px 0 12px; }
+  .ab-cookie-notice button:focus-visible, .ab-cookie-notice a:focus-visible { outline: 2px solid #754600; outline-offset: 2px; }
+  @media(max-width: 900px) { .ab-consent-summary { flex-direction: column; align-items: flex-start; gap: 8px; } .ab-consent-actions { max-width: none; gap: 4px; } }
+  @media(max-width: 640px) { .ab-cookie-notice { bottom: 10px; left: 10px; padding: 10px 12px; width: calc(100% - 94px); } .ab-cookie-notice button { padding: 6px 8px; } }
+</style>

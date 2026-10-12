@@ -72,6 +72,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 
 <script>
   import { mountMacbookScroll } from "../lib/macbook-scroll";
+  import { getLeadAttribution, trackAuditReceived } from "../lib/google-ads.mjs";
 
   const initHomeExperience = async () => {
     const heroAxis = document.querySelector<HTMLElement>("[data-hero-axis]");
@@ -163,8 +164,10 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
             import("../lib/firebase"),
             import("firebase/firestore"),
           ]);
-          await addDoc(collection(db, "email_submissions"), { name: values.name, email: values.email, phone: values.phone || null, monthly_sales: values.monthly_sales || null, subject: "Solicitud de auditoría Amazon", message: values.message || "Quiero detectar oportunidades en mi cuenta de Amazon.", source: "home-experience-2026", status: "unread", created_at: new Date().toISOString() });
+          const attribution = getLeadAttribution();
+          const submission = await addDoc(collection(db, "email_submissions"), { name: values.name, email: values.email, phone: values.phone || null, monthly_sales: values.monthly_sales || null, subject: "Solicitud de auditoría Amazon", message: values.message || "Quiero detectar oportunidades en mi cuenta de Amazon.", source: "home-experience-2026", status: "unread", created_at: new Date().toISOString(), ...(attribution ? { attribution } : {}) });
           status.textContent = "Solicitud recibida. Hablamos muy pronto."; status.dataset.state = "success"; form.reset();
+          trackAuditReceived(submission.id);
         } catch (error) {
           console.error("Error al enviar la solicitud:", error); status.textContent = "No se ha podido enviar. Escríbenos a info@amznboost.es."; status.dataset.state = "error";
         } finally { submit.disabled = false; }
