@@ -1,8 +1,8 @@
-export const ADS_ID = 'AW-11354063574';
+export const ADS_ID = 'AW-18508657011';
 export const ADS_EVENTS = Object.freeze({
-  audit: `${ADS_ID}/VQfCCI_TrZkdENaFhaYq`,
-  whatsapp: `${ADS_ID}/kiA2CJLTrZkdENaFhaYq`,
-  phone: `${ADS_ID}/LRtaCJXTrZkdENaFhaYq`,
+  audit: `${ADS_ID}/k3_bCNDqxpodEPPizvlE`,
+  whatsapp: `${ADS_ID}/Dol2CNPqxpodEPPizvlE`,
+  phone: `${ADS_ID}/bK2JCNbqxpodEPPizvlE`,
 });
 export const CONSENT_KEY = 'ab-consent-v1';
 export const ATTRIBUTION_KEY = 'ab-attribution-v1';

@@ -26,7 +26,12 @@ const granted = { measurement: true, personalization: false };
 const denied = { measurement: false, personalization: false };
 
 test('real Ads destinations are distinct and use the verified account tag', () => {
-  assert.equal(ADS_ID, 'AW-11354063574');
+  assert.equal(ADS_ID, 'AW-18508657011');
+  assert.deepEqual(ADS_EVENTS, {
+    audit: 'AW-18508657011/k3_bCNDqxpodEPPizvlE',
+    whatsapp: 'AW-18508657011/Dol2CNPqxpodEPPizvlE',
+    phone: 'AW-18508657011/bK2JCNbqxpodEPPizvlE',
+  });
   assert.equal(new Set(Object.values(ADS_EVENTS)).size, 3);
   assert.ok(Object.values(ADS_EVENTS).every(id => id.startsWith(`${ADS_ID}/`)));
 });
