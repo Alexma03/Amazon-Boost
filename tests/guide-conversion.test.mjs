@@ -36,7 +36,7 @@ test('all guides offer a visible free audit and a service-to-home journey in sta
     assert.equal(attr(early[0], 'href'), '/#auditoria');
     assert.equal(content(early[0]).trim(), 'Solicitar auditoría gratuita');
     const band = all(tree, (node) => attr(node, 'class') === 'guide-early-cta')[0];
-    assert.ok(content(band).includes(getAuditContact(guide.service).title), guide.slug);
+    assert.ok(content(band).includes(getAuditContact(guide.auditService ?? guide.service).title), guide.slug);
     const nav = all(tree, (node) => attr(node, 'class') === 'guide-business-links')[0];
     const links = all(nav, (node) => node.tagName === 'a');
     assert.deepEqual(links.map((node) => attr(node, 'href')), [guide.service, '/']);

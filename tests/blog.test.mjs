@@ -30,11 +30,17 @@ const originalDates = {
 };
 
 test('blog retains all existing addresses and original publication dates', () => {
-  assert.deepEqual(allBlogPosts.map((post) => post.slug).sort(), Object.keys(originalDates).sort());
+  assert.equal(allBlogPosts.length, 19);
+  assert.deepEqual(allBlogPosts.filter((post) => post.slug in originalDates).map((post) => post.slug).sort(), Object.keys(originalDates).sort());
   for (const post of allBlogPosts) {
-    assert.equal(post.date, originalDates[post.slug]);
-    assert.equal(post.updatedAt, '2026-08-28');
-    assert.ok(post.date < post.updatedAt);
+    if (post.slug in originalDates) {
+      assert.equal(post.date, originalDates[post.slug]);
+      assert.equal(post.updatedAt, '2026-08-28');
+      assert.ok(post.date < post.updatedAt);
+    } else {
+      assert.equal(post.date, '2026-10-20');
+      assert.equal(post.updatedAt, post.date);
+    }
     assert.ok(post.seo.metaTitle.length <= 75, post.seo.metaTitle);
     assert.ok(post.seo.metaDescription.length >= 80, post.slug);
     assert.equal(blogPostsBySlug[post.slug], post);
@@ -84,8 +90,8 @@ test('article metadata, dates, content and contextual links match the record', (
     assert.equal(meta(tree, 'description'), post.seo.metaDescription);
     assert.equal(meta(tree, 'og:title'), post.seo.metaTitle);
     assert.equal(meta(tree, 'twitter:description'), post.seo.metaDescription);
-    assert.equal(meta(tree, 'og:image'), post.image);
-    assert.equal(meta(tree, 'twitter:image'), post.image);
+    assert.equal(meta(tree, 'og:image'), new URL(post.image, 'https://amznboost.es').href);
+    assert.equal(meta(tree, 'twitter:image'), new URL(post.image, 'https://amznboost.es').href);
     assert.equal(attr(tag(tree, 'link').find((node) => attr(node, 'rel') === 'canonical'), 'href'), 'https://amznboost.es' + path);
     const schemas = tag(tree, 'script').filter((node) => attr(node, 'type') === 'application/ld+json').map((node) => JSON.parse(content(node)));
     assert.equal(schemas.length, 2);

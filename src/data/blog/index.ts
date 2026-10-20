@@ -7,6 +7,7 @@ import { aumentarConversionData } from './aumentar-conversion.ts';
 import { algoritmoAmazonData } from './algoritmo-amazon.ts';
 import { internacionalizacionData } from './internacionalizacion.ts';
 import { marketingInfluencersData } from './marketing-influencers.ts';
+import { publishedBlogPosts20261020 } from './published-2026-10-20.ts';
 
 export interface BlogSection {
   id: string;
@@ -22,6 +23,9 @@ export interface BlogPost {
   date: string;
   updatedAt: string;
   image: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  freeAudit?: boolean;
   category: string;
   excerpt: string;
   takeaway: string;
@@ -35,6 +39,7 @@ export interface BlogPost {
 }
 
 export const allBlogPosts: BlogPost[] = [
+  ...publishedBlogPosts20261020,
   estrategiasPpcData,
   optimizacionListingsData,
   aumentarConversionData,
@@ -48,7 +53,7 @@ export const allBlogPosts: BlogPost[] = [
 
 export const blogPostsBySlug: Record<string, BlogPost> = Object.fromEntries(allBlogPosts.map((post) => [post.slug, post]));
 
-export const readingMinutes = (post: BlogPost) => {
+export const readingMinutes = (post: Pick<BlogPost, 'excerpt' | 'takeaway' | 'sections'>) => {
   const text = [post.excerpt, post.takeaway, ...post.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.items ?? [])])].join(' ');
   return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
 };

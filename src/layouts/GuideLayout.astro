@@ -7,20 +7,21 @@ import { serviceDirectory } from '../data/service-pages';
 import { getAuditContact } from '../data/audit-contact';
 import type { Guide } from '../data/guides';
 import '../styles/growth-pages.css';
-interface Props { guide: Guide }
-const { guide } = Astro.props;
+interface Props { guide: Guide; draft?: boolean; relatedGuides?: Guide[] }
+const { guide, draft = false, relatedGuides } = Astro.props;
 const service = serviceDirectory.find((item) => item.path === guide.service)!;
-const contact = getAuditContact(guide.service);
+const contact = getAuditContact(guide.auditService ?? guide.service);
 const words = [guide.answer, ...guide.sections.flatMap((section) => [section.title, ...section.paragraphs, ...(section.bullets ?? [])]), ...guide.faqs.map((faq) => faq.answer)].join(' ').split(/\s+/).length;
 const minutes = Math.max(3, Math.ceil(words / 200));
 const updatedAt = guide.updatedAt ?? '2026-08-29';
 const updatedLabel = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${updatedAt}T00:00:00Z`));
 ---
-<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description, ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {}) } }}>
+<Layout title={guide.metaTitle} description={guide.description} image={null} canonicalPath={guide.path} noindex={draft} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: guide.title, description: guide.description, ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {}) } }}>
   <article class="growth-page guide-page">
     <header class="growth-hero guide-hero"><div class="growth-shell">
       <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Guías Amazon', path: '/guias/' }, { name: guide.title, path: guide.path }]} />
       <p class="growth-eyebrow">{guide.category} / Guía práctica</p>
+      {draft && <p class="guide-draft-notice"><a href="/borradores/guias/">Biblioteca de borradores</a> / <a href="/borradores/revision/">Selección de 20 contenidos</a> / No publicada. Pendiente de aprobación editorial.</p>}
       <h1>{guide.title}</h1>
       <div class="guide-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{minutes} min de lectura</span><span>Actualizado <time datetime={updatedAt}>{updatedLabel}</time></span></div>
     </div></header>
@@ -41,7 +42,12 @@ const updatedLabel = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: '
         <nav class="guide-business-links" aria-label="Ayuda profesional para tu marca"><p>¿Prefieres que lo revisemos contigo?</p><a href={service.path}>Ver {service.title} <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a><a href="/">Conocer Amazon Boost <img src="/icons/lucide/arrow-right.svg" width="18" height="18" alt="" /></a></nav>
       </div>
     </div>
-    <GuideLinks slugs={guide.related} title="Otras preguntas que conviene resolver." />
-    <ServiceContact topic={guide.title} service={guide.service} freeAudit />
+    <GuideLinks slugs={guide.related} entries={relatedGuides} title="Otras preguntas que conviene resolver." />
+    <ServiceContact topic={guide.title} service={guide.service} profileService={guide.auditService} freeAudit />
   </article>
 </Layout>
+
+<style>
+  .guide-draft-notice { margin: 16px 0; line-height: 1.7; }
+  .guide-draft-notice a { display: inline-block; min-height: 44px; padding-block: 8px; box-sizing: border-box; text-decoration: underline; text-underline-offset: 3px; }
+</style>

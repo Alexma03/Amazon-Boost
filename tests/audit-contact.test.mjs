@@ -26,7 +26,8 @@ const checkContact = (path, service, topic) => {
   assert.equal(primary.tagName, 'a');
   assert.equal(attr(primary, 'href'), '/#auditoria');
   const isGuide = guides.some((guide) => guide.path === path);
-  assert.equal(content(primary).trim(), isGuide ? 'Solicitar auditoría gratuita' : 'Solicitar auditoría inicial');
+  const freeArticle = allBlogPosts.some((post) => '/blog/' + post.slug + '/' === path && post.freeAudit);
+  assert.equal(content(primary).trim(), isGuide || freeArticle ? 'Solicitar auditoría gratuita' : 'Solicitar auditoría inicial');
   assert.match(attr(primary, 'class'), /growth-button/);
   assert.equal(content(tag(contact, 'h2')[0]), getAuditContact(service).title);
   assert.equal(attr(contact, 'aria-labelledby'), attr(tag(contact, 'h2')[0], 'id'));
@@ -46,7 +47,7 @@ const checkContact = (path, service, topic) => {
 };
 
 test('each guide and blog article ends with a contextual audit-first call to action', () => {
-  for (const guide of guides.filter((entry) => entry.path.startsWith('/guias/'))) checkContact(guide.path, guide.service, guide.title);
+  for (const guide of guides.filter((entry) => entry.path.startsWith('/guias/'))) checkContact(guide.path, guide.auditService ?? guide.service, guide.title);
   for (const post of allBlogPosts) checkContact('/blog/' + post.slug + '/', post.service, post.title);
   for (const path of ['/blog/', '/guias/', '/servicios/', '/casos-de-exito/']) checkContact(path);
 });

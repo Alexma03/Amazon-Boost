@@ -9,26 +9,30 @@ import { serviceDirectory } from '../data/service-pages';
 import '../styles/growth-pages.css';
 import '../styles/blog.css';
 
-interface Props { frontmatter: BlogPost }
+interface Props { frontmatter: BlogPost | (Omit<BlogPost, 'date'> & { publicationState: 'draft'; preparedAt: string }) }
 const { frontmatter: post } = Astro.props;
-const path = '/blog/' + post.slug + '/';
+const draft = 'publicationState' in post && post.publicationState === 'draft';
+const path = (draft ? '/borradores/blog/' : '/blog/') + post.slug + '/';
+const publicationDate = 'date' in post ? post.date : undefined;
+const preparationDate = 'preparedAt' in post ? post.preparedAt : undefined;
 const service = serviceDirectory.find((item) => item.path === post.service)!;
 const related = post.relatedPosts.map((slug) => blogPostsBySlug[slug]);
 const formatDate = (value: string) => new Date(value + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
 ---
-<Layout title={post.seo.metaTitle} description={post.seo.metaDescription} image={post.image} canonicalPath={path} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: post.title, description: post.seo.metaDescription, image: post.image, date: post.date, dateModified: post.updatedAt } }}>
+<Layout title={post.seo.metaTitle} description={post.seo.metaDescription} image={post.image} canonicalPath={path} noindex={draft} type="article" pageType="blog" aiOptimized={false} structuredData={{ type: 'article', data: { title: post.title, description: post.seo.metaDescription, image: post.image, ...(publicationDate ? { date: publicationDate } : {}), dateModified: post.updatedAt } }}>
   <article class="growth-page blog-page">
     <header class="growth-hero blog-post-hero"><div class="growth-shell">
       <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Blog', path: '/blog/' }, { name: post.title, path }]} />
       <p class="growth-eyebrow">{post.category} / Análisis</p>
+      {draft && <p class="blog-draft-notice"><a href="/borradores/blog/">Borradores de blog</a> / <a href="/borradores/revision/">Selección de 20 contenidos</a> / No publicado. Pendiente de aprobación.</p>}
       <h1>{post.title}</h1>
       <p class="growth-lead">{post.excerpt}</p>
-      <div class="blog-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{readingMinutes(post)} min de lectura</span><span>Publicado <time datetime={post.date}>{formatDate(post.date)}</time></span><span>Actualizado <time datetime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span></div>
+      <div class="blog-meta"><a href="/agencia-amazon/">Amazon Boost</a><span>{readingMinutes(post)} min de lectura</span>{publicationDate && <span>Publicado <time datetime={publicationDate}>{formatDate(publicationDate)}</time></span>}{preparationDate && <span>Preparado <time datetime={preparationDate}>{formatDate(preparationDate)}</time></span>}<span>Actualizado <time datetime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span></div>
     </div></header>
     <div class="growth-shell blog-reading">
       <aside class="blog-toc"><p class="growth-eyebrow">En este análisis</p><nav aria-label="Índice del artículo"><a href="#idea-clave">La idea clave</a>{post.sections.map((section) => <a href={'#apartado-' + section.id}>{section.title}</a>)}<a href="#fuentes">Fuentes y contexto</a></nav><a class="blog-toc-service" href={service.path}><span>Trabajarlo en tu cuenta</span><strong>{service.title}</strong></a></aside>
       <div class="blog-article-content">
-        <img class="blog-article-cover" src={post.image} alt="" width="1080" height="472" decoding="async" />
+        {post.imageCaption ? <figure class="blog-editorial-media"><img class="blog-article-cover" src={post.image} alt={post.imageAlt ?? ''} width="1200" height="630" decoding="async" /><figcaption>{post.imageCaption}</figcaption></figure> : <img class="blog-article-cover" src={post.image} alt="" width="1080" height="472" decoding="async" />}
         <section class="blog-takeaway" id="idea-clave"><p class="growth-eyebrow">La idea clave</p><p>{post.takeaway}</p></section>
         {post.sections.map((section) => <section class="blog-section" id={'apartado-' + section.id}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}{section.source !== undefined && <p class="blog-citation">Referencia: <a href={post.sources[section.source].url} target="_blank" rel="noopener noreferrer">{post.sources[section.source].label}</a></p>}</section>)}
         <section class="blog-sources" id="fuentes"><h2>Fuentes y contexto</h2><ul>{post.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>{source.note && <p>{source.note}</p>}</li>)}</ul><p>Los criterios de análisis son orientativos. Comprueba las funciones, condiciones y políticas aplicables en tu cuenta y marketplace antes de actuar.</p></section>
@@ -36,6 +40,14 @@ const formatDate = (value: string) => new Date(value + 'T12:00:00Z').toLocaleDat
     </div>
     <GuideLinks slugs={post.guides} title="Lleva este análisis al siguiente paso." />
     <section class="growth-band blog-related"><div class="growth-shell"><div class="growth-section-head"><p class="growth-eyebrow">Para seguir pensando</p><h2>Otros análisis conectados.</h2></div><div class="blog-grid">{related.map((entry) => <BlogCard post={entry} />)}</div></div></section>
-    <ServiceContact topic={post.title} service={post.service} />
+    <ServiceContact topic={post.title} service={post.service} freeAudit={post.freeAudit ?? false} />
   </article>
 </Layout>
+
+<style>
+  .blog-draft-notice { margin: 18px 0; color: #d0d0d0; font-size: .9rem; }
+  .blog-draft-notice a { display: inline-block; min-height: 44px; padding-block: 8px; box-sizing: border-box; text-decoration: underline; text-underline-offset: 3px; }
+  .blog-editorial-media { margin: 0 0 40px; }
+  .blog-editorial-media .blog-article-cover { object-fit: contain; aspect-ratio: 1200 / 630; margin-bottom: 12px; }
+  .blog-editorial-media figcaption { color: #65666a; font-size: .8rem; line-height: 1.6; }
+</style>

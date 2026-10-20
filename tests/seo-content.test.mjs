@@ -280,7 +280,8 @@ test('guide sources use official primary destinations', () => {
   for (const guide of guides) for (const source of guide.sources) {
     const url = new URL(source.url);
     assert.equal(url.protocol, 'https:');
-    assert.ok(['advertising.amazon.com', 'sell.amazon.com', 'sell.amazon.es', 'sellercentral.amazon.es', 'www.aemps.gob.es', 'www.aesan.gob.es', 'www.mapa.gob.es', 'commission.europa.eu', 'eur-lex.europa.eu'].includes(url.hostname), url.href);
+    const reviewedStaffPost = url.hostname === 'sellercentral.amazon.com' && url.pathname === '/seller-forums/discussions/t/0c398e96-72ee-4240-861a-b34297507502' && /Glenn_Amazon/.test(source.label);
+    assert.ok(reviewedStaffPost || ['advertising.amazon.com', 'sell.amazon.com', 'sell.amazon.es', 'sellercentral.amazon.es', 'www.aemps.gob.es', 'www.aesan.gob.es', 'www.mapa.gob.es', 'commission.europa.eu', 'eur-lex.europa.eu'].includes(url.hostname), url.href);
   }
 });
 

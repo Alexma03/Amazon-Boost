@@ -1,8 +1,8 @@
 ---
 import { getAuditContact } from '../data/audit-contact';
-interface Props { topic: string; service?: string; preparation?: string[]; freeAudit?: boolean }
-const { topic, service, preparation, freeAudit = false } = Astro.props;
-const contact = getAuditContact(service);
+interface Props { topic: string; service?: string; profileService?: string; preparation?: string[]; freeAudit?: boolean }
+const { topic, service, profileService, preparation, freeAudit = false } = Astro.props;
+const contact = getAuditContact(profileService ?? service);
 const items = preparation?.length ? preparation : contact.preparation;
 const whatsapp = `https://wa.me/34650606400?text=${encodeURIComponent(`Hola, quiero solicitar una auditoría inicial. Me interesa revisar: ${topic}.`)}`;
 ---

@@ -1,8 +1,9 @@
 ---
 import { guideBySlug } from '../data/guides';
-interface Props { slugs: string[]; title?: string }
-const { slugs, title = 'Entiende el problema. Decide el siguiente paso.' } = Astro.props;
-const entries = slugs.map((slug) => guideBySlug.get(slug)).filter(Boolean);
+import type { Guide } from '../data/guides';
+interface Props { slugs: string[]; title?: string; entries?: Guide[] }
+const { slugs, title = 'Entiende el problema. Decide el siguiente paso.', entries: suppliedEntries } = Astro.props;
+const entries = suppliedEntries ?? slugs.map((slug) => guideBySlug.get(slug)).filter(Boolean);
 ---
 <section class="growth-band growth-resources">
   <div class="growth-shell">
