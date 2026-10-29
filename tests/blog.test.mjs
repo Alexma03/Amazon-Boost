@@ -30,13 +30,16 @@ const originalDates = {
 };
 
 test('blog retains all existing addresses and original publication dates', () => {
-  assert.equal(allBlogPosts.length, 19);
+  assert.equal(allBlogPosts.length, 20);
   assert.deepEqual(allBlogPosts.filter((post) => post.slug in originalDates).map((post) => post.slug).sort(), Object.keys(originalDates).sort());
   for (const post of allBlogPosts) {
     if (post.slug in originalDates) {
       assert.equal(post.date, originalDates[post.slug]);
       assert.equal(post.updatedAt, '2026-08-28');
       assert.ok(post.date < post.updatedAt);
+    } else if (post.slug === 'formar-equipo-o-delegar-amazon') {
+      assert.equal(post.date, '2026-10-29');
+      assert.equal(post.updatedAt, post.date);
     } else {
       assert.equal(post.date, '2026-10-20');
       assert.equal(post.updatedAt, post.date);

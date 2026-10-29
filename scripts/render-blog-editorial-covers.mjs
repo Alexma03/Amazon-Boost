@@ -10,6 +10,7 @@ const orange = '#ff9900';
 const blue = '#78a8ff';
 const lime = '#c9ff4a';
 const definitions = [
+  { slug: 'formar-equipo-o-delegar-amazon', title: '¿Quién se ocupa del trabajo?', label: 'FORMACIÓN O GESTIÓN AMAZON', type: 'compare', columns: ['Formar a tu equipo', 'Delegar en la agencia'], rows: [['Aprende con acompañamiento', 'Asume las tareas acordadas'], ['Aplica en vuestra cuenta', 'Realiza su seguimiento'], ['Conserva el conocimiento', 'Coordina contigo las decisiones']], note: 'También puedes combinar. Primero, define qué necesita tu empresa.' },
   { slug: 'crecer-amazon-facturacion-solidez', title: 'Crecer no es solo facturar.', label: 'ESTRATEGIA DE MARCA', type: 'flow', nodes: ['Ventas', 'Contribución', 'Caja', 'Continuidad'], note: 'La siguiente venta también necesita recursos.' },
   { slug: 'catalogo-corto-ventaja-marca-amazon', title: 'Cada referencia, una función.', label: 'CATÁLOGO', type: 'compare', columns: ['Más referencias', 'Una gama con sentido'], rows: [['Más tareas y stock', 'Necesidades distintas'], ['Atención repartida', 'Prioridades claras'], ['Complejidad adicional', 'Recursos para servirla']], note: 'El tamaño de la gama no sustituye su propósito.' },
   { slug: 'marca-premium-amazon-valor-precio', title: 'El valor necesita una razón.', label: 'MARCA Y CONTENIDO', type: 'flow', nodes: ['Diferencia', 'Evidencia', 'Claridad', 'Elección'], note: 'Premium se explica en el producto, no en el adjetivo.' },
@@ -28,7 +29,9 @@ async function text(value, x, y, size, color, width, align = 'left') {
   return { input, left: x, top: y };
 }
 
-for (const definition of definitions) {
+const requestedSlug = process.argv.find((value) => value.startsWith('--only='))?.slice('--only='.length);
+if (requestedSlug && !definitions.some((definition) => definition.slug === requestedSlug)) throw new Error('Unknown editorial cover: ' + requestedSlug);
+for (const definition of definitions.filter((definition) => !requestedSlug || definition.slug === requestedSlug)) {
   const layers = [];
   let geometry = `<rect width="1200" height="630" fill="${ink}"/><path d="M64 105H1136M64 550H1136" stroke="#363636" stroke-width="2"/>`;
   layers.push(await text('Amazon Boost.', 64, 40, 26, '#ffffff', 360));

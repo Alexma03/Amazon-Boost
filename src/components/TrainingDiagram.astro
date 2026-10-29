@@ -1,0 +1,71 @@
+---
+import Icon from './Icon.astro';
+interface Props { variant: 'overview' | 'session' | 'guide' | 'decision'; dark?: boolean }
+const { variant, dark = false } = Astro.props;
+const diagrams = {
+  overview: {
+    caption: 'Aprender con acompañamiento, sobre lo que ya gestionáis.',
+    steps: [
+      { icon: 'users-round', title: 'Tu equipo', text: 'Su nivel, sus dudas y el trabajo que quiere asumir.' },
+      { icon: 'box', title: 'Vuestra cuenta', text: 'Los productos, las fichas y los datos de vuestra marca.' },
+      { icon: 'list-checks', title: 'Práctica con nosotros', text: 'Explicamos, trabajamos juntos y revisamos lo aprendido.' },
+    ],
+  },
+  session: {
+    caption: 'Ejemplo de una sesión: revisar juntos una ficha de producto.',
+    steps: [
+      { icon: 'search', title: 'Vemos qué pasa', text: 'Revisamos vuestra ficha y contrastamos los datos del producto.' },
+      { icon: 'file-text', title: 'Lo trabajamos juntos', text: 'Explicamos las opciones y aplicamos los cambios que aprobéis.' },
+      { icon: 'list-checks', title: 'Sabéis cómo seguir', text: 'El equipo entiende qué comprobar al revisar otra referencia.' },
+    ],
+  },
+  guide: {
+    caption: 'Así prepararíamos el acompañamiento para vuestra empresa.',
+    steps: [
+      { icon: 'users-round', title: 'Os escuchamos', text: 'Quién llevará Amazon y dónde necesita apoyo.' },
+      { icon: 'file-text', title: 'Lo adaptamos', text: 'Prioridades, disponibilidad y recorrido acordados.' },
+      { icon: 'box', title: 'Practicamos', text: 'Sesiones con vuestra cuenta y vuestros productos.' },
+      { icon: 'list-checks', title: 'Lo revisamos', text: 'Dudas y tareas para consolidar lo aprendido.' },
+    ],
+  },
+  decision: {
+    caption: 'Tres formas de organizar el trabajo. La elección depende de tu empresa.',
+    steps: [
+      { icon: 'users-round', title: 'Formar', text: 'Tu equipo quiere asumir las tareas y dispone de tiempo para aprender.', detail: 'Nosotros explicamos y acompañamos.' },
+      { icon: 'list-checks', title: 'Delegar', text: 'Necesitas que la agencia se ocupe de las tareas acordadas.', detail: 'Tu empresa aporta contexto y aprobaciones.' },
+      { icon: 'box', title: 'Combinar', text: 'Queréis aprender unas tareas y delegar otras.', detail: 'Definimos un responsable para cada parte.' },
+    ],
+  },
+} as const;
+const diagram = diagrams[variant];
+---
+<figure class:list={['training-diagram', { 'training-diagram-dark': dark, 'training-diagram-choice': variant === 'decision' }]}>
+  <figcaption>{diagram.caption}</figcaption>
+  <ol style={`--diagram-count:${diagram.steps.length}`}>
+    {diagram.steps.map((step, index) => <li>
+      <div class="training-diagram-marker"><Icon name={step.icon} size={24} /><span>{String(index + 1).padStart(2, '0')}</span></div>
+      <h3>{step.title}</h3><p>{step.text}</p>
+      {'detail' in step && <p class="training-diagram-detail">{step.detail}</p>}
+      {index < diagram.steps.length - 1 && variant !== 'decision' && <Icon name="arrow-right" class="training-diagram-arrow" size={20} />}
+    </li>)}
+  </ol>
+</figure>
+
+<style>
+  .training-diagram { --diagram-ink: #111; --diagram-muted: #53565b; --diagram-line: #cdd0d4; color: var(--diagram-ink); margin: 32px 0; font-family: Inter, sans-serif; letter-spacing: 0; }
+  .training-diagram figcaption { font-size: 14px; line-height: 1.6; font-weight: 600; margin-bottom: 22px; color: var(--diagram-muted); }
+  .training-diagram ol { display: grid; grid-template-columns: repeat(var(--diagram-count), minmax(0, 1fr)); gap: 30px; list-style: none; padding: 0; margin: 0; }
+  .training-diagram li { position: relative; min-width: 0; border-top: 2px solid var(--diagram-line); padding-top: 20px; }
+  .training-diagram-marker { display: flex; align-items: center; gap: 12px; color: #965600; }
+  .training-diagram-marker span { font-size: 12px; font-weight: 700; }
+  .training-diagram h3 { font-size: 20px; line-height: 1.3; margin: 18px 0 10px; font-weight: 700; letter-spacing: 0; }
+  .training-diagram p { font-size: 15px; line-height: 1.65; margin: 0; color: var(--diagram-muted); }
+  .training-diagram .training-diagram-detail { border-top: 1px solid var(--diagram-line); margin-top: 20px; padding-top: 16px; font-size: 13px; }
+  .training-diagram :global(.training-diagram-arrow) { position: absolute; right: -25px; top: 24px; color: #306ba6; }
+  .training-diagram-dark { --diagram-ink: #fff; --diagram-muted: #c8c8c8; --diagram-line: #454545; }
+  .training-diagram-dark .training-diagram-marker { color: #ffad33; }
+  .training-diagram-choice li:nth-child(2) { border-color: #3279b0; }
+  .training-diagram-choice li:first-child { border-color: #ff9900; }
+  .training-diagram-choice li:last-child { border-color: #2d7754; }
+  @media (max-width: 900px) { .training-diagram ol { grid-template-columns: 1fr; gap: 24px; } .training-diagram li { padding: 20px 0 0 48px; } .training-diagram-marker { position: absolute; top: 22px; left: 0; } .training-diagram-marker span { display: none; } .training-diagram h3 { margin-top: 0; } .training-diagram :global(.training-diagram-arrow) { display: none; } }
+</style>

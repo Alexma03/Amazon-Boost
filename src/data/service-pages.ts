@@ -1,3 +1,5 @@
+import { trainingService } from './training.ts';
+
 export type ServicePage = {
   path: string;
   title: string;
@@ -197,8 +199,8 @@ export const servicePages: ServicePage[] = [
       { question: '¿Puede ser una intervención puntual?', answer: 'Sí. Definimos una pregunta y un alcance concreto. Si después tiene sentido acompañar la ejecución, lo valoramos por separado.' },
       { question: '¿Entregáis conclusiones por escrito?', answer: 'La propuesta concreta los entregables. El objetivo es que queden claras las conclusiones, prioridades y criterios de seguimiento para tu equipo.' },
     ],
-    guides: ['acos-tacos-amazon', 'evitar-roturas-stock-amazon', 'amazon-fba-fbm', 'brand-analytics-amazon', 'amazon-business-vender-empresas', 'agencia-amazon-vs-consultor', 'precio-producto-amazon-margen'],
-    related: ['/servicios/gestion-de-cuenta/', '/servicios/lanzamiento-marca-privada-amazon/', '/servicios/expansion-amazon-europa/'],
+    guides: ['acos-tacos-amazon', 'evitar-roturas-stock-amazon', 'amazon-fba-fbm', 'brand-analytics-amazon', 'amazon-business-vender-empresas', 'agencia-amazon-vs-consultor', 'precio-producto-amazon-margen', 'plan-formacion-equipo-amazon'],
+    related: ['/servicios/gestion-de-cuenta/', '/servicios/lanzamiento-marca-privada-amazon/', '/servicios/expansion-amazon-europa/', trainingService.path],
     proof: 'team',
   },
   {
@@ -267,7 +269,7 @@ export const visualService = {
   category: 'Diseño y conversión',
   description: 'Imagen principal, infografías y contenido visual a medida para tu producto.',
 };
-export const serviceDirectory = [...servicePages, visualService];
+export const serviceDirectory = [...servicePages, visualService, trainingService];
 export const serviceByPath = new Map(servicePages.map((page) => [page.path, page]));
 export const serviceAliases: Record<string, string> = {
   '/gestion-cuenta-amazon-seller-central/': '/servicios/gestion-de-cuenta/',

@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from './Icon.astro';
+import SubpageBreadcrumbs from './SubpageBreadcrumbs.astro';
+import TrainingContact from './TrainingContact.astro';
+import TrainingDiagram from './TrainingDiagram.astro';
+import { trainingService as service, trainingGuide, trainingGuidePreview, trainingBlogPreview, trainingBlog } from '../data/training';
+import '../styles/training.css';
+interface Props { draft?: boolean }
+const { draft = true } = Astro.props;
+const path = draft ? service.previewPath : service.path;
+---
+<Layout title={service.metaTitle} description={service.description} canonicalPath={path} noindex={draft} pageType="service" structuredData={{ type: 'service', data: service }} aiOptimized={false}>
+  <article class="training-page">
+    <header class="training-hero"><div class="training-shell">
+      <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Servicios', path: '/servicios/' }, { name: 'Formación Amazon', path }]} />
+      {draft && <p class="training-preview">Borrador local · No publicado</p>}
+      <p class="training-eyebrow">Amazon Boost / Formación para empresas</p>
+      <h1>Formación Amazon<br />para tu equipo.</h1>
+      <p class="training-hero-promise">Vosotros queréis gestionarlo.<br /><strong>Nosotros os enseñamos cómo.</strong></p>
+      <p class="training-lead">No todas las marcas necesitan delegar Amazon. Si quieres trabajarlo dentro de tu empresa, formamos a tu equipo con sesiones prácticas sobre vuestra propia cuenta y acompañamiento entre reuniones por el canal que prefiráis.</p>
+      <div class="training-actions"><a class="training-button" href="#como-funciona">Ver cómo trabajaríamos contigo <Icon name="arrow-down" /></a><a class="training-text-link" href="#contacto">Hablar de mi equipo</a></div>
+    </div></header>
+    <section class="training-intro"><div class="training-shell">
+      <p class="training-eyebrow">Una forma distinta de trabajar con una agencia</p>
+      <h2>La gestión, dentro de tu empresa.<br />El aprendizaje, acompañado.</h2>
+      <p>Puede que una persona vaya a asumir Amazon por primera vez. O que ya lo llevéis internamente y necesitéis apoyo para avanzar. Preparamos una formación individualizada para vuestra empresa: explicamos, practicamos juntos y os acompañamos al aplicar lo aprendido.</p>
+      <TrainingDiagram variant="overview" />
+    </div></section>
+    <nav class="training-jump" aria-label="En esta página"><div class="training-shell"><a href="#como-funciona">Cómo funciona</a><a href="#programa">Una sesión por dentro</a><a href="#temario">Qué podemos trabajar</a><a href="#whatsapp-acompanamiento">Entre sesiones</a><a href="#preguntas">Preguntas</a><a href="#contacto">Hablemos <Icon name="arrow-up-right" size={16} /></a></div></nav>
+    <section class="training-band training-session" id="como-funciona"><div class="training-shell">
+      <div class="training-heading"><p class="training-eyebrow">Paso a paso</p><h2>Primero entendemos tu situación.<br />Después preparamos el plan.</h2><p>No tienes que elegir un paquete y encajar dentro. El recorrido lo definimos contigo, a partir de las necesidades de tu marca y del tiempo de tu equipo.</p></div>
+      <ol class="training-roadmap">
+        <li><span class="training-step-number">01</span><div><h3>Nos cuentas qué queréis gestionar.</h3><p>Quién se ocupará de Amazon, qué sabe hacer ya y dónde necesita ayuda. Revisamos juntos el punto de partida y las prioridades de la cuenta.</p></div><span class="training-step-result">Vuestra situación</span></li>
+        <li><span class="training-step-number">02</span><div><h3>Diseñamos la formación a vuestra medida.</h3><p>Acordamos los temas, la frecuencia, la duración de las reuniones y el plazo del acompañamiento según vuestros objetivos y disponibilidad.</p></div><span class="training-step-result">Un plan que encaja</span></li>
+        <li><span class="training-step-number">03</span><div><h3>Aprendéis trabajando con vuestra cuenta.</h3><p>Sesiones en directo por videollamada, con vuestros productos, fichas y datos. Explicamos cada paso y practicamos con vosotros.</p></div><span class="training-step-result">Aprendizaje aplicado</span></li>
+        <li><span class="training-step-number">04</span><div><h3>Seguimos a vuestro lado entre sesiones.</h3><p>Dejamos un resumen y siguientes tareas. Tu equipo puede consultar dudas y recibir orientación por WhatsApp, email u otro canal que prefiráis y acordemos juntos.</p></div><span class="training-step-result">Acompañamiento incluido</span></li>
+      </ol>
+    </div></section>
+    <section class="training-band" id="programa"><div class="training-shell">
+      <div class="training-heading"><p class="training-eyebrow">Una sesión por dentro</p><h2>No solo explicamos.<br />También lo trabajamos contigo.</h2><p>Podemos aprovechar las sesiones para revisar un problema concreto y avanzar sobre él. Tu equipo participa, entiende las decisiones y aprende un proceso que después puede volver a aplicar.</p></div>
+      <TrainingDiagram variant="session" />
+      <div class="training-session-examples"><span>También podríamos trabajar…</span><p>Una campaña que no entendéis. Una incidencia abierta. Una reposición que necesitáis organizar.</p></div>
+      <p class="training-fit-note">Los cambios se hacen con vuestra aprobación. Algunas incidencias requieren documentación, más trabajo o respuesta de Amazon; valoramos cada caso antes de comprometernos con su resolución.</p>
+    </div></section>
+    <section class="training-band training-format" id="a-medida"><div class="training-shell">
+      <div class="training-heading"><p class="training-eyebrow">A medida de vuestra empresa</p><h2>El contenido y el calendario<br />se adaptan a vosotros.</h2><p>Una persona que empieza y un equipo que ya gestiona el canal no necesitan el mismo recorrido. Por eso acordamos estos puntos antes de comenzar.</p></div>
+      <dl class="training-tailoring"><div><dt>Qué aprender</dt><dd>Las tareas y decisiones que queréis asumir, partiendo del nivel del equipo.</dd></div><div><dt>Cómo organizarnos</dt><dd>Participantes, duración y frecuencia de las sesiones según vuestra disponibilidad.</dd></div><div><dt>Hasta dónde acompañar</dt><dd>El plazo y el seguimiento que necesitéis, con posibilidad de revisar las prioridades.</dd></div></dl>
+      <p class="training-format-note">Sin una duración estándar ni un número fijo de horas. Recibes una propuesta personalizada con el recorrido y el alcance acordados, sin precios públicos cerrados.</p>
+    </div></section>
+    <section class="training-band" id="temario"><div class="training-shell">
+      <div class="training-heading"><p class="training-eyebrow">Qué podemos trabajar</p><h2>Lo que tu equipo necesita<br />para gestionar vuestra marca.</h2><p>Elegimos los temas que aportan en vuestro caso. Estos son algunos de los ámbitos que podemos incluir, no un temario obligatorio para todas las empresas.</p></div>
+      <div class="training-curriculum">{service.blocks.map((block) => <article><span>{block.number}</span><div><h3>{block.title}</h3><p>{block.text}</p><ul>{block.items.map((item) => <li><Icon name="check" size={17} />{item}</li>)}</ul></div></article>)}</div>
+      <p class="training-fit-note">Cuando una cuestión requiere asesoramiento jurídico, fiscal o de conformidad de producto, la diferenciamos del aprendizaje operativo de la cuenta.</p>
+    </div></section>
+    <section class="training-band training-session" id="whatsapp-acompanamiento"><div class="training-shell training-control">
+      <div><p class="training-eyebrow">Entre sesiones, por vuestro canal</p><h2>La sesión termina.<br />El acompañamiento sigue.</h2><p>Incluimos un canal directo entre vuestro equipo y Amazon Boost durante el acompañamiento: WhatsApp, email u otro canal que prefiráis y acordemos juntos.</p></div>
+      <div><h3>No tienes que esperar a la próxima clase para preguntar.</h3><p>Consultad las dudas que surjan al aplicar lo aprendido, explicad una incidencia que os esté frenando o preguntad por el siguiente paso. Os orientamos por el canal elegido y llevamos a una sesión lo que necesite una revisión más profunda.</p><p>Podéis escribir cuando os surja la duda. Los horarios y tiempos de respuesta se acuerdan en la propuesta; no significa respuesta inmediata ni atención de urgencias permanente.</p><h3>Tu cuenta sigue bajo vuestro control.</h3><p>Trabajamos con pantalla compartida o con acceso delegado autorizado y permisos mínimos. Nunca pedimos contraseñas, códigos ni datos bancarios.</p></div>
+    </div></section>
+    <section class="training-band"><div class="training-shell">
+      <div class="training-heading"><p class="training-eyebrow">Aprender, hacer y saber qué esperar</p><h2>Qué incluye el acompañamiento.</h2></div>
+      <div class="training-boundaries"><div><h3>Lo trabajamos contigo</h3><p>Preparación adaptada, sesiones prácticas, explicación y trabajo conjunto sobre tareas acordadas, resumen, siguientes pasos y un canal de dudas entre sesiones, elegido y acordado con vosotros.</p></div><div><h3>Lo definimos por separado</h3><p>La gestión continuada fuera de las sesiones y los encargos de producción, como imágenes o contenido. Si necesitas combinar formación y ejecución, acordamos qué asume cada parte.</p><a href="/servicios/gestion-de-cuenta/" class="training-text-link">Conocer la gestión de cuenta <Icon name="arrow-up-right" size={16} /></a></div></div>
+    </div></section>
+    <section class="training-band training-faq-band" id="preguntas"><div class="training-shell"><div class="training-heading"><p class="training-eyebrow">Antes de empezar</p><h2>Lo que quizá te estás preguntando.</h2></div><div class="training-faqs">{service.faqs.map((faq) => <details><summary>{faq.question}<Icon name="plus" size={18} /></summary><p>{faq.answer}</p></details>)}</div></div></section>
+    <section class="training-band"><div class="training-shell"><div class="training-heading"><p class="training-eyebrow">Para seguir entendiendo</p><h2>¿Cómo encajaría en tu empresa?</h2></div><div class="training-reading"><a href={draft ? trainingGuidePreview : trainingGuide.path}><span>El proceso explicado</span><h3>Cómo formamos a tu equipo.</h3><p>Lo que haríamos contigo antes, durante y entre las sesiones.</p><Icon name="arrow-up-right" /></a><a href={draft ? trainingBlogPreview : '/blog/' + trainingBlog.slug + '/'}><span>Elegir el tipo de ayuda</span><h3>Formar, delegar o combinar.</h3><p>Qué necesita tu empresa y quién puede hacerse cargo del trabajo.</p><Icon name="arrow-up-right" /></a></div></div></section>
+    <TrainingContact />
+  </article>
+</Layout>

@@ -8,6 +8,7 @@ import { algoritmoAmazonData } from './algoritmo-amazon.ts';
 import { internacionalizacionData } from './internacionalizacion.ts';
 import { marketingInfluencersData } from './marketing-influencers.ts';
 import { publishedBlogPosts20261020 } from './published-2026-10-20.ts';
+import { trainingBlog } from '../training.ts';
 
 export interface BlogSection {
   id: string;
@@ -39,6 +40,7 @@ export interface BlogPost {
 }
 
 export const allBlogPosts: BlogPost[] = [
+  trainingBlog,
   ...publishedBlogPosts20261020,
   estrategiasPpcData,
   optimizacionListingsData,

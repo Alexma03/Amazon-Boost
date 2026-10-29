@@ -19,6 +19,22 @@ const content = (node) => node.nodeName === '#text' ? node.value : (node.childNo
 const checkContact = (path, service, topic) => {
   const tree = parse(source('dist' + path + 'index.html'));
   const main = tag(tree, 'main')[0];
+  if (service === '/servicios/formacion-amazon-empresas/') {
+    const contacts = all(main, (node) => attr(node, 'class')?.split(/\s+/).includes('training-contact'));
+    assert.equal(contacts.length, 1, path);
+    const contact = contacts[0];
+    const links = tag(contact, 'a');
+    const whatsapp = new URL(attr(links[0], 'href'));
+    assert.equal(whatsapp.hostname, 'wa.me');
+    assert.equal(whatsapp.pathname, '/34650606400');
+    assert.match(whatsapp.searchParams.get('text'), /formación y acompañamiento/);
+    assert.ok(links.some((link) => attr(link, 'href') === '/#auditoria'));
+    assert.ok(links.some((link) => attr(link, 'href') === 'tel:+34650606400'));
+    assert.match(content(contact), /primera conversación es gratuita/i);
+    assert.match(content(contact), /Sin compromiso/);
+    assert.equal(tag(main, 'section').at(-1), contact);
+    return;
+  }
   const contacts = all(main, (node) => attr(node, 'data-audit-contact') !== undefined);
   assert.equal(contacts.length, 1, path);
   const contact = contacts[0];

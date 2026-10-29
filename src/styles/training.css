@@ -1,0 +1,135 @@
+.training-page { color: #080808; letter-spacing: 0; font-family: Inter, sans-serif; overflow-wrap: break-word; }
+.training-shell { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+.training-page p, .training-page li { font-size: 17px; line-height: 1.75; }
+.training-page h1, .training-page h2, .training-page h3 { letter-spacing: 0; font-weight: 700; }
+.training-eyebrow { margin: 0 0 18px !important; font-size: 12px !important; line-height: 1.5 !important; font-weight: 700; text-transform: uppercase; color: #875000; }
+.training-hero { padding: 32px 0 56px; background: #080808; color: #fff; }
+.training-hero .training-eyebrow { color: #ffad33; }
+.training-hero .growth-breadcrumbs { margin-bottom: 28px; color: #bdbdbd; }
+.training-hero .growth-breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; list-style: none; padding: 0; margin: 0; }
+.training-hero .growth-breadcrumbs li { font-size: 12px; line-height: 1.5; }
+.training-hero .growth-breadcrumbs li + li::before { content: '/'; margin-right: 12px; color: #777; }
+.training-hero .growth-breadcrumbs a { text-decoration: none; }
+.training-hero .growth-breadcrumbs a:hover { color: #ffad33; text-decoration: underline; }
+.training-hero .growth-breadcrumbs [aria-current] { color: #fff; }
+.training-preview { margin: 14px 0 24px; font-size: 13px !important; color: #c8c8c8; }
+.training-hero h1 { margin: 26px 0 20px; font-size: 64px; line-height: 1.04; max-width: 1000px; }
+.training-hero-promise { font-size: 26px !important; line-height: 1.4 !important; margin: 0 0 20px; color: #ddd; }
+.training-hero-promise strong { color: #ffad33; }
+.training-lead { max-width: 740px; color: #c6c6c6; margin: 0 0 26px; }
+.training-actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.training-button { display: inline-flex; gap: 12px; align-items: center; justify-content: center; padding: 15px 20px; min-height: 50px; background: #ff9900; color: #111; text-decoration: none; font-size: 14px; font-weight: 700; border-radius: 4px; box-sizing: border-box; max-width: 100%; text-align: center; }
+.training-button:hover { background: #ffad33; }
+.training-text-link { display: inline-flex; align-items: center; min-height: 44px; gap: 8px; font-size: 15px; font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
+.training-intro { padding: 64px 0 48px; }
+.training-intro h2 { font-size: 36px; line-height: 1.2; margin: 0 0 24px; }
+.training-intro > .training-shell > p:last-of-type { max-width: 850px; color: #535353; }
+.training-intro .training-diagram { margin-bottom: 0; margin-top: 36px; }
+.training-jump { border-block: 1px solid #ddd; background: #fff; }
+.training-jump > .training-shell { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding-block: 12px; }
+.training-jump a { display: inline-flex; gap: 8px; align-items: center; padding-block: 10px; font-size: 13px; font-weight: 600; min-height: 44px; }
+.training-jump a:last-child { margin-left: auto; }
+.training-band { padding: 80px 0; scroll-margin-top: 90px; }
+.training-heading { max-width: 850px; margin-bottom: 40px; }
+.training-heading h2, .training-contact h2, .training-control h2 { font-size: 40px; line-height: 1.18; margin: 0 0 22px; }
+.training-heading > p:last-child { max-width: 780px; color: #555; margin-bottom: 0; }
+.training-session { background: #f2f3f4; }
+.training-roadmap { list-style: none; padding: 0; margin: 0; }
+.training-roadmap li { display: grid; grid-template-columns: 72px minmax(0, 1fr) 180px; align-items: start; gap: 32px; padding-block: 28px; border-top: 1px solid #cdd0d4; }
+.training-step-number { color: #965600; font-size: 24px; line-height: 1.4; font-weight: 700; }
+.training-roadmap h3 { font-size: 23px; line-height: 1.3; margin: 0 0 12px; }
+.training-roadmap p { margin: 0; max-width: 700px; color: #53565b; }
+.training-step-result { font-size: 13px; font-weight: 600; padding-top: 6px; color: #286749; }
+.training-session-examples { border-top: 1px solid #cdd0d4; margin-top: 32px; padding-top: 24px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+.training-session-examples > span { font-size: 13px; font-weight: 600; color: #875000; }
+.training-session-examples p { margin: 0; color: #53565b; }
+.training-fit-note { font-size: 14px !important; line-height: 1.7; color: #5d5d5d; margin: 28px 0 0; max-width: 950px; }
+.training-format { background: #080808; color: #fff; }
+.training-format .training-eyebrow { color: #ffad33; }
+.training-format .training-heading > p:last-child { color: #bdbdbd; }
+.training-tailoring { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin: 0; }
+.training-tailoring > div { padding-top: 24px; border-top: 2px solid #5d5d5d; }
+.training-tailoring dt { font-size: 21px; font-weight: 700; }
+.training-tailoring dd { font-size: 16px; line-height: 1.75; margin: 14px 0 0; color: #c8c8c8; }
+.training-format-note { color: #c6c6c6; font-size: 14px !important; margin: 32px 0 0; max-width: 850px; }
+.training-curriculum article { display: grid; grid-template-columns: 72px 1fr; gap: 32px; padding: 30px 0; border-top: 1px solid #d5d5d5; }
+.training-curriculum article > span { font-size: 28px; color: #8a5100; font-weight: 700; }
+.training-curriculum h3 { margin: 0 0 8px; font-size: 25px; }
+.training-curriculum p { color: #555; margin: 0 0 20px; }
+.training-curriculum ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 32px; list-style: none; margin: 0; padding: 0; }
+.training-curriculum li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; }
+.training-curriculum li svg { flex: none; margin-top: 5px; color: #24694c; }
+.training-control { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; }
+.training-control h3 { font-size: 21px; line-height: 1.4; margin: 0 0 14px; }
+.training-control p { color: #555; margin: 0 0 20px; }
+.training-control h3:not(:first-child) { margin-top: 32px; }
+.training-boundaries { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.training-boundaries > div { border-top: 2px solid #111; padding-top: 24px; }
+.training-boundaries h3 { font-size: 22px; margin: 0 0 14px; }
+.training-boundaries p { color: #555; margin: 0 0 16px; }
+.training-faq-band { background: #f2f3f4; }
+.training-faqs { max-width: 960px; }
+.training-faqs details { border-top: 1px solid #c8c8c8; }
+.training-faqs details:last-child { border-bottom: 1px solid #c8c8c8; }
+.training-faqs summary { display: flex; justify-content: space-between; gap: 24px; align-items: center; cursor: pointer; padding: 22px 0; font-weight: 600; font-size: 17px; list-style: none; }
+.training-faqs summary::-webkit-details-marker { display: none; }
+.training-faqs summary svg { flex: none; }
+.training-faqs details[open] summary svg { transform: rotate(45deg); }
+.training-faqs details > p { color: #555; max-width: 850px; margin: 0 0 24px; }
+.training-reading { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.training-reading a { display: block; padding: 26px 0; border-top: 2px solid #111; text-decoration: none; }
+.training-reading span { color: #875000; font-size: 13px; font-weight: 600; }
+.training-reading h3 { font-size: 25px; margin: 18px 0 12px; }
+.training-reading p { margin: 0 0 20px; color: #555; }
+.training-contact { padding: 72px 0; background: #ff9900; scroll-margin-top: 90px; }
+.training-contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; }
+.training-contact .training-eyebrow { color: #382100; }
+.training-contact p { max-width: 650px; font-size: 17px; line-height: 1.75; margin: 0 0 24px; }
+.training-contact .training-button { background: #080808; color: #fff; }
+.training-contact .training-button:hover { background: #303030; }
+.training-contact .training-contact-note { font-size: 13px; margin-top: 16px; }
+.training-contact-prepare { border-left: 1px solid #895200; padding-left: 36px; }
+.training-contact-prepare h3 { font-size: 22px; margin-top: 0; }
+.training-contact-prepare ul { padding-left: 20px; }
+.training-contact-prepare li { font-size: 15px; line-height: 1.7; margin-block: 10px; }
+.training-contact-prepare p { font-size: 13px !important; }
+.training-page a:focus-visible, .training-page summary:focus-visible, .training-contact a:focus-visible { outline: 3px solid #327ac7; outline-offset: 5px; }
+@media (max-width: 900px) {
+  .training-hero h1 { font-size: 52px; }
+  .training-heading h2, .training-contact h2, .training-control h2 { font-size: 34px; }
+  .training-roadmap li { grid-template-columns: 48px minmax(0, 1fr); gap: 20px; }
+  .training-step-result { grid-column: 2; padding: 0; }
+  .training-control, .training-contact-grid { gap: 32px; }
+  .training-curriculum article { grid-template-columns: 48px 1fr; gap: 20px; }
+  .training-curriculum ul { grid-template-columns: 1fr; }
+  .training-jump a:last-child { margin-left: 0; }
+}
+@media (max-width: 600px) {
+  .training-shell { width: calc(100% - 40px); }
+  .training-hero { padding: 20px 0 36px; }
+  .training-hero h1 { font-size: 40px; line-height: 1.08; margin-top: 20px; }
+  .training-hero-promise { font-size: 21px !important; }
+  .training-page p, .training-page li { font-size: 16px; }
+  .training-preview { font-size: 12px !important; margin-block: 12px 20px; }
+  .training-eyebrow { font-size: 11px !important; margin-bottom: 14px !important; }
+  .training-actions { gap: 12px 20px; }
+  .training-button { font-size: 13px; padding-inline: 14px; }
+  .training-intro { padding-block: 44px 36px; }
+  .training-intro h2, .training-heading h2, .training-contact h2, .training-control h2 { font-size: 29px; }
+  .training-jump > .training-shell { gap: 2px 20px; padding-block: 8px; }
+  .training-band { padding-block: 52px; }
+  .training-heading { margin-bottom: 28px; }
+  .training-roadmap li { grid-template-columns: 28px minmax(0, 1fr); gap: 14px; padding-block: 24px; }
+  .training-step-number { font-size: 20px; }
+  .training-roadmap h3 { font-size: 21px; }
+  .training-session-examples, .training-tailoring, .training-boundaries, .training-control, .training-reading, .training-contact-grid { grid-template-columns: 1fr; gap: 24px; }
+  .training-session-examples { gap: 12px; }
+  .training-tailoring dt { font-size: 20px; }
+  .training-curriculum article { grid-template-columns: 28px 1fr; gap: 14px; padding-block: 24px; }
+  .training-curriculum article > span { font-size: 22px; }
+  .training-curriculum h3 { font-size: 21px; }
+  .training-faqs summary { font-size: 16px; }
+  .training-contact { padding-block: 52px; }
+  .training-contact-prepare { border-left: 0; border-top: 1px solid #895200; padding: 24px 0 0; }
+  .training-reading h3 { font-size: 22px; }
+}

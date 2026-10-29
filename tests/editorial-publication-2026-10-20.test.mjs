@@ -16,12 +16,12 @@ const all = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.c
 const attr = (node, name) => node.attrs?.find((item) => item.name === name)?.value;
 const entries = [...publishedGuides20261020, ...publishedBlogPosts20261020.map((post) => ({ ...post, path: '/blog/' + post.slug + '/' }))];
 
-test('only the twenty approved pages extend the existing public collection', () => {
+test('the twenty previously approved pages remain public alongside the approved training cluster', () => {
   assert.equal(publishedGuides20261020.length, 10);
   assert.equal(publishedBlogPosts20261020.length, 10);
-  assert.equal(guides.length, 77);
-  assert.equal(allBlogPosts.length, 19);
-  assert.equal(indexablePaths.length, 113);
+  assert.equal(guides.length, 78);
+  assert.equal(allBlogPosts.length, 20);
+  assert.equal(indexablePaths.length, 116);
   for (const path of ['src/data/guides.ts', 'src/data/blog/index.ts', 'src/data/guides-reviewed-2026-10-20.ts', 'src/data/blog/published-2026-10-20.ts']) {
     assert.doesNotMatch(read(path), /from\s+['"][^'"]*(?:guide-drafts|blog-drafts)/);
   }
@@ -36,7 +36,7 @@ test('only the twenty approved pages extend the existing public collection', () 
 
 test('twenty pages have canonical HTML, sources, contact and sitemap discovery', () => {
   const sitemap = read('dist/sitemap-0.xml');
-  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 113);
+  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 116);
   assert.doesNotMatch(sitemap, /borradores|admin|politica|quienes-somos/);
   for (const entry of entries) {
     const html = read('dist' + entry.path + 'index.html');

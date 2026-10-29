@@ -14,7 +14,7 @@ const attr = (node, name) => node.attrs?.find((item) => item.name === name)?.val
 
 test('the thirteen previously approved guides remain in the public collection', () => {
   assert.equal(reviewedGuides.length, 13);
-  assert.equal(guides.length, 77);
+  assert.equal(guides.length, 78);
   assert.equal(new Set(guides.map((guide) => guide.slug)).size, guides.length);
   assert.doesNotMatch(read('src/data/guides-reviewed-2026-10-11.ts'), /from\s+['"][^'"]*guide-drafts/);
   assert.doesNotMatch(read('src/data/guides.ts'), /from\s+['"][^'"]*guide-drafts/);
@@ -32,8 +32,8 @@ test('the thirteen previously approved guides remain in the public collection', 
 test('reviewed guides are canonical, indexable, discoverable and absent from draft routes', () => {
   const sitemap = read('dist/sitemap-0.xml');
   const directory = read('dist/guias/index.html');
-  assert.equal(indexablePaths.length, 113);
-  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 113);
+  assert.equal(indexablePaths.length, 116);
+  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 116);
   for (const guide of reviewedGuides) {
     const html = read('dist' + guide.path + 'index.html');
     const tree = parse(html);

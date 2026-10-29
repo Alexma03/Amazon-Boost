@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
 import ServiceContact from '../../components/ServiceContact.astro';
 import { serviceDirectory } from '../../data/service-pages';
+import { trainingService } from '../../data/training';
 import '../../styles/growth-pages.css';
 export const prerender = true;
 
@@ -25,6 +26,12 @@ const serviceGroups = [
     title: 'Crecer con una base preparada.',
     copy: 'Una salida al mercado coordinada y un plan específico para cada país.',
     paths: ['/servicios/lanzamiento-marca-privada-amazon/', '/servicios/expansion-amazon-europa/'],
+  },
+  {
+    eyebrow: 'Formación y equipo',
+    title: 'El conocimiento se queda en tu empresa.',
+    copy: 'Formación sobre vuestra cuenta real, con sesiones y acompañamiento adaptados a tu equipo.',
+    paths: [trainingService.path],
   },
 ].map((group) => ({ ...group, services: group.paths.map((path) => services.get(path)).filter(Boolean) }));
 ---

@@ -212,7 +212,7 @@ export const publishedBlogPosts20261020: BlogPost[] = [
     ],
     tags: ['agencia boutique', 'marca privada', 'responsabilidad', 'servicio'], service: '/servicios/gestion-de-cuenta/',
     guides: ['externalizar-amazon-ads-gestion-integral', 'primer-mes-agencia-amazon-prioridades', 'preparar-datos-auditoria-amazon'],
-    relatedPosts: ['automatizar-amazon-control-decisiones', 'cuenta-saludable-amazon-no-negocio-rentable', 'herramientas-seo-amazon'],
+    relatedPosts: ['automatizar-amazon-control-decisiones', 'cuenta-saludable-amazon-no-negocio-rentable', 'herramientas-seo-amazon', 'formar-equipo-o-delegar-amazon'],
     sources: [{ label: 'Amazon: categorías y elección de proveedores de servicios', url: 'https://sell.amazon.com/es/tools/service-provider-network', note: 'Consultada el 13 y revisada el 20 de octubre de 2026. Referencia informativa sobre selección y especialidades; no acredita membresía, certificación o respaldo de Amazon a Amazon Boost.' }],
     seo: { metaTitle: 'Agencia boutique de Amazon: atención, alcance y responsabilidad', metaDescription: 'Qué valorar en una agencia boutique de Amazon para tu marca privada: interlocutor, alcance, prioridades y seguimiento, más allá del tamaño del equipo.' },
   },

@@ -1,6 +1,10 @@
 ---
 import GuideLayout from '../../layouts/GuideLayout.astro';
 import { guides } from '../../data/guides';
+import { trainingGuide, trainingService } from '../../data/training';
+import TrainingDiagram from '../../components/TrainingDiagram.astro';
+import TrainingContact from '../../components/TrainingContact.astro';
+import '../../styles/training.css';
 export const prerender = true;
 export function getStaticPaths() {
   return guides.filter((guide) => guide.path.startsWith('/guias/')).map((guide) => ({
@@ -9,4 +13,14 @@ export function getStaticPaths() {
 }
 const { guide } = Astro.props;
 ---
-<GuideLayout guide={guide} />
+{guide.slug === trainingGuide.slug ? <GuideLayout guide={guide}>
+  <aside slot="early-contact" class="training-guide-link"><span>Lo preparamos contigo</span><a href={trainingService.path}>Conocer la formación para tu equipo</a></aside>
+  <TrainingDiagram slot="content-visual" variant="guide" />
+  <TrainingContact slot="contact" />
+</GuideLayout> : <GuideLayout guide={guide} />}
+
+<style>
+  .training-guide-link { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding: 16px 0; margin: 24px 0; border-block: 1px solid #d5d5d5; font-size: 14px; }
+  .training-guide-link span { color: #555; }
+  .training-guide-link a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+</style>

@@ -31,6 +31,16 @@ test('guide hub invites an informed decision and exposes the free audit', () => 
 test('all guides offer a visible free audit and a service-to-home journey in static HTML', () => {
   for (const guide of guides) {
     const tree = parse(source('dist' + guide.path + 'index.html'));
+    if (guide.slug === 'plan-formacion-equipo-amazon') {
+      const early = all(tree, (node) => attr(node, 'class')?.split(/\s+/).includes('training-guide-link'))[0];
+      assert.equal(attr(all(early, (node) => node.tagName === 'a')[0], 'href'), guide.service);
+      const contact = all(tree, (node) => attr(node, 'class')?.split(/\s+/).includes('training-contact'))[0];
+      assert.match(content(contact), /primera conversación es gratuita/i);
+      assert.ok(all(contact, (node) => node.tagName === 'a').some((node) => attr(node, 'href') === '/#auditoria'));
+      const nav = all(tree, (node) => attr(node, 'class') === 'guide-business-links')[0];
+      assert.deepEqual(all(nav, (node) => node.tagName === 'a').map((node) => attr(node, 'href')), [guide.service, '/']);
+      continue;
+    }
     const early = all(tree, (node) => attr(node, 'data-guide-audit') !== undefined);
     assert.equal(early.length, 1, guide.slug);
     assert.equal(attr(early[0], 'href'), '/#auditoria');
