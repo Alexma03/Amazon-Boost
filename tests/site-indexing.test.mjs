@@ -54,6 +54,9 @@ test('canonical URLs remove query and fragment without changing image or file ex
 });
 
 test('public redirects preserve queries, avoid chains and do not intercept mutations or unknown paths', () => {
+  for (const path of ['/ads/agencia-amazon', '/ads/agencia-amazon/']) {
+    assert.equal(pageRedirect(new URL(siteUrl + path + '?utm_source=google&gclid=example'), 'GET'), '/agencia-amazon/?utm_source=google&gclid=example');
+  }
   for (const [alias, destination] of Object.entries(serviceAliases)) {
     for (const path of [alias, alias.slice(0, -1)]) {
       assert.equal(pageRedirect(new URL(siteUrl + path + '?utm_source=seo&x=1'), 'GET'), destination + '?utm_source=seo&x=1');
@@ -78,6 +81,16 @@ test('Cloudflare redirects old addresses with HTTP 301 on both slash variants', 
     assert.equal(rules.get(from), to);
     assert.equal(rules.get(from.slice(0, -1)), to);
     assert.ok(isIndexablePath(to), to);
+  }
+});
+
+test('built public pages contain no cookie notice, preference controls or active Google Ads tag', () => {
+  for (const [path, tree] of builtPages) {
+    assert.equal(all(tree, (node) => attr(node, 'data-ab-consent') !== undefined || attr(node, 'data-cookie-settings') !== undefined).length, 0, path);
+    for (const script of tag(tree, 'script')) {
+      assert.doesNotMatch(attr(script, 'src') ?? '', /googletagmanager\.com|googleadservices\.com/, path);
+      assert.doesNotMatch(content(script), /window\.(?:gtag|dataLayer)/, path);
+    }
   }
 });
 

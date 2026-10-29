@@ -9,7 +9,6 @@ import Footer from '../components/Footer.astro';
 import StructuredData from '../components/StructuredData.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import BoostAssistant from '../components/BoostAssistant.astro';
-import CookieNotice from '../components/CookieNotice.astro';
 import { canonicalPageUrl, shouldNoindex, isIndexablePath } from '../data/site-index';
 
 interface Props {
@@ -54,7 +53,6 @@ const excludeFromIndex = noindex || shouldNoindex(Astro.url.pathname) || Astro.r
 // URL completa de la imagen para Open Graph
 const ogImageURL = image ? new URL(image, Astro.site) : null;
 const isAdminPage = Astro.url.pathname.startsWith('/admin');
-const allowMeasurement = !isAdminPage && !Astro.url.pathname.startsWith('/borradores') && Astro.response.status < 400;
 const boostAssistantEnabled = import.meta.env.PUBLIC_BOOST_ASSISTANT_ENABLED === 'true';
 ---
 
@@ -63,14 +61,6 @@ const boostAssistantEnabled = import.meta.env.PUBLIC_BOOST_ASSISTANT_ENABLED ===
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {allowMeasurement && <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-      window.gtag('consent', 'default', {
-        ad_storage: 'denied', analytics_storage: 'denied',
-        ad_user_data: 'denied', ad_personalization: 'denied'
-      });
-    </script>}
     
     <!-- Meta tags básicos de SEO -->
     <title>{title}</title>
@@ -138,8 +128,7 @@ const boostAssistantEnabled = import.meta.env.PUBLIC_BOOST_ASSISTANT_ENABLED ===
     <main>
       <slot />
     </main>
-    <Footer showCookiePreferences={allowMeasurement} />
-    {allowMeasurement && <CookieNotice />}
+    <Footer />
     {!isAdminPage && <WhatsAppFloat />}
     {boostAssistantEnabled && !excludeFromIndex && isIndexablePath(Astro.url.pathname) && <BoostAssistant />}
   </body>

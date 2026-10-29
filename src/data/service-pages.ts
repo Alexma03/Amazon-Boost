@@ -272,6 +272,7 @@ export const visualService = {
 export const serviceDirectory = [...servicePages, visualService, trainingService];
 export const serviceByPath = new Map(servicePages.map((page) => [page.path, page]));
 export const serviceAliases: Record<string, string> = {
+  '/ads/agencia-amazon/': '/agencia-amazon/',
   '/gestion-cuenta-amazon-seller-central/': '/servicios/gestion-de-cuenta/',
   '/agencia-ppc-amazon/': '/servicios/gestion-de-ppc/',
   '/auditoria-cuenta-amazon/': '/servicios/auditoria-de-cuenta/',

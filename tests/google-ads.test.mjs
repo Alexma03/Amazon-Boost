@@ -123,8 +123,8 @@ test('blocked storage and a failed Google tag do not throw or cause uncontrolled
 
 const home = readFileSync(new URL('../src/components/HomeRedesign.astro', import.meta.url), 'utf8');
 // Execute the original form handler with only its Firebase imports substituted.
-async function submitForm({ fail = false, valid = true, trackingFails = false } = {}) {
-  let handler, writes = 0, conversions = 0;
+async function submitForm({ fail = false, valid = true } = {}) {
+  let handler, writes = 0, savedData;
   const status = { dataset: {} }, submit = { disabled: false };
   const form = {
     addEventListener: (_, fn) => { handler = fn; },
@@ -135,27 +135,29 @@ async function submitForm({ fail = false, valid = true, trackingFails = false } 
   let block = home.slice(home.indexOf('document.querySelectorAll<HTMLFormElement>(".audit-form")'), home.indexOf('    const auditForm ='));
   block = block.replace(/<(?:HTMLFormElement|HTMLElement|HTMLButtonElement)>/g, '').replace(/<HTMLInputElement \| HTMLButtonElement \| HTMLSelectElement \| HTMLTextAreaElement>/g, '');
   block = block.replace('import("../lib/firebase")', 'Promise.resolve({ db: {} })').replace('import("firebase/firestore")', 'Promise.resolve(firebase)');
-  const run = new Function('document', 'FormData', 'getLeadAttribution', 'trackAuditReceived', 'firebase', block);
-  const addDoc = async () => { writes++; if (fail) throw Error('Firebase failure'); return { id: 'SavedDoc123' }; };
-  const tracking = () => { try { conversions++; if (trackingFails) throw Error('tag unavailable'); } catch {} };
-  run(document, class { entries() { return [['name', 'Test'], ['email', 'test@example.com'], ['consent', 'on']]; } }, () => undefined, tracking, { collection: () => ({}), addDoc });
+  const run = new Function('document', 'FormData', 'firebase', block);
+  const addDoc = async (_, data) => { writes++; savedData = data; if (fail) throw Error('Firebase failure'); return { id: 'SavedDoc123' }; };
+  run(document, class { entries() { return [['name', 'Test'], ['email', 'test@example.com'], ['consent', 'on']]; } }, { collection: () => ({}), addDoc });
   await handler({ preventDefault() {} });
-  return { status, submit, writes, conversions };
+  return { status, submit, writes, savedData };
 }
-test('original audit form records only a successful Firebase save; invalid and failed sends do not convert', async () => {
-  const success = await submitForm(); assert.equal(success.writes, 1); assert.equal(success.conversions, 1); assert.equal(success.status.dataset.state, 'success');
-  const invalid = await submitForm({ valid: false }); assert.equal(invalid.writes, 0); assert.equal(invalid.conversions, 0);
-  const failure = await submitForm({ fail: true }); assert.equal(failure.status.dataset.state, 'error'); assert.equal(failure.conversions, 0);
-  const trackingFailure = await submitForm({ trackingFails: true }); assert.equal(trackingFailure.status.dataset.state, 'success'); assert.equal(trackingFailure.submit.disabled, false);
-  assert.match(home, /trackAuditReceived\(submission.id\)/);
+test('audit requests still save and confirm without Ads or campaign attribution', async () => {
+  const success = await submitForm();
+  assert.equal(success.writes, 1);
+  assert.equal(success.savedData.name, 'Test');
+  assert.equal(success.savedData.email, 'test@example.com');
+  assert.equal(success.savedData.attribution, undefined);
+  assert.equal(success.status.dataset.state, 'success');
+  assert.equal(success.submit.disabled, false);
+  const invalid = await submitForm({ valid: false }); assert.equal(invalid.writes, 0);
+  const failure = await submitForm({ fail: true });
+  assert.equal(failure.status.dataset.state, 'error');
+  assert.equal(failure.submit.disabled, false);
+  assert.doesNotMatch(home, /google-ads|getLeadAttribution|trackAuditReceived/);
 });
-test('shared layout has one denied default, no unconditional Google library and excludes private pages', () => {
+test('shared layout and footer do not activate Ads or render cookie consent controls', () => {
   const layout = readFileSync(new URL('../src/layouts/Layout.astro', import.meta.url), 'utf8');
-  assert.equal(layout.match(/'consent', 'default'/g).length, 1);
-  assert.doesNotMatch(layout, /googletagmanager\.com\/gtag/);
-  assert.match(layout, /allowMeasurement = !isAdminPage/);
-  assert.match(layout, /!Astro.url.pathname.startsWith\('\/borradores'\)/);
-  const notice = readFileSync(new URL('../src/components/CookieNotice.astro', import.meta.url), 'utf8');
-  assert.match(notice, /class="ab-cookie-notice"/);
-  assert.doesNotMatch(notice, /\.ab-consent\s*\{/);
+  const footer = readFileSync(new URL('../src/components/Footer.astro', import.meta.url), 'utf8');
+  assert.doesNotMatch(layout, /CookieNotice|allowMeasurement|dataLayer|gtag|google-ads/);
+  assert.doesNotMatch(footer, /data-cookie-settings|showCookiePreferences/);
 });
