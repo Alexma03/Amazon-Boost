@@ -1,6 +1,27 @@
 import type { Guide } from './guides';
 import type { BlogPost } from './blog/index';
 
+// Commercial reference supplied by the owner on 1 November 2026; not a fixed price for every plan.
+export const trainingProgramme = {
+  months: [3, 6],
+  priceSummary: 'Desde 350 € + IVA al mes (programa de 6 meses, 1 sesión semanal).',
+  priceNote: 'El precio final depende de la duración, el número de sesiones semanales y el número de personas del equipo. Te enviamos una propuesta cerrada tras una primera conversación gratuita.',
+  terms: 'Programa de 3 o 6 meses, con 1 o 2 sesiones semanales de 1 hora por videollamada sobre vuestra propia cuenta de Seller Central. Contenido, ritmo y prioridades acordados antes de empezar.',
+  offer: {
+    name: 'Referencia para el programa de 6 meses con 1 sesión semanal',
+    description: 'Desde 350 € + IVA al mes (programa de 6 meses, 1 sesión semanal). El precio final depende de la duración, el número de sesiones semanales y el número de personas del equipo.',
+    minPrice: 350,
+    currency: 'EUR',
+    billingDuration: 'P6M',
+  },
+};
+
+// Fill in only after the owner supplies the figures for this section. Null values stay hidden.
+export const trainingInstructorFigures = {
+  yearsExperience: null as number | null,
+  brandsManaged: null as number | null,
+};
+
 // Approved for publication on 29 October 2026. Every proposal is tailored to the client.
 export const trainingService = {
   publicationState: 'published' as const,
@@ -19,12 +40,12 @@ export const trainingService = {
   faqs: [
     { question: '¿Para quién es esta formación?', answer: 'Para empresas que quieren gestionar Amazon de forma interna y necesitan preparar a la persona o al equipo que lo llevará. Puede encajar si vais a asumir el canal, os atascáis en tareas concretas o queréis ampliar conocimientos en un área.' },
     { question: '¿Trabajamos con nuestra propia cuenta?', answer: 'Sí. Preparamos las sesiones con vuestros productos, fichas, campañas y datos disponibles. Explicamos qué estamos revisando y por qué. Vuestra información no se utiliza para formar a otras marcas.' },
-    { question: '¿Hay una duración o un número de horas fijo?', answer: 'No. Acordamos la frecuencia, la duración de las reuniones y el plazo del acompañamiento según lo que necesite aprender tu equipo y el tiempo del que disponga. Podemos ajustar el recorrido si cambian las prioridades.' },
+    { question: '¿Cuánto dura el programa y cuántas horas dedicamos?', answer: 'Partimos de un programa de 3 o 6 meses, con 1 o 2 sesiones semanales de 1 hora en directo por videollamada sobre vuestra propia cuenta de Seller Central. El contenido, el ritmo y las prioridades se acuerdan antes de empezar y se adaptan al equipo. La frecuencia y cualquier adaptación del plazo se concretan en la propuesta.' },
     { question: '¿Podemos resolver problemas durante las clases?', answer: 'Sí. Podemos revisar una ficha, interpretar una campaña o trabajar una incidencia concreta. Si procede y lo aprobáis, aplicamos los cambios juntos y explicamos el proceso. Algunas incidencias dependen de documentación, de Amazon o de una intervención específica; no garantizamos resolverlas en una sesión.' },
     { question: '¿Podemos elegir el canal de acompañamiento?', answer: 'Sí. El acompañamiento incluye un canal directo con Amazon Boost para dudas entre sesiones: WhatsApp, email u otro canal que prefiráis y acordemos juntos. Podéis consultar dudas al aplicar lo aprendido y recibir orientación sobre incidencias y siguientes pasos sin esperar a la próxima sesión. Lo que requiera una revisión más profunda se trabaja en una reunión. Los horarios y tiempos de atención se concretan en la propuesta. No prometemos respuesta inmediata ni atención de urgencias permanente.' },
     { question: '¿Cómo accedéis a Seller Central?', answer: 'Acordamos un acceso delegado autorizado por Amazon con los permisos mínimos necesarios, o trabajamos con pantalla compartida. No pedimos contraseñas, códigos de acceso ni datos bancarios. Las actuaciones sobre la cuenta se realizan con vuestra aprobación.' },
     { question: '¿Es lo mismo que contratar la gestión de cuenta?', answer: 'No. Os explicamos y trabajamos con vosotros para que el equipo pueda gestionar las tareas acordadas. La ejecución continuada fuera de las sesiones se define por separado. Podemos combinar formación con un servicio concreto si tiene sentido para tu empresa.' },
-    { question: '¿Cuánto cuesta y qué incluye la propuesta?', answer: 'Preparamos una propuesta personalizada, sin tarifas públicas cerradas. Recoge objetivos, participantes, temas, sesiones, seguimiento y alcance. La primera conversación es gratuita y sin compromiso.' },
+    { question: '¿Cuánto cuesta?', answer: `${trainingProgramme.priceSummary} ${trainingProgramme.priceNote} La propuesta recoge objetivos, participantes, temas, sesiones, seguimiento y alcance. La primera conversación es gratuita y sin compromiso.` },
     { question: '¿Es un curso oficial de Amazon?', answer: 'Es un servicio independiente de Amazon Boost, no una certificación oficial de Amazon. El objetivo es ayudar a tu equipo a trabajar con criterio y autonomía; no prometemos resultados de ventas ni resoluciones que dependan de Amazon.' },
   ],
 };

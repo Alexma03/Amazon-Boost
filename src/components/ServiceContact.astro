@@ -1,7 +1,7 @@
 ---
 import { getAuditContact } from '../data/audit-contact';
-interface Props { topic: string; service?: string; profileService?: string; preparation?: string[]; freeAudit?: boolean }
-const { topic, service, profileService, preparation, freeAudit = false } = Astro.props;
+interface Props { topic: string; service?: string; profileService?: string; preparation?: string[]; freeAudit?: boolean; responseTime?: string; responseNote?: string }
+const { topic, service, profileService, preparation, freeAudit = false, responseTime, responseNote } = Astro.props;
 const contact = getAuditContact(profileService ?? service);
 const items = preparation?.length ? preparation : contact.preparation;
 const whatsapp = `https://wa.me/34650606400?text=${encodeURIComponent(`Hola, quiero solicitar una auditoría inicial. Me interesa revisar: ${topic}.`)}`;
@@ -12,6 +12,7 @@ const whatsapp = `https://wa.me/34650606400?text=${encodeURIComponent(`Hola, qui
       <p class="growth-eyebrow">Auditoría inicial de Amazon</p>
       <h2 id="audit-contact-title">{contact.title}</h2>
       <p>{contact.description}</p>
+      {responseTime && <div class="unlock-response unlock-response-contact"><p>{responseTime}</p>{responseNote && <small>{responseNote}</small>}</div>}
       <div class="growth-actions">
         <a class="growth-button" href="/#auditoria" data-audit-primary>{freeAudit ? 'Solicitar auditoría gratuita' : 'Solicitar auditoría inicial'} <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
         <a class="growth-text-link" href={whatsapp} target="_blank" rel="noopener noreferrer">Prefiero hablar por WhatsApp</a>

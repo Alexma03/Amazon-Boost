@@ -8,12 +8,15 @@ export const schemaIds = {
 
 export const schemaId = (url: string, entity: 'webpage' | 'service' | 'article' | 'breadcrumb') => `${url}#${entity}`;
 
-interface PageData {
+export interface PageData {
   title?: string;
   description?: string;
   image?: string | null;
   date?: string;
   dateModified?: string;
+  termsOfService?: string;
+  offer?: { name: string; description: string; minPrice: number; currency: string; billingDuration: string };
+  faqSchema?: { question: string; answer: string }[];
 }
 
 interface SchemaOptions {
@@ -105,6 +108,34 @@ export function buildPageSchema({ url, title, description, type, pageType, image
       provider: ref(schemaIds.organization),
       areaServed: ['Espa\u00f1a', 'Europa'],
       mainEntityOfPage: ref(pageId),
+      ...(data.termsOfService ? { termsOfService: data.termsOfService } : {}),
+      ...(data.offer ? { offers: {
+        '@type': 'Offer',
+        name: data.offer.name,
+        description: data.offer.description,
+        url,
+        itemOffered: ref(serviceId),
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          minPrice: data.offer.minPrice,
+          priceCurrency: data.offer.currency,
+          valueAddedTaxIncluded: false,
+          unitCode: 'MON',
+          unitText: 'mes',
+          billingDuration: data.offer.billingDuration,
+        },
+      } } : {}),
+    });
+    if (data.faqSchema?.length) graph.push({
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      isPartOf: ref(pageId),
+      inLanguage: 'es-ES',
+      mainEntity: data.faqSchema.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
     });
   }
 

@@ -1,0 +1,10 @@
+---
+import { unlockingService } from '../data/unlocking-service';
+---
+<section class="growth-band unlock-first-steps" id="primeras-24-horas" aria-labelledby="unlock-first-steps-title">
+  <div class="growth-shell">
+    <div class="growth-section-head"><p class="growth-eyebrow">Antes de responder</p><h2 id="unlock-first-steps-title">Tu cuenta se ha bloqueado: qué hacer en las primeras 24 horas</h2><p>Si tienes una cuenta de Amazon bloqueada, empieza por ordenar la notificación y los antecedentes. Preparar el desbloqueo de cuenta Amazon requiere entender qué solicita la plataforma, no enviar más respuestas sin revisar el motivo.</p></div>
+    <ol>{unlockingService.firstSteps.map((step) => <li>{step}</li>)}</ol>
+    <a class="growth-button" href={unlockingService.whatsapp} target="_blank" rel="noopener noreferrer">Cuéntanos tu caso <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
+  </div>
+</section>

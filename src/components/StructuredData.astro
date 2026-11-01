@@ -1,15 +1,10 @@
 ---
 import { buildPageSchema } from '../lib/structured-data';
+import type { PageData } from '../lib/structured-data';
 
 interface Props {
   type?: 'organization' | 'article' | 'service' | 'breadcrumb';
-  data?: {
-    title?: string;
-    description?: string;
-    image?: string | null;
-    date?: string;
-    dateModified?: string;
-  };
+  data?: PageData;
   url: string;
   title: string;
   description: string;

@@ -93,6 +93,34 @@
 .training-contact-prepare ul { padding-left: 20px; }
 .training-contact-prepare li { font-size: 15px; line-height: 1.7; margin-block: 10px; }
 .training-contact-prepare p { font-size: 13px !important; }
+.training-price { max-width: 780px; margin-top: 28px; padding-top: 22px; border-top: 1px solid #d1d1d1; }
+.training-page .training-price-summary { margin: 0 0 10px; font-size: 18px; font-weight: 700; line-height: 1.6; }
+.training-page .training-price-note { margin: 0; font-size: 13px !important; line-height: 1.7; color: #555; }
+.training-hero .training-price { border-top-color: #444; }
+.training-hero .training-price-summary { color: #ffad33; }
+.training-hero .training-price-note { color: #c6c6c6; }
+.training-programme { border-bottom: 1px solid #ddd; }
+.training-programme-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.training-programme-card { padding: 28px; border: 1px solid #d5d5d5; border-top: 3px solid #ff9900; border-radius: 4px; background: #f6f6f4; }
+.training-programme-card h3 { margin: 0 0 28px; font-size: 34px; line-height: 1.2; }
+.training-programme-card dl { margin: 0; }
+.training-programme-card dl > div + div { margin-top: 22px; }
+.training-programme-card dt { font-size: 14px; font-weight: 700; }
+.training-programme-card dd { margin: 7px 0 0; font-size: 16px; line-height: 1.7; color: #555; }
+.training-programme-blocks { margin-top: 40px; padding-top: 26px; border-top: 1px solid #ddd; }
+.training-programme-blocks ol { display: flex; align-items: center; gap: 24px; list-style: none; padding: 0; margin: 0; }
+.training-programme-blocks li { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+.training-programme-blocks li > span { color: #875000; font-size: 13px; }
+.training-programme-arrow { color: #875000; }
+.training-instructor { border-top: 1px solid #ddd; }
+.training-instructor-body { max-width: 850px; }
+.training-instructor-body h3 { margin: 0 0 16px; font-size: 25px; }
+.training-instructor-body p { color: #555; }
+.training-instructor-figures { display: flex; flex-wrap: wrap; gap: 32px; margin-block: 28px; }
+.training-instructor-figures dt { font-size: 14px; color: #555; }
+.training-instructor-figures dd { margin: 8px 0 0; font-size: 28px; font-weight: 700; }
+.training-contact .training-price { margin: 0 0 24px; padding-top: 20px; border-color: #895200; }
+.training-contact .training-price-note { color: #382100; }
 .training-page a:focus-visible, .training-page summary:focus-visible, .training-contact a:focus-visible { outline: 3px solid #327ac7; outline-offset: 5px; }
 @media (max-width: 900px) {
   .training-hero h1 { font-size: 52px; }
@@ -132,4 +160,9 @@
   .training-contact { padding-block: 52px; }
   .training-contact-prepare { border-left: 0; border-top: 1px solid #895200; padding: 24px 0 0; }
   .training-reading h3 { font-size: 22px; }
+  .training-programme-cards { grid-template-columns: 1fr; gap: 20px; }
+  .training-programme-card { padding: 24px; }
+  .training-programme-card h3 { font-size: 29px; }
+  .training-programme-blocks ol { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .training-programme-arrow { transform: rotate(90deg); margin-left: 27px; }
 }

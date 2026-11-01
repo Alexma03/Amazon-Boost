@@ -3,26 +3,31 @@ import Layout from './Layout.astro';
 import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
 import GuideLinks from '../components/GuideLinks.astro';
 import ServiceContact from '../components/ServiceContact.astro';
+import AccountUnlockFirstSteps from '../components/AccountUnlockFirstSteps.astro';
+import { unlockingService } from '../data/unlocking-service';
 import { serviceDirectory, type ServicePage } from '../data/service-pages';
 import { homeShowcase } from '../data/home-showcase';
 import '../styles/growth-pages.css';
 interface Props { page: ServicePage }
 const { page } = Astro.props;
+const isUnlocking = page.path === unlockingService.path;
+const schemaData = { title: page.title, description: page.description, ...(isUnlocking ? { faqSchema: page.faqs, termsOfService: `${unlockingService.responseTime} ${unlockingService.responseNote} ${page.deliverable}` } : {}) };
 const proof = homeShowcase.featuredCase;
 const related = page.related.map((path) => serviceDirectory.find((item) => item.path === path)).filter(Boolean);
 const image = page.proof === 'organic' ? proof.lifestyleImage : page.proof === 'visual' ? '/images/1.3.png' : '/images/sergio-porras-amazon-boost-v2-800.webp';
 ---
-<Layout title={page.metaTitle} description={page.description} image={image} canonicalPath={page.path} pageType="service" aiOptimized={false} structuredData={{ type: 'service', data: { title: page.title, description: page.description } }}>
+<Layout title={page.metaTitle} description={page.description} image={image} canonicalPath={page.path} pageType="service" aiOptimized={false} structuredData={{ type: 'service', data: schemaData }}>
   <article class="growth-page">
     <header class="growth-hero">
       <div class="growth-shell">
         <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Servicios', path: '/servicios/' }, { name: page.title, path: page.path }]} />
         <p class="growth-eyebrow">Amazon Boost / {page.category}</p>
         <h1>{page.title}</h1>
+        {isUnlocking && <div class="unlock-response"><p>{unlockingService.responseTime}</p><small>{unlockingService.responseNote}</small></div>}
         <p class="growth-promise">{page.promise}</p>
         <p class="growth-lead">{page.intro}</p>
         <div class="growth-actions">
-          <a class="growth-button" href="#contacto">Hablemos de tu cuenta <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>
+          {isUnlocking ? <><a class="growth-button" href={unlockingService.whatsapp} target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a><a class="growth-text-link" href="/#auditoria">Prefiero el formulario</a></> : <a class="growth-button" href="#contacto">Hablemos de tu cuenta <img src="/icons/lucide/arrow-right.svg" width="20" height="20" alt="" /></a>}
           <a class="growth-text-link" href="#alcance">Qué incluye el servicio</a>
         </div>
       </div>
@@ -33,9 +38,10 @@ const image = page.proof === 'organic' ? proof.lifestyleImage : page.proof === '
     <section class="growth-band" id="encaje">
       <div class="growth-shell growth-intro-grid">
         <div class="growth-section-head"><p class="growth-eyebrow">El punto de partida</p><h2>Si esto te suena,<br />hablemos.</h2></div>
-        <ul class="growth-needs">{page.needs.map((need) => <li>{need}</li>)}</ul>
+        {isUnlocking ? <div><ul class="growth-needs">{page.needs.map((need) => <li>{need}</li>)}</ul><ul class="unlock-topics" aria-label="Áreas de revisión">{unlockingService.topics.map((topic) => <li>{topic}</li>)}</ul></div> : <ul class="growth-needs">{page.needs.map((need) => <li>{need}</li>)}</ul>}
       </div>
     </section>
+    {isUnlocking && <AccountUnlockFirstSteps />}
     <section class="growth-band growth-scope-band" id="alcance">
       <div class="growth-shell">
         <div class="growth-section-head"><p class="growth-eyebrow">Qué trabajamos</p><h2>El alcance.<br /><span>Sin letra pequeña.</span></h2></div>
@@ -59,12 +65,13 @@ const image = page.proof === 'organic' ? proof.lifestyleImage : page.proof === '
         </>}
       </div>
     </section>
+    {isUnlocking && unlockingService.caseStudy && <section class="growth-band" id="caso-real-desbloqueo"><div class="growth-shell"><div class="growth-section-head"><p class="growth-eyebrow">Caso anonimizado</p><h2>Caso real</h2></div><h3>Situación de partida</h3><p>{unlockingService.caseStudy.startingPoint}</p><h3>Qué hicimos</h3><p>{unlockingService.caseStudy.actions}</p><h3>Resultado</h3><p>{unlockingService.caseStudy.result}</p></div></section>}
     <section class="growth-band" id="preguntas"><div class="growth-shell growth-faq-grid">
       <div class="growth-section-head"><p class="growth-eyebrow">Antes de empezar</p><h2>Las preguntas<br />importantes.</h2></div>
       <div class="growth-faqs">{page.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
     </div></section>
     <GuideLinks slugs={page.guides} />
     <section class="growth-band growth-related"><div class="growth-shell"><p class="growth-eyebrow">Servicios conectados</p><div class="growth-related-links">{related.map((item) => item && <a href={item.path}>{item.title}<img src="/icons/lucide/arrow-right.svg" width="22" height="22" alt="" /></a>)}</div><a class="growth-text-link" href="/servicios/">Todos los servicios</a></div></section>
-    <ServiceContact topic={page.title} service={page.path} preparation={page.preparation} />
+    <ServiceContact topic={page.title} service={page.path} preparation={page.preparation} responseTime={isUnlocking ? unlockingService.responseTime : undefined} responseNote={isUnlocking ? unlockingService.responseNote : undefined} />
   </article>
 </Layout>

@@ -1,10 +1,13 @@
 ---
 import Icon from './Icon.astro';
+import TrainingPrice from './TrainingPrice.astro';
 import { trainingService } from '../data/training';
+interface Props { showPrice?: boolean }
+const { showPrice = false } = Astro.props;
 ---
 <section class="training-contact" id="contacto" aria-labelledby="training-contact-title">
   <div class="training-shell training-contact-grid">
-    <div><p class="training-eyebrow">La primera conversación es gratuita</p><h2 id="training-contact-title">Cuéntanos quién llevará<br />Amazon en tu empresa.</h2><p>Qué vende tu marca, quién gestiona hoy la cuenta y qué necesita aprender. Con ese punto de partida, definimos un programa que tenga sentido para tu equipo.</p><div class="training-actions"><a class="training-button" href={trainingService.whatsapp} target="_blank" rel="noopener noreferrer">Hablar de formación por WhatsApp <Icon name="arrow-up-right" /></a><a class="training-text-link" href="/#auditoria">Solicitar una llamada gratuita</a></div><p class="training-contact-note">Sin compromiso. Programa adaptado a tu equipo.</p></div>
+    <div><p class="training-eyebrow">La primera conversación es gratuita</p><h2 id="training-contact-title">Cuéntanos quién llevará<br />Amazon en tu empresa.</h2><p>Qué vende tu marca, quién gestiona hoy la cuenta y qué necesita aprender. Con ese punto de partida, definimos un programa que tenga sentido para tu equipo.</p>{showPrice && <TrainingPrice />}<div class="training-actions"><a class="training-button" href={trainingService.whatsapp} target="_blank" rel="noopener noreferrer">Hablar de formación por WhatsApp <Icon name="arrow-up-right" /></a><a class="training-text-link" href="/#auditoria">Solicitar una llamada gratuita</a></div><p class="training-contact-note">Sin compromiso. Programa adaptado a tu equipo.</p></div>
     <div class="training-contact-prepare"><h3>Para empezar, basta con esto.</h3><ul><li>Tu marca y los mercados en los que trabajáis.</li><li>La persona o el equipo que participará.</li><li>Las tareas que hoy cuestan más resolver.</li></ul><p>No envíes contraseñas, códigos ni datos de compradores.</p><a class="training-text-link" href="tel:+34650606400">650 606 400</a></div>
   </div>
 </section>
