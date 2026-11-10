@@ -10,10 +10,16 @@ export const prerender = true;
 const services = new Map(serviceDirectory.map((service) => [service.path, service]));
 const serviceGroups = [
   {
-    eyebrow: 'Dirección y cuenta',
-    title: 'Ordenar antes de acelerar.',
-    copy: 'Prioridades, gestión e incidencias con una lectura completa de la cuenta.',
-    paths: ['/servicios/gestion-de-cuenta/', '/servicios/auditoria-de-cuenta/', '/servicios/desbloqueos-amazon/'],
+    eyebrow: 'Gestión y auditoría',
+    title: 'Diagnóstico y gestión de tu cuenta.',
+    copy: 'Entendemos el estado de tu cuenta, definimos prioridades y coordinamos su gestión.',
+    paths: ['/servicios/gestion-de-cuenta/', '/servicios/auditoria-de-cuenta/'],
+  },
+  {
+    eyebrow: 'Incidencias y recuperación',
+    title: 'Desbloqueos y fondos retenidos.',
+    copy: 'Revisamos suspensiones, verificaciones y retenciones de saldo para preparar la respuesta y hacer seguimiento con Amazon.',
+    paths: ['/servicios/desbloqueos-amazon/'],
   },
   {
     eyebrow: 'Captación y conversión',
