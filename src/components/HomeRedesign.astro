@@ -104,13 +104,22 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     if (heroCount && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const target = Number(heroCount.dataset.heroCount);
       const format = new Intl.NumberFormat("es-ES", { useGrouping: "always" });
-      const started = performance.now() + 350;
-      const tick = (now: number) => {
-        const progress = Math.min(1, Math.max(0, (now - started) / 1600));
-        heroCount.textContent = `${format.format(Math.round(target * (1 - Math.pow(1 - progress, 3))))} €`;
-        if (progress < 1) window.requestAnimationFrame(tick);
+      const laptop = document.querySelector<HTMLElement>("[data-hero-macbook]");
+      let counted = false;
+      const count = () => {
+        if (counted) return;
+        counted = true;
+        const started = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min(1, Math.max(0, (now - started) / 1600));
+          heroCount.textContent = `${format.format(Math.round(target * (1 - Math.pow(1 - progress, 3))))} €`;
+          if (progress < 1) window.requestAnimationFrame(tick);
+        };
+        window.requestAnimationFrame(tick);
       };
-      window.requestAnimationFrame(tick);
+      // With the scroll-opened laptop, wait until the lid is open; otherwise start shortly after load.
+      if (laptop) new MutationObserver(() => { if (laptop.classList.contains("is-open")) count(); }).observe(laptop, { attributes: true, attributeFilter: ["class"] });
+      window.setTimeout(() => { if (!hero?.classList.contains("is-scroll-opening")) count(); }, 1200);
     }
     let axisFrame = 0;
     const updateHeroAxis = () => {

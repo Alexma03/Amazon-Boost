@@ -396,5 +396,7 @@
 @keyframes ab-stage-glow{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:scale(1.04)}}
 .ab-seller-bars i{transform-origin:bottom;animation:ab-bar-rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.5s + var(--seller-index,0)*45ms)}
 @keyframes ab-bar-rise{from{transform:scaleY(0)}}
+.ab-hero.is-scroll-opening .ab-macbook:not(.is-open) .ab-seller-bars i{animation:none;transform:scaleY(0)}
+.ab-macbook.is-open .ab-seller-bars i{animation-delay:calc(var(--seller-index,0)*45ms)}
 .ab-seller-performance strong{font-variant-numeric:tabular-nums}
 @media(prefers-reduced-motion:reduce){.ab-account-stage:before,.ab-seller-bars i{animation:none}}
