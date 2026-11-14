@@ -381,8 +381,9 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 </section>
 
 <section class="ab-services-section" id="services">
-  <div class="ab-section-intro ab-services-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> El sistema Amazon Boost</p><h2 data-reflection="No gestionamos piezas sueltas. Gestionamos el mecanismo completo.">No gestionamos piezas sueltas. Gestionamos el mecanismo completo.</h2></div>
-  <div class="ab-service-list">{services.map((service) => <a class="ab-service-row" href={service.href} data-reveal><div class="ab-service-title"><span class="ab-service-step"><i></i>{service.step}</span><h3>{service.name}</h3></div><p>{service.copy}</p><div class="ab-service-tags">{service.tags.map((tag) => <span>{tag}</span>)}</div></a>)}</div>
+  <div class="ab-section-intro ab-services-intro" data-reveal><p class="ab-overline ab-overline-dark"><span></span> El sistema Amazon Boost</p><h2 data-reflection="No gestionamos piezas sueltas. Gestionamos el mecanismo completo.">No gestionamos piezas sueltas. Gestionamos el mecanismo completo.</h2><p class="ab-services-lead">Servicios de Amazon Boost para marcas privadas: auditoría de cuenta, desbloqueos, Amazon Ads, listings, imágenes y gestión integral de Seller Central.</p></div>
+  <div class="ab-service-list">{services.map((service) => <a class="ab-service-row" href={service.href} data-reveal><div class="ab-service-title"><span class="ab-service-step"><i></i>{service.step}</span><h3>{service.name}</h3></div><p>{service.copy}</p><div class="ab-service-tags">{service.tags.map((tag) => <span>{tag}</span>)}</div><span class="ab-service-go" aria-hidden="true"><Icon name="arrow-up-right" size={18} /></span></a>)}</div>
+  <p class="ab-services-more" data-reveal><a href="/servicios/">Ver todos los servicios, incluidos lanzamiento de marca, expansión en Europa y formación <Icon name="arrow-up-right" size={17} /></a></p>
 </section>
 
 <section class="ab-method-section" id="direccion-estrategica" aria-labelledby="ab-strategy-title">
