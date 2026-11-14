@@ -78,7 +78,7 @@ test('indexable content connects to the same provider and only real blog dates a
       assert.equal(breadcrumb['@id'], `${siteUrl}${path}#breadcrumb`);
       assert.equal(breadcrumb.itemListElement.at(-1).item, siteUrl + path);
     }
-    assert.equal(entities.filter((entry) => entry['@type'] === 'FAQPage').length, ['/servicios/formacion-amazon-empresas/', '/servicios/desbloqueos-amazon/'].includes(path) ? 1 : 0, path);
+    assert.equal(entities.filter((entry) => entry['@type'] === 'FAQPage').length, ['/', '/servicios/formacion-amazon-empresas/', '/servicios/desbloqueos-amazon/'].includes(path) ? 1 : 0, path);
   }
 });
 

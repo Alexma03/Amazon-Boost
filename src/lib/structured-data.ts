@@ -1,5 +1,7 @@
 import { siteUrl } from '../data/site-index';
 import { publicReviews } from '../data/home-showcase';
+import { homeFaqs } from '../data/home-faq';
+import { serviceDirectory } from '../data/service-pages';
 
 export const schemaIds = {
   organization: `${siteUrl}/#organization`,
@@ -71,6 +73,17 @@ export function buildPageSchema({ url, title, description, type, pageType, image
         email: 'info@amznboost.es',
         availableLanguage: ['es'],
       },
+      knowsAbout: ['Amazon Seller Central', 'Amazon Ads', 'Amazon PPC', 'SEO en Amazon', 'Amazon FBA', 'Amazon FBM', 'Contenido A+', 'Marcas privadas en Amazon'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicios de Amazon Boost',
+        itemListElement: serviceDirectory.map((service) => ({
+          '@type': 'Offer',
+          name: service.title,
+          url: absolute(service.path),
+          itemOffered: ref(schemaId(absolute(service.path), 'service')),
+        })),
+      },
       founder: ref(schemaIds.founder),
       // Only public reviews that link to their original. No aggregateRating:
       // the rating summary belongs to Trustpilot, not to our own markup.
@@ -98,6 +111,17 @@ export function buildPageSchema({ url, title, description, type, pageType, image
       jobTitle: 'Fundador de Amazon Boost',
       worksFor: ref(schemaIds.organization),
       sameAs: ['https://www.linkedin.com/in/sergio-deroman-amazon/'],
+    });
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/#faq`,
+      isPartOf: ref(pageId),
+      inLanguage: 'es-ES',
+      mainEntity: homeFaqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
     });
     graph.push({
       '@type': 'WebSite',

@@ -1,6 +1,7 @@
 ---
 import "../styles/home-redesign.css";
 import "../styles/macbook-scroll.css";
+import { homeFaqs } from "../data/home-faq";
 import { homeShowcase, publicReviews, trustpilotProfileUrl, websiteReviews } from "../data/home-showcase";
 import FeaturedCases from "./FeaturedCases.astro";
 import ReviewCard from "./ReviewCard.astro";
@@ -112,7 +113,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         const started = performance.now();
         const tick = (now: number) => {
           const progress = Math.min(1, Math.max(0, (now - started) / 1600));
-          heroCount.textContent = `${format.format(Math.round(target * (1 - Math.pow(1 - progress, 3))))} €`;
+          heroCount.dataset.figure = `${format.format(Math.round(target * (1 - Math.pow(1 - progress, 3))))} €`;
           if (progress < 1) window.requestAnimationFrame(tick);
         };
         window.requestAnimationFrame(tick);
@@ -260,7 +261,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
       <p class="ab-overline"><span data-hero-axis></span> España · Europa · FBA · FBM</p>
       <h1><small>Agencia Amazon para marcas privadas</small><span>Amazon</span><em>Boost.</em></h1>
       <p class="ab-hero-statement">Convertimos Amazon en un canal rentable.</p>
-      <p class="ab-hero-description">Hacemos que publicidad, catálogo y stock trabajen juntos para vender más sin perder rentabilidad.</p>
+      <p class="ab-hero-description">Amazon Boost es una agencia de Amazon boutique para marcas privadas. Gestionamos publicidad, catálogo y stock en Seller Central, en España y Europa, para vender más sin perder rentabilidad.</p>
       <div class="ab-hero-actions">
         <a class="ab-button ab-button-primary ab-button-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">Hablemos por WhatsApp <Icon name="arrow-up-right" size={18} /></a>
         <a class="ab-button ab-button-ghost" href="#auditoria">Solicitar auditoría <Icon name="arrow-down" size={18} /></a>
@@ -274,7 +275,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
           <img class="ab-macbook-device ab-macbook-device-lid" src="/images/macbook-graphite-frame-lossless.webp" width="1635" height="962" fetchpriority="high" alt="" aria-hidden="true" />
           <div class="ab-macbook-screen">
           <div class="ab-macbook-camera" aria-hidden="true"><i></i></div>
-          <div class="ab-seller-window" aria-label="Vista de ejemplo de una cuenta de Seller Central">
+          <div class="ab-seller-window" data-nosnippet aria-label="Vista de ejemplo de una cuenta de Seller Central">
             <div class="ab-seller-topbar">
               <div class="ab-seller-brand"><b>amazon</b><span>seller central</span></div>
               <div class="ab-seller-search">Buscar en Seller Central</div>
@@ -287,13 +288,13 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
               <div class="ab-seller-dashboard">
                 <div class="ab-seller-health"><i><Icon name="check" size={11} strokeWidth={3} /></i><strong>Tu tienda es saludable</strong><span><Icon name="chevron-right" size={15} /></span></div>
                 <div class="ab-seller-heading">
-                  <div><small>VENTAS DE PRODUCTOS</small><h2>Últimos 30 días</h2></div>
+                  <div><small>VENTAS DE PRODUCTOS</small><p class="ab-seller-period">Últimos 30 días</p></div>
                   <span class="ab-seller-demo">Simulación visual</span>
                 </div>
                 <div class="ab-seller-performance">
-                  <article><strong data-hero-count="487930">487.930 €</strong><small>Últimos 30 días</small></article>
-                  <article class="is-down"><strong>12 % <Icon name="trending-down" size={12} /></strong><small>Periodo anterior</small></article>
-                  <article class="is-up"><strong>742 % <Icon name="trending-up" size={12} /></strong><small>El año pasado</small></article>
+                  <article><strong data-hero-count="487930" data-figure="487.930 €"></strong><small>Últimos 30 días</small></article>
+                  <article class="is-down"><strong><span data-figure="12 %"></span> <Icon name="trending-down" size={12} /></strong><small>Periodo anterior</small></article>
+                  <article class="is-up"><strong><span data-figure="742 %"></span> <Icon name="trending-up" size={12} /></strong><small>El año pasado</small></article>
                 </div>
                 <div class="ab-seller-bar-chart" role="img" aria-label="Gráfico de barras de ventas diarias durante los últimos 30 días">
                   <div class="ab-seller-grid-lines"><i></i><i></i><i></i><i></i></div>
@@ -391,7 +392,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     <div class="ab-strategy-copy" data-reveal>
       <p class="ab-overline"><span aria-hidden="true"></span> Dirección estratégica</p>
       <h2 id="ab-strategy-title"><span>Datos que importan.</span> <span>Decisiones con criterio.</span> <span>Crecimiento con margen.</span></h2>
-      <p class="ab-strategy-description">Los informes dan contexto y la estrategia marca el siguiente paso. Sabes qué ocurre, qué hacemos y por qué.</p>
+      <p class="ab-strategy-description">Así trabaja Amazon Boost una cuenta de Amazon: leer los datos, priorizar, ejecutar y escalar. Los informes dan contexto y la estrategia marca el siguiente paso. Sabes qué ocurre, qué hacemos y por qué.</p>
       <a class="ab-strategy-cta" href="#auditoria">Quiero una auditoría <Icon name="arrow-up-right" size={17} /></a>
     </div>
     <ol class="ab-strategy-flow" role="list" aria-label="De los datos al crecimiento">
@@ -420,9 +421,23 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
   <div class="ab-founder-copy ab-founder-details" data-reveal><p>Creé Amazon Boost como agencia Amazon boutique para marcas privadas. Dirijo la estrategia de cada cuenta junto al equipo, cerca de las decisiones que afectan a las ventas y al margen.</p><blockquote>“Primero entendemos el negocio. Después construimos cómo hacerlo crecer.”</blockquote><a href="#auditoria">Hablar con Sergio <Icon name="arrow-up-right" size={17} /></a></div>
 </section>
 
+<section class="ab-faq-section" id="preguntas" aria-labelledby="ab-faq-title">
+  <div class="ab-faq-shell">
+    <div class="ab-faq-heading" data-reveal><p class="ab-overline ab-overline-dark"><span></span> Preguntas frecuentes</p><h2 id="ab-faq-title">Preguntas frecuentes sobre Amazon Boost</h2><p>Respuestas directas sobre la agencia, sus servicios y cómo trabaja. Fuente: Amazon Boost.</p></div>
+    <div class="ab-faq-list" data-reveal>
+      {homeFaqs.map((faq, index) => (
+        <details open={index === 0}>
+          <summary><h3>{faq.question}</h3><span aria-hidden="true"></span></summary>
+          <p>{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="ab-audit-section" id="auditoria">
   <div class="ab-audit-shell">
-    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría gratuita</p><h2>Tu marca ya tiene la respuesta. Vamos a encontrarla.</h2><p>Hablemos por WhatsApp sobre tu marca o solicita tu auditoría gratuita con el formulario.</p><a class="ab-button ab-button-primary ab-button-whatsapp ab-audit-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">Habla con Amazon Boost <Icon name="arrow-up-right" size={18} /></a><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
+    <div class="ab-audit-copy" data-reveal><p class="ab-overline"><span></span> Auditoría gratuita</p><h2>Tu marca ya tiene la respuesta. Vamos a encontrarla.</h2><p>La auditoría inicial de Amazon Boost es gratuita y sin compromiso. Solicítala con el formulario o hablemos por WhatsApp sobre tu marca.</p><a class="ab-button ab-button-primary ab-button-whatsapp ab-audit-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">Habla con Amazon Boost <Icon name="arrow-up-right" size={18} /></a><div class="ab-audit-contact"><a href="mailto:info@amznboost.es">info@amznboost.es</a><a href="tel:+34650606400">+34 650 606 400</a></div></div>
     <form class="audit-form ab-phone-form" method="post" data-phone-rise>
       <div class="ab-phone-speaker" aria-hidden="true"><i></i></div>
       <div class="ab-phone-side ab-phone-action" aria-hidden="true"></div><div class="ab-phone-side ab-phone-volume" aria-hidden="true"></div>
