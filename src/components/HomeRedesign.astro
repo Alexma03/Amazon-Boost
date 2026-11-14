@@ -67,9 +67,16 @@ const reviewRail = [
   },
 ];
 
+const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 const trustpilotCount = publicReviews.filter((review) => review.platform === "Trustpilot").length;
 const linkedinCount = publicReviews.filter((review) => review.platform === "LinkedIn").length;
-const reviewSourceNote = `Reseñas públicas de clientes: ${trustpilotCount} en Trustpilot y ${linkedinCount === 1 ? "1 recomendación" : `${linkedinCount} recomendaciones`} en LinkedIn, cada una enlazada a su original y copiada sin cambios.`;
+const linkedinUrl = publicReviews.find((review) => review.platform === "LinkedIn")?.url;
+const reviewSources = [
+  { count: trustpilotCount, label: trustpilotCount === 1 ? "reseña en Trustpilot" : "reseñas en Trustpilot", url: trustpilotProfileUrl },
+  { count: linkedinCount, label: linkedinCount === 1 ? "recomendación en LinkedIn" : "recomendaciones en LinkedIn", url: linkedinUrl },
+  { count: websiteReviews.length, label: "experiencias enviadas desde nuestra web", url: null },
+];
+const reviewSourceNote = `Reseñas de clientes de Amazon Boost: ${trustpilotCount} en Trustpilot, ${plural(linkedinCount, "recomendación", "recomendaciones")} en LinkedIn y ${plural(websiteReviews.length, "experiencia", "experiencias")} que los clientes nos han enviado directamente desde nuestra web. Las de Trustpilot y LinkedIn enlazan a su original y se muestran sin cambios.`;
 
 const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 26, 36, 100, 31, 22, 36, 36, 63, 30, 53, 41, 68, 73];
 ---
@@ -295,6 +302,14 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 <section class="ab-client-reviews" id="resenas">
   <div class="ab-client-reviews-heading is-unified" data-reveal>
     <p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2>
+    <p class="ab-review-intro">Lo que cuentan las marcas que han trabajado con Amazon Boost: reseñas en Trustpilot, recomendaciones en LinkedIn y experiencias que los clientes nos han enviado directamente desde esta web.</p>
+    <ul class="ab-review-source-list">
+      {reviewSources.map((source) => (
+        <li>{source.url
+          ? <a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.count}</strong><span>{source.label}</span><Icon name="arrow-up-right" size={14} /></a>
+          : <span class="ab-review-source-item"><strong>{source.count}</strong><span>{source.label}</span></span>}</li>
+      ))}
+    </ul>
   </div>
   <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes" style={`--review-duration:${reviewRail.length * 12}s`}>
     <div class="ab-review-track">

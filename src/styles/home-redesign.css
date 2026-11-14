@@ -368,3 +368,11 @@
 }
 .ab-review-sources{width:min(1280px,calc(100% - 48px));margin:16px auto 0;color:#62645e;font-size:.72rem;line-height:1.6;text-align:right}
 @media(max-width:760px){.ab-review-sources{width:calc(100% - 32px);text-align:left}}
+.ab-review-intro{max-width:720px;margin:26px 0 0;color:#4d504a;font-size:1rem;line-height:1.6}
+.ab-review-source-list{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+.ab-review-source-list a,.ab-review-source-item{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 16px;border:1px solid #d0d1cb;border-radius:4px;background:#fff;color:#111;font-size:.8rem;line-height:1.3}
+.ab-review-source-list strong{color:var(--ab-orange);font-size:1.25rem;font-weight:850}
+.ab-review-source-list a{transition:border-color .2s ease}
+.ab-review-source-list a:hover,.ab-review-source-list a:focus-visible{border-color:#111}
+.ab-client-reviews-heading.is-unified{margin-bottom:44px}
+@media(max-width:760px){.ab-review-intro{font-size:.92rem}.ab-review-source-list{display:grid}.ab-review-source-list a,.ab-review-source-item{width:100%}}
