@@ -138,7 +138,6 @@ test('public reviews are newest first, verbatim and link to their individual ori
   assert.equal(mattia.publishedAt, '2026-11-12');
   const note = all(reviews, node => hasClass(node, 'ab-review-sources'))[0];
   assert.match(text(note), /2 en Trustpilot, 1 recomendación en LinkedIn y 7 experiencias que los clientes nos han enviado directamente desde nuestra web/);
-  const sources = all(reviews, node => hasClass(node, 'ab-review-source-list'))[0];
-  assert.equal(all(sources, node => node.tagName === 'li').length, 3);
-  assert.deepEqual(all(sources, node => node.tagName === 'a').map(node => new URL(attr(node, 'href')).hostname), ['es.trustpilot.com', 'www.linkedin.com']);
+  assert.equal(all(reviews, node => hasClass(node, 'ab-review-source-list')).length, 0);
+  assert.match(text(all(reviews, node => hasClass(node, 'ab-review-intro'))[0]), /clientes de Amazon Boost/);
 });

@@ -70,12 +70,6 @@ const reviewRail = [
 const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 const trustpilotCount = publicReviews.filter((review) => review.platform === "Trustpilot").length;
 const linkedinCount = publicReviews.filter((review) => review.platform === "LinkedIn").length;
-const linkedinUrl = publicReviews.find((review) => review.platform === "LinkedIn")?.url;
-const reviewSources = [
-  { count: trustpilotCount, label: trustpilotCount === 1 ? "reseña en Trustpilot" : "reseñas en Trustpilot", url: trustpilotProfileUrl },
-  { count: linkedinCount, label: linkedinCount === 1 ? "recomendación en LinkedIn" : "recomendaciones en LinkedIn", url: linkedinUrl },
-  { count: websiteReviews.length, label: "experiencias enviadas desde nuestra web", url: null },
-];
 const reviewSourceNote = `Reseñas de clientes de Amazon Boost: ${trustpilotCount} en Trustpilot, ${plural(linkedinCount, "recomendación", "recomendaciones")} en LinkedIn y ${plural(websiteReviews.length, "experiencia", "experiencias")} que los clientes nos han enviado directamente desde nuestra web. Las de Trustpilot y LinkedIn enlazan a su original y se muestran sin cambios.`;
 
 const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 26, 36, 100, 31, 22, 36, 36, 63, 30, 53, 41, 68, 73];
@@ -107,6 +101,23 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
     }, { passive: true });
 
     const reviewMarquee = document.querySelector<HTMLElement>(".ab-review-marquee");
+    if (reviewMarquee && window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+      let lit: HTMLElement | null = null;
+      const reset = () => { lit?.style.removeProperty("--tilt-x"); lit?.style.removeProperty("--tilt-y"); lit?.classList.remove("is-lit"); lit = null; };
+      reviewMarquee.addEventListener("pointermove", (event) => {
+        const card = (event.target as HTMLElement).closest<HTMLElement>(".ab-review-unified");
+        if (card !== lit) { reset(); lit = card; card?.classList.add("is-lit"); }
+        if (!card) return;
+        const box = card.getBoundingClientRect();
+        const x = (event.clientX - box.left) / box.width;
+        const y = (event.clientY - box.top) / box.height;
+        card.style.setProperty("--mx", `${x * 100}%`);
+        card.style.setProperty("--my", `${y * 100}%`);
+        card.style.setProperty("--tilt-x", `${(0.5 - y) * 7}deg`);
+        card.style.setProperty("--tilt-y", `${(x - 0.5) * 9}deg`);
+      });
+      reviewMarquee.addEventListener("pointerleave", reset);
+    }
     const reviewPause = document.querySelector<HTMLButtonElement>("[data-review-pause]");
     reviewPause?.addEventListener("click", () => {
       const paused = reviewPause.getAttribute("aria-pressed") !== "true";
@@ -302,14 +313,7 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
 <section class="ab-client-reviews" id="resenas">
   <div class="ab-client-reviews-heading is-unified" data-reveal>
     <p class="ab-overline ab-overline-dark"><span></span> Voces de clientes</p><h2>El resultado importa. La experiencia hasta llegar a él, también.</h2>
-    <p class="ab-review-intro">Lo que cuentan las marcas que han trabajado con Amazon Boost: reseñas en Trustpilot, recomendaciones en LinkedIn y experiencias que los clientes nos han enviado directamente desde esta web.</p>
-    <ul class="ab-review-source-list">
-      {reviewSources.map((source) => (
-        <li>{source.url
-          ? <a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.count}</strong><span>{source.label}</span><Icon name="arrow-up-right" size={14} /></a>
-          : <span class="ab-review-source-item"><strong>{source.count}</strong><span>{source.label}</span></span>}</li>
-      ))}
-    </ul>
+    <p class="ab-review-intro">Opiniones y experiencias reales de clientes de Amazon Boost.</p>
   </div>
   <div class="ab-review-marquee" data-reveal aria-label="Opiniones y experiencias de clientes" style={`--review-duration:${reviewRail.length * 12}s`}>
     <div class="ab-review-track">
