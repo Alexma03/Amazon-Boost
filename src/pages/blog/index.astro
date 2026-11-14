@@ -4,12 +4,14 @@ import SubpageBreadcrumbs from '../../components/SubpageBreadcrumbs.astro';
 import ResourceNav from '../../components/ResourceNav.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import ServiceContact from '../../components/ServiceContact.astro';
+import IndexAnswer from '../../components/IndexAnswer.astro';
 import { allBlogPosts } from '../../data/blog';
 import '../../styles/growth-pages.css';
 import '../../styles/blog.css';
 
 export const prerender = true;
 const categories = [...new Set(allBlogPosts.map((post) => post.category))];
+const blogAnswer = `El blog de Amazon Boost reúne ${allBlogPosts.length} análisis en español para marcas que venden en Amazon. Trata temas de estrategia, publicidad, SEO y catálogo, conversión, rentabilidad, marca y gestión de la cuenta. Cada artículo explica un criterio para decidir y enlaza con guías prácticas para aplicarlo en la cuenta.`;
 ---
 <Layout title="Blog Amazon Boost: SEO, publicidad y estrategia para marcas" description="Análisis para marcas que venden en Amazon: SEO, PPC, conversión, reseñas y expansión. Criterios para decidir y guías para llevar cada tema a tu cuenta." canonicalPath="/blog/" aiOptimized={false}>
   <div class="growth-page blog-page" data-blog-library>
@@ -21,6 +23,7 @@ const categories = [...new Set(allBlogPosts.map((post) => post.category))];
       <p class="growth-lead">SEO, publicidad, conversión y crecimiento. Una mirada completa al canal para entender qué mover, cuándo y por qué.</p>
       <ResourceNav current="blog" />
     </div></header>
+    <IndexAnswer question="¿De qué trata el blog de Amazon Boost?" answer={blogAnswer} listName="Artículos del blog de Amazon Boost" items={allBlogPosts.map((post) => ({ name: post.title, path: `/blog/${post.slug}/` }))} />
     <section class="blog-library"><div class="growth-shell">
       <div class="blog-library-head"><h2>Todos los análisis</h2><p data-blog-count role="status" aria-live="polite" aria-atomic="true">{allBlogPosts.length} artículos</p></div>
       <form class="blog-filters" role="search" aria-label="Buscar en el blog" data-blog-form>
