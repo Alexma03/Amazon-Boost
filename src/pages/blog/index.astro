@@ -23,7 +23,7 @@ const blogAnswer = `El blog de Amazon Boost reúne ${allBlogPosts.length} análi
       <p class="growth-lead">SEO, publicidad, conversión y crecimiento. Una mirada completa al canal para entender qué mover, cuándo y por qué.</p>
       <ResourceNav current="blog" />
     </div></header>
-    <IndexAnswer question="¿De qué trata el blog de Amazon Boost?" answer={blogAnswer} listName="Artículos del blog de Amazon Boost" items={allBlogPosts.map((post) => ({ name: post.title, path: `/blog/${post.slug}/` }))} />
+    <IndexAnswer question="¿De qué trata el blog de Amazon Boost?" answer={blogAnswer} listName="Artículos del blog de Amazon Boost" source="Los análisis los escribe Amazon Boost. Cada artículo termina con un apartado «Fuentes y contexto» que enlaza sus referencias, en su mayoría documentación oficial de Amazon (sell.amazon y Amazon Ads)." items={allBlogPosts.map((post) => ({ name: post.title, path: `/blog/${post.slug}/` }))} />
     <section class="blog-library"><div class="growth-shell">
       <div class="blog-library-head"><h2>Todos los análisis</h2><p data-blog-count role="status" aria-live="polite" aria-atomic="true">{allBlogPosts.length} artículos</p></div>
       <form class="blog-filters" role="search" aria-label="Buscar en el blog" data-blog-form>

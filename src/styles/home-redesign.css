@@ -445,3 +445,6 @@
 .ab-faq-list details>p{margin:0;padding:0 70px 22px 22px;color:#4d504a;font-size:.96rem;line-height:1.65}
 @media(max-width:900px){.ab-faq-shell{grid-template-columns:1fr;gap:30px}}
 @media(max-width:760px){.ab-faq-section{padding:72px 16px}.ab-faq-list details>p{padding-right:22px}}
+.ab-faq-heading .ab-faq-source{margin-top:18px;padding-left:14px;border-left:3px solid var(--ab-orange);color:#5a5c56;font-size:.84rem;line-height:1.6}
+.ab-faq-source a{color:#111;text-decoration:underline;text-underline-offset:3px}
+.ab-faq-heading>p:last-child{margin-top:18px}
