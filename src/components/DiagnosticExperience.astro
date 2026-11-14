@@ -88,6 +88,21 @@ const areas = Object.entries(diagnosticSignals);
   .diagnostic-motion[aria-pressed="true"] > span { width: 0; height: 0; margin-right: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 9px solid currentColor; background: none; box-shadow: none; }
   .diagnostic-experience :is(button, a):focus-visible { outline: 2px solid #3473b5; outline-offset: 4px; }
   .diagnostic-motion:focus-visible { outline-color: #fff; outline-offset: -3px; }
+  /* Visual refresh: numbered tabs with their own colour, and a lit dark panel. */
+  .diagnostic-experience .diagnostic-tabs { counter-reset: diagnostic-tab; }
+  .diagnostic-experience .diagnostic-tabs button { counter-increment: diagnostic-tab; position: relative; display: flex; align-items: center; gap: 14px; overflow: hidden; border: 1px solid #e1e3de; border-radius: 10px; background: #fff; transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .diagnostic-experience .diagnostic-tabs button::before { content: "0" counter(diagnostic-tab); flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: color-mix(in srgb, var(--tab-color) 22%, white); color: #161816; font-size: .72rem; font-weight: 800; transition: background .25s ease, color .25s ease; }
+  .diagnostic-experience .diagnostic-tabs button:hover { border-color: var(--tab-color); transform: translateX(4px); }
+  .diagnostic-experience .diagnostic-tabs button[aria-pressed="true"] { border-color: #11151b; background: #11151b; color: #fff; box-shadow: 0 14px 30px rgba(17, 21, 27, .18); }
+  .diagnostic-experience .diagnostic-tabs button[aria-pressed="true"]::before { background: var(--tab-color); }
+  .diagnostic-experience .diagnostic-tabs button[aria-pressed="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--tab-color); }
+  .diagnostic-experience .diagnostic-art { border-radius: 14px; background: radial-gradient(90% 70% at 85% 0%, color-mix(in srgb, var(--signal-color) 26%, transparent), transparent 70%), #11151b; box-shadow: 0 30px 60px rgba(17, 21, 27, .22), inset 0 0 0 1px color-mix(in srgb, var(--signal-color) 35%, transparent); transition: box-shadow .3s ease; }
+  .diagnostic-experience .diagnostic-copy a { align-items: center; gap: 10px; padding: 14px 20px; border: 0; border-radius: 6px; background: #11151b; color: #fff; transition: background .25s ease, color .25s ease, transform .25s ease; }
+  .diagnostic-experience .diagnostic-copy a::after { content: "→"; transition: transform .25s ease; }
+  .diagnostic-experience .diagnostic-copy a:hover { background: var(--signal-color); color: #131513; }
+  .diagnostic-experience .diagnostic-copy a:hover::after { transform: translateX(4px); }
+  @media (max-width: 1000px) { .diagnostic-experience .diagnostic-tabs button:hover { transform: none; } }
+  @media (max-width: 650px) { .diagnostic-experience .diagnostic-tabs button { gap: 10px; } .diagnostic-experience .diagnostic-tabs button::before { width: 28px; height: 28px; } }
   @media (max-width: 1150px) {
     .diagnostic-experience { grid-template-columns: 190px minmax(0, 1fr); gap: 28px; }
     .diagnostic-panel { gap: 28px; }
