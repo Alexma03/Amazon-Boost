@@ -41,7 +41,8 @@ export const homeShowcase = {
         fullQuote: "Una empresa muy recomendable si vendes en Amazon. Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.",
         title: "Una empresa muy recomendable si vendes en Amazon",
         quote: "Muy enfocados en tus problemas y con grandes soluciones para cualquier cosa que pueda surgir.",
-        url: "https://es.trustpilot.com/review/amznboost.es",
+        url: "https://es.trustpilot.com/reviews/69a07fd7d1ed6838a467c937",
+        rating: 5,
       },
       {
         platform: "LinkedIn",
@@ -59,6 +60,28 @@ export const homeShowcase = {
     ],
   },
 };
+
+// Public reviews: every entry links to its original and is copied verbatim.
+// Newest first. Add new Trustpilot or LinkedIn reviews here; they feed the home
+// rail and the Review entries of the Organization schema.
+const trustpilotMattia = {
+  platform: "Trustpilot",
+  author: "Mattia Gattesco",
+  initials: "MG",
+  meta: "ES",
+  date: "12 nov 2026",
+  publishedAt: "2026-11-12",
+  context: "Opinión espontánea",
+  fullQuote: "Competencia y profesionalidad, y disponibilidad a todas horas. Servico excelente!",
+  title: "Competencia y profesionalidad",
+  quote: "Competencia y profesionalidad, y disponibilidad a todas horas. Servico excelente!",
+  url: "https://es.trustpilot.com/reviews/6af70dee22fc67be02b84937",
+  rating: 5,
+};
+
+export const publicReviews = [trustpilotMattia, ...homeShowcase.featuredCase.reviews];
+
+export const trustpilotProfileUrl = "https://es.trustpilot.com/review/amznboost.es";
 
 export const websiteReviews = [
   {

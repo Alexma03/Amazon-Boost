@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { diagnosticSignals } from '../src/data/home-signals.ts';
-import { homeShowcase, websiteReviews } from '../src/data/home-showcase.ts';
+import { homeShowcase, publicReviews, websiteReviews } from '../src/data/home-showcase.ts';
 
 const { parse } = createRequire(import.meta.resolve('astro'))('parse5');
 const all = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap(child => all(child, predicate))];
@@ -77,14 +77,14 @@ test('every testimonial uses the same card structure with its actual source', ()
   const groups = all(reviews, node => hasClass(node, 'ab-review-group'));
   assert.equal(groups.length, 2);
   const cards = all(groups[0], node => hasClass(node, 'ab-review-unified'));
-  assert.equal(cards.length, homeShowcase.featuredCase.reviews.length + websiteReviews.length);
+  assert.equal(cards.length, publicReviews.length + websiteReviews.length);
   for (const card of cards) {
     assert.deepEqual(card.childNodes.filter(n => n.tagName).map(n => n.tagName), ['div', 'div', 'div', 'blockquote', 'footer']);
     for (const cls of ['ab-review-source', 'ab-review-author', 'ab-review-context']) {
       assert.equal(all(card, node => hasClass(node, cls)).length, 1);
     }
   }
-  for (const [i, review] of homeShowcase.featuredCase.reviews.entries()) {
+  for (const [i, review] of publicReviews.entries()) {
     assert.equal(attr(cards[i], 'href'), review.url);
     assert.equal(attr(all(cards[i], node => node.tagName === 'time')[0], 'datetime'), review.publishedAt);
     assert.ok(text(cards[i]).includes(review.fullQuote));
@@ -101,7 +101,7 @@ test('every testimonial uses the same card structure with its actual source', ()
     assert.equal(text(footer).trim(), 'Leer completa');
     assert.ok(text(card).includes(websiteReviews[i].quote));
   }
-  assert.equal(all(groups[0], node => hasClass(node, 'ab-platform-stars')).length, 1);
+  assert.equal(all(groups[0], node => hasClass(node, 'ab-platform-stars')).length, publicReviews.filter(review => review.platform === 'Trustpilot').length);
   const heading = all(reviews, node => hasClass(node, 'ab-client-reviews-heading'))[0];
   assert.match(text(heading), /El resultado importa/);
   assert.doesNotMatch(text(heading), /Opiniones públicas|Nuevas historias|publicación original/);
@@ -125,4 +125,17 @@ test('full testimonials remain readable and carousel duplicates are not focusabl
   }
   assert.equal(all(reviews, node => attr(node, 'data-review-pause') !== undefined).length, 1);
   assert.equal(all(reviews, node => node.tagName === 'a' && attr(node, 'href') === '/dejar-resena').length, 3);
+});
+
+test('public reviews are newest first, verbatim and link to their individual originals', () => {
+  const dates = publicReviews.map(review => review.publishedAt);
+  assert.deepEqual([...dates].sort().reverse(), dates);
+  for (const review of publicReviews.filter(review => review.platform === 'Trustpilot')) {
+    assert.match(review.url, /^https:\/\/es\.trustpilot\.com\/reviews\/[0-9a-f]+$/);
+    assert.ok(review.fullQuote.includes(review.quote));
+  }
+  const mattia = publicReviews.find(review => review.author === 'Mattia Gattesco');
+  assert.equal(mattia.publishedAt, '2026-11-12');
+  const note = all(reviews, node => hasClass(node, 'ab-review-sources'))[0];
+  assert.match(text(note), /2 en Trustpilot y 1 recomendación en LinkedIn/);
 });

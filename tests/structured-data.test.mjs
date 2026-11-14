@@ -39,6 +39,15 @@ test('home identifies the agency, its own logo, founder and website consistently
   assert.equal(webpage.mainEntity['@id'], organization['@id']);
   assert.equal(organization.logo.url, `${siteUrl}/images/amazon-boost-logo.png`);
   assert.ok(existsSync(file('public/images/amazon-boost-logo.png')));
+  assert.ok(organization.review.length >= 3);
+  assert.equal('aggregateRating' in organization, false);
+  for (const review of organization.review) {
+    assert.equal(review['@type'], 'Review');
+    assert.match(review.url, /^https:\/\/(es\.trustpilot\.com\/reviews\/|www\.linkedin\.com\/)/);
+    assert.match(review.datePublished, /^\d{4}-\d{2}-\d{2}$/);
+    assert.equal(review.author['@type'], 'Person');
+    assert.ok(review.reviewBody.length > 20);
+  }
 });
 
 test('indexable content connects to the same provider and only real blog dates are emitted', () => {

@@ -1,7 +1,7 @@
 ---
 import "../styles/home-redesign.css";
 import "../styles/macbook-scroll.css";
-import { homeShowcase, websiteReviews } from "../data/home-showcase";
+import { homeShowcase, publicReviews, trustpilotProfileUrl, websiteReviews } from "../data/home-showcase";
 import FeaturedCases from "./FeaturedCases.astro";
 import ReviewCard from "./ReviewCard.astro";
 import DiagnosticExperience from "./DiagnosticExperience.astro";
@@ -34,7 +34,7 @@ const process = [
 ];
 
 const reviewRail = [
-  ...homeShowcase.featuredCase.reviews.map((review, index) => ({
+  ...publicReviews.map((review, index) => ({
     ...review,
     id: `external-${index}`,
     tone: review.platform === "Trustpilot" ? "trustpilot" : "linkedin",
@@ -66,6 +66,10 @@ const reviewRail = [
     action: "Compartir experiencia",
   },
 ];
+
+const trustpilotCount = publicReviews.filter((review) => review.platform === "Trustpilot").length;
+const linkedinCount = publicReviews.filter((review) => review.platform === "LinkedIn").length;
+const reviewSourceNote = `Reseñas públicas de clientes: ${trustpilotCount} en Trustpilot y ${linkedinCount === 1 ? "1 recomendación" : `${linkedinCount} recomendaciones`} en LinkedIn, cada una enlazada a su original y copiada sin cambios.`;
 
 const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 26, 36, 100, 31, 22, 36, 36, 63, 30, 53, 41, 68, 73];
 ---
@@ -309,7 +313,8 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
       ))}
     </div>
   </div>
-  <div class="ab-review-actions" data-reveal><button class="ab-review-pause" type="button" data-review-pause aria-pressed="false">Pausar reseñas</button><a href="/dejar-resena">Compartir mi experiencia <Icon name="arrow-up-right" size={17} /></a><a href="https://es.trustpilot.com/review/amznboost.es" target="_blank" rel="noreferrer">Ver Trustpilot <Icon name="arrow-up-right" size={17} /></a></div>
+  <div class="ab-review-actions" data-reveal><button class="ab-review-pause" type="button" data-review-pause aria-pressed="false">Pausar reseñas</button><a href="/dejar-resena">Compartir mi experiencia <Icon name="arrow-up-right" size={17} /></a><a href={trustpilotProfileUrl} target="_blank" rel="noreferrer">Ver Trustpilot <Icon name="arrow-up-right" size={17} /></a></div>
+  <p class="ab-review-sources" data-reveal>{reviewSourceNote}</p>
   {websiteReviews.map((review) => (
     <dialog class="ab-review-dialog" id={`review-${review.id}`} aria-labelledby={`review-title-${review.id}`}>
       <form method="dialog"><button type="submit" aria-label="Cerrar reseña" title="Cerrar reseña"><Icon name="x" size={20} /></button></form>

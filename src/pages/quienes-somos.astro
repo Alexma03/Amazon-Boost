@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import SubpageBreadcrumbs from '../components/SubpageBreadcrumbs.astro';
 import ServiceContact from '../components/ServiceContact.astro';
-import { homeShowcase } from '../data/home-showcase';
+import { homeShowcase, trustpilotProfileUrl } from '../data/home-showcase';
 import '../styles/growth-pages.css';
 import '../styles/about-page.css';
 
@@ -185,6 +185,7 @@ const serviceLinks = [
               <p>“{trustpilotReview.fullQuote}”</p>
               <footer>{trustpilotReview.author} · Opinión publicada en Trustpilot</footer>
               <a href={trustpilotReview.url} target="_blank" rel="noopener noreferrer">Ver la reseña externa <Icon name="arrow-up-right" size={15} /></a>
+              <a href={trustpilotProfileUrl} target="_blank" rel="noopener noreferrer">Ver todas las reseñas en Trustpilot <Icon name="arrow-up-right" size={15} /></a>
             </blockquote>
           )}
         </div>

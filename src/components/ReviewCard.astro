@@ -13,6 +13,7 @@ interface Props {
     fullQuote?: string;
     publishedAt?: string;
     context?: string;
+    rating?: number;
   };
   duplicate?: boolean;
 }
@@ -37,7 +38,7 @@ const source = internal ? null : trustpilot ? review.context : "Recomendación e
   </div>
   <div class="ab-review-context">
     {trustpilot
-      ? <img class="ab-platform-stars" src="/icons/brands/trustpilot-stars-5.svg" alt="5 de 5 estrellas" width="108" height="20" loading="lazy" />
+      ? <img class="ab-platform-stars" src="/icons/brands/trustpilot-stars-5.svg" alt={`${review.rating ?? 5} de 5 estrellas`} width="108" height="20" loading="lazy" />
       : <p>{internal ? "Experiencia compartida" : review.context}</p>}
   </div>
   <blockquote>

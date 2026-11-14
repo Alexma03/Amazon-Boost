@@ -1,4 +1,5 @@
 import { siteUrl } from '../data/site-index';
+import { publicReviews } from '../data/home-showcase';
 
 export const schemaIds = {
   organization: `${siteUrl}/#organization`,
@@ -71,6 +72,19 @@ export function buildPageSchema({ url, title, description, type, pageType, image
         availableLanguage: ['es'],
       },
       founder: ref(schemaIds.founder),
+      // Only public reviews that link to their original. No aggregateRating:
+      // the rating summary belongs to Trustpilot, not to our own markup.
+      review: publicReviews.map((review) => ({
+        '@type': 'Review',
+        url: review.url,
+        name: review.title,
+        reviewBody: review.fullQuote,
+        datePublished: review.publishedAt,
+        inLanguage: 'es-ES',
+        author: { '@type': 'Person', name: review.author },
+        ...(review.rating ? { reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5, worstRating: 1 } } : {}),
+        publisher: { '@type': 'Organization', name: review.platform, url: review.platform === 'Trustpilot' ? 'https://www.trustpilot.com/' : 'https://www.linkedin.com/' },
+      })),
       sameAs: [
         'https://www.linkedin.com/company/amznboost/',
         'https://es.trustpilot.com/review/amznboost.es',
