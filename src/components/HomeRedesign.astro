@@ -86,6 +86,32 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
         mountMacbookScroll(hero, { gsap, ScrollTrigger });
       }).catch(() => {});
     }
+    if (hero && window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+      let glowFrame = 0;
+      hero.addEventListener("pointermove", (event) => {
+        if (glowFrame) return;
+        glowFrame = window.requestAnimationFrame(() => {
+          glowFrame = 0;
+          const box = hero.getBoundingClientRect();
+          hero.style.setProperty("--hero-x", `${event.clientX - box.left}px`);
+          hero.style.setProperty("--hero-y", `${event.clientY - box.top}px`);
+          hero.classList.add("has-pointer");
+        });
+      });
+      hero.addEventListener("pointerleave", () => hero.classList.remove("has-pointer"));
+    }
+    const heroCount = document.querySelector<HTMLElement>("[data-hero-count]");
+    if (heroCount && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const target = Number(heroCount.dataset.heroCount);
+      const format = new Intl.NumberFormat("es-ES", { useGrouping: "always" });
+      const started = performance.now() + 350;
+      const tick = (now: number) => {
+        const progress = Math.min(1, Math.max(0, (now - started) / 1600));
+        heroCount.textContent = `${format.format(Math.round(target * (1 - Math.pow(1 - progress, 3))))} €`;
+        if (progress < 1) window.requestAnimationFrame(tick);
+      };
+      window.requestAnimationFrame(tick);
+    }
     let axisFrame = 0;
     const updateHeroAxis = () => {
       axisFrame = 0;
@@ -256,13 +282,13 @@ const sellerBars = [42, 46, 39, 24, 31, 44, 41, 32, 30, 50, 19, 35, 41, 34, 27, 
                   <span class="ab-seller-demo">Simulación visual</span>
                 </div>
                 <div class="ab-seller-performance">
-                  <article><strong>487.930 €</strong><small>Últimos 30 días</small></article>
+                  <article><strong data-hero-count="487930">487.930 €</strong><small>Últimos 30 días</small></article>
                   <article class="is-down"><strong>12 % <Icon name="trending-down" size={12} /></strong><small>Periodo anterior</small></article>
                   <article class="is-up"><strong>742 % <Icon name="trending-up" size={12} /></strong><small>El año pasado</small></article>
                 </div>
                 <div class="ab-seller-bar-chart" role="img" aria-label="Gráfico de barras de ventas diarias durante los últimos 30 días">
                   <div class="ab-seller-grid-lines"><i></i><i></i><i></i><i></i></div>
-                  <div class="ab-seller-bars">{sellerBars.map((height) => <i style={`--seller-bar:${height}%`}></i>)}</div>
+                  <div class="ab-seller-bars">{sellerBars.map((height, index) => <i style={`--seller-bar:${height}%;--seller-index:${index}`}></i>)}</div>
                   <div class="ab-seller-axis"><span>28 jul</span><span>7 ago</span><span>17 ago</span><span>26 ago</span></div>
                 </div>
               </div>

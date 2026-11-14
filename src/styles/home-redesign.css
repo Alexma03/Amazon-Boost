@@ -388,3 +388,13 @@
 .ab-review-dialog blockquote p{color:#deded8}
 .ab-review-dialog footer{border-top-color:rgba(255,255,255,.14)}.ab-review-dialog footer span{color:#aeafa9}
 @media(max-width:760px){.ab-review-intro{font-size:.92rem}.ab-review-sources{width:calc(100% - 32px);text-align:left}.ab-client-reviews .ab-review-marquee{-webkit-mask-image:none;mask-image:none}}
+/* Hero experiment: cursor light, glow behind the laptop and a chart that draws itself. */
+.ab-hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(520px circle at var(--hero-x,50%) var(--hero-y,40%),rgba(255,153,0,.13),transparent 65%);transition:opacity .4s ease}
+.ab-hero.has-pointer:after{opacity:1}
+.ab-hero-shell,.ab-proof-rail{z-index:1}
+.ab-account-stage:before{content:"";position:absolute;z-index:-1;inset:8% 4% 12%;pointer-events:none;border-radius:50%;background:radial-gradient(closest-side,rgba(255,153,0,.28),transparent);filter:blur(30px);animation:ab-stage-glow 6s ease-in-out infinite alternate}
+@keyframes ab-stage-glow{from{opacity:.55;transform:scale(.94)}to{opacity:1;transform:scale(1.04)}}
+.ab-seller-bars i{transform-origin:bottom;animation:ab-bar-rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.5s + var(--seller-index,0)*45ms)}
+@keyframes ab-bar-rise{from{transform:scaleY(0)}}
+.ab-seller-performance strong{font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.ab-account-stage:before,.ab-seller-bars i{animation:none}}
