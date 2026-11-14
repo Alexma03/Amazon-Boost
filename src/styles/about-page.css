@@ -181,3 +181,9 @@
 .about-team-facts strong { display: block; margin-bottom: 4px; }
 @media (max-width: 1000px) { .about-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .about-team-facts { grid-template-columns: 1fr; gap: 18px; } }
 @media (max-width: 640px) { .about-team-grid { grid-template-columns: 1fr; } }
+/* Hero without the portrait: plain dark stage with the brand glow. */
+.about-hero { background: #080808; }
+.about-hero-shade { background: radial-gradient(60% 70% at 82% 0%, rgba(255, 153, 0, .2), transparent 70%); }
+.about-team-person { display: flex; align-items: center; gap: 14px; margin: 14px 0 10px; }
+.about-team-person img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #ff9900; }
+.about-team-person h3 { margin: 0; }

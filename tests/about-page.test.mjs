@@ -36,7 +36,7 @@ test('about page links verifiable proof, founder and commercial next steps', () 
   ]) assert.ok(links.includes(href), href);
   const portrait = tag(tree, 'img').find((node) => /fundador de la agencia Amazon Boost/.test(attr(node, 'alt') ?? ''));
   assert.ok(portrait);
-  assert.equal(attr(portrait, 'fetchpriority'), 'high');
+  assert.equal(attr(portrait, 'loading'), 'lazy');
 });
 
 test('release header keeps only approved destinations and grouped Recursos', () => {
