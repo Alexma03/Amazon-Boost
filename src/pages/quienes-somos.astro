@@ -49,6 +49,11 @@ const serviceLinks = [
 >
   <article class="about-page">
     <header class="about-hero">
+      <picture class="about-hero-media">
+        <!-- Sustituir estas fuentes por la futura fotografía de oficina aprobada. -->
+        <source media="(max-width: 760px)" srcset="/images/sergio-porras-amazon-boost-v2-800.webp" />
+        <img src="/images/sergio-porras-amazon-boost-v2-1440.webp" alt="Sergio Porras, fundador de la agencia Amazon Boost" width="1440" height="1440" fetchpriority="high" decoding="async" />
+      </picture>
       <div class="about-hero-shade" aria-hidden="true"></div>
       <div class="about-shell about-hero-content">
         <SubpageBreadcrumbs items={[{ name: 'Inicio', path: '/' }, { name: 'Quiénes somos', path: '/quienes-somos/' }]} />
@@ -66,7 +71,7 @@ const serviceLinks = [
     <nav class="about-local-nav" aria-label="Contenido de quiénes somos">
       <div class="about-shell">
         <a href="#enfoque">Nuestro enfoque</a>
-        <a href="#direccion">Dirección</a><a href="#equipo">Equipo</a>
+        <a href="#direccion">Dirección</a>
         <a href="#pruebas">Resultados</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -127,25 +132,6 @@ const serviceLinks = [
           <p>Sergio dirige personalmente la estrategia de las cuentas junto al equipo y mantiene la conversación cerca del cliente y de Seller Central. Desde ahí coordinamos publicidad, conversión, catálogo, incidencias y operativa para que cada especialista trabaje sobre la misma prioridad.</p>
           <a class="about-linkedin" href="https://www.linkedin.com/in/sergio-deroman-amazon/" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">in</span> Conocer a Sergio en LinkedIn <Icon name="arrow-up-right" size={17} /></a>
         </div>
-      </div>
-    </section>
-
-    <section class="about-band about-team" id="equipo" aria-labelledby="team-title">
-      <div class="about-shell">
-        <p class="growth-eyebrow">Cómo está formado el equipo</p>
-        <h2 id="team-title">Una persona responde ante ti. Un equipo trabaja tu cuenta.</h2>
-        <p class="about-team-lead">Amazon Boost es una agencia boutique. Sergio Porras dirige la estrategia y es tu interlocutor. En la ejecución le apoyan especialistas por área que colaboran con la agencia. Aquí se presentan por su función, sin nombre ni imagen.</p>
-        <div class="about-team-grid">
-          <article class="is-lead"><span>Dirección y estrategia</span><div class="about-team-person"><img src="/images/sergio-porras-avatar-192.webp" alt="Sergio Porras, fundador de la agencia Amazon Boost" width="56" height="56" loading="lazy" decoding="async" /><h3>Sergio Porras</h3></div><p>Fundador. Define las prioridades de cada cuenta, toma las decisiones con el cliente y responde del resultado.</p></article>
-          <article><span>Especialista</span><h3>Publicidad y rendimiento</h3><p>Campañas de Amazon Ads, pujas, términos de búsqueda y seguimiento de la rentabilidad.</p></article>
-          <article><span>Especialista</span><h3>Contenido y conversión</h3><p>SEO de Amazon, listings, imágenes de producto y contenido A+.</p></article>
-          <article><span>Especialista</span><h3>Catálogo y operativa</h3><p>Catálogo, incidencias con Amazon, stock y disponibilidad en FBA y FBM.</p></article>
-        </div>
-        <ul class="about-team-facts">
-          <li><strong>Un único interlocutor.</strong> Hablas siempre con Sergio, no con una cadena de intermediarios.</li>
-          <li><strong>Accesos bajo control.</strong> Se trabaja con permisos delegados de Seller Central: tú decides quién entra y puedes retirarlo cuando quieras.</li>
-          <li><strong>Pocas cuentas.</strong> La agencia limita el número de marcas para seguir de cerca cada una.</li>
-        </ul>
       </div>
     </section>
 
