@@ -166,3 +166,4 @@
 @media (prefers-reduced-motion: reduce) {
   .about-page *, .about-page *::before, .about-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+.about-review a + a { margin-left: 18px; }

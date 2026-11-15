@@ -70,3 +70,33 @@
 }
 @media(max-width:380px){.ab-case-pharma .ab-case-sales-headline{font-size:2.65rem}.ab-case-controls{gap:6px}}
 @media(prefers-reduced-motion:reduce){.ab-case-controls button{transition:none}}
+/* Visual refresh: glow, lit product stage and numbered decisions. CSS only. */
+.ab-case-section{position:relative;isolation:isolate}
+.ab-case-section:before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(50% 40% at 12% 0%,rgba(255,153,0,.14),transparent 70%)}
+.ab-case-product-stage{border:1px solid var(--ab-dark-line);transition:border-color .35s ease,box-shadow .35s ease}
+.ab-case-product-stage:before{content:"";position:absolute;inset:18% 12% 10%;pointer-events:none;border-radius:50%;background:radial-gradient(closest-side,rgba(255,153,0,.34),transparent);filter:blur(34px);opacity:.7;transition:opacity .35s ease,transform .35s ease}
+.ab-case-product-stage .ab-case-lifestyle{position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ab-case-product-stage .ab-case-badge{z-index:1;border:1px solid rgba(255,153,0,.4)}
+.ab-case-numbers strong{transition:transform .25s ease}
+.ab-case-decisions>div{counter-reset:case-decision;gap:0}
+.ab-case-decisions>div>div{counter-increment:case-decision;position:relative;padding:6px 28px 6px 96px;transition:transform .25s ease}
+.ab-case-decisions>div>div:before{content:"0" counter(case-decision);position:absolute;top:-4px;left:0;color:transparent;-webkit-text-stroke:1.5px rgba(255,153,0,.75);font-size:3.6rem;line-height:1;font-weight:850;transition:color .3s ease}
+.ab-case-decisions>div>div:after{content:"";position:absolute;left:0;bottom:-14px;width:64px;height:3px;border-radius:3px;background:var(--ab-orange);transform:scaleX(.35);transform-origin:left;transition:transform .3s ease}
+@media(hover:hover){
+.ab-case-product-stage:hover{border-color:rgba(255,153,0,.5);box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 60px rgba(255,153,0,.12)}
+.ab-case-product-stage:hover:before{opacity:1;transform:scale(1.08)}
+.ab-case-product-stage:hover .ab-case-lifestyle{transform:scale(1.48)}
+.ab-case-numbers>div:hover strong{transform:translateY(-4px)}
+.ab-case-decisions>div>div:hover{transform:translateY(-4px)}
+.ab-case-decisions>div>div:hover:before{color:var(--ab-orange)}
+.ab-case-decisions>div>div:hover:after{transform:scaleX(1)}
+}
+@media(max-width:760px){.ab-case-decisions>div{gap:34px}.ab-case-decisions>div>div{padding:4px 0 4px 78px}.ab-case-decisions>div>div:before{font-size:3rem}}
+@media(prefers-reduced-motion:reduce){.ab-case-product-stage,.ab-case-product-stage:before,.ab-case-product-stage .ab-case-lifestyle,.ab-case-numbers strong,.ab-case-decisions>div>div{transition:none}}
+/* Baby case: the product floats on the section instead of sitting in a card. */
+.ab-case-product-stage,.ab-case-product-stage:hover{overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none}
+.ab-case-product-stage .ab-case-lifestyle{filter:none;animation:ab-case-float 6s ease-in-out infinite alternate}
+.ab-case-product-stage:before{inset:auto 16% 6%;height:26%;background:radial-gradient(closest-side,rgba(255,153,0,.3),transparent);filter:blur(30px)}
+@keyframes ab-case-float{from{translate:0 -8px}to{translate:0 10px}}
+@media(prefers-reduced-motion:reduce){.ab-case-product-stage .ab-case-lifestyle{animation:none}}
+.ab-case-product-stage:after{content:none}
