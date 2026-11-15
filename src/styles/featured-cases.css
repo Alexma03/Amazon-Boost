@@ -95,8 +95,7 @@
 @media(prefers-reduced-motion:reduce){.ab-case-product-stage,.ab-case-product-stage:before,.ab-case-product-stage .ab-case-lifestyle,.ab-case-numbers strong,.ab-case-decisions>div>div{transition:none}}
 /* Baby case: the product floats on the section instead of sitting in a card. */
 .ab-case-product-stage,.ab-case-product-stage:hover{overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none}
-.ab-case-product-stage .ab-case-lifestyle{mix-blend-mode:lighten;animation:ab-case-float 6s ease-in-out infinite alternate}
+.ab-case-product-stage .ab-case-lifestyle{filter:none;animation:ab-case-float 6s ease-in-out infinite alternate}
 .ab-case-product-stage:before{inset:auto 16% 6%;height:26%;background:radial-gradient(closest-side,rgba(255,153,0,.3),transparent);filter:blur(30px)}
 @keyframes ab-case-float{from{translate:0 -8px}to{translate:0 10px}}
 @media(prefers-reduced-motion:reduce){.ab-case-product-stage .ab-case-lifestyle{animation:none}}
-.ab-case-product-stage .ab-case-lifestyle{-webkit-mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 76%,transparent);mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 76%,transparent)}
