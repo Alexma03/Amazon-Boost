@@ -99,3 +99,4 @@
 .ab-case-product-stage:before{inset:auto 16% 6%;height:26%;background:radial-gradient(closest-side,rgba(255,153,0,.3),transparent);filter:blur(30px)}
 @keyframes ab-case-float{from{translate:0 -8px}to{translate:0 10px}}
 @media(prefers-reduced-motion:reduce){.ab-case-product-stage .ab-case-lifestyle{animation:none}}
+.ab-case-product-stage .ab-case-lifestyle{-webkit-mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 76%,transparent);mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 76%,transparent)}
